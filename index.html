@@ -52,6 +52,17 @@ body.in-battle #scene{cursor:none;touch-action:none;outline:none}
 .highscores{padding-left:1.7rem}.highscores li{padding:12px;border-bottom:1px solid #ffffff20}.highscores li span{display:inline-block;min-width:65%;overflow-wrap:anywhere}.score-entry{margin-top:24px;border-top:1px solid #ffffff30;padding-top:16px}.score-entry form{display:flex;gap:12px;flex-wrap:wrap;align-items:end}.score-entry label{display:grid;gap:8px}.score-entry input{padding:12px;background:#171d1d;color:#fff;border:1px solid #83917c;border-radius:4px}
 
 .brand-light{white-space:nowrap}.map-cards{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:760px){.map-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Command screen: vehicle preview, deployment settings, then one selection panel. */
+body{background:#131a18}.topbar{height:82px;padding:0 4%;gap:35px;background:#171f1d;border-bottom:1px solid #64716135}.brand{font-size:21px}.brand-mark{font-size:38px}.topbar nav{gap:28px}.topbar .profile{gap:20px}.topbar #language-select{padding:8px 9px;font-size:11px;max-width:105px;background:#202b25;border:1px solid #63715b;color:#e4e8d5;border-radius:4px}
+#hangar{max-width:1500px;margin:auto;padding:0 4%}.hangar-heading{display:flex;align-items:center;justify-content:space-between;padding:25px 0 22px;gap:20px}.hangar-heading h1{font-size:29px;line-height:1.2;margin:9px 0 0;letter-spacing:-.6px;text-transform:none;font-weight:500}.hangar-heading .eyebrow{font-size:9px;letter-spacing:2px}.hangar-status{font-size:10px;color:#a9b3a3;letter-spacing:1.4px}.command-layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:stretch}
+#hangar .hero{height:410px;min-width:0;border:1px solid #6f7d5e40;border-radius:9px;overflow:hidden;background:#1d2b25}#hangar .hero-copy{top:23px;left:25px;pointer-events:none}#hangar .hero-copy .eyebrow{color:#b9c5ad;font-size:9px;letter-spacing:1.8px}#hangar .hero-shade{pointer-events:none;background:linear-gradient(0deg,#101d18ed,transparent 31%)}#hangar .vehicle-label{left:25px;right:25px;bottom:27px;gap:15px}#hangar .vehicle-label h2{font-size:32px;font-weight:500}#hangar .vehicle-label small{font-size:9px;letter-spacing:1.5px}#hangar .hero-year{margin-left:auto;font-size:27px}#hangar .hero-corner{top:23px;bottom:auto;right:25px;font-size:9px}#hangar .hero-corner small{color:#b0bfa9;font-size:9px}#hangar .customize-button{top:auto;bottom:101px;right:24px;padding:9px 12px;font-size:9px;border-radius:4px;background:#17251dd9}
+#hangar .deploy-panel{border:1px solid #6f7d5e40;border-radius:9px;padding:23px;background:#202a24;display:flex;flex-direction:column;gap:14px}#hangar .deploy-panel>.eyebrow{color:#d2b780;font-size:9px}#hangar .mode-picker{margin:0;font:11px inherit;gap:8px;color:#aeb9a5}#hangar select{font-family:inherit}#hangar .mode-picker select{padding:10px 9px;border-radius:4px;font-size:11px;background:#141e18;border:1px solid #63715b;color:#e2e5d4}#hangar .map-selection>span{display:block;color:#aeb9a5;font-size:11px;margin-bottom:8px}#selected-map{display:flex;width:100%;justify-content:space-between;gap:8px;background:#141e18;border:1px solid #63715b;border-radius:4px;padding:11px 10px;font-size:12px;text-align:left}#selected-map span{color:#d4b778;font-size:8px;white-space:nowrap;align-self:center}#hangar .difficulty-label{display:flex;justify-content:space-between;align-items:center;margin:0;color:#aeb9a5;font-size:11px;gap:12px}#hangar .difficulty-label select{font-size:11px;padding:7px 12px;border-radius:4px}#hangar .mode-label{padding-top:12px;border-top:1px solid #6f7d5e40;gap:12px}#hangar .mode-icon{font-size:20px}#hangar .mode-label strong{font-size:11px;letter-spacing:1px}#hangar .mode-label small{font-size:9px;line-height:1.5}#hangar .deploy-panel p{display:none}#hangar #play-button{width:100%;justify-content:space-between;font-size:13px;padding:16px 18px;margin:0;margin-top:auto;border-radius:4px;background:#dbb46d;color:#17221a}#hangar .offline-note{font-size:8px;margin:0;text-align:center;letter-spacing:0}
+#hangar .hangar-content{padding:25px 0 0}.loadout-toolbar{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #63715b50;margin-bottom:22px;gap:12px}.loadout-tabs{display:flex;gap:28px}.loadout-tabs button{border-bottom:2px solid transparent;padding:0 0 15px;font-size:10px;color:#8d9b87;letter-spacing:1px}.loadout-tabs button span{font-size:14px;margin-left:9px;letter-spacing:0}.loadout-tabs button[aria-selected=true]{color:#e0c58e;border-color:#d3b77d}.loadout-toolbar>.text-button{font-size:10px}#hangar .section-title{margin-bottom:17px;gap:20px;align-items:center}#hangar .section-title h2{font-size:19px;font-weight:500;margin:0}#hangar .nation-tabs{margin-left:auto}#hangar .nation-tab{font-size:10px;padding:9px 13px}#hangar .garage-grid{grid-template-columns:minmax(0,1fr) 235px;gap:20px}#hangar .tank-cards,#hangar .tank-cards.five,#hangar .tank-cards.six,#hangar .tank-cards.three{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}#hangar .tank-card{min-height:170px;padding:13px 11px;border-radius:6px;background:#1d2720;border-color:#5361486b}#hangar .tank-card.selected{border-color:#d8b773;background:#30382a}#hangar .tank-card.locked{opacity:.62}#hangar .tank-card strong{font-size:13px}#hangar .tank-card svg{height:78px}#hangar .card-top{font-size:7px;letter-spacing:.5px}#hangar .tank-card small{font-size:7px;letter-spacing:.6px}#hangar .spec-panel{padding:17px;background:#1b241e;border:1px solid #5361486b;border-radius:6px}#hangar .spec-heading{font-size:8px}#hangar .spec-row{font-size:10px}#hangar #tank-description{font-size:10px;line-height:1.6}#hangar .deployment{display:block;border:0;margin:0;padding:0}#hangar .map-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}#hangar .map-card{height:165px;border-radius:6px}#hangar .map-title{padding:35px 15px 14px}#hangar .map-title strong{font-size:16px}#hangar .map-title small{font-size:10px}.map-filters{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}.map-filters button{padding:8px 12px;border:1px solid #63715b70;border-radius:4px;font-size:10px;color:#b1bca7}.map-filters button[aria-pressed=true]{background:#c6aa7130;color:#e0c58e;border-color:#bd9f65}#hangar footer{margin-top:22px;padding:16px 0;font-size:8px}#hangar footer .text-button{font-size:8px}button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #efd29a;outline-offset:4px}
+@media(min-width:1450px){#hangar .hero{height:440px}}
+@media(max-width:1100px){.topbar{gap:20px}.topbar nav{gap:20px}.topbar .profile{gap:12px}#hangar .garage-grid{grid-template-columns:1fr}#hangar .spec-panel{display:none}.command-layout{grid-template-columns:minmax(0,1fr) 285px}#hangar .deploy-panel{padding:18px}#hangar .hero-corner{display:none}}
+@media(max-width:800px){.topbar{padding:0 4%;height:72px;gap:15px}.topbar nav{gap:13px}.topbar .nav{font-size:10px}.topbar .brand{font-size:17px}.topbar .brand-mark{font-size:29px}.topbar .xp-total{display:none}.topbar .profile{margin-left:auto;gap:9px}.topbar #language-select{font-size:10px;max-width:85px}.hangar-heading h1{font-size:25px}.hangar-status{display:none}.command-layout{grid-template-columns:minmax(0,1fr) 255px;gap:12px}#hangar .hero{height:400px}#hangar .hero-year{display:none}#hangar .vehicle-label h2{font-size:25px}#hangar .vehicle-label{left:17px;right:17px;bottom:22px}#hangar .customize-button{right:17px}#hangar .hero-copy{left:17px}.loadout-tabs{gap:19px}#hangar .tank-cards,#hangar .tank-cards.five,#hangar .tank-cards.six,#hangar .tank-cards.three{grid-template-columns:repeat(3,minmax(0,1fr))}#hangar .map-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.map-filters{gap:4px}.map-filters button{font-size:9px;padding:7px 9px}#hangar .compact{flex-wrap:wrap}}
+@media(max-width:580px){.topbar{height:auto;min-height:68px;flex-wrap:wrap;gap:5px 12px;padding:12px 4% 0}.topbar .brand{font-size:17px}.topbar nav{order:3;width:100%;justify-content:space-between;height:40px}.topbar .nav{padding:10px 4px;font-size:11px}.topbar .nav[data-view=guide]{display:block}.topbar .brand small{font-size:5px}.topbar .profile{gap:10px}#hangar{padding:0 4%}.hangar-heading{padding:20px 0 16px}.hangar-heading h1{font-size:25px}.command-layout{grid-template-columns:1fr}#hangar .hero{height:285px}#hangar .vehicle-label h2{font-size:26px}#hangar .vehicle-label small{font-size:8px}#hangar .customize-button{bottom:86px}#hangar .deploy-panel{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:17px}#hangar .deploy-panel>.eyebrow{grid-column:1/-1}#hangar .mode-picker{grid-column:1/-1}#hangar .map-selection{grid-column:1}#hangar .difficulty-label{grid-column:2;display:flex;flex-direction:column;align-items:stretch;gap:8px}#hangar .difficulty-label select{padding:10px}#hangar .mode-label{grid-column:1/-1;padding-top:10px}#hangar #play-button{grid-column:1/-1;grid-row:auto;margin:0}#hangar .offline-note{grid-column:1/-1}#selected-map{min-height:38px;font-size:10px}#selected-map span{display:none}#hangar .hangar-content{padding-top:22px}.loadout-tabs button span{font-size:13px;margin-left:6px}.loadout-toolbar>.text-button{font-size:9px}#hangar .section-title{gap:12px;flex-wrap:wrap}#hangar .section-title h2{font-size:18px}#hangar .nation-tabs{margin:0;width:100%;order:2;justify-content:space-between}#hangar .nation-tab{padding:9px 10px}#hangar .tank-cards,#hangar .tank-cards.five,#hangar .tank-cards.six,#hangar .tank-cards.three{grid-template-columns:repeat(2,minmax(0,1fr))}#hangar .tank-card{min-height:155px}#hangar .map-card{height:150px}#hangar .map-title{padding:30px 10px 12px}#hangar .map-title strong{font-size:13px}#hangar .map-title small{font-size:9px}.map-filters{margin:0}.map-filters button{padding:8px}#hangar footer{flex-wrap:wrap;gap:12px}}
 </style><!-- Three.js MIT License:
 The MIT License
 
@@ -78,11 +89,14 @@ THE SOFTWARE.
 --></head>
 <body>
 <div id="app">
-<header class="topbar"><a class="brand" href="#" aria-label="Hard Steel War — hangár"><span class="brand-mark">✣</span><span>HARD<span class="brand-light">STEEL WAR</span><small>ARMORED WARFARE</small></span></a><nav aria-label="Hlavní navigace"><button class="nav active" data-view="hangar">Hangár</button><button class="nav" data-view="research">Výzkum <span class="tiny-dot"></span></button><button class="nav" data-view="guide">Polní příručka</button><button class="nav" data-view="scores">TOP 5</button></nav><div class="profile"><span class="local-indicator"><i></i> LOKÁLNÍ SIMULACE</span><span class="xp-total"><b>✦</b> <strong id="xp-top">0</strong> <small>VB</small></span><button id="settings-button" class="icon-button" aria-label="Nastavení">⚙</button></div></header>
+<header class="topbar"><a class="brand" href="#" aria-label="Hard Steel War — hangár"><span class="brand-mark">✣</span><span>HARD<span class="brand-light">STEEL WAR</span><small>ARMORED WARFARE</small></span></a><nav aria-label="Hlavní navigace"><button class="nav active" data-view="hangar">Hangár</button><button class="nav" data-view="research">Výzkum</button><button class="nav" data-view="guide">Příručka</button><button class="nav" data-view="scores">TOP 5</button></nav><div class="profile"><span class="xp-total"><b>✦</b> <strong id="xp-top">0</strong> <small>VB</small></span><select id="language-select" aria-label="Jazyk"><option value="cs">Čeština</option><option value="en">English</option><option value="auto">Auto</option></select><button id="settings-button" class="icon-button" aria-label="Nastavení">⚙</button></div></header>
 <main id="hangar">
-<section class="hero"><canvas id="scene" aria-label="3D náhled vybraného tanku"></canvas><div class="hero-shade"></div><div class="hero-copy"><div class="eyebrow"><span></span> VELITELSTVÍ / HANGÁR 01</div><h1>OCEL. OHEŇ.<br><span>PŘEVAHA.</span></h1><p>Každý zásah rozhoduje.<br>Vyber si stroj. Zanech svou stopu.</p><div class="hero-badges"><span>3 NÁRODY</span><span>15 STROJŮ</span><span>6 VS 6</span></div></div><div class="hero-corner"><span class="status-dot"></span> STROJ PŘIPRAVEN <small>Táhni pravým tlačítkem pro otočení pohledu</small></div><button id="customize-button" class="customize-button">✎ UPRAVIT VZHLED</button><div class="vehicle-label"><span id="hero-flag">DE</span><div><small id="hero-role">STŘEDNÍ TANK · II. ÚROVEŇ</small><h2 id="hero-name">Panzer IV F2</h2></div><span class="hero-year" id="hero-gun">75 <small>mm</small></span></div><div id="loading">PŘIPRAVUJI HANGÁR<span class="loading-line"></span></div></section>
-<div class="hangar-content"><section class="garage-section"><div class="section-title"><div><span class="eyebrow">TVŮJ ARZENÁL</span><h2>Vyber svůj stroj</h2></div><div id="nation-tabs" class="nation-tabs"></div><button class="text-button" data-view="research">Výzkumný strom <span>↗</span></button></div><div class="garage-grid"><div id="tank-cards" class="tank-cards"></div><aside class="spec-panel"><div class="spec-heading"><span>TECHNICKÝ PROFIL</span><span id="spec-role">STŘEDNÍ</span></div><div id="tank-specs"></div><p id="tank-description"></p></aside></div></section>
-<section class="deployment"><div class="battle-config"><div class="section-title compact"><div><span class="eyebrow">DALŠÍ OPERACE</span><h2>Zvol bojiště</h2></div><label class="difficulty-label">Obtížnost <select id="difficulty"><option value="easy">Rekrut</option><option value="normal" selected>Veterán</option><option value="hard">Eso</option></select></label></div><div id="map-cards" class="map-cards"></div></div><div class="deploy-panel"><label class="mode-picker">HERNÍ REŽIM<select id="game-mode"><option value="battle">Nadvláda · tanky proti tankům</option><option value="zombies">Zombie · přežití ve vlnách</option></select></label><div class="mode-label"><span class="mode-icon">⚑</span><div><strong>NADVLÁDA</strong><small>3 zóny · 4,84 km² · 6 proti 6</small></div></div><p><span id="matchup-label">Bitva národů</span><br>Obsaď zóny. Vybojuj další stroj.</p><button id="play-button" class="primary-button">DO BITVY <span>→</span></button><div class="offline-note"><i></i> Boti i fyzika běží na tvém zařízení</div></div></section>
+<div class="hangar-heading"><div><span class="eyebrow">VELITELSTVÍ / HANGÁR</span><h1>Připraven k nasazení.</h1></div><div class="hangar-status"><span class="status-dot"></span> 15 STROJŮ · 6 MAP</div></div>
+<div class="command-layout"><section class="hero"><canvas id="scene" aria-label="3D náhled vybraného tanku"></canvas><div class="hero-shade"></div><div class="hero-copy"><div class="eyebrow">TVŮJ VYBRANÝ STROJ</div></div><div class="hero-corner"><small>Pravým tlačítkem otáčej pohled</small></div><button id="customize-button" class="customize-button">✎ UPRAVIT VZHLED</button><div class="vehicle-label"><span id="hero-flag">DE</span><div><small id="hero-role">STŘEDNÍ TANK · I. ÚROVEŇ</small><h2 id="hero-name">Panzer IV F2</h2></div><span class="hero-year" id="hero-gun">75 <small>mm</small></span></div><div id="loading">PŘIPRAVUJI HANGÁR<span class="loading-line"></span></div></section>
+<aside class="deploy-panel"><span class="eyebrow">PŘÍPRAVA BITVY</span><label class="mode-picker">Herní režim<select id="game-mode"><option value="battle">Nadvláda · tanky proti tankům</option><option value="zombies">Zombie · přežití ve vlnách</option></select></label><div class="map-selection"><span>Bojiště</span><button id="selected-map" data-hangar-tab="maps">Zelené údolí <span>ZMĚNIT ↗</span></button></div><label class="difficulty-label">Obtížnost <select id="difficulty"><option value="easy">Rekrut</option><option value="normal" selected>Veterán</option><option value="hard">Eso</option></select></label><div class="mode-label"><span class="mode-icon">⚑</span><div><strong>NADVLÁDA</strong><small>3 zóny · 4,84 km² · 6 proti 6</small></div></div><p><span id="matchup-label">Bitva národů</span><br>Obsaď zóny. Vybojuj další stroj.</p><button id="play-button" class="primary-button">DO BITVY <span>→</span></button><div class="offline-note"><i></i> Boti i fyzika běží na tvém zařízení</div></aside></div>
+<div class="hangar-content"><div class="loadout-toolbar"><div class="loadout-tabs" role="tablist" aria-label="Příprava nasazení"><button id="vehicles-tab" role="tab" data-hangar-tab="vehicles" aria-selected="true" aria-controls="vehicles-panel">01 <span>Vozidla</span></button><button id="maps-tab" role="tab" data-hangar-tab="maps" aria-selected="false" aria-controls="maps-panel">02 <span>Mapy</span></button></div><button class="text-button" data-view="research">Výzkumný strom ↗</button></div>
+<section id="vehicles-panel" class="garage-section" role="tabpanel" aria-labelledby="vehicles-tab"><div class="section-title"><h2>Vyber svůj stroj</h2><div id="nation-tabs" class="nation-tabs"></div></div><div class="garage-grid"><div id="tank-cards" class="tank-cards"></div><aside class="spec-panel"><div class="spec-heading"><span>TECHNICKÝ PROFIL</span><span id="spec-role">STŘEDNÍ</span></div><div id="tank-specs"></div><p id="tank-description"></p></aside></div></section>
+<section id="maps-panel" class="deployment" role="tabpanel" aria-labelledby="maps-tab" hidden><div class="battle-config"><div class="section-title compact"><h2>Zvol bojiště</h2><div class="map-filters" aria-label="Typ mapy"><button data-map-filter="all" aria-pressed="true">Všechny</button><button data-map-filter="urban" aria-pressed="false">Město / CQC</button><button data-map-filter="hills" aria-pressed="false">Kopce</button><button data-map-filter="flat" aria-pressed="false">Rovina</button></div></div><div id="map-cards" class="map-cards"></div></div></section>
 <footer><span>HARD STEEL WAR <b> / </b> EXPERIMENTÁLNÍ TANKOVÝ POLYGON</span><span class="text-button">OFFLINE EDICE · VŠE V TOMTO SOUBORU</span><button class="text-button" data-view="guide">Ovládání a mechaniky ↗</button></footer></div>
 </main>
 <section id="battle" hidden><div id="battle-scene"></div><div class="battle-top"><button id="pause-button" class="hud-button">Ⅱ <span>ESC</span></button><div class="battle-score"><div class="score-row"><span class="team-blue">SPOJENCI <b id="friendly-score">2000</b></span><span id="battle-time">12:00</span><span class="team-red"><b id="enemy-score">2000</b> NEPŘÍTEL</span></div><div class="ticket-bars"><i id="friendly-bar"></i><i id="enemy-bar"></i></div><div id="zone-hud" class="zone-hud"></div></div><span class="battle-map-label" id="battle-map-label"></span></div><div id="name-tags"></div><div id="zombie-hud" hidden></div><div id="scope-overlay" class="scope-overlay" hidden><div class="scope-ticks"></div></div><div id="view-status" class="view-status"></div><button id="camera-mode-button" class="camera-mode-button">[SHIFT] 1. OSOBA</button><div id="gun-marker" hidden></div><div id="reticle"><i></i><span></span></div><div id="hit-notice" aria-live="polite"></div><div id="kill-confirmation" class="kill-confirmation" hidden><span>✦</span><strong>CÍL ZNIČEN</strong><small></small></div><div id="kill-feed" class="kill-feed"></div><div class="battle-objective" id="battle-objective">OBSAĎ A UDRŽ ZÓNY</div><div id="damage-flash"></div><div id="nuke-flash"></div><button id="nuke-button" disabled>☢ BODY 0 / 10</button><div class="battle-bottom"><div class="module-panel"><div class="hud-caption"><span id="battle-tank-name"></span><span id="crew-label">POSÁDKA</span></div><div class="module-layout"><div id="tank-diagram" class="tank-diagram"><div class="track left"></div><div class="hull"><div class="engine-block"></div><div class="turret-block"><div class="gun-block"></div></div><div class="ammo-block"></div></div><div class="track right"></div></div><div id="module-bars"></div></div><div class="module-actions"><button id="repair-button">[F] Opravit</button><button id="smoke-button">[G] Kouř <span>3</span></button></div><button id="missile-button" class="missile-action" hidden>[2] RAKETA 4/4</button></div><div class="driving-hud"><div class="speed"><strong id="speed-value">0</strong><span>km/h</span></div><div class="ammo-hud"><div class="shell-icon"></div><div><strong id="ammo-name">APHE</strong><small id="reload-label">PŘIPRAVENO</small><div class="reload-track"><i id="reload-bar"></i></div></div><span id="reload-count"></span></div><div class="mg-hud"><span id="mg-status">MEZERNÍK · KULOMET</span><div><i id="mg-heat"></i></div></div><div class="key-hints"><span><kbd>W A S D</kbd> Pohyb</span><span><kbd>MYŠ</kbd> Míření</span><span><kbd>SHIFT</kbd> Zaměřovač</span><span><kbd>C</kbd> Rozhlížení</span></div></div><div class="minimap-wrap"><div class="hud-caption"><span>TAKTICKÁ MAPA</span><span id="terrain-label">TERÉN</span></div><canvas id="minimap" width="220" height="220" aria-label="Taktická mapa bojiště"></canvas></div></div><div id="respawn-panel" hidden><span class="eyebrow">STROJ VYŘAZEN</span><h2>Bitva ještě nekončí.</h2><p id="respawn-text">Připravuje se záložní tank…</p><button id="respawn-button" class="primary-button">ZPĚT DO BOJE →</button></div><div class="touch-controls"><div class="touch-pad"><button data-key="KeyW">▲</button><button data-key="KeyA">◀</button><button data-key="KeyS">▼</button><button data-key="KeyD">▶</button></div><div class="touch-aim-actions"><button id="touch-scope">ZAMĚŘOVAČ</button><button id="touch-fire">PALBA</button></div></div></section>
@@ -54663,6 +54677,492 @@ if ( typeof window !== 'undefined' ) {
 
 return {ACESFilmicToneMapping,AddEquation,AddOperation,AdditiveAnimationBlendMode,AdditiveBlending,AgXToneMapping,AlphaFormat,AlwaysCompare,AlwaysDepth,AlwaysStencilFunc,AmbientLight,AnimationAction,AnimationClip,AnimationLoader,AnimationMixer,AnimationObjectGroup,AnimationUtils,ArcCurve,ArrayCamera,ArrowHelper,AttachedBindMode,Audio,AudioAnalyser,AudioContext,AudioListener,AudioLoader,AxesHelper,BackSide,BasicDepthPacking,BasicShadowMap,BatchedMesh,Bone,BooleanKeyframeTrack,Box2,Box3,Box3Helper,BoxGeometry,BoxHelper,BufferAttribute,BufferGeometry,BufferGeometryLoader,ByteType,Cache,Camera,CameraHelper,CanvasTexture,CapsuleGeometry,CatmullRomCurve3,CineonToneMapping,CircleGeometry,ClampToEdgeWrapping,Clock,Color,ColorKeyframeTrack,ColorManagement,CompressedArrayTexture,CompressedCubeTexture,CompressedTexture,CompressedTextureLoader,ConeGeometry,ConstantAlphaFactor,ConstantColorFactor,Controls,CubeCamera,CubeReflectionMapping,CubeRefractionMapping,CubeTexture,CubeTextureLoader,CubeUVReflectionMapping,CubicBezierCurve,CubicBezierCurve3,CubicInterpolant,CullFaceBack,CullFaceFront,CullFaceFrontBack,CullFaceNone,Curve,CurvePath,CustomBlending,CustomToneMapping,CylinderGeometry,Cylindrical,Data3DTexture,DataArrayTexture,DataTexture,DataTextureLoader,DataUtils,DecrementStencilOp,DecrementWrapStencilOp,DefaultLoadingManager,DepthFormat,DepthStencilFormat,DepthTexture,DetachedBindMode,DirectionalLight,DirectionalLightHelper,DiscreteInterpolant,DodecahedronGeometry,DoubleSide,DstAlphaFactor,DstColorFactor,DynamicCopyUsage,DynamicDrawUsage,DynamicReadUsage,EdgesGeometry,EllipseCurve,EqualCompare,EqualDepth,EqualStencilFunc,EquirectangularReflectionMapping,EquirectangularRefractionMapping,Euler,EventDispatcher,ExtrudeGeometry,FileLoader,Float16BufferAttribute,Float32BufferAttribute,FloatType,Fog,FogExp2,FramebufferTexture,FrontSide,Frustum,GLBufferAttribute,GLSL1,GLSL3,GreaterCompare,GreaterDepth,GreaterEqualCompare,GreaterEqualDepth,GreaterEqualStencilFunc,GreaterStencilFunc,GridHelper,Group,HalfFloatType,HemisphereLight,HemisphereLightHelper,IcosahedronGeometry,ImageBitmapLoader,ImageLoader,ImageUtils,IncrementStencilOp,IncrementWrapStencilOp,InstancedBufferAttribute,InstancedBufferGeometry,InstancedInterleavedBuffer,InstancedMesh,Int16BufferAttribute,Int32BufferAttribute,Int8BufferAttribute,IntType,InterleavedBuffer,InterleavedBufferAttribute,Interpolant,InterpolateDiscrete,InterpolateLinear,InterpolateSmooth,InvertStencilOp,KeepStencilOp,KeyframeTrack,LOD,LatheGeometry,Layers,LessCompare,LessDepth,LessEqualCompare,LessEqualDepth,LessEqualStencilFunc,LessStencilFunc,Light,LightProbe,Line,Line3,LineBasicMaterial,LineCurve,LineCurve3,LineDashedMaterial,LineLoop,LineSegments,LinearFilter,LinearInterpolant,LinearMipMapLinearFilter,LinearMipMapNearestFilter,LinearMipmapLinearFilter,LinearMipmapNearestFilter,LinearSRGBColorSpace,LinearToneMapping,LinearTransfer,Loader,LoaderUtils,LoadingManager,LoopOnce,LoopPingPong,LoopRepeat,LuminanceAlphaFormat,LuminanceFormat,MOUSE,Material,MaterialLoader,MathUtils,Matrix2,Matrix3,Matrix4,MaxEquation,Mesh,MeshBasicMaterial,MeshDepthMaterial,MeshDistanceMaterial,MeshLambertMaterial,MeshMatcapMaterial,MeshNormalMaterial,MeshPhongMaterial,MeshPhysicalMaterial,MeshStandardMaterial,MeshToonMaterial,MinEquation,MirroredRepeatWrapping,MixOperation,MultiplyBlending,MultiplyOperation,NearestFilter,NearestMipMapLinearFilter,NearestMipMapNearestFilter,NearestMipmapLinearFilter,NearestMipmapNearestFilter,NeutralToneMapping,NeverCompare,NeverDepth,NeverStencilFunc,NoBlending,NoColorSpace,NoToneMapping,NormalAnimationBlendMode,NormalBlending,NotEqualCompare,NotEqualDepth,NotEqualStencilFunc,NumberKeyframeTrack,Object3D,ObjectLoader,ObjectSpaceNormalMap,OctahedronGeometry,OneFactor,OneMinusConstantAlphaFactor,OneMinusConstantColorFactor,OneMinusDstAlphaFactor,OneMinusDstColorFactor,OneMinusSrcAlphaFactor,OneMinusSrcColorFactor,OrthographicCamera,PCFShadowMap,PCFSoftShadowMap,PMREMGenerator,Path,PerspectiveCamera,Plane,PlaneGeometry,PlaneHelper,PointLight,PointLightHelper,Points,PointsMaterial,PolarGridHelper,PolyhedronGeometry,PositionalAudio,PropertyBinding,PropertyMixer,QuadraticBezierCurve,QuadraticBezierCurve3,Quaternion,QuaternionKeyframeTrack,QuaternionLinearInterpolant,RED_GREEN_RGTC2_Format,RED_RGTC1_Format,REVISION,RGBADepthPacking,RGBAFormat,RGBAIntegerFormat,RGBA_ASTC_10x10_Format,RGBA_ASTC_10x5_Format,RGBA_ASTC_10x6_Format,RGBA_ASTC_10x8_Format,RGBA_ASTC_12x10_Format,RGBA_ASTC_12x12_Format,RGBA_ASTC_4x4_Format,RGBA_ASTC_5x4_Format,RGBA_ASTC_5x5_Format,RGBA_ASTC_6x5_Format,RGBA_ASTC_6x6_Format,RGBA_ASTC_8x5_Format,RGBA_ASTC_8x6_Format,RGBA_ASTC_8x8_Format,RGBA_BPTC_Format,RGBA_ETC2_EAC_Format,RGBA_PVRTC_2BPPV1_Format,RGBA_PVRTC_4BPPV1_Format,RGBA_S3TC_DXT1_Format,RGBA_S3TC_DXT3_Format,RGBA_S3TC_DXT5_Format,RGBDepthPacking,RGBFormat,RGBIntegerFormat,RGB_BPTC_SIGNED_Format,RGB_BPTC_UNSIGNED_Format,RGB_ETC1_Format,RGB_ETC2_Format,RGB_PVRTC_2BPPV1_Format,RGB_PVRTC_4BPPV1_Format,RGB_S3TC_DXT1_Format,RGDepthPacking,RGFormat,RGIntegerFormat,RawShaderMaterial,Ray,Raycaster,RectAreaLight,RedFormat,RedIntegerFormat,ReinhardToneMapping,RenderTarget,RepeatWrapping,ReplaceStencilOp,ReverseSubtractEquation,RingGeometry,SIGNED_RED_GREEN_RGTC2_Format,SIGNED_RED_RGTC1_Format,SRGBColorSpace,SRGBTransfer,Scene,ShaderChunk,ShaderLib,ShaderMaterial,ShadowMaterial,Shape,ShapeGeometry,ShapePath,ShapeUtils,ShortType,Skeleton,SkeletonHelper,SkinnedMesh,Source,Sphere,SphereGeometry,Spherical,SphericalHarmonics3,SplineCurve,SpotLight,SpotLightHelper,Sprite,SpriteMaterial,SrcAlphaFactor,SrcAlphaSaturateFactor,SrcColorFactor,StaticCopyUsage,StaticDrawUsage,StaticReadUsage,StereoCamera,StreamCopyUsage,StreamDrawUsage,StreamReadUsage,StringKeyframeTrack,SubtractEquation,SubtractiveBlending,TOUCH,TangentSpaceNormalMap,TetrahedronGeometry,Texture,TextureLoader,TextureUtils,TorusGeometry,TorusKnotGeometry,Triangle,TriangleFanDrawMode,TriangleStripDrawMode,TrianglesDrawMode,TubeGeometry,UVMapping,Uint16BufferAttribute,Uint32BufferAttribute,Uint8BufferAttribute,Uint8ClampedBufferAttribute,Uniform,UniformsGroup,UniformsLib,UniformsUtils,UnsignedByteType,UnsignedInt248Type,UnsignedInt5999Type,UnsignedIntType,UnsignedShort4444Type,UnsignedShort5551Type,UnsignedShortType,VSMShadowMap,Vector2,Vector3,Vector4,VectorKeyframeTrack,VideoTexture,WebGL3DRenderTarget,WebGLArrayRenderTarget,WebGLCoordinateSystem,WebGLCubeRenderTarget,WebGLMultipleRenderTargets,WebGLRenderTarget,WebGLRenderer,WebGLUtils,WebGPUCoordinateSystem,WireframeGeometry,WrapAroundEnding,ZeroCurvatureEnding,ZeroFactor,ZeroSlopeEnding,ZeroStencilOp,createCanvasElement};})();
 const MODULES={};
+MODULES["i18n-content.js"]=(()=>{
+const CONTENT_TRANSLATIONS=[
+ ['Online žebříček ještě není připojen.','The online leaderboard is not connected yet.'],
+ ['Server není dostupný. Zkontroluj připojení a zkus to znovu.','Server unavailable. Check your connection and try again.'],
+ ['Tuto přezdívku už používá jiný hráč.','Another player already uses this nickname.'],
+ ['Před dalším odesláním počkej 30 sekund.','Wait 30 seconds before submitting again.'],
+ ['Online služba požadavek odmítla. Zkus to později.','The online service rejected the request. Try again later.'],
+ ['Přihlášení hráče se nezdařilo.','Player sign-in failed.'],
+ ['Pro zachování přezdívky povol ukládání dat v prohlížeči.','Allow browser storage to keep your nickname.'],
+ ['Přezdívka musí mít 3–20 znaků a skóre musí být platné.','Use a nickname of 3–20 characters and a valid score.'],
+ ['Obrázek se nepodařilo zmenšit. Zkus jiný soubor.','Cannot resize the image. Try another file.'],
+ ['Věž · zadní strana','Turret · rear'],['Korba · čelo','Hull · front'],['Korba · záď','Hull · rear'],['Věž · střecha','Turret · roof'],['Korba · horní plocha','Hull · roof'],
+ ['Klikni na pancíř pro nové umístění','Click the armor to place the decal'],
+ ['HORDA NA KORBĚ · ROZJEĎ SE!','HORDE ON YOUR HULL · GET MOVING!'],
+ ['JADERNÝ ÚDER ZA 8 SEKUND','NUCLEAR STRIKE IN 8 SECONDS'],
+ ['Požár uhašen. Opravuji moduly…','Fire extinguished. Repairing modules…'],
+ ['Oprava přerušena pohybem nebo střelbou','Repair interrupted by movement or firing'],
+ ['Mechanické moduly jsou v pořádku','Mechanical modules are in working order'],
+ ['Pro opravu nejprve zastav','Stop before repairing'],['Opravuji moduly… Zůstaň stát','Repairing modules… Stay still'],
+ ['NUKE PŘIPRAVEN · stiskni N pro jaderný úder','NUKE READY · press N for a nuclear strike'],
+ ['Spojenec v dráze střely','Ally in the line of fire'],['Zásah pásu · mimo korbu','Track hit · outside hull'],
+ ['Odražená střela','Ricochet'],['Neproraženo','No penetration'],['APHE · výbuch uvnitř','APHE · internal explosion'],
+ ['Vyřazen','Disabled'],['Zásah','Hit'],['motor','engine'],['pásy','tracks'],['pohon věže','turret drive'],['závěr děla','gun breech'],['munice','ammunition'],['posádka','crew'],
+ ['Tank zničen','Tank destroyed'],['zničen','destroyed'],['Výbuch munice','Ammunition explosion'],['Bitva opuštěna','Battle abandoned'],['OPERACE VYHRÁNA','OPERATION WON'],
+ ['Přesný dlouhý kanón. Drž si odstup a nastav nepříteli čelo korby.','Accurate long gun. Keep your distance and face the enemy with your hull front.'],
+ ['Silnější čelní pancíř a boční představné pláty. Spolehlivá palebná podpora.','Stronger frontal armor and side skirts. Reliable fire support.'],
+ ['Silná osmaosmdesátka a odolné boky. Natočení korby zvyšuje účinnost pancíře.','Powerful 88 mm gun and sturdy sides. Angle your hull to improve protection.'],
+ ['Vylepšená posádka a rychlejší nabíjení. Ovládni otevřené střelecké linie.','Improved crew and faster reload. Dominate open firing lanes.'],
+ ['Dlouhá osmaosmdesátka a silně skloněné čelo. Ovládá vzdálené hřebeny, ale boky a pomalý přesun vyžadují krytí.','Long 88 mm gun and heavily sloped frontal armor. Controls distant ridges, but needs cover for its flanks and slow movement.'],
+ ['Vyvážený Sherman s oblou litou korbou. Rychlá palba a pohyblivá věž.','Balanced Sherman with a rounded cast hull. Fast firing and a responsive turret.'],
+ ['Odolnější čelo a svižné nabíjení. Pomáhej spojencům a obsazuj zóny.','Improved frontal protection and a quick reload. Support allies and capture zones.'],
+ ['Dlouhý 76mm kanón si poradí i s těžkými cíli. Mokré uložení střeliva snižuje riziko výbuchu.','The long 76 mm gun can tackle heavy targets. Wet ammunition storage reduces explosion risk.'],
+ ['Nízký Pershing se silným 90mm dělem. Zaujmi palebné postavení za hřebenem a využij odolnou věž.','Low-profile Pershing with a powerful 90 mm gun. Take a hull-down position and use its sturdy turret.'],
+ ['Skloněný pancíř a široké pásy. V terénu se rychle dostaneš nepříteli do boku.','Sloped armor and wide tracks. Use your mobility to flank the enemy across rough ground.'],
+ ['Zdokonalená věž a rychlejší obsluha kanónu. Pohyblivý bojovník pro obsazování.','Improved turret and faster gun handling. A mobile fighter for capturing objectives.'],
+ ['Větší věž a účinný 85mm kanón. Zůstávej v pohybu a využívej boční zásahy.','Larger turret and effective 85 mm gun. Stay mobile and aim for flanking shots.'],
+ ['Silně pancéřovaný průlomový tank. Kryj slabší spojence a tlač na obsazované zóny.','Heavily armored breakthrough tank. Protect lighter allies and push the objectives.'],
+ ['Mohutný 122mm kanón způsobuje ničivé průstřely. Po výstřelu se stáhni do krytu; dlouhé nabíjení musí krýt spojenci.','Massive 122 mm gun with devastating penetrating hits. Pull into cover after firing; allies must cover your long reload.'],
+ ['Moderní ruský bonus ve stromu SSSR. Dva rychlopalné 30mm kanóny ničí slabší pancíř; čtyři naváděné rakety prorazí těžké cíle. Raketu řídíš mířením.','Modern Russian bonus vehicle in the USSR tree. Twin 30 mm autocannons defeat lighter armor; four guided missiles tackle heavy targets. Guide missiles with your aim.'],
+ ['POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK','FIELD MANUAL / BASIC TRAINING'],
+ ['Znát svůj tank. Ovládnout bojiště.','Know your tank. Master the battlefield.'],
+ ['Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.','An original browser game inspired by tank simulators. Armor and module damage are simplified for tactical battles. Vehicle specifications are balanced for gameplay. The modern Russian BMPT Terminator is unlocked after the IS-2 in the USSR branch. The research trees also include Tiger II and M26 Pershing.'],
+ ['Ovládání','Controls'],['Vpřed / zpátečka','Forward / reverse'],
+ ['Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla','Smooth left / right steering; reversing follows vehicle steering'],
+ ['Pohyb pohledu a zaměřování; věž zaměřovač dohání','Move the view and aim; the turret follows the reticle'],
+ ['LEVÉ TLAČÍTKO','LEFT BUTTON'],['Výstřel (lze držet)','Fire (hold for repeated fire)'],['MEZERNÍK','SPACE'],
+ ['Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.','Machine gun; watch the heat gauge. Cannot penetrate heavy armor.'],
+ ['Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.','Nuke at 10 points: each kill +1, death −1. Points carry over between lives. Eight-second countdown, then victory.'],
+ ['PRAVÉ TLAČÍTKO','RIGHT BUTTON'],['Podržet pro přiblížení','Hold to zoom'],
+ ['Podržet pro rozhlížení bez otáčení věže','Hold to look around without rotating the turret'],['KOLEČKO','SCROLL'],
+ ['Vzdálenost kamery / zvětšení zaměřovače','Camera distance / sight magnification'],
+ ['Přepnout do první osoby — optický zaměřovač střelce','Toggle first-person gunner optics'],['Oprava modulů při zastavení','Repair modules while stationary'],
+ ['Kouřová clona — 3 na život','Smoke screen — three per life'],['BMPT: naváděná raketa; po odpalu ji řídíš mířením','BMPT: guided missile; steer it after launch with your aim'],
+ ['Podržet pro zobrazení modulů','Hold to view modules'],['Nasadit záložní tank po zničení','Deploy a reserve tank after destruction'],['Pauza','Pause'],
+ ['Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.','The reticle is centered on deployment. The large cross sets your aim. The smaller marker predicts the first shell impact; cover in front of the barrel can stop your shot. First person uses gunner optics; the small marker follows the gun. Click the battlefield for unlimited mouse rotation. Esc releases the mouse and pauses. Adjust sensitivity in Settings.'],
+ ['Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.','On touch devices, use the direction buttons, touch the battlefield to aim and press FIRE. A wide screen gives the best view.'],
+ ['ZOMBIE · Přežití','ZOMBIES · Survival'],
+ ['V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný pouze v Nadvládě.','Choose Zombies in the hangar. Repel waves with the machine gun on Space, cannon explosions and running over the horde. Spend scrap between waves. The automatic machine gun costs 1,800 scrap and aims independently of your turret. You have one life; upgrades and scrap last for the current run. Nukes are only available in Domination.'],
+ ['Nadvláda · 6 proti 6','Domination · 6 vs 6'],
+ ['Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po dvanácti minutách.','You and five allied bots of your nation face six tanks from other nations. Enter circle A, B or C and hold it. Enemies in the circle block capture. Controlled zones drain enemy tickets; win by exhausting their tickets or leading after twelve minutes.'],
+ ['Každý zásah má svou cestu','Every hit has a path'],
+ ['Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.','Effective armor thickness depends on impact angle, hull side and distance. Steep angles can cause ricochets. Penetrations damage modules near the hit: tracks stop movement, the engine limits mobility, turret damage slows aiming and a broken breech prevents firing. An ammunition hit or crew loss can destroy a vehicle.'],
+ ['Přežij další minutu','Survive another minute'],
+ ['Mapy zahrnují městské bloky, průmyslové dvory, otevřenou rovinu i krajinu s mnoha menšími kopci. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky a využívej terén i budovy. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.','Maps range from city blocks and industrial yards to open plains and landscapes with many smaller hills. Cross rivers on bridges; deep water is impassable. Protect your flanks and use terrain and buildings. Smoke obstructs bot vision and helps you repair. Sand, mud and deep snow slow movement; roads are faster. After destruction, a reserve tank costs team tickets.'],
+ ['Postup zůstává u tebe','Your progress stays with you'],
+ ['Výzkum se ukládá automaticky v tomto prohlížeči. V nastavení lze stáhnout a později načíst zálohu postupu. Vymazání dat webu postup odstraní. Hra nepotřebuje účet pro svou simulaci ani herní server.','Research saves automatically in this browser. Download and restore a progress backup in Settings. Clearing site data removes progress. The simulation needs neither an account nor a game server.'],
+ ['Vyber obrázek do 20 MB.','Choose an image up to 20 MB.'],
+ ['Obrázek je příliš velký. Použij nejvýše 40 megapixelů.','The image is too large. Use up to 40 megapixels.'],
+ ['Tankové bitvy','Tank battles'],['Taktická mapa bojiště','Tactical battlefield map'],
+ ['bitev','battles'],['zničených cílů','targets destroyed'],['strojů','vehicles'],['Zóna','Zone'],['boj o zónu','contested'],['spojenci','allies'],['nepřítel','enemy'],['neutrální','neutral'],
+ ['Korba — pravý bok','Hull — right side'],['Korba — levý bok','Hull — left side'],['Korba — čelo','Hull — front'],['Korba — záď','Hull — rear'],['Věž — pravý bok','Turret — right side'],['Věž — levý bok','Turret — left side'],['Věž — záď','Turret — rear'],['Korba — horní pancíř','Hull — roof'],['Věž — střecha','Turret — roof'],
+ ['Vybrat nálepku','Select decal'],['na tanku','on the tank'],['nálepky','decal'],
+];
+
+return {CONTENT_TRANSLATIONS};
+})();
+MODULES["i18n.js"]=(()=>{
+const {CONTENT_TRANSLATIONS} = MODULES["i18n-content.js"];
+const LANGUAGE_KEY='hsw-language';
+function resolveLanguage({preference='auto',hostname='',languages=['cs']}={}){
+ if(preference==='cs'||preference==='en')return preference;
+ const host=hostname.toLowerCase().replace(/\.$/,'');
+ if(host.endsWith('.cz'))return 'cs';
+ if(host.endsWith('.com'))return 'en';
+ const supported=languages.find(l=>/^(cs|en)(?:-|$)/i.test(l));return /^cs(?:-|$)/i.test(supported||'')?'cs':'en';
+}
+let preference='auto';try{preference=globalThis.localStorage?.getItem(LANGUAGE_KEY)||'auto';}catch{}
+if(!['auto','cs','en'].includes(preference))preference='auto';
+let language=resolveLanguage({preference,hostname:globalThis.location?.hostname,languages:globalThis.navigator?.languages||['cs']});
+const getLanguage=()=>language;
+const getLanguagePreference=()=>preference;
+
+// Source strings remain Czech in the simulation and save data. Only visible
+// text is translated; tank IDs, controls, nicknames and imported images stay intact.
+const pairs=`
+Hangár	Hangar
+Výzkum	Research
+Příručka	Guide
+Polní příručka	Field manual
+Jazyk	Language
+Nastavení	Settings
+Zavřít	Close
+Hlavní navigace	Main navigation
+Hard Steel War — hangár	Hard Steel War — hangar
+Čeština	Čeština
+VELITELSTVÍ / HANGÁR	COMMAND / HANGAR
+Připraven k nasazení.	Ready to deploy.
+15 STROJŮ · 6 MAP	15 VEHICLES · 6 MAPS
+TVŮJ VYBRANÝ STROJ	YOUR SELECTED VEHICLE
+Pravým tlačítkem otáčej pohled	Right-drag to rotate the view
+✎ UPRAVIT VZHLED	✎ CUSTOMIZE
+PŘIPRAVUJI HANGÁR	PREPARING HANGAR
+3D náhled vybraného tanku	3D preview of the selected tank
+PŘÍPRAVA BITVY	BATTLE SETUP
+Příprava nasazení	Deployment setup
+Herní režim	Game mode
+Nadvláda · tanky proti tankům	Domination · tank battles
+Zombie · přežití ve vlnách	Zombies · wave survival
+Bojiště	Battlefield
+ZMĚNIT ↗	CHANGE ↗
+Obtížnost	Difficulty
+Rekrut	Recruit
+Veterán	Veteran
+Eso	Ace
+NADVLÁDA	DOMINATION
+DO BITVY	TO BATTLE
+Boti i fyzika běží na tvém zařízení	Bots and physics run on your device
+Vozidla	Vehicles
+Mapy	Maps
+Výzkumný strom ↗	Research tree ↗
+Vyber svůj stroj	Choose your vehicle
+TECHNICKÝ PROFIL	VEHICLE PROFILE
+Německo	Germany
+SSSR	USSR
+Střední tank	Medium tank
+Těžký tank	Heavy tank
+Bojové vozidlo podpory	Support vehicle
+STŘEDNÍ	MEDIUM
+ÚROVEŇ	RANK
+VYBRÁNO	SELECTED
+PŘIPRAVEN	READY
+UZAMČENO · VYZKOUMAT ↗	LOCKED · RESEARCH ↗
+Kanón	Gun
+Pancíř	Armor
+Rychlost	Speed
+Nabíjení	Reload
+Zvol bojiště	Choose a battlefield
+Typ mapy	Map type
+Všechny	All
+Město / CQC	City / CQC
+Kopce	Hills
+Rovina	Plains
+Zelené údolí	Green Valley
+Písečná bouře	Sandstorm
+Zimní průlom	Winter Breakthrough
+Ocelové město	Steel City
+Průmyslový uzel	Industrial Junction
+Široká pláň	Open Plains
+Kopce · říční mosty · vesnice	Hills · river bridges · villages
+Duny · kaňon · skalní plošiny	Dunes · canyon · rocky plateaus
+Hřebeny · lesy · zasněžené mosty	Ridges · forests · snowy bridges
+Uliční bloky · náměstí · průjezdné dvory	City blocks · squares · open courtyards
+Průmyslové dvory · sklady · obchvaty	Factory yards · warehouses · flanking routes
+Otevřená rovina · dlouhé palebné linie	Open terrain · long sightlines
+3 zóny	3 zones
+6 proti 6	6 vs 6
+proti	vs
+Bitva národů	Battle of nations
+Obsaď zóny. Vybojuj další stroj.	Capture zones. Earn your next vehicle.
+ZOMBIE · PŘEŽITÍ	ZOMBIES · SURVIVAL
+Vlny · šrot · vylepšení tanku	Waves · scrap · vehicle upgrades
+Jeden tank proti hordě.	One tank against the horde.
+Každou vlnou silnější. Mezi vlnami obchod.	Stronger every wave. Buy upgrades between waves.
+EXPERIMENTÁLNÍ TANKOVÝ POLYGON	EXPERIMENTAL TANK BATTLEGROUND
+STÁHNOUT OFFLINE ↗	DOWNLOAD OFFLINE ↗
+OFFLINE EDICE · VŠE V TOMTO SOUBORU	OFFLINE EDITION · ALL IN THIS FILE
+Ovládání a mechaniky ↗	Controls and mechanics ↗
+VB	RP
+TECHNOLOGIE / VÝZKUMNÝ STROM	TECHNOLOGY / RESEARCH TREE
+Další stroj je na dosah.	Your next vehicle is within reach.
+Tři národy, tři vývojové linie. Bojuj, obsazuj a proměň výzkumné body v nové tanky. Základní stroj každého národa máš hned. Body můžeš využít v libovolné větvi.	Three nations, three research branches. Fight, capture zones and turn research points into new vehicles. Each nation's starter is free. Spend your points in any branch.
+BITEV	BATTLES
+VÍTĚZSTVÍ	VICTORIES
+VYZKOUMÁNO	RESEARCHED
+VÝZKUMNÝCH BODŮ	RESEARCH POINTS
+AKTUÁLNÍ STROJ	CURRENT VEHICLE
+NASADIT DO HANGÁRU	EQUIP IN HANGAR
+VYZKOUMAT →	RESEARCH →
+Nejdřív	Requires
+Chybí	Missing
+Výzkum tanku stojí 4 500–6 300 VB; základní stroje zůstávají zdarma. Výdělek závisí na výsledku, zásazích a obsazování. Nic se nezkoumá na čas.	Vehicles cost 4,500–6,300 RP; starter vehicles are free. Earnings depend on the result, hits and captures. There are no research timers.
+vyzkoumán. Připraven k nasazení.	researched. Ready to deploy.
+NASTAVENÍ / TVŮJ POLYGON	SETTINGS / YOUR BATTLEGROUND
+Připravit k boji.	Make it yours.
+Zvuk	Sound
+Motor, výstřely a události bitvy	Engine, gunfire and battle events
+ZAPNUTO	ON
+VYPNUTO	OFF
+Grafika	Graphics
+Nižší kvalita omezí stíny a rozlišení	Lower quality reduces shadows and render resolution
+Vysoká	High
+Úsporná	Low
+Citlivost myši	Mouse sensitivity
+Stejný směr myši a pohledu; jemnější míření při přiblížení	Direct mouse movement; finer aiming when zoomed in
+Nízká	Low
+Normální	Normal
+Vyšší	Higher
+Lokální postup	Local progress
+Zálohovat	Back up
+Obnovit zálohu	Restore backup
+Nahradí aktuální výzkum uloženým postupem	Replaces current research with the saved progress
+Načíst soubor	Load file
+HOTOVO →	DONE →
+Automaticky podle domény; ruční volba zůstane uložená.	Automatic by domain; your manual choice is saved.
+Automaticky	Automatic
+Záloha postupu připravena.	Progress backup is ready.
+Postup úspěšně obnoven.	Progress restored.
+Soubor není platná záloha Hard Steel War.	This is not a valid Hard Steel War backup.
+Prohlížeč nepovolil uložení. Postup zůstane jen do zavření hry.	The browser blocked saving. Progress will last only until the game is closed.
+BITVA POZASTAVENA	BATTLE PAUSED
+Chvíle na rozmyšlenou.	Take a moment.
+Simulace je pozastavená. Tvůj tank je v bezpečí.	The simulation is paused. Your tank is safe.
+POKRAČOVAT →	RESUME →
+OVLÁDÁNÍ	CONTROLS
+UKONČIT BITVU	END BATTLE
+OPERACE UKONČENA	OPERATION COMPLETE
+Konec přežití.	Survival ended.
+Vítězství patří tvému týmu.	Victory for your team.
+Dnes jsme ztratili bojiště.	The battlefield was lost today.
+Operace ukončena.	Operation complete.
+Každá zkušenost tě posune dál.	Every battle takes you further.
+Výsledky byly uloženy.	Results saved.
+ZNIČENÝCH CÍLŮ	TARGETS DESTROYED
+DOKONČENÝCH VLN	WAVES COMPLETED
+OBSAZENÝCH ZÓN	ZONES CAPTURED
+POŠKOZENÍ MODULŮ	MODULE DAMAGE
+Další na řadě:	Up next:
+Máš dost bodů na výzkum!	You have enough points to research it!
+Zbývá	Remaining
+Tvá vývojová větev je kompletní. Vyzkoušej další národ.	This research branch is complete. Try another nation.
+ZPĚT DO HANGÁRU →	BACK TO HANGAR →
+SPOJENCI	ALLIES
+NEPŘÍTEL	ENEMY
+OBSAĎ A UDRŽ ZÓNY	CAPTURE AND HOLD THE ZONES
+CÍL ZNIČEN	TARGET DESTROYED
+POSÁDKA	CREW
+MEZERNÍK · KULOMET	SPACE · MACHINE GUN
+KULOMET · CHLADÍ SE	MACHINE GUN · COOLING
+PŘIPRAVENO	READY
+PŘIPRAVENA	READY
+NABÍJÍM	RELOADING
+ZÁVĚR POŠKOZEN	BREECH DAMAGED
+Posádka	Crew
+Motor	Engine
+Pásy	Tracks
+Věž	Turret
+Závěr	Breech
+Munice	Ammo
+[F] Opravit	[F] Repair
+[G] Kouř	[G] Smoke
+RAKETA	MISSILE
+OPRAVA	REPAIR
+TAKTICKÁ MAPA	TACTICAL MAP
+TERÉN	TERRAIN
+Pohyb	Move
+MYŠ	MOUSE
+Míření	Aim
+Zaměřovač	Gunner sight
+Rozhlížení	Free look
+[SHIFT] 1. OSOBA	[SHIFT] GUNNER VIEW
+[SHIFT] 3. OSOBA	[SHIFT] THIRD PERSON
+MEZ NÁMĚRU	ELEVATION LIMIT
+PŘEKÁŽKA	OBSTACLE
+NÁSTŘEL	SIGHT RANGE
+Y změřit	Y measure
+VOLNÝ POHLED · UVOLNI C PRO NÁVRAT	FREE LOOK · RELEASE C TO RETURN
+OPTIKA STŘELCE · SHIFT ZPĚT	GUNNER OPTICS · SHIFT TO RETURN
+KLIKNI DO BOJIŠTĚ PRO ZACHYCENÍ MYŠI	CLICK THE BATTLEFIELD TO CAPTURE THE MOUSE
+MYŠ MÍŘÍ · C ROZHLÍŽENÍ · ESC PAUZA	MOUSE AIM · C FREE LOOK · ESC PAUSE
+STROJ VYŘAZEN	VEHICLE LOST
+Bitva ještě nekončí.	The battle is not over.
+Připravuje se záložní tank…	Preparing a reserve vehicle…
+Záložní tank připraven za	Reserve vehicle ready in
+Záložní tank je připraven. Stiskni R nebo pokračuj tlačítkem.	Reserve ready. Press R or use the button to continue.
+ZPĚT DO BOJE →	BACK TO BATTLE →
+ZAMĚŘOVAČ	GUNNER SIGHT
+PALBA	FIRE
+KRYT	COVER
+OBCHVAT	FLANK
+POSTUP	ADVANCE
+PODPORA	SUPPORT
+KRYJE DVOJICI	COVERING PARTNER
+OBRANA	DEFEND
+ÚTOK	ATTACK
+Městská ulice	City street
+Dvůr	Courtyard
+Most	Bridge
+Nájezd na most	Bridge approach
+Hluboká řeka · použij most	Deep river · use a bridge
+Zledovatělý břeh	Icy bank
+Říční břeh	River bank
+Ujetá cesta	Packed road
+Pevná cesta	Firm road
+Polní cesta	Dirt road
+Hluboký písek	Deep sand
+Písek	Sand
+Hluboký sníh	Deep snow
+Sníh	Snow
+Bahno	Mud
+Tráva	Grass
+BODY	POINTS
+ÚDER ZA	STRIKE IN
+JADERNÝ ÚDER	NUCLEAR STRIKE
+VYPUSTIT NUKE	LAUNCH NUKE
+PŘEŽIJ HORDU · MEZERNÍK KULOMET · PŘEJÍŽDĚJ ZOMBÍKY	SURVIVE THE HORDE · SPACE MACHINE GUN · RUN OVER ZOMBIES
+VLNA	WAVE
+ZBÝVÁ	REMAINING
+ŠROTU	SCRAP
+AUTO KULOMET AKTIVNÍ	AUTO MACHINE GUN ACTIVE
+MEZERNÍK · KULOMET / LMB · DĚLO	SPACE · MACHINE GUN / LMB · CANNON
+TANKOVÉ BITVY · SPOLEČNÝ ŽEBŘÍČEK	TANK BATTLES · GLOBAL LEADERBOARD
+Online TOP 5	Online TOP 5
+Nejlepší dokončená tanková bitva každého hráče podle získaných výzkumných bodů. Skóre ovlivňuje obtížnost. Výsledky počítá zařízení hráče.	Each player's best completed tank battle, ranked by research points earned. Difficulty affects the score. Results are calculated on the player's device.
+Načítám…	Loading…
+OBNOVIT	REFRESH
+Online žebříček ještě není připojen. Čeká na nastavení serveru majitelem hry.	The online leaderboard is not connected yet. The game owner needs to configure the server.
+Zatím tu nikdo nemá výsledek. Buď první!	No scores yet. Be the first!
+Zatím žádný uložený výsledek.	No saved scores yet.
+Zapsat do online TOP 5	Submit to the online TOP 5
+Veřejně se uloží přezdívka a nejlepší skóre:	Your nickname and best score will be public:
+bodů. Hráčská identita zůstává v tomto prohlížeči; po smazání jeho dat ji nelze obnovit.	points. Your player identity stays in this browser and cannot be recovered after clearing its data.
+Přezdívka	Nickname
+ODESLAT SKÓRE	SUBMIT SCORE
+Online ukládání čeká na připojení databáze.	Online saving is waiting for a database connection.
+Odesílám…	Submitting…
+Uloženo online. V žebříčku se zobrazí pět hráčů s nejvyššími osobními rekordy.	Saved online. The leaderboard shows the five highest personal bests.
+DÍLNA / VLASTNÍ VZHLED	WORKSHOP / CUSTOM APPEARANCE
+Vyber nálepku přímo na 3D tanku. Táhni po pancíři, rohy měň velikost, horním úchytem otáčej. Pravým tlačítkem si tank prohlédni ze všech stran.	Select a decal on the 3D tank. Drag it across the armor, resize with the corners and rotate with the top handle. Right-drag to inspect every side.
+Kamufláž	Camouflage
+Původní nátěr	Factory paint
+Jednobarevný	Solid color
+Skvrnitý	Spotted
+Pruhovaný	Striped
+Digitální	Digital
+Základní barva	Base color
+Druhá barva	Secondary color
+Číslo tanku	Vehicle number
+Bez čísla	No number
+Číslo má až 4 číslice. Změnou barvy se původní nátěr přepne na jednobarevný.	Use up to four digits. Changing a paint color switches factory paint to solid color.
+Vlastní nálepky	Custom decals
+Přidat obrázek	Import image
+Klikni na nálepku na tanku a přetáhni ji. Rohové úchyty mění velikost, kulatý úchyt otáčí. Až 6 obrázků. Soubory do 20 MB zůstávají na tvém zařízení.	Click and drag a decal on the tank. Corner handles resize; the round handle rotates. Import up to six images. Files up to 20 MB stay on your device.
+Nálepka	Decal
+Přesné nastavení	Precise settings
+Umístění	Placement
+Vodorovný posun	Horizontal offset
+Svislý posun	Vertical offset
+Velikost	Size
+Otočení	Rotation
+Odstranit nálepku	Remove decal
+Doplňky	Accessories
+Brašny a zavazadla	Bags and stowage
+Pytle s pískem	Sandbags
+Maskovací větve	Camouflage branches
+Obnovit původní vzhled	Restore factory appearance
+ULOŽIT VZHLED	SAVE APPEARANCE
+ZRUŠIT	CANCEL
+Vzhled je zdarma a nemění bojové vlastnosti. Ukládá se pro každý tank zvlášť v tomto prohlížeči.	Appearance is free and does not change combat performance. Saved per vehicle in this browser.
+Vzhled tanku uložen. Použije se i v bitvě.	Appearance saved. It will also be used in battle.
+Načítám obrázek…	Loading image…
+Na tank lze přidat nejvýše 6 nálepek.	A tank can have up to six decals.
+Táhni obrázek přímo po tanku. Úchyty mění velikost a otočení.	Drag the image directly on the tank. Use handles to resize and rotate it.
+Obrázek nelze načíst. Zkus PNG, JPG nebo WebP.	Cannot load the image. Try PNG, JPG or WebP.
+Pohled na tank	Tank view
+Čelo	Front
+Záď	Rear
+Levý bok	Left side
+Pravý bok	Right side
+Shora	Top
+Celý tank	Whole tank
+Přiblížit tank	Zoom in on tank
+Oddálit tank	Zoom out from tank
+Vyber nálepku přímo na tanku	Select a decal on the tank
+Umístit kliknutím	Click to place
+Duplikovat	Duplicate
+Smazat	Delete
+Zpět	Undo
+Znovu	Redo
+Nálepka: klikni a táhni · rohy: velikost · horní úchyt: otočení	Decal: click and drag · corners: size · top handle: rotate
+Pravé tlačítko / prázdné místo: otáčení pohledu · kolečko: přiblížení	Right button / empty space: orbit · scroll: zoom
+Otočit vybranou nálepku	Rotate selected decal
+Změnit velikost nálepky	Resize decal
+Korba · pravý bok	Hull · right side
+Korba · levý bok	Hull · left side
+Věž · pravý bok	Turret · right side
+Věž · levý bok	Turret · left side
+PŘEŽITÍ / POLNÍ DÍLNA	SURVIVAL / FIELD WORKSHOP
+odražena.	cleared.
+šrotu · Vylepšení platí pro toto přežití. Další vlna začne, až budeš připravený.	scrap · Upgrades last for this survival run. Start the next wave when you are ready.
+AUTONOMNÍ OBRANA	AUTONOMOUS DEFENSE
+SERVIS	SERVICE
+ZAKOUPENO	PURCHASED
+DALŠÍ VLNA →	NEXT WAVE →
+UKONČIT PŘEŽITÍ	END SURVIVAL
+Silnější munice	Stronger ammunition
++40 % poškození děla i kulometů za úroveň.	+40% cannon and machine gun damage per level.
+Rychlejší nabíječ	Faster loader
+O 18 % kratší nabíjení hlavního děla za úroveň.	18% shorter main gun reload per level.
+Ochrana proti hordě	Horde protection
+O 22 % menší poškození od zombíků za úroveň.	22% less zombie damage per level.
+Chlazení kulometu	Machine gun cooling
+Rychlejší ochlazování a delší dávky.	Faster cooling and longer bursts.
+Automatický obranný kulomet	Automatic defense machine gun
+Samostatně zaměřuje a střílí na viditelné zombíky do 90 m. Hlavní věž dál ovládáš ty.	Independently targets and fires at visible zombies within 90 m. You keep control of the main turret.
+Oprava a doplnění	Repair and resupply
+Obnoví všechny moduly, posádku, kouř a rakety.	Restores all modules, crew, smoke and missiles.
+Nový tank připraven. Zpátky do boje!	New vehicle ready. Back to battle!
+JADERNÝ ÚDER · OPERACE VYHRÁNA	NUCLEAR STRIKE · OPERATION WON
+Vítězství jaderným úderem	Victory by nuclear strike
+Požár zničil tank	Fire destroyed the vehicle
+Oprava dokončena	Repair complete
+Posádka vyřazena	Crew knocked out
+Nepříteli došly posily	Enemy reinforcements depleted
+Našemu týmu došly posily	Allied reinforcements depleted
+Čas bitvy vypršel	Battle time expired
+Kouřová clona	Smoke screen
+Naváděná raketa vypuštěna	Guided missile launched
+Náš tým obsadil	Our team captured
+Nepřítel obsadil	Enemy captured
+zónu	zone
+ZÁSAH	HIT
+ODRAŽENO	RICOCHET
+Simulace narazila na chybu. Vrať se do hangáru a spusť novou bitvu.	The simulation encountered an error. Return to the hangar and start a new battle.
+GRAFIKA NENÍ DOSTUPNÁ	GRAPHICS UNAVAILABLE
+Pro tuhle bitvu potřebujeme WebGL 2.	This battle needs WebGL 2.
+Otevři hru v aktuálním Chromu, Edge nebo Firefoxu a zapni hardwarovou akceleraci. Pokud používáš vestavěný náhled, zkus hru otevřít v samostatném prohlížeči.	Open the game in a current Chrome, Edge or Firefox browser with hardware acceleration enabled. If using an embedded preview, try a standalone browser.
+`.trim().split('\n').map(line=>line.split('\t'));
+const dictionary=new Map();
+for(const [cs,en] of [...pairs,...CONTENT_TRANSLATIONS]){dictionary.set(cs,en);dictionary.set(cs.toLocaleUpperCase('cs-CZ'),en.toLocaleUpperCase('en-US'));}
+const escaped=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const fragments=new RegExp('(?<![\\p{L}\\p{N}])(?:'+[...dictionary.keys()].sort((a,b)=>b.length-a.length).map(escaped).join('|')+')(?![\\p{L}\\p{N}])','gu');
+const cache=new Map();
+function translate(text,lang=language){
+ if(lang!=='en'||!text?.trim())return text;
+ if(cache.has(text))return cache.get(text);
+ const core=text.trim(),direct=dictionary.get(core),value=direct?text.replace(core,direct):text.replace(fragments,match=>dictionary.get(match));
+ if(cache.size>2500)cache.clear();cache.set(text,value);return value;
+}
+let mountedRoot,observer;
+const sources=new WeakMap(),attributeSources=new WeakMap();
+function ignored(node){return node.parentElement?.closest('script,style,svg,[translate="no"],input,textarea,option[value="cs"],option[value="en"]');}
+function translateNode(node){
+ if(node.nodeType===3){
+  if(ignored(node))return;
+  const previous=sources.get(node),current=node.data;
+  const source=previous&&current===previous.output?previous.source:current,output=translate(source);
+  sources.set(node,{source,output});if(current!==output)node.data=output;
+ }else if(node.nodeType===1){
+  if(node.closest('[translate="no"]'))return;
+  for(const name of ['aria-label','title','placeholder','alt'])if(node.hasAttribute(name)){
+   const key=attributeSources.get(node)||{},current=node.getAttribute(name),old=key[name],source=old&&current===old.output?old.source:current,output=translate(source);
+   key[name]={source,output};attributeSources.set(node,key);if(current!==output)node.setAttribute(name,output);
+  }
+ }
+}
+function localize(root=mountedRoot){
+ if(!root)return;translateNode(root);
+ const walker=document.createTreeWalker(root,1|4);let node;while((node=walker.nextNode()))translateNode(node);
+}
+function setLanguage(value){
+ preference=['cs','en'].includes(value)?value:'auto';try{localStorage.setItem(LANGUAGE_KEY,preference);}catch{}
+ language=resolveLanguage({preference,hostname:globalThis.location?.hostname,languages:globalThis.navigator?.languages||['cs']});
+ if(mountedRoot){document.documentElement.lang=language;localize();document.querySelectorAll('[data-language-picker],#language-select').forEach(s=>s.value=preference);document.dispatchEvent(new CustomEvent('languagechange',{detail:language}));}
+ return language;
+}
+function mountLocalization(root=document.body){
+ mountedRoot=root;document.documentElement.lang=language;localize(root);
+ observer?.disconnect();observer=new MutationObserver(records=>{
+  for(const r of records){if(r.type==='characterData'||r.type==='attributes')translateNode(r.target);else for(const n of r.addedNodes)if(n.nodeType===3)translateNode(n);else if(n.nodeType===1)localize(n);}
+ });
+ observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-label','title','placeholder','alt']});
+ return ()=>observer.disconnect();
+}
+
+return {resolveLanguage,getLanguage,getLanguagePreference,translate,localize,setLanguage,mountLocalization};
+})();
 MODULES["leaderboard.js"]=(()=>{
 const cleanNick=value=>String(value||'').normalize('NFKC').replace(/[<>\u0000-\u001f\u007f]/g,'').trim().slice(0,20);
 function topFive(rows,entry){
@@ -54774,8 +55274,8 @@ for(const [id,spec] of Object.entries(MAP_SPECS)) {
   spec.bridges=[-720,-220,0,220,720].map(x=>({x,z:riverCenter(id,x),w:spec.bridgeWidth,d:spec.span,height:spec.deck,ramp:spec.ramp}));
 }
 const variants=new Map();
-MAP_SPECS.city={urban:true,water:{level:-20,width:0},bridges:[]};
-MAP_SPECS.works={urban:true,water:{level:-20,width:0},bridges:[]};
+MAP_SPECS.city={urban:true,roadStep:120,roadHalf:12,water:{level:-20,width:0},bridges:[]};
+MAP_SPECS.works={urban:true,roadStep:90,roadHalf:11,water:{level:-20,width:0},bridges:[]};
 MAP_SPECS.plains={flat:true,water:{level:-20,width:0},bridges:[]};
 const specFor = id => variants.get(id)?.spec||MAP_SPECS[id]||MAP_SPECS.valley;
 
@@ -54784,7 +55284,11 @@ function groundHeight(mapId,x,z) {
   if(context.flat)return 7+Math.sin(x*.006)*.5+Math.cos(z*.005)*.4;
   if(context.hills){
     let land=9+Math.sin(x*.006+context.seed)*2+Math.cos(z*.007)*2;
-    for(const h of context.hills)land+=hill(x,z,...h);
+    for(const h of context.hills){const dx=(x-h[0])/h[2],dz=(z-h[1])/h[3],q=dx*dx+dz*dz;if(q<12)land+=h[4]*1.65*Math.exp(-q)*(q>9?smooth((12-q)/3):1);}
+    // Random hills must not spawn a tank on a steep face with its gun already
+    // at an elevation stop. Blend level deployment areas into the landscape.
+    const spawnDelta=Math.abs(z)-(context.spawnZ||590);
+    if(Math.abs(spawnDelta)<140){let nearest=Infinity;for(const b of context.bridges)nearest=Math.min(nearest,(x-b.x)**2+spawnDelta**2);if(nearest<140**2)land=mix(9,land,smooth((Math.sqrt(nearest)-70)/70));}
     const distance=Math.abs(z-riverCenter(mapId,x)),half=context.water.width*.5;
     if(distance<half)return context.water.level-7+7*(distance/half)**2;
     return mix(context.water.level,land,smooth((distance-half)/100));
@@ -54852,7 +55356,7 @@ function onRoad(mapId,x,z) {
 
 function terrainAt(mapId,x,z) {
   const spec=specFor(mapId),baseId=spec.base||mapId;
-  if(spec.urban){const street=Math.abs(x-Math.round(x/90)*90)<15||Math.abs(z-Math.round(z/90)*90)<15;return {name:street?'Městská ulice':'Dvůr',speed:street?1.12:1,color:street?'#656966':'#8c8c78',passable:true};}
+  if(spec.urban){const street=Math.abs(x-Math.round(x/spec.roadStep)*spec.roadStep)<spec.roadHalf||Math.abs(z-Math.round(z/spec.roadStep)*spec.roadStep)<spec.roadHalf;return {name:street?'Městská ulice':'Dvůr',speed:street?1.12:1,color:street?'#505957':'#8c8c78',passable:true};}
   if(spec.flat)return {name:'Rovina',speed:1,color:'#87916c',passable:true};
   mapId=baseId;
   for(const b of spec.bridges) {
@@ -54951,16 +55455,29 @@ const MAPS = [
 
 function getTank(id) { return TANKS.find(t => t.id === id) || TANKS[0]; }
 function urbanMap(id,name,size,industrial=false){
- const obstacles=[],zones=[{id:'A',x:-180,z:-90},{id:'B',x:0,z:0},{id:'C',x:180,z:90}];
- for(let x=-size/2+90;x<size/2-60;x+=90)for(let z=-size/2+90;z<size/2-60;z+=90){
-  for(const dx of [-24,24])for(const dz of [-24,24]){
-   const px=x+dx,pz=z+dz;
-   if(zones.some(q=>Math.hypot(px-q.x,pz-q.z)<42)||Math.abs(pz)>size*.34)continue;
-   const w=industrial?30:23,d=industrial?27:23;
-   obstacles.push(building(px,pz,w,d,industrial?9:10+((x+z+2000)%4)*3));
+ const spec=specFor(id),step=spec.roadStep,half=spec.roadHalf,roads=[],blocks=[],parks=[],obstacles=[];
+ const zones=[{id:'A',x:-step*2,z:-step},{id:'B',x:0,z:0},{id:'C',x:step*2,z:step}];
+ for(let p=-step*3;p<=step*3;p+=step)roads.push(p);
+ for(let ix=0;ix<roads.length-1;ix++)for(let iz=0;iz<roads.length-1;iz++){
+  const left=roads[ix]+half+6,right=roads[ix+1]-half-6,near=roads[iz]+half+6,far=roads[iz+1]-half-6;
+  const cx=(left+right)/2,cz=(near+far)/2,w=right-left,d=far-near,blockId=ix*10+iz;
+  // Aligned street fronts enclose courtyards; gaps are actual tank-width alleys.
+  const block={x:cx,z:cz,w,d};blocks.push(block);
+  if(!industrial&&((ix===1&&iz===3)||(ix===4&&iz===2))){parks.push(block);continue;}
+  const push=(x,z,bw,bd,h)=>{
+   if(zones.some(q=>Math.abs(x-q.x)<bw/2+30&&Math.abs(z-q.z)<bd/2+30))return;
+   obstacles.push({...building(x,z,bw,bd,h),blockId,style:industrial?'warehouse':iz%3===0?'townhouse':'apartment',colorIndex:ix%4});
+  };
+  if(industrial){
+   push(cx,near+8,w,16,8);push(cx,far-8,w,16,10);
+   push(left+8,cz,16,d-44,7);
+  }else{
+   const frontage=(w-14)/2,depth=17,height=iz%3===0?8:13+(ix%2)*3;
+   for(const z of [near+depth/2,far-depth/2])for(const x of [left+frontage/2,right-frontage/2])push(x,z,frontage,depth,height);
+   for(const x of [left+depth/2,right-depth/2])push(x,cz,depth,d-depth*2-12,height);
   }
  }
- return {id,name,subtitle:industrial?'Průmyslové dvory · krátké souboje · rovina':'Ulice · křižovatky · městské CQC',description:'Pevné bloky budov, dvory a průjezdy. Bojuj o křižovatky a kryj boky svého týmu.',biome:industrial?'desert':'summer',kind:'urban',size,spawnZ:size*.39,water:null,bridges:[],zones,obstacles};
+ return {id,name,subtitle:industrial?'Průmyslové dvory · sklady · obchvaty':'Uliční bloky · náměstí · průjezdné dvory',description:industrial?'Sklady kolem servisních dvorů. Propojené ulice a zadní průjezdy umožňují obejít hlavní brány.':'Řadové domy podél ulic, vnitrobloky a dva městské parky. Náměstí propojují hlavní třídy i úzké zadní průjezdy.',biome:industrial?'desert':'summer',kind:'urban',size,spawnZ:size*.43,water:null,bridges:[],zones,obstacles,streets:{axes:roads,width:half*2,sidewalk:3},blocks,parks};
 }
 MAPS.push(urbanMap('city','Ocelové město',900),urbanMap('works','Průmyslový uzel',720,true),{id:'plains',name:'Široká pláň',subtitle:'Otevřená rovina · dlouhé palebné linie',description:'Přehledné bojiště s menšími osadami, skalami a širokými obchvaty.',biome:'summer',kind:'flat',size:1800,spawnZ:650,water:null,bridges:[],zones:[{id:'A',x:-330,z:-100},{id:'B',x:0,z:0},{id:'C',x:330,z:100}],obstacles:[]});
 for(const map of MAPS)if(!map.kind)map.kind='hills';
@@ -54973,9 +55490,16 @@ function createBattleMap(id,seed){
  const variantId=source.id.split(':')[0]+':'+(seed>>>0);if(variants.has(variantId))return variants.get(variantId).map;
  let state=seed>>>0;const random=()=>{state=(Math.imul(state,1664525)+1013904223)>>>0;return state/4294967296;};
  const base=source.id.split(':')[0],original=specFor(base),hills=[];
- for(let i=0;i<15;i++){const x=(random()-.5)*1900,z=(random()-.5)*1800;hills.push([x,z,150+random()*180,150+random()*180,18+random()*85]);}
- const spec={...original,base,seed,hills};variants.set(variantId,{spec,map:null});
- const map={...source,id:variantId,baseId:base,seed,zones:source.zones.map(z=>({...z})),obstacles:makeObstacles(variantId)};variants.get(variantId).map=map;return map;
+ // Many separated low hills, knolls and narrow ridges. Stratification avoids
+ // piling several enormous Gaussian peaks onto the same part of the map.
+ for(let ix=0;ix<7;ix++)for(let iz=0;iz<6;iz++){
+  const x=-900+ix*300+(random()-.5)*160,z=-800+iz*320+(random()-.5)*150,shape=random();
+  const rx=shape<.3?130+random()*40:55+random()*55,rz=shape<.3?45+random()*25:65+random()*65;
+  hills.push([x,z,rx,rz,9+random()*27]);
+ }
+ for(const zone of source.zones)if(zone.id!=='B')hills.push([zone.x+(random()-.5)*70,zone.z,110,125,18+random()*8]);
+ const spec={...original,base,seed,hills,spawnZ:source.spawnZ};variants.set(variantId,{spec,map:null});
+ const map={...source,id:variantId,baseId:base,seed,terrainHills:hills.map(h=>[...h]),zones:source.zones.map(z=>({...z})),obstacles:makeObstacles(variantId)};variants.get(variantId).map=map;return map;
 }
 function getMap(id) { return variants.get(id)?.map || MAPS.find(m => m.id === id) || MAPS[0]; }
 
@@ -55259,9 +55783,9 @@ const mix = (a,b,t) => a+(b-a)*t;
 const MECHANICAL = ['engine','tracks','turret','breech'];
 const MODULE_NAMES = {engine:'motor',tracks:'pásy',turret:'pohon věže',breech:'závěr děla',ammo:'munice',crew:'posádka'};
 const DIFFICULTY = {
-  easy:{aim:2.0,think:.7,reaction:1.6,enemyDamage:.85},
-  normal:{aim:.9,think:.45,reaction:.8,enemyDamage:1},
-  hard:{aim:.35,think:.28,reaction:.4,enemyDamage:1.08},
+  easy:{aim:2.0,think:.7,reaction:1.6,enemyDamage:.85,vision:1050},
+  normal:{aim:.9,think:.45,reaction:.8,enemyDamage:1,vision:1400},
+  hard:{aim:.35,think:.28,reaction:.4,enemyDamage:1.08,vision:1800},
 };
 
 function pointSegmentDistance(x,z,ax,az,bx,bz) {
@@ -55312,7 +55836,7 @@ class Game {
     this.zones=this.map.zones.map(z=>({...z,owner:-1,progress:0,contested:false,radius:22}));
     this.shells=[];this.smokeClouds=[];this._serial=0;this._seed=(seed>>>0)||1;
     this._input={};this._repairHeld=false;this._smokeHeld=false;
-    this._rules=DIFFICULTY[this.difficulty];this._nav=this._buildNav();
+    this._rules=DIFFICULTY[this.difficulty];this.sightDistance=Math.min(this._rules.vision,this.map.size*Math.SQRT2);this._nav=this._buildNav();
     const selected=getTank(tankId), friendly=TANKS.filter(t=>t.nation===selected.nation&&t.rank<=Math.max(2,selected.rank));
     const enemies=TANKS.filter(t=>t.nation!==selected.nation&&t.rank<=Math.max(2,selected.rank+1));
     this.tanks=[];
@@ -55338,7 +55862,7 @@ class Game {
       alive:true,reload:0,mgCooldown:0,mgHeat:0,mgOverheated:false,modules:{engine:100,tracks:100,turret:100,breech:100,ammo:100,crew:100},repair:0,fire:0,respawnIn:0,
       smoke:0,smokes:3,smokeCooldown:0,missiles:t.type==='bmpt'?4:0,missileReload:0,_barrelIndex:0,health:100,maxSpeed:spec.speed/3.6,width:spec.role==='Těžký tank'||t.type==='bmpt'?4.0:3.45,length:spec.role==='Těžký tank'||t.type==='bmpt'?7.2:6.5,
       _aimX:x,_aimZ:z+sign*100,_aimY:null,sightRange:400,_playerDamage:0,_lastPlayerHit:-Infinity,gunPitch:0,_think:this._rand()*.3,_targetId:null,_goal:null,_path:[],_pathAge:99,_reaction:this._rules.reaction,
-      _approachKey:null,_approach:null,_approachDone:false,_observed:null,_flankDone:null,_order:null,_tactic:null,
+      _approachKey:null,_approach:null,_approachDone:false,_observed:null,_flankDone:null,_order:null,_tactic:null,_sightChecks:new Map(),
       _stuck:0,_reverse:0,_lastX:x,_lastZ:z,_lastPlayerHit:-999,_repairTotal:0,_captureClock:0,lastHit:null});
     if(!initial&&t.isPlayer)this._message('Nový tank připraven. Zpátky do boje!',t);
   }
@@ -55756,17 +56280,23 @@ class Game {
   }
 
   _visible(a,b,allowSmoke=false) {
-    const d=distance(a,b);if(d>Math.min(650,this.map.size*.65))return false;
+    const d=distance(a,b);if(d>this.sightDistance)return false;
     if(!allowSmoke&&d>22&&this.smokeClouds.some(c=>c.life>1&&pointSegmentDistance(c.x,c.z,a.x,a.z,b.x,b.z)<c.radius))return false;
     const y0=surfaceHeight(this.map.id,a.x,a.z)+2.5,y1=surfaceHeight(this.map.id,b.x,b.z)+1.5;
     return !this._traceSegment({x:a.x,y:y0,z:a.z},{x:b.x,y:y1,z:b.z},null,false);
+  }
+
+  _botVisible(a,b){
+    const old=a._sightChecks.get(b.id),smokeCount=this.smokeClouds.length;
+    if(old&&this.time-old.time>=0&&this.time-old.time<.12&&old.obstacles===this.map.obstacles&&old.smokeCount===smokeCount&&Math.hypot(a.x-old.x,a.z-old.z,b.x-old.bx,b.z-old.bz)<3)return old.visible;
+    const visible=this._visible(a,b);a._sightChecks.set(b.id,{visible,time:this.time,x:a.x,z:a.z,bx:b.x,bz:b.z,obstacles:this.map.obstacles,smokeCount});return visible;
   }
 
   _botControl(t,dt) {
     t._think-=dt;t._pathAge+=dt;
     if(t._think<=0) {
       t._think=this._rules.think*(.8+this._rand()*.4);
-      const enemies=this.tanks.filter(o=>o.alive&&o.team!==t.team&&distance(t,o)<550&&this._visible(t,o));
+      const enemies=this.tanks.filter(o=>o.alive&&o.team!==t.team&&this._botVisible(t,o));
       const priority=o=>distance(t,o)+(o.id===t._targetId?-45:0)+(o.modules.crew<35?-35:0)-(this.zones.some(z=>distance(o,z)<65&&z.owner===t.team)?80:0);
       enemies.sort((a,b)=>priority(a)-priority(b));
       const target=enemies[0];
@@ -55780,7 +56310,7 @@ class Game {
       if(crippled&&t.repair<=0){if(target)this._smoke(t);t.speed*=.4;if(Math.abs(t.speed)<1)this._startRepair(t);}
       else if(!target&&MECHANICAL.some(k=>t.modules[k]<45)&&t.repair<=0){t.speed=0;this._startRepair(t);}
     }
-    const target=this.tanks.find(o=>o.id===t._targetId&&o.alive&&distance(t,o)<550&&this._visible(t,o));
+    const target=this.tanks.find(o=>o.id===t._targetId&&o.alive&&this._botVisible(t,o));
     if(target){
       const flight=distance(t,target)/weaponGeometry(t.type).speed,err=this._rules.aim*(t.team===0?2.8:1.7)*(1+distance(t,target)/500);
       if(!t._observed||this.time-t._observed.time>.65){t._observed={id:target.id,time:this.time,x:target.x,z:target.z,vx:Math.sin(target.angle)*target.speed,vz:Math.cos(target.angle)*target.speed};}
@@ -55828,7 +56358,7 @@ class Game {
   }
   _buildNav() {
     const step=10,offset=-this.map.size*.5+10,size=Math.floor((this.map.size-20)/step)+1,cells=[];
-    for(let z=0;z<size;z++)for(let x=0;x<size;x++){const wx=offset+x*step,wz=offset+z*step;cells.push({x:wx,z:wz,open:this._free(wx,wz,3.3),cost:1/terrainAt(this.map.id,wx,wz).speed});}
+    for(let z=0;z<size;z++)for(let x=0;x<size;x++){const wx=offset+x*step,wz=offset+z*step;cells.push({x:wx,z:wz,height:surfaceHeight(this.map.id,wx,wz),open:this._free(wx,wz,3.3),cost:1/terrainAt(this.map.id,wx,wz).speed});}
     return {size,step,offset,cells};
   }
   _pathfind(start,goal) {
@@ -55852,7 +56382,7 @@ class Game {
         if(!dx&&!dz)continue;const nx=x+dx,nz=z+dz;if(nx<0||nz<0||nx>=size||nz>=size)continue;
         const ni=nz*size+nx;if(closed[ni]||!cells[ni].open)continue;
         if(dx&&dz&&(!cells[z*size+nx].open||!cells[nz*size+x].open))continue;
-        if(surfaceHeight(this.map.id,cells[ni].x,cells[ni].z)-surfaceHeight(this.map.id,cells[id].x,cells[id].z)>step*(dx&&dz?1.414:1)*.8)continue;
+        if(cells[ni].height-cells[id].height>step*(dx&&dz?1.414:1)*.8)continue;
         const ng=g[id]+(dx&&dz?1.414:1)*cells[ni].cost;
         if(ng<g[ni]){g[ni]=ng;previous[ni]=id;heap.push({id:ni,f:ng+distance(cells[ni],cells[to])/step});}
       }
@@ -55992,6 +56522,10 @@ const UP = new THREE.Vector3(0, 1, 0);
 const DUMMY = new THREE.Object3D();
 const TEX = new Map();
 const GEO = new Map();
+function muzzleEffectProfile(weapon,scoped=false,own=false){
+  const clearSight=scoped&&own,auto=weapon==='autocannon';
+  return {size:clearSight?(auto?.22:.5):(auto?1.25:2.9),life:clearSight?.035:.12,opacity:clearSight?.2:1,smoke:!clearSight,light:clearSight?.35:12};
+}
 const color = value => new THREE.Color(value);
 function random(seed) { return () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }; }
 function hash(x, z) { return ((Math.sin(x * 127.1 + z * 311.7) * 43758.5453) % 1 + 1) % 1; }
@@ -56477,8 +57011,7 @@ class Renderer {
     const rect = this.canvas.parentElement?.getBoundingClientRect() || this.canvas.getBoundingClientRect();
     this.width = Math.max(1, Math.round(rect.width)); this.height = Math.max(1, Math.round(rect.height));
     this.renderer.setSize(this.width, this.height, false); this.camera.aspect = this.width / this.height;
-    if (this.mode === 'hangar' && this.canvas.parentElement?.id!=='custom-preview' && this.width / this.height > 1.35) this.camera.setViewOffset(this.width, this.height, -this.width * .15, 0, this.width, this.height);
-    else this.camera.clearViewOffset();
+    this.camera.clearViewOffset();
     this.camera.updateProjectionMatrix();
   }
 
@@ -56572,7 +57105,7 @@ class Renderer {
     this.clearWorld(); this.mode = 'battle'; this.game = game; const map = game.map || getMap(game.mapId); this.map = map;
     const desert = map.biome === 'desert', winter = map.biome === 'winter';
     const sky = desert ? '#b8c5c4' : winter ? '#aabac4' : '#b4cacf';
-    this.scene.background = color(sky); this.scene.fog = new THREE.FogExp2(sky, desert ? .00115 : winter ? .00135 : .00095);
+    this.scene.background = color(sky); this.scene.fog = new THREE.FogExp2(sky, desert ? .00060 : winter ? .00065 : .00050);
     this.hemi.color.set(winter ? '#d8e5f2' : '#d6e6ea'); this.hemi.groundColor.set(desert ? '#8b7151' : winter ? '#73828c' : '#68704e'); this.hemi.intensity = winter ? 2.6 : 2.1;
     this.sun.color.set(winter ? '#e6edf1' : desert ? '#ffe2ac' : '#ffebbf'); this.sun.intensity = winter ? 2.7 : 3.5; this.fill.intensity = .4;
     Object.assign(this.sun.shadow.camera, { left: -85, right: 85, top: 85, bottom: -85 }); this.sun.shadow.camera.updateProjectionMatrix();
@@ -56623,7 +57156,23 @@ class Renderer {
       const m = addMesh(mountains, geometry('mountain', () => new THREE.ConeGeometry(1, 1, 7, 1)), mountainMaterial, Math.sin(angle) * radius, height / 2 - 12, Math.cos(angle) * radius, 70 + rng() * 60, height, 70 + rng() * 60); m.rotation.y = rng() * TAU;
     }
     mergeStatic(mountains); this.world.add(mountains);
-    this.buildClutter(map);
+    if(map.streets)this.buildStreets(map);else this.buildClutter(map);
+  }
+
+  buildStreets(map){
+    const group=new THREE.Group(),road=mat('#505957',{roughness:1,metalness:0}),paving=mat('#a6a18f',{roughness:1,metalness:0}),mark=mat('#b9bba5',{roughness:1});
+    const {axes,width,sidewalk}=map.streets,level=7;
+    for(const axis of axes)for(const vertical of [false,true]){
+      const x=vertical?axis:0,z=vertical?0:axis;
+      box(group,paving,x,level+.025,z,vertical?width+sidewalk*2:map.size,.05,vertical?map.size:width+sidewalk*2);
+      box(group,road,x,level+.075,z,vertical?width:map.size,.04,vertical?map.size:width);
+      for(let p=-map.size/2+10;p<map.size/2;p+=14){
+        if(axes.some(a=>Math.abs(p-a)<width/2+5))continue;
+        box(group,mark,vertical?axis:p,level+.101,vertical?p:axis,vertical?.16:5,.008,vertical?5:.16);
+      }
+    }
+    for(const park of map.parks||[])box(group,mat('#74845e',{roughness:1}),park.x,level+.04,park.z,park.w,.04,park.d);
+    mergeStatic(group);this.world.add(group);
   }
 
   buildBridges(map) {
@@ -56633,8 +57182,9 @@ class Renderer {
     const iron = mat('#52605a', { roughness: .65, metalness: .55 }), stripe = mat('#bfb99b', { roughness: 1 });
     for (const bridge of map.bridges || []) {
       const {x, z, w, d, height} = bridge;
-      box(bridges, concrete, x, height - .6, z, w, 1.2, d);
-      box(bridges, asphalt, x, height - .018, z, w - .8, .036, d);
+      // Concrete ends below the wearing course. Coplanar top faces flickered.
+      box(bridges, concrete, x, height - .66, z, w, 1.2, d);
+      box(bridges, asphalt, x, height - .03, z, w - .8, .06, d);
       for (const side of [-1, 1]) {
         const railX = x + side * (w / 2 - .18);
         for (let dz = -d / 2; dz <= d / 2 + .1; dz += 5) box(bridges, iron, railX, height + .63, z + dz, .12, 1.26, .12);
@@ -56645,18 +57195,8 @@ class Renderer {
         }
       }
       for (let dz = -d / 2 + 3; dz < d / 2 - 3; dz += 9) box(bridges, stripe, x, height + .008, z + dz, .16, .018, 4);
-      // The embankments are the same continuous heightfield tanks drive on;
-      // this ribbon adds a road finish without filling the river beneath it.
-      for (const side of [-1, 1]) {
-        const vertices = [];
-        for (let i = 0; i < 32; i++) {
-          const z0 = z + side * (d / 2 + bridge.ramp * i / 32), z1 = z + side * (d / 2 + bridge.ramp * (i + 1) / 32);
-          const points = [[x - w * .44, z0], [x + w * .44, z0], [x + w * .44, z1], [x - w * .44, z1]];
-          for (const k of [0, 1, 2, 0, 2, 3]) vertices.push(points[k][0], this.heightAt(...points[k]) + .045, points[k][1]);
-        }
-        const roadGeo = new THREE.BufferGeometry(); roadGeo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3)); roadGeo.computeVertexNormals();
-        const road = new THREE.Mesh(roadGeo, mat(asphalt.color, {roughness: 1, metalness: 0, side: THREE.DoubleSide})); road.receiveShadow = true; bridges.add(road);
-      }
+      // Approaches use the terrain's road material: no second heightfield
+      // ribbon intersects its triangles on slopes or at a distance.
     }
     mergeStatic(bridges); this.world.add(bridges);
   }
@@ -56683,13 +57223,15 @@ class Renderer {
   buildProps(map) {
     const group = new THREE.Group(), desert = map.biome === 'desert', winter = map.biome === 'winter';
     const wall = mat(desert ? '#baa27a' : winter ? '#a3a59b' : '#b4b09a', { roughness: 1, metalness: 0 }), roof = mat(winter ? '#c6ceca' : '#686158', { roughness: .98 }), dark = mat('#414b48', { roughness: 1 }), wood = mat('#665e45'), stone = mat(desert ? '#a99572' : '#7f897e', { roughness: 1 }), leaves = mat(winter ? '#607a72' : '#556c43', { roughness: 1, metalness: 0 }), snow = mat('#d4ddd9', { roughness: 1, metalness: 0 });
+    const facades=['#b5a28b','#a3aaa2','#c4bca4','#a8a18e'].map(c=>mat(c,{roughness:1,metalness:0}));
     for (const obstacle of map.obstacles || []) {
       const { x, z } = obstacle, w = obstacle.w || 3, d = obstacle.d || 3, h = obstacle.h || 4, y = this.heightAt(x, z), prop = new THREE.Group(); prop.position.set(x, y, z); prop.rotation.y = obstacle.rotation || 0;
       if (obstacle.type === 'building') {
-        box(prop, wall, 0, h / 2, 0, w, h, d);
+        const facade=map.kind==='urban'?facades[obstacle.colorIndex||0]:wall;
+        box(prop, facade, 0, h / 2, 0, w, h, d);
         // Buried footing closes the downhill edge on gently sloping plots.
         box(prop, stone, 0, -.75, 0, w + .15, 2.5, d + .15);
-        if (desert) { box(prop, roof, 0, h + .15, 0, w + .25, .3, d + .25); for (const side of [-1, 1]) box(prop, wall, side * w / 2, h + .5, 0, .22, .7, d); }
+        if (desert||obstacle.style==='apartment') { box(prop, roof, 0, h + .15, 0, w + .25, .3, d + .25); for (const side of [-1, 1]) box(prop, facade, side * w / 2, h + .5, 0, .22, .7, d); }
         else {
           const roofGeo = new THREE.BufferGeometry(), rr = w * .16;
           const vertices = [-w / 2 - .3, h, -d / 2 - .3, w / 2 + .3, h, -d / 2 - .3, 0, h + rr, -d / 2 - .3, -w / 2 - .3, h, d / 2 + .3, 0, h + rr, d / 2 + .3, w / 2 + .3, h, d / 2 + .3, -w / 2 - .3, h, -d / 2 - .3, 0, h + rr, -d / 2 - .3, 0, h + rr, d / 2 + .3, -w / 2 - .3, h, -d / 2 - .3, 0, h + rr, d / 2 + .3, -w / 2 - .3, h, d / 2 + .3, w / 2 + .3, h, -d / 2 - .3, w / 2 + .3, h, d / 2 + .3, 0, h + rr, d / 2 + .3, w / 2 + .3, h, -d / 2 - .3, 0, h + rr, d / 2 + .3, 0, h + rr, -d / 2 - .3];
@@ -56699,12 +57241,13 @@ class Renderer {
         }
         for (const side of [-1, 1]) {
           for (let wx = -w / 2 + 1.3; wx < w / 2 - .5; wx += 2.8) for (let wy = 2.1; wy < h - .35; wy += 2.7) {
-            box(prop, dark, wx, wy, side * (d / 2 + .015), .75, 1, .035);
-            box(prop, roof, wx, wy - .55, side * (d / 2 + .1), .95, .12, .22);
+            const window=addMesh(prop,geometry('window-plane',()=>new THREE.PlaneGeometry(1,1)),dark,wx,wy,side*(d/2+.025),.75,1,1);window.rotation.y=side>0?0:Math.PI;window.castShadow=false;
+            if(wy<3||map.kind!=='urban')box(prop, roof, wx, wy - .55, side * (d / 2 + .1), .95, .12, .22);
           }
           box(prop, wood, 0, .95, side * (d / 2 + .02), 1.2, 1.9, .06);
         }
-        for (let i = 0; i < 3; i++) { const rubble = addMesh(prop, ROCK(), stone, (hash(x + i, z) - .5) * (w + 2), .18, d / 2 + .4 + hash(x, z + i) * 1.1, .2 + i * .08, .2, .3); rubble.rotation.set(i, i * .7, 0); }
+        if(map.kind==='urban')box(prop,roof,0,h-.35,0,w+.2,.18,d+.2);
+        else for (let i = 0; i < 3; i++) { const rubble = addMesh(prop, ROCK(), stone, (hash(x + i, z) - .5) * (w + 2), .18, d / 2 + .4 + hash(x, z + i) * 1.1, .2 + i * .08, .2, .3); rubble.rotation.set(i, i * .7, 0); }
       } else if (obstacle.type === 'tree') {
         const th = Math.max(h, 6.5), crown = Math.max(w, th * .27); cyl(prop, wood, 0, th * .37, 0, Math.max(.18, w * .11), th * .74);
         if (winter) {
@@ -57014,8 +57557,12 @@ class Renderer {
       let mx = x, mz = z, my = y;
       const tank = this.game?.tanks.find(t => t.id === event.targetId) || this.game?.tanks.find(t => Math.hypot(t.x - x, t.z - z) < 2 && t.alive);
       if (tank&&!event.missile) { const model = this.tankModels.get(tank.id), frame = weaponFrame(tank, this.map.id, {barrelIndex:event.barrel??0}); mx = frame.muzzle.x; mz = frame.muzzle.z; my = frame.muzzle.y; if(model?.barrels)model.recoil[event.barrel??0]=.19; }
-      this.spawnGlow(mx, my, mz, event.weapon==='autocannon'?1.25:2.9, .12, '#ffc97b'); this.spawnPuff(mx, my, mz, '#bcb3a0', .8, 1.1, .35);
-      this.flash.position.set(mx, my, mz); this.flash.intensity = 12;
+      const own=tank?.isPlayer||event.targetId===this.game?.player.id,profile=muzzleEffectProfile(event.weapon,this.viewScope,own),start=this.effects.length;
+      this.spawnGlow(mx,my,mz,profile.size,profile.life,'#ffc97b');
+      this.effects.at(-1).mesh.material.opacity=profile.opacity;
+      if(profile.smoke)this.spawnPuff(mx,my,mz,'#bcb3a0',.65,event.weapon==='autocannon'?.4:1.1,.28);
+      for(let i=start;i<this.effects.length;i++){this.effects[i].muzzleOwner=own;this.effects[i].opacity??=profile.opacity;}
+      this.flash.position.set(mx, my, mz); this.flash.intensity = profile.light;
     }
     if (event.type === 'impact' || event.type === 'hit' || event.type === 'bounce') {
       this.spawnGlow(x, y, z, event.type === 'bounce' ? 1.3 : 2.2, .2, '#ffbe6d'); this.spawnPuff(x, y, z, '#8f8b7a', .8, 1.9, .55);
@@ -57042,10 +57589,11 @@ class Renderer {
   updateEffects(dt) {
     for (let i = this.effects.length - 1; i >= 0; i--) {
       const e = this.effects[i]; e.age += dt; const t = e.age / e.life;
+      e.mesh.visible=!(e.muzzleOwner&&this.viewScope&&e.kind==='smoke');
       if (t >= 1) { this.dynamic.remove(e.mesh); e.mesh.material.dispose(); this.effects.splice(i, 1); continue; }
       if(e.kind==='shockwave'){e.mesh.scale.setScalar(20+t*1100);e.mesh.material.opacity=(1-t)*.65;}
       else if (e.kind === 'smoke') { const s = e.size * (1 + t * (e.screen ? 1.1 : 2.4)); e.mesh.scale.set(s, s, 1); e.mesh.position.y += dt * e.rise; e.mesh.position.x += e.drift * dt; e.mesh.material.opacity = e.opacity * Math.min(1, (1 - t) * 3) * Math.min(1, .45 + t * 8); }
-      else if (e.kind === 'glow') { e.mesh.material.opacity = 1 - t; e.mesh.scale.setScalar(e.size * (.6 + t)); }
+      else if (e.kind === 'glow') { e.mesh.material.opacity = (1-t)*(e.opacity??1); e.mesh.scale.setScalar(Math.min(e.muzzleOwner&&this.viewScope?.3:Infinity,e.size*(.6+t))); }
       else { e.vy -= dt * 16; e.mesh.position.x += e.vx * dt; e.mesh.position.y += e.vy * dt; e.mesh.position.z += e.vz * dt; }
     }
   }
@@ -57067,7 +57615,7 @@ class Renderer {
   dispose() { this.disposed = true; this.resizeObserver?.disconnect(); this.clearWorld(); this.renderer.dispose(); }
 }
 
-return {Renderer};
+return {muzzleEffectProfile,Renderer};
 })();
 MODULES["audio.js"]=(()=>{
 /** Small, asset-free battlefield soundscape. Audio starts only after unlock(). */
@@ -57388,11 +57936,12 @@ function bindMouseButtons(target, releaseTarget, onDown, onUp) {
 return {keyboardInput,bindMouseButtons};
 })();
 MODULES["app.js"]=(()=>{
+const {getLanguage,getLanguagePreference,setLanguage,mountLocalization,translate} = MODULES["i18n.js"];
 const {OnlineLeaderboard} = MODULES["online-leaderboard.js"];
 const {ONLINE_CONFIG} = MODULES["online-config.js"];
 const {LocalLeaderboard,cleanNick} = MODULES["leaderboard.js"];
 const {WorkshopEditor} = MODULES["workshop.js"];
-const {NATIONS,TANKS,MAPS,getTank,getMap,terrainAt,terrainHeight,surfaceHeight,riverCenter} = MODULES["data.js"];
+const {NATIONS,TANKS,MAPS,getTank,getMap,createBattleMap,terrainAt,terrainHeight,surfaceHeight,riverCenter} = MODULES["data.js"];
 const {Game} = MODULES["simulation.js"];
 const {CAMOUFLAGES,normalizeAppearance,normalizeAppearances,importTankImage,DECAL_SURFACES} = MODULES["appearance.js"];
 const {ZombieGame,ZOMBIE_UPGRADES} = MODULES["zombies.js"];
@@ -57404,6 +57953,7 @@ const STORAGE='iron-front-progress-v1', defaults={xp:0,unlocked:['pz4f2','m4a1',
 let progress;
 try{const p=JSON.parse(localStorage.getItem(STORAGE)||'null');progress={...structuredClone(defaults),...p,settings:{...defaults.settings,...p?.settings}};progress.unlocked=[...new Set([...defaults.unlocked,...(Array.isArray(p?.unlocked)?p.unlocked.filter(id=>TANKS.some(t=>t.id===id)):[])])];progress.xp=Math.max(0,Math.floor(Number(progress.xp)||0));if(!progress.unlocked.includes(progress.selected))progress.selected='pz4f2';if(!MAPS.some(m=>m.id===progress.map))progress.map='valley';progress.nation=getTank(progress.selected).nation;}catch{progress=structuredClone(defaults)}
 progress.appearances=normalizeAppearances(progress.appearances);
+let hangarTab='vehicles',mapFilter='all';
 let customDraft=null,customPreviewTimer,imageImportVersion=0,workshopEditor=null;
 let game=null,renderer=null,paused=false,awardDone=false,lastTime=performance.now(),lastHud=0,modalView='',toastTimer,noticeTimer,flashTimer,feed=[],pointer={x:innerWidth*.5,y:innerHeight*.5,down:false,right:false},keys=new Set(),returnFocus=null;
 let killConfirmTimer;
@@ -57411,7 +57961,7 @@ let ignoreMouseMove=true,fireRequested=false,mgRequested=false,touchCannon=false
 const audio=new AudioEngine();audio.setEnabled(progress.settings.sound);
 const canvas=$('#scene'),hero=$('.hero'), mini=$('#minimap'), mc=mini.getContext('2d');
 const fullName=t=>`${t.name} ${t.variant}`;
-const num=n=>Math.round(n).toLocaleString('cs-CZ');
+const num=n=>Math.round(n).toLocaleString(getLanguage()==='en'?'en-US':'cs-CZ');
 const caliber=t=>t.gunCaliber||parseInt(t.gun);
 const gunLabel=t=>`${t.weapon==='autocannon'?'2×':''}${caliber(t)}`;
 function lateTankSVG(t){
@@ -57430,29 +57980,42 @@ function tankSVG(t){if(['is2','tiger2','m26'].includes(t.id))return lateTankSVG(
 const mapTextureCache=new Map();
 function mapTexture(map){
  if(mapTextureCache.has(map.id))return mapTextureCache.get(map.id);
+ const displayMap=map.kind==='hills'&&!map.baseId?createBattleMap(map.id,202621):map;
  const c=document.createElement('canvas');c.width=c.height=180;const ctx=c.getContext('2d'),img=ctx.createImageData(180,180),step=map.size/180;
  for(let py=0;py<180;py++)for(let px=0;px<180;px++){
-   const x=(px/180-.5)*map.size,z=(py/180-.5)*map.size,h=terrainHeight(map.id,x,z),ground=terrainAt(map.id,x,z);
-   const slopeX=(terrainHeight(map.id,x+step,z)-h)/step,slopeZ=(terrainHeight(map.id,x,z+step)-h)/step;
+   const x=(px/180-.5)*map.size,z=(py/180-.5)*map.size,h=terrainHeight(displayMap.id,x,z),ground=terrainAt(displayMap.id,x,z);
+   const slopeX=(terrainHeight(displayMap.id,x+step,z)-h)/step,slopeZ=(terrainHeight(displayMap.id,x,z+step)-h)/step;
    let shade=Math.max(.4,Math.min(1.35,.85-slopeX*.3-slopeZ*.6));
    if(Math.abs(h/10-Math.round(h/10))<.055)shade*=.8;
    const hex=ground.color.replace('#',''),i=(py*180+px)*4;
    for(let j=0;j<3;j++)img.data[i+j]=Math.min(255,parseInt(hex.slice(j*2,j*2+2),16)*shade);
    img.data[i+3]=255;
  }
- ctx.putImageData(img,0,0);ctx.fillStyle='#dec89a';ctx.strokeStyle='#3b3327';ctx.lineWidth=1;
+ ctx.putImageData(img,0,0);
+ if(map.streets){
+  for(const park of map.parks||[]){ctx.fillStyle='#647e4e';ctx.fillRect((park.x+map.size/2-park.w/2)/step,(park.z+map.size/2-park.d/2)/step,park.w/step,park.d/step);}
+  for(const o of map.obstacles){if(o.type!=='building')continue;ctx.fillStyle='#202b28';ctx.fillRect((o.x+map.size/2-o.w/2)/step+1,(o.z+map.size/2-o.d/2)/step+1,o.w/step,o.d/step);ctx.fillStyle='#b8b29b';ctx.fillRect((o.x+map.size/2-o.w/2)/step,(o.z+map.size/2-o.d/2)/step,o.w/step,o.d/step);}
+ }
+ ctx.fillStyle='#dec89a';ctx.strokeStyle='#3b3327';ctx.lineWidth=1;
  for(const b of map.bridges||[]){const x=(b.x+map.size/2)/step,z=(b.z+map.size/2)/step;ctx.fillRect(x-b.w/step/2,z-b.d/step/2,b.w/step,b.d/step);ctx.strokeRect(x-b.w/step/2,z-b.d/step/2,b.w/step,b.d/step);}
  mapTextureCache.set(map.id,c);return c;
 }
 
-function deploymentSummary(){const m=getMap(progress.map);return '3 zóny · '+(m.size*m.size/1e6).toLocaleString('cs-CZ',{maximumFractionDigits:2})+' km² · 6 proti 6';}
+function deploymentSummary(){const m=getMap(progress.map);return '3 zóny · '+(m.size*m.size/1e6).toLocaleString(getLanguage()==='en'?'en-US':'cs-CZ',{maximumFractionDigits:2})+' km² · 6 proti 6';}
+function switchHangarTab(tab){
+ hangarTab=tab==='maps'?'maps':'vehicles';
+ $('#vehicles-panel').hidden=hangarTab!=='vehicles';$('#maps-panel').hidden=hangarTab!=='maps';
+ $$('.loadout-tabs [role="tab"]').forEach(b=>{const active=b.dataset.hangarTab===hangarTab;b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;});
+}
 function renderHangar(){
+ const map=getMap(progress.map);$('#selected-map').innerHTML=esc(map.name)+' <span>ZMĚNIT ↗</span>';
+ switchHangarTab(hangarTab);
  if($('#game-mode').value!=='zombies')$('.mode-label small').textContent=deploymentSummary();
  const tank=getTank(progress.selected);if($('#matchup-label'))$('#matchup-label').textContent=NATIONS.find(n=>n.id===tank.nation).name+' proti '+NATIONS.filter(n=>n.id!==tank.nation).map(n=>n.name).join(' / ');$('#xp-top').textContent=num(progress.xp);$('#hero-flag').textContent=NATIONS.find(n=>n.id===tank.nation).short;$('#hero-role').textContent=`${tank.role.toLocaleUpperCase('cs-CZ')} · ${roman(tank.rank)}. ÚROVEŇ`;$('#hero-name').textContent=fullName(tank);$('#hero-gun').innerHTML=`${gunLabel(tank)} <small>mm</small>`;$('#spec-role').textContent=tank.role.toUpperCase();
  $('#nation-tabs').innerHTML=NATIONS.map(n=>`<button class="nation-tab ${progress.nation===n.id?'active':''}" data-nation="${n.id}" aria-pressed="${progress.nation===n.id}">${flag(n.id)}${n.name.toUpperCase()}</button>`).join('');
  const tanks=TANKS.filter(t=>t.nation===progress.nation);$('#tank-cards').classList.toggle('three',tanks.length===3);$('#tank-cards').classList.toggle('five',tanks.length===5);$('#tank-cards').classList.toggle('six',tanks.length>=6);$('#tank-cards').innerHTML=tanks.map(t=>{const owned=progress.unlocked.includes(t.id);return `<button class="tank-card ${t.id===progress.selected?'selected':''} ${owned?'':'locked'}" data-tank="${t.id}" aria-pressed="${t.id===progress.selected}"><span class="card-top"><span>${roman(t.rank)}. ÚROVEŇ</span><b>${t.id===progress.selected?'✓ VYBRÁNO':owned?'PŘIPRAVEN':'◇ '+num(t.cost)+' VB'}</b></span>${tankSVG(t)}<strong>${esc(fullName(t))}</strong><small>${owned?t.role.toUpperCase():'UZAMČENO · VYZKOUMAT ↗'}</small></button>`}).join('');
  $('#tank-specs').innerHTML=[['Kanón',caliber(tank)/122,`${caliber(tank)} mm`],['Pancíř',tank.armor.front/150,`${tank.armor.front} mm`],['Rychlost',tank.speed/65,`${tank.speed} km/h`],['Nabíjení',1-tank.reload/15,`${tank.reload.toFixed(1)} s`]].map(([name,ratio,value])=>`<div class="spec-row"><span>${name}</span><div class="spec-bar"><i style="width:${Math.min(1,ratio)*100}%"></i></div><b>${value}</b></div>`).join('');$('#tank-description').textContent=tank.description;
- $('#map-cards').innerHTML=MAPS.map(m=>`<button class="map-card ${m.id===progress.map?'selected':''}" data-map="${m.id}" aria-pressed="${m.id===progress.map}"><div class="map-art ${m.biome}" style="background-image:url(${mapTexture(m).toDataURL()});background-size:cover"></div><svg class="map-lines" viewBox="0 0 220 120" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 100Q30 20 80 70T230 20M40 -10Q110 50 95 130" fill="none" stroke="#c4c7a1" stroke-width="2" stroke-dasharray="4 3"/><circle cx="57" cy="53" r="5" fill="#d5debd"/><circle cx="107" cy="76" r="5" fill="#d5debd"/><circle cx="164" cy="49" r="5" fill="#d5debd"/></svg><span class="map-check">${m.id===progress.map?'✓':''}</span><span class="map-title"><strong>${m.name}</strong><small>${m.subtitle} · ${m.size} × ${m.size} m</small></span></button>`).join('');
+ $('#map-cards').innerHTML=MAPS.filter(m=>mapFilter==='all'||m.kind===mapFilter).map(m=>`<button class="map-card ${m.id===progress.map?'selected':''}" data-map="${m.id}" aria-pressed="${m.id===progress.map}"><div class="map-art ${m.biome}" style="background-image:url(${mapTexture(m).toDataURL()});background-size:cover"></div><svg class="map-lines" viewBox="0 0 220 120" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 100Q30 20 80 70T230 20M40 -10Q110 50 95 130" fill="none" stroke="#c4c7a1" stroke-width="2" stroke-dasharray="4 3"/><circle cx="57" cy="53" r="5" fill="#d5debd"/><circle cx="107" cy="76" r="5" fill="#d5debd"/><circle cx="164" cy="49" r="5" fill="#d5debd"/></svg><span class="map-check">${m.id===progress.map?'✓':''}</span><span class="map-title"><strong>${m.name}</strong><small>${m.subtitle} · ${m.size} × ${m.size} m</small></span></button>`).join('');
 }
 function selectTank(id){const t=getTank(id);if(!progress.unlocked.includes(id)){showResearch(id);return}progress.selected=id;progress.nation=t.nation;save();renderHangar();renderer?.setHangar(id)}
 function openModal(view,html){if(game){paused=true;releaseControls();}if(!modalView)returnFocus=document.activeElement;modalView=view;$('#modal-content').innerHTML=html;$('#modal').hidden=false;$('#modal').querySelector('.modal').scrollTop=0;$('#close-modal').hidden=view==='result'||view==='zshop';$('#modal-content h2')?.setAttribute('id','modal-title');(view==='result'?$('#modal-content button'):$('#close-modal'))?.focus();$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.view===view))}
@@ -57491,8 +58054,8 @@ $('#custom-form').addEventListener('change',async e=>{
 function showZombieShop(){
  openModal('zshop',`<span class="eyebrow">PŘEŽITÍ / POLNÍ DÍLNA</span><h2>Vlna ${game.wave} odražena.</h2><p class="modal-intro">${game.credits} šrotu · Vylepšení platí pro toto přežití. Další vlna začne, až budeš připravený.</p><div class="z-upgrades">${ZOMBIE_UPGRADES.map(u=>{const level=game.upgrades[u.id]||0,cost=game.upgradeCost(u.id),max=level>=u.max;return `<article><small>${u.id==='auto'?'AUTONOMNÍ OBRANA':u.id==='repair'?'SERVIS':'ÚROVEŇ '+level+' / '+u.max}</small><h3>${u.name}</h3><p>${u.description}</p><button class="secondary-button" data-zupgrade="${u.id}" ${max||game.credits<cost?'disabled':''}>${max?'ZAKOUPENO':cost+' ŠROTU'}</button></article>`}).join('')}</div><div class="modal-actions"><button id="next-wave" class="primary-button">DALŠÍ VLNA →</button><button data-action="abandon" class="secondary-button">UKONČIT PŘEŽITÍ</button></div>`);
 }
-function showGuide(){openModal('guide',`<span class="eyebrow">POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK</span><h2>Znát svůj tank. Ovládnout bojiště.</h2><p class="modal-intro">Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.</p><div class="guide-grid"><section><h3>Ovládání</h3><div class="controls-list"><span><kbd>W</kbd> / <kbd>S</kbd></span><span>Vpřed / zpátečka</span><span><kbd>A</kbd> / <kbd>D</kbd></span><span>Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla</span><span><kbd>MYŠ</kbd></span><span>Pohyb pohledu a zaměřování; věž zaměřovač dohání</span><span><kbd>LEVÉ TLAČÍTKO</kbd></span><span>Výstřel (lze držet)</span><span><kbd>MEZERNÍK</kbd></span><span>Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.</span><span><kbd>N</kbd></span><span>Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.</span><span><kbd>PRAVÉ TLAČÍTKO</kbd></span><span>Podržet pro přiblížení</span><span><kbd>C</kbd></span><span>Podržet pro rozhlížení bez otáčení věže</span><span><kbd>KOLEČKO</kbd></span><span>Vzdálenost kamery / zvětšení zaměřovače</span><span><kbd>SHIFT</kbd></span><span>Přepnout do první osoby — optický zaměřovač střelce</span><span><kbd>F</kbd></span><span>Oprava modulů při zastavení</span><span><kbd>G</kbd></span><span>Kouřová clona — 3 na život</span><span><kbd>2</kbd></span><span>BMPT: naváděná raketa; po odpalu ji řídíš mířením</span><span><kbd>X</kbd></span><span>Podržet pro zobrazení modulů</span><span><kbd>R</kbd></span><span>Nasadit záložní tank po zničení</span><span><kbd>ESC</kbd></span><span>Pauza</span></div><p>Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.</p><p>Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.</p></section><section><h3>ZOMBIE · Přežití</h3><p>V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný pouze v Nadvládě.</p><h3>Nadvláda · 6 proti 6</h3><p>Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po šesti minutách.</p><h3>Každý zásah má svou cestu</h3><p>Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.</p><h3>Přežij další minutu</h3><p>Každá mapa má rozlohu 4,84 km². Využívej hřebeny, údolí a svahy. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky. Používej budovy a skály. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.</p><h3>Postup zůstává u tebe</h3><p>Výzkum se ukládá automaticky v tomto prohlížeči. V nastavení lze stáhnout a později načíst zálohu postupu. Vymazání dat webu postup odstraní. Hra nepotřebuje účet pro svou simulaci ani herní server.</p></section></div>`)}
-function showSettings(){if(game)paused=true;openModal('settings',`<span class="eyebrow">NASTAVENÍ / TVŮJ POLYGON</span><h2>Připravit k boji.</h2><div class="settings-row"><div>Zvuk<p>Motor, výstřely a události bitvy</p></div><button class="toggle" id="sound-toggle">${progress.settings.sound?'ZAPNUTO':'VYPNUTO'}</button></div><div class="settings-row"><div>Grafika<p>Nižší kvalita omezí stíny a rozlišení</p></div><select id="quality-select"><option value="high" ${progress.settings.quality==='high'?'selected':''}>Vysoká</option><option value="low" ${progress.settings.quality==='low'?'selected':''}>Úsporná</option></select></div><div class="settings-row"><div><label for="sensitivity-select">Citlivost myši</label><p>Stejný směr myši a pohledu; jemnější míření při přiblížení</p></div><select id="sensitivity-select">${[[.5,"Nízká"],[1,"Normální"],[1.5,"Vyšší"],[2,"Vysoká"]].map(([v,n])=>`<option value="${v}" ${Number(progress.settings.sensitivity)===v?"selected":""}>${n}</option>`).join("")}</select></div><div class="settings-row"><div>Lokální postup<p>${progress.battles} bitev · ${progress.kills} zničených cílů · ${progress.unlocked.length}/${TANKS.length} strojů</p></div><button class="secondary-button" id="export-save">Zálohovat</button></div><div class="settings-row"><div>Obnovit zálohu<p>Nahradí aktuální výzkum uloženým postupem</p></div><label class="secondary-button" style="cursor:pointer">Načíst soubor<input id="import-save" type="file" accept="application/json,.json" hidden></label></div><div class="modal-actions"><button class="primary-button" data-action="close">HOTOVO →</button></div>`)}
+function showGuide(){openModal('guide',`<span class="eyebrow">POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK</span><h2>Znát svůj tank. Ovládnout bojiště.</h2><p class="modal-intro">Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.</p><div class="guide-grid"><section><h3>Ovládání</h3><div class="controls-list"><span><kbd>W</kbd> / <kbd>S</kbd></span><span>Vpřed / zpátečka</span><span><kbd>A</kbd> / <kbd>D</kbd></span><span>Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla</span><span><kbd>MYŠ</kbd></span><span>Pohyb pohledu a zaměřování; věž zaměřovač dohání</span><span><kbd>LEVÉ TLAČÍTKO</kbd></span><span>Výstřel (lze držet)</span><span><kbd>MEZERNÍK</kbd></span><span>Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.</span><span><kbd>N</kbd></span><span>Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.</span><span><kbd>PRAVÉ TLAČÍTKO</kbd></span><span>Podržet pro přiblížení</span><span><kbd>C</kbd></span><span>Podržet pro rozhlížení bez otáčení věže</span><span><kbd>KOLEČKO</kbd></span><span>Vzdálenost kamery / zvětšení zaměřovače</span><span><kbd>SHIFT</kbd></span><span>Přepnout do první osoby — optický zaměřovač střelce</span><span><kbd>F</kbd></span><span>Oprava modulů při zastavení</span><span><kbd>G</kbd></span><span>Kouřová clona — 3 na život</span><span><kbd>2</kbd></span><span>BMPT: naváděná raketa; po odpalu ji řídíš mířením</span><span><kbd>X</kbd></span><span>Podržet pro zobrazení modulů</span><span><kbd>R</kbd></span><span>Nasadit záložní tank po zničení</span><span><kbd>ESC</kbd></span><span>Pauza</span></div><p>Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.</p><p>Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.</p></section><section><h3>ZOMBIE · Přežití</h3><p>V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný pouze v Nadvládě.</p><h3>Nadvláda · 6 proti 6</h3><p>Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po dvanácti minutách.</p><h3>Každý zásah má svou cestu</h3><p>Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.</p><h3>Přežij další minutu</h3><p>Mapy zahrnují městské bloky, průmyslové dvory, otevřenou rovinu i krajinu s mnoha menšími kopci. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky a využívej terén i budovy. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.</p><h3>Postup zůstává u tebe</h3><p>Výzkum se ukládá automaticky v tomto prohlížeči. V nastavení lze stáhnout a později načíst zálohu postupu. Vymazání dat webu postup odstraní. Hra nepotřebuje účet pro svou simulaci ani herní server.</p></section></div>`)}
+function showSettings(){if(game)paused=true;openModal('settings',`<span class="eyebrow">NASTAVENÍ / TVŮJ POLYGON</span><h2>Připravit k boji.</h2><div class="settings-row"><div>Jazyk<p>Automaticky podle domény; ruční volba zůstane uložená.</p></div><select data-language-picker aria-label="Jazyk"><option value="auto" ${getLanguagePreference()==='auto'?'selected':''}>Automaticky</option><option value="cs" ${getLanguagePreference()==='cs'?'selected':''}>Čeština</option><option value="en" ${getLanguagePreference()==='en'?'selected':''}>English</option></select></div><div class="settings-row"><div>Zvuk<p>Motor, výstřely a události bitvy</p></div><button class="toggle" id="sound-toggle">${progress.settings.sound?'ZAPNUTO':'VYPNUTO'}</button></div><div class="settings-row"><div>Grafika<p>Nižší kvalita omezí stíny a rozlišení</p></div><select id="quality-select"><option value="high" ${progress.settings.quality==='high'?'selected':''}>Vysoká</option><option value="low" ${progress.settings.quality==='low'?'selected':''}>Úsporná</option></select></div><div class="settings-row"><div><label for="sensitivity-select">Citlivost myši</label><p>Stejný směr myši a pohledu; jemnější míření při přiblížení</p></div><select id="sensitivity-select">${[[.5,"Nízká"],[1,"Normální"],[1.5,"Vyšší"],[2,"Vysoká"]].map(([v,n])=>`<option value="${v}" ${Number(progress.settings.sensitivity)===v?"selected":""}>${n}</option>`).join("")}</select></div><div class="settings-row"><div>Lokální postup<p>${progress.battles} bitev · ${progress.kills} zničených cílů · ${progress.unlocked.length}/${TANKS.length} strojů</p></div><button class="secondary-button" id="export-save">Zálohovat</button></div><div class="settings-row"><div>Obnovit zálohu<p>Nahradí aktuální výzkum uloženým postupem</p></div><label class="secondary-button" style="cursor:pointer">Načíst soubor<input id="import-save" type="file" accept="application/json,.json" hidden></label></div><div class="modal-actions"><button class="primary-button" data-action="close">HOTOVO →</button></div>`)}
 function pause(){if(!game||game.finished)return;paused=true;keys.clear();pointer.down=false;openModal('pause',`<span class="eyebrow">BITVA POZASTAVENA</span><h2>Chvíle na rozmyšlenou.</h2><p class="modal-intro">${getMap(progress.map).name} · ${fullName(getTank(progress.selected))}<br>Simulace je pozastavená. Tvůj tank je v bezpečí.</p><div class="modal-actions"><button class="primary-button" data-action="resume">POKRAČOVAT →</button><button class="secondary-button" data-view="guide">OVLÁDÁNÍ</button><button class="secondary-button" data-action="abandon">UKONČIT BITVU</button></div>`)}
 function startBattle(){if(!renderer)return;closeModal();$('#modal').hidden=true;modalView='';audio.unlock().catch(()=>{});game=new ($('#game-mode').value==='zombies'?ZombieGame:Game)({tankId:progress.selected,mapId:progress.map,difficulty:$('#difficulty').value,onEvent:onGameEvent});awardDone=false;paused=false;keys.clear();feed=[];$('#kill-confirmation').hidden=true;$('#kill-feed').innerHTML='';$('#hit-notice').textContent='';$('#respawn-panel').hidden=true;$('#hangar').hidden=true;$('#battle').hidden=false;document.body.classList.add('in-battle');$('#battle-scene').append(canvas);renderer.resize();renderer.setBattle(game);scope=false;lastAim=null;lockUnavailable=false;clearControls();captureMouse();pointer.x=innerWidth/2;pointer.y=innerHeight*.48;pointer.down=false;$('#battle-map-label').textContent=game.map.name.toUpperCase();$('#battle-objective').textContent=game.mode==='zombies'?'PŘEŽIJ HORDU · MEZERNÍK KULOMET · PŘEJÍŽDĚJ ZOMBÍKY':'OBSAĎ A UDRŽ ZÓNY';$('#zombie-hud').hidden=game.mode!=='zombies';$('#nuke-button').hidden=game.mode==='zombies';$('.battle-score').hidden=game.mode==='zombies';$('#battle-tank-name').textContent=fullName(getTank(progress.selected));$('#battle-objective').style.opacity='1';setTimeout(()=>{$('#battle-objective').style.opacity='0'},8500);lastTime=performance.now();updateHUD();}
 function finishBattle(result){if(awardDone||!result)return;awardDone=true;paused=true;keys.clear();pointer.down=false;const xp=Math.max(0,Math.round(Number(result.xp)||0));progress.xp+=xp;progress.battles++;if(result.winner===0)progress.wins++;progress.kills+=result.kills||0;save();const next=TANKS.find(t=>t.nation===progress.nation&&!progress.unlocked.includes(t.id)&&progress.unlocked.includes(t.requires));openModal('result',`<span class="eyebrow">OPERACE UKONČENA / ${game.map.name.toUpperCase()}</span><h2>${game.mode==='zombies'?'Konec přežití.':result.winner===0?'Vítězství patří tvému týmu.':result.winner===1?'Dnes jsme ztratili bojiště.':'Operace ukončena.'}</h2><p class="modal-intro">${esc(result.reason||'Výsledky byly uloženy.')} Každá zkušenost tě posune dál.</p><div class="result-stats"><div><strong>+${num(xp)}</strong><small>VÝZKUMNÝCH BODŮ</small></div><div><strong>${result.kills||0}</strong><small>ZNIČENÝCH CÍLŮ</small></div><div><strong>${result.captures||0}</strong><small>${game.mode==='zombies'?'DOKONČENÝCH VLN':'OBSAZENÝCH ZÓN'}</small></div><div><strong>${num(result.damage||0)}</strong><small>POŠKOZENÍ MODULŮ</small></div></div><div class="result-message">${next?`Další na řadě: <b>${fullName(next)}</b> · ${progress.xp>=next.cost?'Máš dost bodů na výzkum!':`Zbývá ${num(next.cost-progress.xp)} VB.`}`:'Tvá vývojová větev je kompletní. Vyzkoušej další národ.'}</div><div class="modal-actions"><button class="primary-button" data-action="result-hangar">ZPĚT DO HANGÁRU →</button><button class="secondary-button" data-action="result-research">VÝZKUMNÝ STROM</button></div>`);showScoreEntry(result);}
@@ -57504,13 +58067,15 @@ function drawMinimap(){const s=mini.width,scale=s/game.map.size;mc.drawImage(map
 let tagRefresh=-1,tagVisible=new Set(),tagNodes=new Map();
 function drawTags(){
  if(!renderer.projectTank)return;const p=game.player,root=$('#name-tags');
- if(game.time<tagRefresh||game.time-tagRefresh>.15){tagRefresh=game.time;tagVisible=new Set(game.tanks.filter(t=>t.alive&&!t.isPlayer&&Math.hypot(t.x-p.x,t.z-p.z)<900&&(t.team===0||game.canSeeTarget(t))).map(t=>t.id));}
+ if(game.time<tagRefresh||game.time-tagRefresh>.15){tagRefresh=game.time;tagVisible=new Set(game.tanks.filter(t=>t.alive&&!t.isPlayer&&Math.hypot(t.x-p.x,t.z-p.z)<game.sightDistance&&(t.team===0||game.canSeeTarget(t))).map(t=>t.id));}
  const live=new Set();for(const t of game.tanks){if(!tagVisible.has(t.id)||!t.alive)continue;const q=renderer.projectTank(t);if(!q?.visible)continue;live.add(t.id);let node=tagNodes.get(t.id);if(!node||!node.isConnected){node=document.createElement('div');node.className='tank-tag'+(t.team===1?' enemy':'');root.append(node);tagNodes.set(t.id,node);}node.hidden=false;node.style.left='0';node.style.top='0';node.style.transform='translate('+q.x+'px,'+(q.y-9)+'px) translateX(-50%)';node.textContent=(t.team===0?'◆ ':'◇ ')+getTank(t.type).name+' · '+Math.round(Math.hypot(t.x-p.x,t.z-p.z))+' m'+(t.team===0&&t._tactic?' · '+({cover:'KRYT',flank:'OBCHVAT',push:'POSTUP',support:'PODPORA','cover-buddy':'KRYJE DVOJICI',defend:'OBRANA',attack:'ÚTOK'}[t._tactic]||''):'');}for(const [id,node] of tagNodes)if(!live.has(id)){node.remove();tagNodes.delete(id);}
 }
 
-document.addEventListener('click',e=>{const b=e.target.closest('button,a.brand');if(!b)return;if(b.matches('.brand')){e.preventDefault();if(!game)closeModal();return}if(b.dataset.view){if(b.dataset.view==='hangar')closeModal();if(b.dataset.view==='research')showResearch();if(b.dataset.view==='guide')showGuide();}if(b.dataset.nation){progress.nation=b.dataset.nation;const t=TANKS.find(t=>t.nation===progress.nation&&progress.unlocked.includes(t.id));selectTank(t.id)}if(b.dataset.tank)selectTank(b.dataset.tank);if(b.dataset.map){progress.map=b.dataset.map;save();renderHangar()}if(b.dataset.equip){selectTank(b.dataset.equip);closeModal()}if(b.dataset.unlock){const t=getTank(b.dataset.unlock);if(!progress.unlocked.includes(t.id)&&progress.xp>=t.cost&&(!t.requires||progress.unlocked.includes(t.requires))){progress.xp-=t.cost;progress.unlocked.push(t.id);save();showResearch(t.id);renderHangar();toast(`${fullName(t)} vyzkoumán. Připraven k nasazení.`)}}switch(b.dataset.action){case'close':case'resume':closeModal();break;case'abandon':{const r=game.abandon();finishBattle(r||game.finished);break}case'result-hangar':backToHangar();break;case'result-research':backToHangar(true);break;}
+document.addEventListener('click',e=>{const b=e.target.closest('button,a.brand');if(!b)return;if(b.matches('.brand')){e.preventDefault();if(!game)closeModal();return}if(b.dataset.hangarTab){switchHangarTab(b.dataset.hangarTab);if(b.id==='selected-map')$('#maps-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}
+ if(b.dataset.mapFilter){mapFilter=b.dataset.mapFilter;$$('[data-map-filter]').forEach(q=>q.setAttribute('aria-pressed',String(q.dataset.mapFilter===mapFilter)));renderHangar();}
+ if(b.dataset.view){if(b.dataset.view==='hangar')closeModal();if(b.dataset.view==='research')showResearch();if(b.dataset.view==='guide')showGuide();}if(b.dataset.nation){progress.nation=b.dataset.nation;const t=TANKS.find(t=>t.nation===progress.nation&&progress.unlocked.includes(t.id));selectTank(t.id)}if(b.dataset.tank)selectTank(b.dataset.tank);if(b.dataset.map){progress.map=b.dataset.map;save();renderHangar()}if(b.dataset.equip){selectTank(b.dataset.equip);closeModal()}if(b.dataset.unlock){const t=getTank(b.dataset.unlock);if(!progress.unlocked.includes(t.id)&&progress.xp>=t.cost&&(!t.requires||progress.unlocked.includes(t.requires))){progress.xp-=t.cost;progress.unlocked.push(t.id);save();showResearch(t.id);renderHangar();toast(`${fullName(t)} vyzkoumán. Připraven k nasazení.`)}}switch(b.dataset.action){case'close':case'resume':closeModal();break;case'abandon':{const r=game.abandon();finishBattle(r||game.finished);break}case'result-hangar':backToHangar();break;case'result-research':backToHangar(true);break;}
  if(b.dataset.selectDecal!==undefined&&customDraft){workshopEditor.select(Number(b.dataset.selectDecal));renderer.workshopView(customDraft.decals[Number(b.dataset.selectDecal)].surface.split('-')[1]);}if(b.dataset.removeDecal!==undefined&&customDraft){imageImportVersion++;$('#custom-save').disabled=false;customDraft.decal='';customDraft.decals.splice(Number(b.dataset.removeDecal),1);renderCustomizationForm();previewCustomization();}if(b.id==='customize-button')showCustomization();if(b.id==='custom-save')closeCustomization(true);if(b.id==='custom-cancel')closeCustomization(false);if(b.id==='custom-remove-image'){imageImportVersion++;$('#custom-save').disabled=false;customDraft.decal='';renderCustomizationForm();previewCustomization();}if(b.id==='custom-reset'){imageImportVersion++;$('#custom-save').disabled=false;customDraft=normalizeAppearance({},progress.selected);renderCustomizationForm();previewCustomization();}if(b.dataset.zupgrade){if(game?.buyUpgrade(b.dataset.zupgrade))showZombieShop();}if(b.id==='next-wave'){if(game?.nextWave())closeModal();}if(b.id==='nuke-button')game?.launchNuke();if(b.id==='play-button')startBattle();if(b.id==='close-modal')closeModal();if(b.id==='settings-button')showSettings();if(b.id==='pause-button')pause();if(b.id==='camera-mode-button'&&game&&!paused)scope=!scope;if(b.id==='repair-button')game?.repairPlayer();if(b.id==='smoke-button')game?.smokePlayer();if(b.id==='missile-button')game?.fireMissilePlayer();if(b.id==='respawn-button')respawn();if(b.id==='sound-toggle'){progress.settings.sound=!progress.settings.sound;audio.setEnabled(progress.settings.sound);audio.unlock().catch(()=>{});save();b.textContent=progress.settings.sound?'ZAPNUTO':'VYPNUTO'}if(b.id==='export-save'){const blob=new Blob([JSON.stringify({...progress,format:'iron-front-save-v1'},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='iron-front-postup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Záloha postupu připravena.')}});
-document.addEventListener('change',async e=>{if(e.target.id==='game-mode'){const zombie=e.target.value==='zombies';$('.mode-label strong').textContent=zombie?'ZOMBIE · PŘEŽITÍ':'NADVLÁDA';$('.mode-label small').textContent=zombie?'Vlny · šrot · vylepšení tanku':deploymentSummary();$('.deploy-panel p').innerHTML=zombie?'Jeden tank proti hordě.<br>Každou vlnou silnější. Mezi vlnami obchod.':'<span id="matchup-label">Bitva národů</span><br>Obsaď zóny. Vybojuj další stroj.';}if(e.target.id==='sensitivity-select'){progress.settings.sensitivity=Number(e.target.value);save();}if(e.target.id==='quality-select'){progress.settings.quality=e.target.value;renderer?.setQuality(progress.settings.quality);save()}if(e.target.id==='import-save'){const f=e.target.files[0];if(!f)return;try{if(f.size>2500000)throw Error();const p=JSON.parse(await f.text());if(p.format!=='iron-front-save-v1'||!Array.isArray(p.unlocked)||!Number.isFinite(p.xp)||p.xp<0)throw Error();progress.unlocked=[...new Set([...defaults.unlocked,...p.unlocked.filter(id=>TANKS.some(t=>t.id===id))])];progress.xp=Math.floor(p.xp);progress.appearances=normalizeAppearances(p.appearances);if(renderer)renderer.appearances=progress.appearances;for(const k of ['battles','wins','kills'])progress[k]=Math.max(0,Math.floor(Number(p[k])||0));progress.selected=progress.unlocked.includes(p.selected)?p.selected:defaults.selected;progress.nation=getTank(progress.selected).nation;save();renderHangar();if(!game)renderer?.setHangar(progress.selected);showSettings();toast('Postup úspěšně obnoven.')}catch{toast('Soubor není platná záloha Hard Steel War.')}}});
+document.addEventListener('change',async e=>{if(e.target.id==='language-select'||e.target.matches('[data-language-picker]')){setLanguage(e.target.value);return;}if(e.target.id==='game-mode'){const zombie=e.target.value==='zombies';$('.mode-label strong').textContent=zombie?'ZOMBIE · PŘEŽITÍ':'NADVLÁDA';$('.mode-label small').textContent=zombie?'Vlny · šrot · vylepšení tanku':deploymentSummary();$('.deploy-panel p').innerHTML=zombie?'Jeden tank proti hordě.<br>Každou vlnou silnější. Mezi vlnami obchod.':'<span id="matchup-label">Bitva národů</span><br>Obsaď zóny. Vybojuj další stroj.';}if(e.target.id==='sensitivity-select'){progress.settings.sensitivity=Number(e.target.value);save();}if(e.target.id==='quality-select'){progress.settings.quality=e.target.value;renderer?.setQuality(progress.settings.quality);save()}if(e.target.id==='import-save'){const f=e.target.files[0];if(!f)return;try{if(f.size>2500000)throw Error();const p=JSON.parse(await f.text());if(p.format!=='iron-front-save-v1'||!Array.isArray(p.unlocked)||!Number.isFinite(p.xp)||p.xp<0)throw Error();progress.unlocked=[...new Set([...defaults.unlocked,...p.unlocked.filter(id=>TANKS.some(t=>t.id===id))])];progress.xp=Math.floor(p.xp);progress.appearances=normalizeAppearances(p.appearances);if(renderer)renderer.appearances=progress.appearances;for(const k of ['battles','wins','kills'])progress[k]=Math.max(0,Math.floor(Number(p[k])||0));progress.selected=progress.unlocked.includes(p.selected)?p.selected:defaults.selected;progress.nation=getTank(progress.selected).nation;save();renderHangar();if(!game)renderer?.setHangar(progress.selected);showSettings();toast('Postup úspěšně obnoven.')}catch{toast('Soubor není platná záloha Hard Steel War.')}}});
 
 function respawn(){
   if(!game?.respawnPlayer())return;
@@ -57669,13 +58234,13 @@ let onlineStorage;try{onlineStorage=localStorage;}catch{}
 const onlineScores=new OnlineLeaderboard(ONLINE_CONFIG,onlineStorage);
 let scoreStore;try{scoreStore=new LocalLeaderboard(localStorage);}catch{scoreStore=null;}
 const scoreMode=()=>game?.mode==='zombies'?'zombies':'battle';
-function scoreTable(mode){const rows=scoreStore?.list(mode)||[];return rows.length?'<ol class="highscores">'+rows.map(r=>'<li><span>'+esc(r.nick)+'</span><strong>'+num(r.score)+'</strong></li>').join('')+'</ol>':'<p>Zatím žádný uložený výsledek.</p>';}
+function scoreTable(mode){const rows=scoreStore?.list(mode)||[];return rows.length?'<ol class="highscores">'+rows.map(r=>'<li><span translate="no">'+esc(r.nick)+'</span><strong>'+num(r.score)+'</strong></li>').join('')+'</ol>':'<p>Zatím žádný uložený výsledek.</p>';}
 
 async function showScores(){
  openModal('scores','<span class="eyebrow">TANKOVÉ BITVY · SPOLEČNÝ ŽEBŘÍČEK</span><h2>Online TOP 5</h2><p class="modal-intro">Nejlepší dokončená tanková bitva každého hráče podle získaných výzkumných bodů. Skóre ovlivňuje obtížnost. Výsledky počítá zařízení hráče.</p><div id="online-table" role="status">Načítám…</div><button class="secondary-button" data-view="scores">OBNOVIT</button>');
  const target=$('#online-table');
  if(!onlineScores.ready){target.textContent='Online žebříček ještě není připojen. Čeká na nastavení serveru majitelem hry.';return;}
- try{const rows=await onlineScores.list();if(!target.isConnected)return;target.innerHTML=rows.length?'<ol class="highscores">'+rows.map(r=>'<li><span>'+esc(r.nick)+'</span><strong>'+num(r.score)+'</strong></li>').join('')+'</ol>':'Zatím tu nikdo nemá výsledek. Buď první!';}catch(error){if(target.isConnected)target.textContent=error.message;}
+ try{const rows=await onlineScores.list();if(!target.isConnected)return;target.innerHTML=rows.length?'<ol class="highscores">'+rows.map(r=>'<li><span translate="no">'+esc(r.nick)+'</span><strong>'+num(r.score)+'</strong></li>').join('')+'</ol>':'Zatím tu nikdo nemá výsledek. Buď první!';}catch(error){if(target.isConnected)target.textContent=error.message;}
 }
 function showScoreEntry(result){
  if(game.mode==='zombies'||result.abandoned)return;
@@ -57692,6 +58257,12 @@ function showScoreEntry(result){
 }
 document.addEventListener('click',e=>{if(e.target.closest('[data-view="scores"]'))showScores();});
 
+
+$('#language-select').value=getLanguagePreference();
+mountLocalization();
+document.title='Hard Steel War — '+(getLanguage()==='en'?'Tank battles':'Tankové bitvy');
+document.addEventListener('languagechange',()=>{document.title='Hard Steel War — '+(getLanguage()==='en'?'Tank battles':'Tankové bitvy');if(!game&&!customDraft)renderHangar();});
+$('.loadout-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();switchHangarTab(e.key==='Home'?'vehicles':e.key==='End'?'maps':hangarTab==='vehicles'?'maps':'vehicles');$('#'+hangarTab+'-tab').focus();});
 
 return {};
 })();
