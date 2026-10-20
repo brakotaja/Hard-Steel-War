@@ -54683,12 +54683,13 @@ return {cleanNick,topFive,LocalLeaderboard};
 MODULES["online-leaderboard.js"]=(()=>{
 const {cleanNick} = MODULES["leaderboard.js"];
 class OnlineLeaderboard{
- constructor(config,storage,fetcher=globalThis.fetch){this.config=config;this.storage=storage;this.fetcher=fetcher;this.session=null;this.pending=null;this.key='iron-front-online-session:'+config.url;try{this.session=JSON.parse(storage?.getItem(this.key)||'null');}catch{}}
+ constructor(config,storage,fetcher=(url,options)=>globalThis.fetch(url,options)){this.config=config;this.storage=storage;this.fetcher=fetcher;this.session=null;this.pending=null;this.key='iron-front-online-session:'+config.url;try{this.session=JSON.parse(storage?.getItem(this.key)||'null');}catch{}}
  get ready(){return /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(this.config.url)&&/^sb_publishable_/.test(this.config.publishableKey);}
  async request(path,body,token){
   if(!this.ready)throw Error('Online žebříček ještě není připojen.');
   const headers={apikey:this.config.publishableKey,'Content-Type':'application/json'};if(token)headers.Authorization='Bearer '+token;
-  let response;try{response=await this.fetcher(this.config.url+path,{method:'POST',headers,body:JSON.stringify(body),signal:AbortSignal.timeout(12000)});}catch{throw Error('Server není dostupný. Zkontroluj připojení a zkus to znovu.');}
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),12000);
+  let response;try{response=await this.fetcher(this.config.url+path,{method:'POST',headers,body:JSON.stringify(body),signal:controller.signal});}catch(error){console.warn('Leaderboard request failed:',error?.message);throw Error('Server není dostupný. Zkontroluj připojení a zkus to znovu.');}finally{clearTimeout(timer);}
   const data=await response.json().catch(()=>null);
   if(!response.ok){if(data?.code==='23505')throw Error('Tuto přezdívku už používá jiný hráč.');if(data?.message==='score_cooldown')throw Error('Před dalším odesláním počkej 30 sekund.');throw Error('Online služba požadavek odmítla. Zkus to později.');}
   return data;
