@@ -79,6 +79,11 @@ body{background:#131a18}.topbar{height:82px;padding:0 4%;gap:35px;background:#17
 /* Keep the blast and orbit unobstructed until the results appear. */
 body.nuke-cinematic #battle > :not(#battle-scene):not(#nuke-flash):not(#view-status){visibility:hidden!important;pointer-events:none!important}
 body.nuke-cinematic #view-status{top:auto;bottom:8%;font-size:12px;letter-spacing:.16em}
+/* Private room: two readable team rosters and editable deployment choices. */
+.mp-share-actions{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}.mp-room-code .mp-share-actions button{margin:0;font-size:9px;padding:12px}.mp-share-details{margin:-8px 0 22px;color:#b9c5b1;font-size:12px}.mp-share-details summary{cursor:pointer}.mp-share-details input{width:100%;margin-top:10px;padding:11px;border:1px solid #67785c;border-radius:5px;background:#111d17;color:#dce4d5;font:12px monospace}.mp-room-controls{margin-bottom:16px}.mp-teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:18px 0 22px}.mp-team{border:1px solid #668d9c60;border-radius:8px;overflow:hidden;background:#12232b50}.mp-team-1{border-color:#aa78665c;background:#2c1f1950}.mp-team>header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:#88bbd00e;gap:10px;border-bottom:1px solid #668d9c45}.mp-team-1>header{background:#d6a08b0e;border-color:#aa786645}.mp-team h3{margin:0;font-size:11px;letter-spacing:1.4px;color:#a7d8e8}.mp-team-1 h3{color:#e6b19c}.mp-team>header>span{font:11px monospace;color:#bcc9c3;white-space:nowrap}.mp-team-members{display:grid;gap:8px;padding:10px}.mp-team .mp-player{background:#9dc5d208;border-color:#8ab4c22c;padding:12px;min-width:0}.mp-team-1 .mp-player{background:#d1a18a08;border-color:#c4937b2c}.mp-team .mp-player.is-you{border-color:#d7bc7c88;box-shadow:inset 3px 0 #d7bc7c}.mp-player-label{display:flex;justify-content:space-between;gap:8px;color:#b7c6ba;font-size:8px;letter-spacing:1px;flex-wrap:wrap}.mp-ready{color:#bdb6a4}.mp-ready.ready{color:#abd0a2}.mp-team .mp-player strong{font-size:17px;line-height:1.2;margin:8px 0 5px}.mp-team .mp-player small{font-size:11px}.mp-empty-slot{border:1px dashed #87958b28;border-radius:5px;min-height:43px;display:flex;align-items:center;padding:10px 12px;font-size:11px;color:#829087}.mp-room-settings{align-items:end;padding:18px;background:#ffffff03;border:1px solid #82907833;border-radius:7px}.mp-room-settings .mp-checkbox{display:flex;align-items:center;gap:10px;min-height:41px;line-height:1.6}.mp-room-settings input[type=checkbox]{width:auto;accent-color:#d6b67b}.mp-room-error{color:#e5b19c;font-size:13px}.mp-invitation{border:1px solid #95b7a766;background:#28433660;padding:15px 18px;border-radius:6px;margin:20px 0;color:#c7decf;font-size:13px}.mp-invitation>span{font:16px monospace;letter-spacing:2px;margin-left:10px;color:#e9d9b4}.mp-invitation p{margin:8px 0 0;font-size:12px;color:#b9cabf}.mp-room-controls select:disabled,.mp-room-settings select:disabled{opacity:.55}
+@media(max-width:580px){.mp-teams{grid-template-columns:1fr;gap:14px}.mp-share-actions{margin:0;width:100%}.mp-room-code .mp-share-actions button{flex:1;justify-content:center;min-height:44px}.mp-team-members{grid-template-columns:repeat(2,minmax(0,1fr))}.mp-team .mp-player{padding:10px}.mp-team .mp-player strong{font-size:15px}.mp-empty-slot{min-height:65px}.mp-room-settings{padding:14px}.mp-invitation>span{display:block;margin:8px 0 0}}
+
+#cruise-status{display:block;color:#e2bd7d;font-size:10px;letter-spacing:.08em;text-align:center;margin-bottom:6px}#cruise-status[hidden],#team-roster[hidden]{display:none}#death-killer{color:#e4a180;max-width:540px;overflow-wrap:anywhere}#team-roster{position:fixed;z-index:45;left:50%;top:20%;transform:translateX(-50%);width:min(760px,94vw);padding:22px;background:#121d20ed;border:1px solid #889d8870;box-shadow:0 12px 70px #0009;pointer-events:none}#team-roster>strong{font-size:12px;letter-spacing:.16em;color:#d6c79e}#team-roster>div{display:grid;grid-template-columns:1fr 1fr;gap:24px}#team-roster h3{font-size:12px;color:#87ccd9}#team-roster section+section h3{color:#e6a08a}#team-roster p{display:grid;margin:10px 0;border-top:1px solid #ffffff15;padding-top:8px;gap:3px}#team-roster b{font-size:14px;overflow-wrap:anywhere}#team-roster span,#team-roster small{font-size:11px;color:#aeb9a9}
 </style><!-- Three.js MIT License:
 The MIT License
 
@@ -115,7 +120,7 @@ THE SOFTWARE.
 <section id="maps-panel" class="deployment" role="tabpanel" aria-labelledby="maps-tab" hidden><div class="battle-config"><div class="section-title compact"><h2>Zvol bojiště</h2><div class="map-filters" aria-label="Typ mapy"><button data-map-filter="all" aria-pressed="true">Všechny</button><button data-map-filter="urban" aria-pressed="false">Město / CQC</button><button data-map-filter="hills" aria-pressed="false">Kopce</button><button data-map-filter="flat" aria-pressed="false">Rovina</button></div></div><div id="map-cards" class="map-cards"></div></div></section>
 <footer><span>HARD STEEL WAR <b> / </b> EXPERIMENTÁLNÍ TANKOVÝ POLYGON</span><span class="text-button">OFFLINE EDICE · VŠE V TOMTO SOUBORU</span><button class="text-button" data-view="guide">Ovládání a mechaniky ↗</button></footer></div>
 </main>
-<section id="battle" hidden><div id="battle-scene"></div><div class="battle-top"><button id="pause-button" class="hud-button">Ⅱ <span>ESC</span></button><div class="battle-score"><div class="score-row"><span class="team-blue">SPOJENCI <b id="friendly-score">2000</b></span><span id="battle-time">12:00</span><span class="team-red"><b id="enemy-score">2000</b> NEPŘÍTEL</span></div><div class="ticket-bars"><i id="friendly-bar"></i><i id="enemy-bar"></i></div><div id="zone-hud" class="zone-hud"></div></div><span class="battle-map-label" id="battle-map-label"></span></div><div id="network-hud" hidden></div><section id="server-chat" hidden><button id="server-chat-toggle" type="button">CHAT · ENTER</button><div id="server-chat-body" hidden><div id="server-chat-log" role="log" aria-label="Chat" aria-live="polite"></div><form id="server-chat-form"><input id="server-chat-input" aria-label="Zpráva" placeholder="Napiš zprávu…" maxlength="180" autocomplete="off"><button type="submit">ODESLAT</button></form><small>Enter · odeslat / Esc · zavřít</small></div></section><div id="name-tags"></div><div id="zombie-hud" hidden></div><div id="scope-overlay" class="scope-overlay" hidden><div class="scope-ticks"></div></div><div id="view-status" class="view-status"></div><button id="camera-mode-button" class="camera-mode-button">[SHIFT] 1. OSOBA</button><div id="gun-marker" hidden></div><div id="reticle"><i></i><span></span></div><div id="hit-notice" aria-live="polite"></div><div id="kill-confirmation" class="kill-confirmation" hidden><span>✦</span><strong>CÍL ZNIČEN</strong><small></small></div><div id="kill-feed" class="kill-feed"></div><div class="battle-objective" id="battle-objective">OBSAĎ A UDRŽ ZÓNY</div><div id="damage-flash"></div><div id="nuke-flash"></div><button id="nuke-button" disabled>☢ BODY 0 / 10</button><div class="battle-bottom"><div class="module-panel"><div class="hud-caption"><span id="battle-tank-name"></span><span id="crew-label">POSÁDKA</span></div><div class="module-layout"><div id="tank-diagram" class="tank-diagram"><div class="track left"></div><div class="hull"><div class="engine-block"></div><div class="turret-block"><div class="gun-block"></div></div><div class="ammo-block"></div></div><div class="track right"></div></div><div id="module-bars"></div></div><div class="module-actions"><button id="repair-button">[F] Opravit</button><button id="smoke-button">[G] Kouř <span>3</span></button></div><button id="missile-button" class="missile-action" hidden>[2] RAKETA 4/4</button></div><div class="driving-hud"><div class="speed"><strong id="speed-value">0</strong><span>km/h</span></div><div class="ammo-hud"><div class="shell-icon"></div><div><strong id="ammo-name">APHE</strong><small id="reload-label">PŘIPRAVENO</small><div class="reload-track"><i id="reload-bar"></i></div></div><span id="reload-count"></span></div><div class="mg-hud"><span id="mg-status">MEZERNÍK · KULOMET</span><div><i id="mg-heat"></i></div></div><div class="key-hints"><span><kbd>W A S D</kbd> Pohyb</span><span><kbd>MYŠ</kbd> Míření</span><span><kbd>SHIFT</kbd> Zaměřovač</span><span><kbd>C</kbd> Rozhlížení</span></div></div><div class="minimap-wrap"><div class="hud-caption"><span>TAKTICKÁ MAPA</span><span id="terrain-label">TERÉN</span></div><canvas id="minimap" width="220" height="220" aria-label="Taktická mapa bojiště"></canvas></div></div><div id="respawn-panel" hidden><span class="eyebrow">STROJ VYŘAZEN</span><h2>Bitva ještě nekončí.</h2><p id="respawn-text">Připravuje se záložní tank…</p><button id="respawn-button" class="primary-button">ZPĚT DO BOJE →</button></div><div class="touch-controls"><div class="touch-pad"><button data-key="KeyW">▲</button><button data-key="KeyA">◀</button><button data-key="KeyS">▼</button><button data-key="KeyD">▶</button></div><div class="touch-aim-actions"><button id="touch-scope">ZAMĚŘOVAČ</button><button id="touch-fire">PALBA</button></div></div></section>
+<section id="battle" hidden><div id="battle-scene"></div><div class="battle-top"><button id="pause-button" class="hud-button">Ⅱ <span>ESC</span></button><div class="battle-score"><div class="score-row"><span class="team-blue">SPOJENCI <b id="friendly-score">2000</b></span><span id="battle-time">12:00</span><span class="team-red"><b id="enemy-score">2000</b> NEPŘÍTEL</span></div><div class="ticket-bars"><i id="friendly-bar"></i><i id="enemy-bar"></i></div><div id="zone-hud" class="zone-hud"></div></div><span class="battle-map-label" id="battle-map-label"></span></div><div id="network-hud" hidden></div><section id="server-chat" hidden><button id="server-chat-toggle" type="button">CHAT · ENTER</button><div id="server-chat-body" hidden><div id="server-chat-log" role="log" aria-label="Chat" aria-live="polite"></div><form id="server-chat-form"><input id="server-chat-input" aria-label="Zpráva" placeholder="Napiš zprávu…" maxlength="180" autocomplete="off"><button type="submit">ODESLAT</button></form><small>Enter · odeslat / Esc · zavřít</small></div></section><aside id="team-roster" hidden></aside><div id="name-tags"></div><div id="zombie-hud" hidden></div><div id="scope-overlay" class="scope-overlay" hidden><div class="scope-ticks"></div></div><div id="view-status" class="view-status"></div><button id="camera-mode-button" class="camera-mode-button">[SHIFT] 1. OSOBA</button><div id="gun-marker" hidden></div><div id="reticle"><i></i><span></span></div><div id="hit-notice" aria-live="polite"></div><div id="kill-confirmation" class="kill-confirmation" hidden><span>✦</span><strong>CÍL ZNIČEN</strong><small></small></div><div id="kill-feed" class="kill-feed"></div><div class="battle-objective" id="battle-objective">OBSAĎ A UDRŽ ZÓNY</div><div id="damage-flash"></div><div id="nuke-flash"></div><button id="nuke-button" disabled>☢ BODY 0 / 10</button><div class="battle-bottom"><div class="module-panel"><div class="hud-caption"><span id="battle-tank-name"></span><span id="crew-label">POSÁDKA</span></div><div class="module-layout"><div id="tank-diagram" class="tank-diagram"><div class="track left"></div><div class="hull"><div class="engine-block"></div><div class="turret-block"><div class="gun-block"></div></div><div class="ammo-block"></div></div><div class="track right"></div></div><div id="module-bars"></div></div><div class="module-actions"><button id="repair-button">[F] Opravit</button><button id="smoke-button">[G] Kouř <span>3</span></button></div><button id="secondary-button" class="missile-action" hidden>[R] 75 mm · PŘIPRAVENO</button><button id="missile-button" class="missile-action" hidden>[2] RAKETA 4/4</button></div><div class="driving-hud"><small id="cruise-status" hidden></small><div class="speed"><strong id="speed-value">0</strong><span>km/h</span></div><div class="ammo-hud"><div class="shell-icon"></div><div><strong id="ammo-name">APHE</strong><small id="reload-label">PŘIPRAVENO</small><div class="reload-track"><i id="reload-bar"></i></div></div><span id="reload-count"></span></div><div class="mg-hud"><span id="mg-status">MEZERNÍK · KULOMET</span><div><i id="mg-heat"></i></div></div><div class="key-hints"><span><kbd>W A S D</kbd> Pohyb</span><span><kbd>MYŠ</kbd> Míření</span><span><kbd>SHIFT</kbd> Zaměřovač</span><span><kbd>C</kbd> Rozhlížení</span></div></div><div class="minimap-wrap"><div class="hud-caption"><span>TAKTICKÁ MAPA</span><span id="terrain-label">TERÉN</span></div><canvas id="minimap" width="220" height="220" aria-label="Taktická mapa bojiště"></canvas></div></div><div id="respawn-panel" hidden><span class="eyebrow">STROJ VYŘAZEN</span><h2>Bitva ještě nekončí.</h2><p id="death-killer" translate="no"></p><p id="respawn-text">Připravuje se záložní tank…</p><button id="respawn-button" class="primary-button">ZPĚT DO BOJE →</button></div><div class="touch-controls"><div class="touch-pad"><button data-key="KeyW">▲</button><button data-key="KeyA">◀</button><button data-key="KeyS">▼</button><button data-key="KeyD">▶</button></div><div class="touch-aim-actions"><button id="touch-scope">ZAMĚŘOVAČ</button><button id="touch-fire">PALBA</button></div></div></section>
 <div id="modal" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button id="close-modal" class="modal-close" aria-label="Zavřít">×</button><div id="modal-content"></div></section></div>
 <section id="workshop" hidden><div id="custom-preview"></div><aside><span class="eyebrow">DÍLNA / VLASTNÍ VZHLED</span><h2 id="custom-title"></h2><p>Vyber nálepku přímo na 3D tanku. Táhni po pancíři, rohy měň velikost, horním úchytem otáčej. Pravým tlačítkem si tank prohlédni ze všech stran.</p><div id="custom-form"></div><button id="custom-reset" class="text-button">Obnovit původní vzhled</button><div class="custom-actions"><button id="custom-save" class="primary-button">ULOŽIT VZHLED</button><button id="custom-cancel" class="secondary-button">ZRUŠIT</button></div><small>Vzhled je zdarma a nemění bojové vlastnosti. Ukládá se pro každý tank zvlášť v tomto prohlížeči.</small></aside></section><div id="toast" role="status"></div>
 </div>
@@ -54695,6 +54700,15 @@ return {ACESFilmicToneMapping,AddEquation,AddOperation,AdditiveAnimationBlendMod
 const MODULES={};
 MODULES["i18n-content.js"]=(()=>{
 const CONTENT_TRANSLATIONS=[
+ ['Tempomat vpřed / vzad. WASD nebo šipky jej zruší.','Cruise forward / reverse. WASD or arrow keys cancel it.'],
+ ['TEMPOMAT VPŘED · WASD ZRUŠÍ','CRUISE FORWARD · WASD CANCELS'],
+ ['TEMPOMAT VZAD · WASD ZRUŠÍ','CRUISE REVERSE · WASD CANCELS'],
+ ['Maus: druhý kanón 75 mm (lze držet). Po zničení: nasadit záložní tank.','Maus: secondary 75 mm gun (hold to fire). After destruction: respawn.'],
+ ['Oprava modulů při zastavení. Míření a funkční zbraně zůstávají dostupné.','Repair modules while stationary. You can still aim and fire working weapons.'],
+ ['KLIKNI PRO ZACHYCENÍ MYŠI · U OKRAJŮ SE POHLED OTÁČÍ','CLICK TO CAPTURE MOUSE · EDGES TURN THE VIEW'],
+ ['Zničil tě:','Destroyed by:'],['Prostředí','Environment'],
+ ['TÝMY · TAB','TEAMS · TAB'],['ZNIČEN','DESTROYED'],
+ ['Týmy a přezdívky v online bitvě','Teams and nicknames in an online battle'],
  ['Týmový deathmatch · pouze killy','Team deathmatch · kills only'],
  ['TÝMOVÝ DEATHMATCH','TEAM DEATHMATCH'],['30 killů · 12 minut · 6 proti 6','30 kills · 12 minutes · 6 vs 6'],
  ['Žádné zóny. Každý zničený nepřítel je bod pro tým.','No zones. Every enemy destroyed scores a point for your team.'],
@@ -54782,6 +54796,27 @@ return {CONTENT_TRANSLATIONS};
 })();
 MODULES["i18n-multiplayer.js"]=(()=>{
 const MULTIPLAYER_TRANSLATIONS=[
+ ['Zprávu nelze odeslat. Počkej chvilku a zkus to znovu.','Message could not be sent. Wait a moment and try again.'],
+ ['Vyraz do bitvy s přáteli.','Go into battle with friends.'],
+ ['Vyber veřejný server, soukromou místnost až pro osm hráčů nebo offline bitvu proti botům.','Choose a public server, a private room for up to eight players, or an offline battle against bots.'],
+ ['Až 8 hráčů · vlastní týmy · volitelní boti','Up to 8 players · choose teams · optional bots'],
+ ['Pozvánka do místnosti','Room invitation'],
+ ['Vyber přezdívku a tank, potom se připoj tlačítkem níže.','Choose a nickname and a tank, then use the join button below.'],
+ ['Soukromá místnost · až 8 hráčů','Private room · up to 8 players'],
+ ['Doplnit týmy boty do 6 proti 6','Fill teams with bots for 6 vs 6'],
+ ['Hostitel ti pošle odkaz nebo osmimístný kód.','The host will send you a link or an eight-character code.'],
+ ['Odkaz lze sdílet z webové adresy hry. Ze staženého souboru pošli kód místnosti.','Share links from the game website. When playing a downloaded file, send the room code.'],
+ ['Odkaz na místnost zkopírován.','Room link copied.'],
+ ['Zkopíruj označený odkaz na místnost.','Copy the selected room link.'],
+ ['HRÁČ','PLAYER'],['TY','YOU'],['ČEKÁ','WAITING'],
+ ['MODRÝ TÝM','BLUE TEAM'],['ČERVENÝ TÝM','RED TEAM'],['Tvůj tým','Your team'],['PLNÝ','FULL'],['Volné místo','Open slot'],
+ ['Pozvi další hráče odkazem nebo kódem místnosti.','Invite more players with the room link or code.'],
+ ['Rozdělte se do obou týmů.','Join both teams before starting.'],
+ ['Všichni jsou připraveni. Můžeš spustit bitvu.','Everyone is ready. You can start the battle.'],
+ ['Čekám, až ostatní hráči potvrdí připravenost.','Waiting for the other players to confirm they are ready.'],
+ ['KOPÍROVAT KÓD','COPY CODE'],['KOPÍROVAT ODKAZ','COPY LINK'],['Odkaz pro připojení','Join link'],
+ ['6 proti 6 · volná místa doplní boti','6 vs 6 · bots fill the open slots'],['Pouze hráči · až 4 proti 4','Players only · up to 4 vs 4'],
+ ['Tank i tým můžeš změnit před začátkem bitvy. Změny nastavení zruší připravenost hráčů.','Change your tank and team before the battle starts. Setting changes reset player readiness.'],
 ["Vyber veřejný server, soukromou místnost s kamarádem nebo offline bitvu proti botům.","Choose a public server, a private room with a friend, or an offline battle against bots."],
 ["ONLINE / VEŘEJNÝ SERVER","ONLINE / PUBLIC SERVER"],
 ["Do bitvy s ostatními","Join the battlefield"],
@@ -54844,6 +54879,7 @@ const MULTIPLAYER_TRANSLATIONS=[
  ['Místnost nebyla nalezena. Ověř kód a otevřené okno hostitele.','Room not found. Check the code and make sure the host has the game open.'],['Soupeř se odpojil. Vytvoř nebo připoj novou místnost.','Your opponent disconnected. Create or join another room.'],
  ['Neplatná data hráče.','Invalid player data.'],['Neplatná konfigurace bitvy.','Invalid match configuration.']
 ];
+
 
 return {MULTIPLAYER_TRANSLATIONS};
 })();
@@ -55371,7 +55407,7 @@ function terrainHeight(mapId,x,z) {
   // open above the riverbed and is supplied separately by surfaceHeight.
   for(const b of specFor(mapId).bridges) {
     const dx=Math.abs(x-b.x),dz=Math.abs(z-b.z);
-    if(dx<b.w*.5+10 && dz>=b.d*.5 && dz<=b.d*.5+b.ramp) {
+    if(dx<b.w*.5+10 && dz>=b.d*.5-1e-6 && dz<=b.d*.5+b.ramp+1e-6) {
       const shoulder=1-smooth((dx-b.w*.5)/10);
       y=mix(y,rampHeight(mapId,x,z,b),shoulder);
     }
@@ -55648,6 +55684,12 @@ const { getTank, surfaceHeight } = MODULES["data.js"];
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const GRAVITY = 9.81;
 
+// The Maus coaxial gun shares elevation and traverse with the 128 mm gun,
+// but has its own muzzle, ammunition and loading cycle.
+function secondaryWeaponGeometry(type) {
+  return type==='maus'?{caliber:75,reload:5.2,penetration:100,damageScale:.9,speed:750,barrelLength:2.71,offsetX:.65,offsetY:-.03}:null;
+}
+
 /** All distances are metres. This is the single source of weapon geometry for
  * the visible model, sight, projectile spawn and impact prediction. The turret
  * is stabilized in world space while the hull follows the ground. */
@@ -55685,13 +55727,15 @@ function hullPose(tank,mapId){
  return tank._terrainPose={x:tank.x,z:tank.z,yaw:tank.angle,mapId,pitch,roll,transform,inverse};
 }
 function weaponFrame(tank,mapId,options={}){
- const geometry=weaponGeometry(tank.type),yaw=options.yaw??tank.turretAngle??tank.angle,pitch=options.pitch??tank.gunPitch??0;
+ const secondary=options.secondary||tank.type==='maus'&&options.barrelIndex===1?secondaryWeaponGeometry(tank.type):null;
+ const geometry={...weaponGeometry(tank.type),...(secondary||{})},yaw=options.yaw??tank.turretAngle??tank.angle,pitch=options.pitch??tank.gunPitch??0;
  const pose=hullPose(tank,mapId),localYaw=yaw-(tank.angle||0),s=Math.sin(localYaw),c=Math.cos(localYaw);
- const side=tank.type==='bmpt'?((options.barrelIndex??tank._barrelIndex??0)===0?-.22:.22):0;
+ const side=secondary?secondary.offsetX:tank.type==='bmpt'?((options.barrelIndex??tank._barrelIndex??0)===0?-.22:.22):0;
  const rootOffset=pose.transform({x:0,y:geometry.turretBaseY,z:geometry.turretOffsetZ});
  const root={x:tank.x+rootOffset.x,y:surfaceHeight(mapId,tank.x,tank.z)+.035+rootOffset.y,z:tank.z+rootOffset.z};
  const direction=pose.transform({x:s*Math.cos(pitch),y:Math.sin(pitch),z:c*Math.cos(pitch)});
- const shift=pose.transform({x:s*geometry.mantletZ+c*side,y:geometry.gunY,z:c*geometry.mantletZ-s*side});
+ const vertical=secondary?.offsetY||0,forward=geometry.mantletZ-vertical*Math.sin(pitch);
+ const shift=pose.transform({x:s*forward+c*side,y:geometry.gunY+vertical*Math.cos(pitch),z:c*forward-s*side});
  const pivot={x:root.x+shift.x,y:root.y+shift.y,z:root.z+shift.z};
  const muzzle={x:pivot.x+direction.x*geometry.barrelLength,y:pivot.y+direction.y*geometry.barrelLength,z:pivot.z+direction.z*geometry.barrelLength};
  return {...geometry,pose,root,pivot,muzzle,direction,sight:{...muzzle},yaw,pitch,side};
@@ -55713,13 +55757,13 @@ function solveWeaponAim(tank,mapId,target){
  return {yaw,desiredPitch:pitch,rawPitch,limited:Math.abs(rawPitch-pitch)>.0002,targetY:target.y,distance:rootRange};
 }
 
-return {GRAVITY,weaponGeometry,hullPose,weaponFrame,solveWeaponAim};
+return {GRAVITY,secondaryWeaponGeometry,weaponGeometry,hullPose,weaponFrame,solveWeaponAim};
 })();
 MODULES["simulation.js"]=(()=>{
 const {TacticalDirector} = MODULES["tactics.js"];
 const {ObstacleIndex} = MODULES["spatial.js"];
 const { TANKS, getTank, getMap, createBattleMap, terrainHeight, terrainAt, surfaceHeight } = MODULES["data.js"];
-const { weaponFrame, weaponGeometry, solveWeaponAim, GRAVITY } = MODULES["ballistics.js"];
+const { weaponFrame, weaponGeometry, secondaryWeaponGeometry, solveWeaponAim, GRAVITY } = MODULES["ballistics.js"];
 const TAU = Math.PI * 2;
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
 const norm = a => ((a+Math.PI)%TAU+TAU)%TAU-Math.PI;
@@ -55784,8 +55828,8 @@ class Game {
     this.shells=[];this.smokeClouds=[];this._serial=0;this._seed=(seed>>>0)||1;
     this._input={};this._repairHeld=false;this._smokeHeld=false;
     this._rules=DIFFICULTY[this.difficulty];this.sightDistance=Math.min(this._rules.vision,this.map.size*Math.SQRT2);this._nav=this._buildNav();
-    const selected=getTank(tankId), friendly=TANKS.filter(t=>t.nation===selected.nation&&t.rank<=Math.max(2,selected.rank));
-    const enemies=TANKS.filter(t=>t.nation!==selected.nation&&t.rank<=Math.max(2,selected.rank+1));
+    const selected=getTank(tankId), friendly=TANKS.filter(t=>t.id!=='bmpt'&&t.nation===selected.nation&&t.rank<=Math.max(2,selected.rank));
+    const enemies=TANKS.filter(t=>t.id!=='bmpt'&&t.nation!==selected.nation&&t.rank<=Math.max(2,selected.rank+1));
     this.tanks=[];
     for(let team=0;team<2;team++) for(let i=0;i<6;i++) {
       const isPlayer=team===0&&i===0;
@@ -55806,11 +55850,11 @@ class Game {
     let x=lanes[lane]+(t._slot<3?-12:12)+(initial?0:(this._rand()-.5)*6),z=-sign*(this.map.spawnZ||this.map.size*.36)+(t._slot%2)*sign*14;
     for(let n=0;n<8;n++){if(this._free(x,z,3)&&!this.tanks?.some(o=>o!==t&&o.alive&&Math.hypot(o.x-x,o.z-z)<8))break;x+=n%2?12:-18;}
     Object.assign(t,{x,z,y:surfaceHeight(this.map.id,x,z),angle:t.team===0?0:Math.PI,turretAngle:t.team===0?0:Math.PI,speed:0,yawVelocity:0,
-      alive:true,reload:0,mgCooldown:0,mgHeat:0,mgOverheated:false,modules:{engine:100,tracks:100,turret:100,breech:100,ammo:100,crew:100},repair:0,fire:0,respawnIn:0,
+      alive:true,reload:0,secondaryReload:0,mgCooldown:0,mgHeat:0,mgOverheated:false,modules:{engine:100,tracks:100,turret:100,breech:100,ammo:100,crew:100},repair:0,fire:0,respawnIn:0,
       smoke:0,smokes:3,smokeCooldown:0,missiles:t.type==='bmpt'?4:0,missileReload:0,_barrelIndex:0,health:100,maxSpeed:spec.speed/3.6,width:spec.width??(spec.role==='Těžký tank'||t.type==='bmpt'?4.0:3.45),length:spec.length??(spec.role==='Těžký tank'||t.type==='bmpt'?7.2:6.5),
       _aimX:x,_aimZ:z+sign*100,_aimY:null,sightRange:400,_playerDamage:0,_lastPlayerHit:-Infinity,gunPitch:0,_think:this._rand()*.3,_targetId:null,_goal:null,_path:[],_pathAge:99,_reaction:this._rules.reaction,
       _approachKey:null,_approach:null,_approachDone:false,_observed:null,_flankDone:null,_order:null,_tactic:null,_sightChecks:new Map(),
-      _stuck:0,_reverse:0,_lastX:x,_lastZ:z,_lastPlayerHit:-999,_repairTotal:0,_captureClock:0,lastHit:null});
+      _stuck:0,_reverse:0,_lastX:x,_lastZ:z,_lastPlayerHit:-999,_fireSource:null,_repairTotal:0,_captureClock:0,lastHit:null,lastKiller:null});
     if(!initial&&t.isPlayer)this._message('Nový tank připraven. Zpátky do boje!',t);
   }
 
@@ -55845,7 +55889,7 @@ class Game {
       t.mgCooldown=Math.max(0,(t.mgCooldown||0)-dt);t.mgHeat=Math.max(0,(t.mgHeat||0)-dt*.18);
       if(t.mgHeat<.3)t.mgOverheated=false;
       t.smoke=Math.max(0,t.smoke-dt);t.smokeCooldown=Math.max(0,t.smokeCooldown-dt);t.missileReload=Math.max(0,t.missileReload-dt);
-      if(t.modules.breech>0)t.reload=Math.max(0,t.reload-dt*(.65+.35*t.modules.crew/100));
+      if(t.modules.breech>0){const loading=dt*(.65+.35*t.modules.crew/100);t.reload=Math.max(0,t.reload-loading);t.secondaryReload=Math.max(0,(t.secondaryReload||0)-loading);}
       if(t.fire>0){
         const durability=getTank(t.type).durability||1;
         t.fire=Math.max(0,t.fire-dt);t.modules.crew=Math.max(0,t.modules.crew-dt*2.5/durability);t.modules.ammo=Math.max(0,t.modules.ammo-dt*1.3/durability);
@@ -55869,18 +55913,19 @@ class Game {
     const aimBound=this.map.size*1.5;
     if(Number.isFinite(input.aimX)&&Number.isFinite(input.aimZ)){t._aimX=clamp(input.aimX,-aimBound,aimBound);t._aimZ=clamp(input.aimZ,-aimBound,aimBound);t._aimY=Number.isFinite(input.aimY)?clamp(input.aimY,-200,1500):null;}
     const throttle=clamp(Number(input.throttle)||0,-1,1),steer=clamp(Number(input.steer)||0,-1,1);
-    if(t.repair>0&&(Math.abs(throttle)>.05||Math.abs(steer)>.05||input.fire||input.machineGun)){t.repair=0;this._message('Oprava přerušena pohybem nebo střelbou');}
+    if(t.repair>0&&(Math.abs(throttle)>.05||Math.abs(steer)>.05)){t.repair=0;this._message('Oprava přerušena pohybem',t);}
     // In reverse A/D steers the travelling rear, as with a vehicle steering
     // wheel. Neutral pivot turns still turn the bow toward the pressed key.
     const reversing=t.speed<-.35||(throttle<0&&Math.abs(t.speed)<.35);
     this._move(t,dt,t.repair?0:throttle,t.repair?0:steer*(reversing?-1:1));
     this._aim(t,dt,t._aimX,t._aimZ);
     if(input.fire&&t.alive&&!this.finished)this._fire(t);
+    if(input.secondaryFire)this.fireSecondaryPlayer(t);
     if(input.machineGun)this.fireMachineGunPlayer(t);
   }
 
   _aim(t,dt,x,z) {
-    if(t.modules.turret<=0||t.repair>0)return;
+    if(t.modules.turret<=0)return;
     const solution=this.gunSolution(t),angle=solution.desiredYaw,spec=getTank(t.type);
     const rate=(spec.turretRate??(spec.role==='Těžký tank'?.73:1.18))*(.25+.75*t.modules.turret/100);
     t.turretAngle=norm(t.turretAngle+clamp(norm(angle-t.turretAngle),-rate*dt,rate*dt));
@@ -55934,7 +55979,7 @@ class Game {
     this._event({type:'nuke-warning',x:this.player.x,z:this.player.z,team:0,playerRelated:true,text:'JADERNÝ ÚDER ZA 8 SEKUND'});return true;
   }
   fireMachineGunPlayer(t=this.player){
-    if(this.finished||!t.alive||t.repair>0||t.modules.crew<=0||t.modules.turret<=0||(t.mgCooldown||0)>0||t.mgOverheated)return false;
+    if(this.finished||!t.alive||t.modules.crew<=0||t.modules.turret<=0||(t.mgCooldown||0)>0||t.mgOverheated)return false;
     const frame=weaponFrame(t,this.map.id),side=.35;
     const pivot={x:frame.pivot.x+Math.cos(t.turretAngle)*side,y:frame.pivot.y,z:frame.pivot.z-Math.sin(t.turretAngle)*side};
     const muzzle={x:pivot.x+frame.direction.x*.8,y:pivot.y+frame.direction.y*.8,z:pivot.z+frame.direction.z*.8};
@@ -55973,7 +56018,7 @@ class Game {
   }
 
   _fire(t) {
-    if(t.reload>.001||t.repair>0||t.modules.breech<=0||t.modules.crew<=0)return false;
+    if(this.finished||!t.alive||t.reload>.001||t.modules.breech<=0||t.modules.crew<=0)return false;
     const spec=getTank(t.type),autocannon=spec.weapon==='autocannon',barrelIndex=t._barrelIndex;
     // A stopped gun shoots along its visible axis. Motion adds only a small,
     // symmetric dispersion; it never silently changes the gun's elevation.
@@ -55992,8 +56037,22 @@ class Game {
     return true;
   }
 
+  fireSecondaryPlayer(t=this.player) {
+    const spec=secondaryWeaponGeometry(t.type);
+    if(!spec||this.finished||!t.alive||(t.secondaryReload||0)>.001||t.modules.breech<=0||t.modules.crew<=0)return false;
+    const spread=Math.abs(t.speed)*.0001;
+    const frame=weaponFrame(t,this.map.id,{secondary:true,yaw:t.turretAngle+(this._rand()-.5)*spread*2});
+    const {direction,speed,muzzle}=frame;
+    const shell={id:`shell-${++this._serial}`,...muzzle,vx:direction.x*speed,vy:direction.y*speed,vz:direction.z*speed,team:t.team,shooterId:t.id,penetration:spec.penetration,damageScale:spec.damageScale,weapon:'cannon',secondary:true,missile:false,age:0,distance:0};
+    t.secondaryReload=spec.reload*(1+(100-t.modules.breech)/160);
+    this._event({type:'shot',text:t.isPlayer?'Výstřel · 75 mm':'',...muzzle,team:t.team,targetId:t.id,playerRelated:t.isPlayer,weapon:'cannon',secondary:true,missile:false,barrel:1});
+    const blocked=this._traceSegment(frame.pivot,frame.muzzle,t.id);
+    if(blocked)this._resolveImpact(shell,blocked,frame.pivot,frame.muzzle);else this.shells.push(shell);
+    return true;
+  }
+
   _fireMissile(t) {
-    if(this.finished||!t.alive||t.type!=='bmpt'||t.missiles<=0||t.missileReload>.001||t.repair>0||t.modules.breech<=0||t.modules.turret<=0||t.modules.crew<=0)return false;
+    if(this.finished||!t.alive||t.type!=='bmpt'||t.missiles<=0||t.missileReload>.001||t.modules.breech<=0||t.modules.turret<=0||t.modules.crew<=0)return false;
     const angle=t.turretAngle,side=t.missiles%2?-1:1,muzzle=95;
     const x=t.x+Math.sin(angle)*2.4+Math.cos(angle)*side*1.65,z=t.z+Math.cos(angle)*2.4-Math.sin(angle)*side*1.65;
     const y=surfaceHeight(this.map.id,t.x,t.z)+2.65;
@@ -56195,8 +56254,12 @@ class Game {
         this.nuke.ready=true;this.nuke.state='ready';this._message('NUKE PŘIPRAVEN · stiskni N pro jaderný úder');
       }
     }
-    const shooter=this.tanks.find(o=>o.id===sourceId);
-    this._event({type:'kill',text:t.isPlayer?`Tank zničen · ${reason}`:`${specName(t)} zničen`,x:t.x,z:t.z,team:shooter?.team??1-t.team,targetId:t.id,playerRelated:t.isPlayer||sourceId==='player',sourceId});
+    const shooter=this.tanks.find(o=>o.id===sourceId),sourceNick=shooter?.nick||'',targetNick=t.nick||'';
+    const sourceType=shooter?.type||null,targetType=t.type;
+    const killerName=shooter?`${sourceNick?sourceNick+' · ':''}${specName(shooter)}`:sourceId==='nuke'?'Jaderný úder':'Prostředí';
+    const victimName=`${targetNick?targetNick+' · ':''}${specName(t)}`;
+    t.lastKiller={id:sourceId||null,nick:sourceNick,tankId:sourceType,tankName:shooter?specName(shooter):killerName,reason};
+    this._event({type:'kill',text:`${killerName} → ${victimName}`,reason,x:t.x,z:t.z,team:shooter?.team??1-t.team,targetId:t.id,playerRelated:t.isPlayer||sourceId==='player',sourceId,sourceNick,targetNick,sourceType,targetType,killerName,victimName,killer:{...t.lastKiller}});
   }
 
   _updateZones(dt) {
@@ -56419,7 +56482,7 @@ const tankTypes=new Set(TANKS.map(t=>t.id));
 function sanitizeInput(input={}){
  if(!input||typeof input!=='object'||Array.isArray(input))input={};
  const number=(k,a,b,fallback=0)=>finite(input[k],a,b)?input[k]:fallback;
- return {throttle:number('throttle',-1,1),steer:number('steer',-1,1),aimX:number('aimX',-4000,4000),aimZ:number('aimZ',-4000,4000),aimY:finite(input.aimY,-200,1500)?input.aimY:null,fire:input.fire===true,machineGun:input.machineGun===true};
+ return {throttle:number('throttle',-1,1),steer:number('steer',-1,1),aimX:number('aimX',-4000,4000),aimZ:number('aimZ',-4000,4000),aimY:finite(input.aimY,-200,1500)?input.aimY:null,fire:input.fire===true,secondaryFire:input.secondaryFire===true,machineGun:input.machineGun===true};
 }
 function publicAppearance(value,tankId){
  const a=normalizeAppearance(value,tankId);
@@ -56433,18 +56496,46 @@ function normalizeProfile(value){
 }
 function normalizeMatch(value){
  if(!value||typeof value.id!=='string'||!/^[a-zA-Z0-9-]{8,60}$/.test(value.id)||!MAPS.some(m=>m.id===value.mapId)||!finite(value.seed,0,4294967295)||!Number.isInteger(value.seed))throw Error('Neplatná konfigurace bitvy.');
- return {id:value.id,mapId:value.mapId,seed:value.seed,bots:value.bots===true,public:value.public===true,difficulty:['easy','normal','hard'].includes(value.difficulty)?value.difficulty:'normal',host:normalizeProfile(value.host),guest:normalizeProfile(value.guest)};
+ const host=normalizeProfile(value.host),guest=normalizeProfile(value.guest);
+ let members;
+ if(value.members!==undefined){
+  if(!Array.isArray(value.members)||value.members.length<2||value.members.length>8)throw Error('Neplatný seznam hráčů.');
+  members=value.members.map(m=>{if(![0,1].includes(m.team))throw Error('Neplatný tým.');return {...normalizeProfile(m),team:m.team};});
+  if(new Set(members.map(m=>m.id)).size!==members.length||members[0].id!==host.id||!members.some(m=>m.id===guest.id)||[0,1].some(team=>members.filter(m=>m.team===team).length>4))throw Error('Neplatný seznam hráčů.');
+ }
+ return {id:value.id,mapId:value.mapId,seed:value.seed,bots:value.bots===true,public:value.public===true,difficulty:['easy','normal','hard'].includes(value.difficulty)?value.difficulty:'normal',host,guest,...(members?{members}:{})};
 }
+function memberTankId(descriptor,profileId){
+ if(!descriptor.members)return profileId===descriptor.host.id?'player':'guest';
+ const i=descriptor.members.findIndex(m=>m.id===profileId);
+ return i===0?'player':i===1?'guest':i>1?'human-'+i:null;
+}
+const emptyStats=()=>({kills:0,captures:0,damage:0,xp:0});
 
 class HostedBattle extends Game{
  constructor(descriptor,{onEvent=()=>{}}={}){
   const d=normalizeMatch(descriptor);super({tankId:d.host.tankId,mapId:d.mapId,seed:d.seed,difficulty:d.difficulty,onEvent});
-  this.mode='multiplayer';this.descriptor=d;this.networkEvents=[];this.humanStats={player:{kills:0,captures:0,damage:0,xp:0},guest:{kills:0,captures:0,damage:0,xp:0}};
-  Object.assign(this.player,{isHuman:true,nick:d.host.nick,appearance:d.host.appearance});
-  const guest=this.tanks.find(t=>t.team===1&&t._slot===0);Object.assign(guest,{id:'guest',type:d.guest.tankId,isHuman:true,nick:d.guest.nick,appearance:d.guest.appearance});this._spawn(guest,true);
-  for(const t of this.tanks.filter(t=>t.team===1&&!t.isHuman)){const pool=TANKS.filter(s=>s.nation===getTank(d.guest.tankId).nation&&s.rank<=Math.max(2,getTank(d.guest.tankId).rank));t.type=pool[Math.floor(this._rand()*pool.length)].id;this._spawn(t,true);}
+  this.mode='multiplayer';this.descriptor=d;this.networkEvents=[];this.humanStats={};
+  const members=d.members||[{...d.host,team:0},{...d.guest,team:1}],hostTeam=members[0].team,slots=[0,0];
+  // Physical teams are relative to the host so the existing HUD stays friendly-first.
+  for(const member of members){
+   const team=member.team===hostTeam?0:1,slot=slots[team]++,t=this.tanks.find(t=>t.team===team&&t._slot===slot);
+   const id=memberTankId(d,member.id);Object.assign(t,{id,type:member.tankId,isHuman:true,isPlayer:id==='player',nick:member.nick,appearance:member.appearance});this._spawn(t,true);this.humanStats[id]=emptyStats();if(t.isPlayer)this.player=t;
+  }
+  for(const t of this.tanks.filter(t=>!t.isHuman)){
+   const member=members.find(m=>(m.team===hostTeam?0:1)===t.team),selected=getTank(member?.tankId||d.guest.tankId);
+   const pool=TANKS.filter(s=>s.id!=='bmpt'&&s.nation===selected.nation&&s.rank<=Math.max(2,selected.rank));t.type=pool[Math.floor(this._rand()*pool.length)].id;this._spawn(t,true);
+  }
   if(!d.bots)this.tanks=this.tanks.filter(t=>t.isHuman);
  }
+ setHumanInput(id,input){const t=this.tanks.find(t=>t.id===id);if(!t?.isHuman)return false;t._remoteInput=sanitizeInput(input);t._lastNetworkInput=this.time;return true;}
+ removeHuman(id){
+  const t=this.tanks.find(t=>t.id===id);if(!t||t.isPlayer)return;
+  if(!this.descriptor.bots){this.tanks=this.tanks.filter(o=>o!==t);return;}
+  t.isHuman=false;t.nick='';delete t.appearance;t._remoteInput={};
+  if(t.type==='bmpt'){const spec=getTank('t3485');t.type=spec.id;t.maxSpeed=spec.speed/3.6;t.width=spec.width||3.45;t.length=spec.length||6.5;t.missiles=0;}
+ }
+
  _hit(shell,...args){const old=this._networkShooter;this._networkShooter=shell.shooterId;try{return super._hit(shell,...args);}finally{this._networkShooter=old;}}
  _event(event){
   if(event.type==='message'&&event.text?.startsWith('NUKE'))return;
@@ -56452,12 +56543,12 @@ class HostedBattle extends Game{
   const stats=this.humanStats?.[sourceId];
   if(stats&&event.type==='hit')stats.damage+=Math.max(0,event.damage||0);
   if(stats&&event.type==='kill'&&this.tanks.find(t=>t.id===event.targetId)?.team!==this.tanks.find(t=>t.id===sourceId)?.team)stats.kills++;
-  if(event.type==='capture')for(const t of this.tanks.filter(t=>t.isHuman&&t.alive&&t.team===event.team&&Math.hypot(t.x-event.x,t.z-event.z)<22))this.humanStats[t.id].captures++;
+  if(event.type==='capture')for(const t of this.tanks.filter(t=>t.isHuman&&t.alive&&t.team===event.team&&Math.hypot(t.x-event.x,t.z-event.z)<22))(this.humanStats[t.id]||=emptyStats()).captures++;
   this.networkEvents?.push(e);if(this.networkEvents?.length>96)this.networkEvents.shift();this.onEvent(e);
  }
  _finish(winner,reason,abandoned=false){const result=super._finish(winner,reason,abandoned);Object.assign(result,this.humanStats?.player||{}, {xp:0});return result;}
  launchNuke(){return false;}
- setGuestInput(input){const t=this.tanks.find(t=>t.id==='guest');t._remoteInput=sanitizeInput(input);t._lastNetworkInput=this.time;}
+ setGuestInput(input){return this.setHumanInput('guest',input);}
  command(id,name){
   const t=this.tanks.find(t=>t.id===id);if(!t?.isHuman||this.finished)return false;
   if(name==='respawn'){if(t.alive||t.respawnIn>0)return false;this._spawn(t);return true;}
@@ -56469,11 +56560,11 @@ class HostedBattle extends Game{
  }
 }
 
-const tankFields=['x','z','y','angle','turretAngle','gunPitch','speed','yawVelocity','reload','mgCooldown','mgHeat','repair','fire','respawnIn','smoke','smokes','smokeCooldown','missiles','missileReload','width','length','health','maxSpeed','_barrelIndex'];
+const tankFields=['x','z','y','angle','turretAngle','gunPitch','speed','yawVelocity','reload','secondaryReload','mgCooldown','mgHeat','repair','fire','respawnIn','smoke','smokes','smokeCooldown','missiles','missileReload','width','length','health','maxSpeed','_barrelIndex'];
 const rounded=v=>Math.round(v*10000)/10000;
 function makeSnapshot(game,sequence,ack=0,paused=false){
  return {match:game.descriptor.id,sequence,ack,paused:!!paused,time:rounded(game.time),remaining:rounded(game.remaining),duration:game.duration,initialTickets:game.initialTickets,tickets:game.tickets.map(rounded),
-  tanks:game.tanks.map(t=>({id:t.id,type:t.type,team:t.team,alive:t.alive,isHuman:!!t.isHuman,nick:t.nick||'',...Object.fromEntries(tankFields.map(k=>[k,rounded(t[k]||0)])),modules:{...t.modules},mgOverheated:!!t.mgOverheated,_aimX:t._aimX,_aimY:t._aimY,_aimZ:t._aimZ})),
+  tanks:game.tanks.map(t=>({id:t.id,type:t.type,team:t.team,alive:t.alive,isHuman:!!t.isHuman,nick:t.nick||'',...Object.fromEntries(tankFields.map(k=>[k,rounded(t[k]||0)])),modules:{...t.modules},mgOverheated:!!t.mgOverheated,lastKiller:t.lastKiller?{...t.lastKiller}:null,_aimX:t._aimX,_aimY:t._aimY,_aimZ:t._aimZ})),
   shells:game.shells.slice(-192).map(s=>({id:s.id,team:s.team,shooterId:s.shooterId,weapon:s.weapon||'cannon',missile:!!s.missile,age:s.age||0,...Object.fromEntries(['x','y','z','vx','vy','vz'].map(k=>[k,rounded(s[k]||0)]))})),
   smokeClouds:game.smokeClouds.slice(-16).map(c=>({id:c.id,x:c.x,z:c.z,radius:c.radius,life:c.life})),zones:game.zones.map(z=>({id:z.id,owner:z.owner,progress:z.progress,contested:!!z.contested})),stats:structuredClone(game.humanStats),
   finished:game.finished?{winner:game.finished.winner,reason:game.finished.reason,abandoned:!!game.finished.abandoned}:null};
@@ -56481,56 +56572,61 @@ function makeSnapshot(game,sequence,ack=0,paused=false){
 function validSnapshot(s,descriptor){
  if(!s||s.match!==descriptor.id||!Number.isSafeInteger(s.sequence)||s.sequence<0||!finite(s.time,0,740)||!finite(s.remaining,0,720)||s.duration!==720||s.initialTickets!==2000||!Array.isArray(s.tickets)||s.tickets.length!==2||!s.tickets.every(v=>finite(v,0,2000)))return false;
  if(!Array.isArray(s.tanks)||s.tanks.length<2||s.tanks.length>12||!s.tanks.every(t=>t&&typeof t==='object')||new Set(s.tanks.map(t=>t.id)).size!==s.tanks.length)return false;
- if(!s.tanks.some(t=>t.id==='player'&&t.team===0&&(descriptor.public||t.isHuman))||!s.tanks.some(t=>t.id==='guest'&&t.team===1&&t.isHuman))return false;
+ if(!s.tanks.some(t=>t.id==='player'&&t.team===0&&(descriptor.public||t.isHuman)))return false;
+ if(!descriptor.members&&!s.tanks.some(t=>t.id==='guest'&&t.team===1&&t.isHuman))return false;
+ if(descriptor.members){for(const t of s.tanks.filter(t=>t.isHuman)){const member=descriptor.members.find(m=>memberTankId(descriptor,m.id)===t.id);if(!member||member.tankId!==t.type||t.team!==(member.team===descriptor.members[0].team?0:1))return false;}}
  const ids=new Set(s.tanks.map(t=>t.id));
  for(const t of s.tanks){if(typeof t.id!=='string'||t.id.length>30||!tankTypes.has(t.type)||![0,1].includes(t.team)||typeof t.alive!=='boolean'||!modules.every(k=>finite(t.modules?.[k],0,100)))return false;
   if(!tankFields.every(k=>finite(t[k],['x','y','z','angle','turretAngle','gunPitch','speed','yawVelocity'].includes(k)?-4000:0,4000)))return false;
   if(Math.abs(t.x)>1200||Math.abs(t.z)>1200)return false;
+  if(t.lastKiller!==undefined&&t.lastKiller!==null&&(!t.lastKiller||typeof t.lastKiller!=='object'||!['id','nick','tankId','tankName','reason'].every(k=>t.lastKiller[k]===null||typeof t.lastKiller[k]==='string'&&t.lastKiller[k].length<=200)))return false;
  }
- if(!Array.isArray(s.shells)||s.shells.length>192||!s.shells.every(p=>p&&typeof p.id==='string'&&p.id.length<40&&[0,1].includes(p.team)&&(ids.has(p.shooterId)||descriptor.public&&typeof p.shooterId==='string'&&p.shooterId.length<40)&&['cannon','autocannon','machinegun','missile'].includes(p.weapon)&&finite(p.age,0,20)&&['x','y','z','vx','vy','vz'].every(k=>finite(p[k],-10000,10000))))return false;
+ if(!Array.isArray(s.shells)||s.shells.length>192||!s.shells.every(p=>p&&typeof p.id==='string'&&p.id.length<40&&[0,1].includes(p.team)&&(ids.has(p.shooterId)||(descriptor.public||descriptor.members)&&typeof p.shooterId==='string'&&p.shooterId.length<40)&&['cannon','autocannon','machinegun','missile'].includes(p.weapon)&&finite(p.age,0,20)&&['x','y','z','vx','vy','vz'].every(k=>finite(p[k],-10000,10000))))return false;
  if(!Array.isArray(s.smokeClouds)||s.smokeClouds.length>16||!s.smokeClouds.every(c=>c&&typeof c.id==='string'&&finite(c.x,-2000,2000)&&finite(c.z,-2000,2000)&&finite(c.radius,0,20)&&finite(c.life,0,20)))return false;
  if(!Array.isArray(s.zones)||s.zones.length!==3||!s.zones.every(z=>z&&['A','B','C'].includes(z.id)&&[-1,0,1].includes(z.owner)&&finite(z.progress,-1,1))||new Set(s.zones.map(z=>z.id)).size!==3)return false;
- for(const id of ['player','guest'])if(!['kills','captures','damage','xp'].every(k=>finite(s.stats?.[id]?.[k],0,1000000)))return false;
+ for(const id of (descriptor.members?s.tanks.filter(t=>t.isHuman).map(t=>t.id):['player','guest']))if(!['kills','captures','damage','xp'].every(k=>finite(s.stats?.[id]?.[k],0,1000000)))return false;
  return !s.finished||([0,1].includes(s.finished.winner)&&typeof s.finished.reason==='string'&&s.finished.reason.length<200);
 }
 
-function localEvent(event,guest=false){
- const id=value=>guest?(value==='guest'?'player':value==='player'?'rival':value):value;
- return {...event,sourceId:id(event.sourceId),targetId:id(event.targetId),team:[0,1].includes(event.team)?guest?1-event.team:event.team:event.team,playerRelated:id(event.sourceId)==='player'||id(event.targetId)==='player'||(event.type==='capture'&&event.team===(guest?1:0))};
+function localEvent(event,view=false){
+ const localId=typeof view==='object'?view.localId:view?'guest':'player',localTeam=typeof view==='object'?view.team:view?1:0;
+ const id=value=>value===localId?'player':value==='player'&&localId!=='player'?'rival':value;
+ return {...event,...(event.killer?{killer:{...event.killer,id:id(event.killer.id)}}:{}),sourceId:id(event.sourceId),targetId:id(event.targetId),team:[0,1].includes(event.team)?event.team^localTeam:event.team,playerRelated:id(event.sourceId)==='player'||id(event.targetId)==='player'||(event.type==='capture'&&event.team===localTeam)};
 }
 class ReplicaBattle extends Game{
- constructor(descriptor,{onCommand=()=>{},onEvent=()=>{}}={}){
-  const d=normalizeMatch(descriptor);super({tankId:d.guest.tankId,mapId:d.mapId,seed:d.seed,difficulty:d.difficulty,onEvent});
+ constructor(descriptor,{onCommand=()=>{},onEvent=()=>{},profileId}={}){
+  const d=normalizeMatch(descriptor),profile=d.members?.find(m=>m.id===(profileId||d.guest.id))||d.guest;super({tankId:profile.tankId,mapId:d.mapId,seed:d.seed,difficulty:d.difficulty,onEvent});
+  this.localId=memberTankId(d,profile.id);this.localTeam=d.members?(profile.team===d.members[0].team?0:1):1;
   this.mode='multiplayer';this.descriptor=d;this.onCommand=onCommand;this.snapshots=[];this.networkSequence=-1;this._renderClock=0;this._authority=null;this.localView=true;
  }
  receive(snapshot,now=performance.now()){
-  if(!validSnapshot(snapshot,this.descriptor)||snapshot.sequence<=this.networkSequence)return false;
+  if(!validSnapshot(snapshot,this.descriptor)||snapshot.sequence<=this.networkSequence||!snapshot.tanks.some(t=>t.id===this.localId&&t.isHuman))return false;
   this.networkSequence=snapshot.sequence;this.snapshots.push({state:snapshot,at:now});if(this.snapshots.length>5)this.snapshots.shift();
   if(this.snapshots.length===1)this.apply(snapshot,snapshot,1,true);
   this._authority=snapshot;return true;
  }
  apply(a,b,alpha,initial=false){
-  const id=value=>value==='guest'?'player':value==='player'?'rival':value,oldById=new Map(this.tanks.map(t=>[t.id,t])),aById=new Map(a.tanks.map(t=>[t.id,t]));
+  const id=value=>value===this.localId?'player':value==='player'?'rival':value,oldById=new Map(this.tanks.map(t=>[t.id,t])),aById=new Map(a.tanks.map(t=>[t.id,t]));
   this.tanks=b.tanks.map(t=>{
-   const localId=id(t.id),old=oldById.get(localId),previous=aById.get(t.id)||t,isPlayer=localId==='player',profile=t.id==='guest'?this.descriptor.guest:this.descriptor.host;
-   const o={...(old||{}),...t,id:localId,team:1-t.team,isPlayer,modules:{...t.modules},_sightChecks:old?._sightChecks||new Map(),nick:t.isHuman?(this.descriptor.public?cleanNick(t.nick):profile.nick):'',appearance:t.isHuman?(this.descriptor.public?publicAppearance(t.appearance,t.type):profile.appearance):undefined};
+   const localId=id(t.id),old=oldById.get(localId),previous=aById.get(t.id)||t,isPlayer=localId==='player',profile=this.descriptor.members?.find(m=>memberTankId(this.descriptor,m.id)===t.id)||(t.id==='guest'?this.descriptor.guest:this.descriptor.host);
+   const o={...(old||{}),...t,id:localId,team:t.team^this.localTeam,isPlayer,lastKiller:t.lastKiller?{...t.lastKiller,id:id(t.lastKiller.id)}:null,modules:{...t.modules},_sightChecks:old?._sightChecks||new Map(),nick:t.isHuman?(this.descriptor.public?cleanNick(t.nick):profile.nick):'',appearance:t.isHuman?(this.descriptor.public?publicAppearance(t.appearance,t.type):profile.appearance):undefined};
    if(previous.alive&&t.alive){for(const k of ['x','z','y','speed','gunPitch'])o[k]=mix(previous[k],t[k],alpha);o.angle=angle(previous.angle,t.angle,alpha);o.turretAngle=angle(previous.turretAngle,t.turretAngle,alpha);}
    if(isPlayer&&old){o.sightRange=old.sightRange||400;if(!initial&&old.alive&&t.alive){o.x=old.x;o.z=old.z;o.angle=old.angle;o.speed=old.speed;o.yawVelocity=old.yawVelocity;}}
    o._terrainPose=null;return o;
   });
   this.player=this.tanks.find(t=>t.isPlayer);this.player.sightRange??=400;
   const oldShells=new Map(a.shells.map(s=>[s.id,s]));
-  this.shells=b.shells.map(s=>{const prior=oldShells.get(s.id),o={...s,team:1-s.team,shooterId:id(s.shooterId)},delta=Math.max(-s.age,(b.time-a.time)*(alpha-1));for(const k of ['x','y','z'])o[k]=prior?mix(prior[k],s[k],alpha):s[k]+s['v'+k]*delta;return o;});this.smokeClouds=b.smokeClouds.map(c=>({...c}));
-  for(const z of this.zones){const state=b.zones.find(s=>s.id===z.id);Object.assign(z,state,{owner:state.owner<0?-1:1-state.owner,progress:-state.progress});}
-  this.time=b.time;this.remaining=b.remaining;this.tickets=[b.tickets[1],b.tickets[0]];this.stats={...b.stats.guest};
-  if(b.finished)this.finished={...b.finished,winner:1-b.finished.winner,...this.stats,xp:0};
+  this.shells=b.shells.map(s=>{const prior=oldShells.get(s.id),o={...s,team:s.team^this.localTeam,shooterId:id(s.shooterId)},delta=Math.max(-s.age,(b.time-a.time)*(alpha-1));for(const k of ['x','y','z'])o[k]=prior?mix(prior[k],s[k],alpha):s[k]+s['v'+k]*delta;return o;});this.smokeClouds=b.smokeClouds.map(c=>({...c}));
+  for(const z of this.zones){const state=b.zones.find(s=>s.id===z.id);Object.assign(z,state,{owner:state.owner<0?-1:state.owner^this.localTeam,progress:this.localTeam?-state.progress:state.progress});}
+  this.time=b.time;this.remaining=b.remaining;this.tickets=this.localTeam?[b.tickets[1],b.tickets[0]]:[...b.tickets];this.stats={...b.stats[this.localId]};
+  if(b.finished)this.finished={...b.finished,winner:b.finished.winner^this.localTeam,...this.stats,xp:0};
  }
  advance(dt,input,now=performance.now(),rtt=0){
   if(!this.snapshots.length)return;
   const newest=this.snapshots.at(-1),target=Math.min(newest.state.time+.1,newest.state.time+(now-newest.at)/1000)-.1;
   let a=this.snapshots[0].state,b=newest.state;for(let i=1;i<this.snapshots.length;i++)if(this.snapshots[i].state.time>=target){a=this.snapshots[i-1].state;b=this.snapshots[i].state;break;}
   this.apply(a,b,b.time>a.time?clamp((target-a.time)/(b.time-a.time),0,1):1);
-  const p=this.player,s=this._authority.tanks.find(t=>t.id==='guest');
+  const p=this.player,s=this._authority.tanks.find(t=>t.id===this.localId);
   if(p.alive&&!this.finished&&!this._authority.paused&&now-newest.at<1200){
    const command=sanitizeInput(input);p._aimX=command.aimX;p._aimY=command.aimY;p._aimZ=command.aimZ;
    const reversing=p.speed<-.35||(command.throttle<0&&Math.abs(p.speed)<.35);this._move(p,dt,command.throttle,command.steer*(reversing?-1:1));
@@ -56548,7 +56644,7 @@ class ReplicaBattle extends Game{
  abandon(){return this.finished={winner:1,reason:'Multiplayer ukončen.',xp:0,abandoned:true,...this.stats};}
 }
 
-return {sanitizeInput,publicAppearance,normalizeProfile,normalizeMatch,HostedBattle,makeSnapshot,validSnapshot,localEvent,ReplicaBattle};
+return {sanitizeInput,publicAppearance,normalizeProfile,normalizeMatch,memberTankId,HostedBattle,makeSnapshot,validSnapshot,localEvent,ReplicaBattle};
 })();
 MODULES["public-server.js"]=(()=>{
 const {ReplicaBattle,normalizeProfile,normalizeMatch,sanitizeInput,localEvent} = MODULES["multiplayer-game.js"];
@@ -56561,7 +56657,7 @@ function serverURL(value){
 class PublicServerRoom{
  constructor({url,profile,onBattle=()=>{},onEvent=()=>{},onClose=()=>{},onChat=()=>{},onStatus=()=>{},WebSocketImpl=globalThis.WebSocket,now=()=>performance.now()}){
   profile=normalizeProfile({...profile,id:'client-profile'});
-  Object.assign(this,{url:serverURL(url),profile,onBattle,onEvent,onClose,onChat,onStatus,WebSocketImpl,now,public:true,host:false,phase:'connecting',closed:false,hidden:false,latency:null,latestInput:sanitizeInput(),inputSequence:0,lastInput:-Infinity,lastStateAt:now(),commands:{},pendingFire:false,pendingMG:false});
+  Object.assign(this,{url:serverURL(url),profile,onBattle,onEvent,onClose,onChat,onStatus,WebSocketImpl,now,public:true,host:false,phase:'connecting',closed:false,hidden:false,latency:null,latestInput:sanitizeInput(),inputSequence:0,lastInput:-Infinity,lastStateAt:now(),commands:{},pendingFire:false,pendingMG:false,pendingSecondary:false});
  }
  get waiting(){return this.phase==='battle'&&this.now()-this.lastStateAt>1500;}
  connect(){
@@ -56578,7 +56674,7 @@ class PublicServerRoom{
      try{
       const d=normalizeMatch(m.descriptor);if(!d.public)throw Error('Neplatný server.');
       const game=new ReplicaBattle(d,{onCommand:name=>this.action(name)});if(!game.receive(m.snapshot,this.now()))throw Error('Neplatný stav bitvy.');
-      this.game=game;this.phase='battle';this.commands={};this.inputSequence=0;this.lastStateAt=this.now();this.latestInput=sanitizeInput();this.pendingFire=this.pendingMG=false;
+      this.game=game;this.phase='battle';this.commands={};this.inputSequence=0;this.lastStateAt=this.now();this.latestInput=sanitizeInput();this.pendingFire=this.pendingMG=this.pendingSecondary=false;
       this.onChat(null,true);for(const entry of (m.chat||[]).slice(-30))this.onChat(entry);
       this.onBattle(game,this);this.send({type:'loaded',match:d.id});clearTimeout(this.timeout);this.settled=true;resolve(this);
       if(!this.timer)this.timer=setInterval(()=>{this.send({type:'ping',at:this.now()});if(this.phase==='battle'&&this.now()-this.lastStateAt>16000)this.fail('Spojení se serverem bylo přerušeno.');},2000);
@@ -56593,13 +56689,13 @@ class PublicServerRoom{
   });
  }
  send(message){if(this.closed||this.socket?.readyState!==1||this.socket.bufferedAmount>64000)return false;this.socket.send(JSON.stringify(message));return true;}
- idleInput(){return {...this.latestInput,throttle:0,steer:0,fire:false,machineGun:false};}
- stopInput(){this.latestInput=this.idleInput();this.pendingFire=this.pendingMG=false;this.sendInput(true);}
+ idleInput(){return {...this.latestInput,throttle:0,steer:0,fire:false,secondaryFire:false,machineGun:false};}
+ stopInput(){this.latestInput=this.idleInput();this.pendingFire=this.pendingMG=this.pendingSecondary=false;this.sendInput(true);}
  sendInput(force=false){
   if(this.phase!=='battle'||!this.game)return;const now=this.now();if(!force&&now-this.lastInput<50)return;
-  if(this.send({type:'input',match:this.game.descriptor.id,sequence:++this.inputSequence,input:{...this.latestInput,fire:this.latestInput.fire||this.pendingFire,machineGun:this.latestInput.machineGun||this.pendingMG},commands:this.commands})){this.lastInput=now;this.pendingFire=this.pendingMG=false;}
+  if(this.send({type:'input',match:this.game.descriptor.id,sequence:++this.inputSequence,input:{...this.latestInput,fire:this.latestInput.fire||this.pendingFire,machineGun:this.latestInput.machineGun||this.pendingMG,secondaryFire:this.latestInput.secondaryFire||this.pendingSecondary},commands:this.commands})){this.lastInput=now;this.pendingFire=this.pendingMG=this.pendingSecondary=false;}
  }
- update(dt,input){this.latestInput=sanitizeInput(input);if(this.hidden)this.latestInput=this.idleInput();this.pendingFire||=this.latestInput.fire;this.pendingMG||=this.latestInput.machineGun;this.sendInput();this.game?.advance(dt,this.waiting?this.idleInput():this.latestInput,this.now(),this.latency||0);}
+ update(dt,input){this.latestInput=sanitizeInput(input);if(this.hidden)this.latestInput=this.idleInput();this.pendingFire||=this.latestInput.fire;this.pendingMG||=this.latestInput.machineGun;this.pendingSecondary||=this.latestInput.secondaryFire;this.sendInput();this.game?.advance(dt,this.waiting?this.idleInput():this.latestInput,this.now(),this.latency||0);}
  action(name){if(!['repair','smoke','missile','respawn'].includes(name)||!this.game||this.game.finished)return false;this.commands[name]=(this.commands[name]||0)+1;this.sendInput(true);return true;}
  setHidden(value){this.hidden=!!value;this.stopInput();}
  chat(text){return this.send({type:'chat',text:String(text).slice(0,180)});}
@@ -56658,7 +56754,7 @@ class PublicServerUI{
   }catch(error){if(operation!==o.operation)return;o.room?.close();o.room=null;if(card.isConnected){card.textContent=error.message;const b=document.createElement('button');b.className='secondary-button';b.dataset.server='refresh';b.textContent=translate('OBNOVIT SERVER');card.append(b);}}
  }
  chat(entry,reset=false){
-  if(reset)this.messages=[];
+  if(reset){this.messages=[];this.unread=0;const input=document.querySelector('#server-chat-input');if(input)input.value='';const button=document.querySelector('#server-chat-toggle');if(button)button.textContent='CHAT · ENTER';}if(entry&&document.querySelector('#server-chat-body')?.hidden){this.unread=(this.unread||0)+1;const button=document.querySelector('#server-chat-toggle');if(button)button.textContent='CHAT ('+this.unread+') · ENTER';}
   if(entry&&typeof entry.nick==='string'&&typeof entry.text==='string')this.messages.push({nick:entry.nick.slice(0,20),text:entry.text.slice(0,180)});
   this.messages=this.messages.slice(-30);const target=document.querySelector('#server-chat-log');if(!target)return;target.replaceChildren();
   for(const m of this.messages){const row=document.createElement('p'),name=document.createElement('b');row.translate=false;name.textContent=m.nick+': ';row.append(name,document.createTextNode(m.text));target.append(row);}target.scrollTop=target.scrollHeight;
@@ -56668,7 +56764,7 @@ class PublicServerUI{
 return {PublicServerUI};
 })();
 MODULES["realtime.js"]=(()=>{
-const MULTIPLAYER_VERSION=22;
+const MULTIPLAYER_VERSION=25;
 const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 function roomCode(){const a=new Uint8Array(8);globalThis.crypto.getRandomValues(a);return [...a].map(v=>alphabet[v%32]).join('');}
 function normalizeRoomCode(value){const code=String(value||'').toUpperCase().replace(/[\s-]/g,'');if(!/^[A-HJ-NP-Z2-9]{8}$/.test(code))throw Error('Kód místnosti musí mít 8 znaků.');return code;}
@@ -56716,114 +56812,186 @@ class RealtimeTransport{
  close(){if(this.closed)return;if(!this.settled)this.rejectJoin?.(Error('Připojení bylo zrušeno.'));this.settled=true;this.closed=true;this.joined=false;clearTimeout(this.timeout);clearInterval(this.heartbeat);if(this.socket){this.socket.onclose=null;this.socket.onerror=null;try{this.socket.close();}catch{}}}
 }
 
+
 return {MULTIPLAYER_VERSION,roomCode,normalizeRoomCode,RealtimeTransport};
 })();
 MODULES["multiplayer.js"]=(()=>{
 const {RealtimeTransport,roomCode,normalizeRoomCode} = MODULES["realtime.js"];
-const {HostedBattle,ReplicaBattle,normalizeProfile,normalizeMatch,makeSnapshot,localEvent,sanitizeInput} = MODULES["multiplayer-game.js"];
+const {HostedBattle,ReplicaBattle,normalizeProfile,normalizeMatch,memberTankId,makeSnapshot,localEvent,sanitizeInput} = MODULES["multiplayer-game.js"];
 const {MAPS} = MODULES["data.js"];
 const randomId=()=>[...globalThis.crypto.getRandomValues(new Uint8Array(16))].map(v=>v.toString(16).padStart(2,'0')).join('');
 const actions=['repair','smoke','missile','respawn'];
 const options=value=>({mapId:MAPS.some(m=>m.id===value?.mapId)?value.mapId:'city',bots:value?.bots===true,difficulty:['easy','normal','hard'].includes(value?.difficulty)?value.difficulty:'normal'});
+const eventTypes=new Set(['shot','hit','bounce','kill','capture','repair','smoke','message','impact']);
+function validEvent(e){return e&&eventTypes.has(e.type)&&['text','sourceNick','targetNick','killerName','victimName','reason'].every(k=>e[k]===undefined||typeof e[k]==='string'&&e[k].length<=300)&&(!e.killer||typeof e.killer==='object'&&['id','nick','tankId','tankName','reason'].every(k=>e.killer[k]===null||typeof e.killer[k]==='string'&&e.killer[k].length<=200))&&['x','y','z'].every(k=>e[k]===undefined||Number.isFinite(e[k])&&Math.abs(e[k])<=5000);}
+function roster(value,hostId){
+ if(!Array.isArray(value)||value.length<1||value.length>8)throw Error('Neplatný seznam hráčů.');
+ const members=value.map(m=>({...normalizeProfile(m),team:m.team,ready:m.ready===true,host:m.id===hostId}));
+ if(members[0].id!==hostId||new Set(members.map(m=>m.id)).size!==members.length||members.some(m=>![0,1].includes(m.team))||[0,1].some(team=>members.filter(m=>m.team===team).length>4))throw Error('Neplatný seznam hráčů.');
+ return members;
+}
 class MultiplayerRoom{
- constructor({config,role='host',code,profile,settings,onLobby=()=>{},onBattle=()=>{},onEvent=()=>{},onClose=()=>{},now=()=>performance.now(),transportFactory=(...args)=>new RealtimeTransport(...args),pollAutomatically=true}){
-  this.role=role==='guest'?'guest':'host';this.code=code?normalizeRoomCode(code):roomCode();this.profile=normalizeProfile({...profile,id:profile.id||randomId()});this.settings=options(settings);
-  Object.assign(this,{onLobby,onBattle,onEvent,onClose,now,pollAutomatically,peer:null,peerReady:false,ready:false,phase:'connecting',connected:false,closed:false,hidden:false,latency:null,sequence:0,inputSequence:0,ack:0,eventSequence:0,lastEventSequence:-1,lastInput:-Infinity,lastSnapshot:-Infinity,lastEvents:-Infinity,lastHello:-Infinity,lastPing:-Infinity,lastPeerAt:now(),openedAt:now(),commandCounters:{},receivedCommands:{},latestInput:sanitizeInput(),pendingFire:false,pendingMG:false});
+ constructor({config,role='host',code,profile,settings,onLobby=()=>{},onBattle=()=>{},onEvent=()=>{},onChat=()=>{},onClose=()=>{},now=()=>performance.now(),transportFactory=(...args)=>new RealtimeTransport(...args),pollAutomatically=true}){
+  Object.assign(this,{onChat,chatSequence:0,chatRequest:0,lastChatSequence:0,lastChatAt:-Infinity,chatPeers:new Map()});
+  this.role=role==='guest'?'guest':'host';this.code=code?normalizeRoomCode(code):roomCode();this.profile={...normalizeProfile({...profile,id:profile.id||randomId()}),team:0};this.settings=options(settings);
+  Object.assign(this,{onLobby,onBattle,onEvent,onClose,now,pollAutomatically,maxPlayers:8,maxTeamPlayers:4,members:[],peers:new Map(),revision:0,phase:'connecting',connected:false,closed:false,hidden:false,latency:null,sequence:0,inputSequence:0,eventSequence:0,lastEventSequence:-1,lastInput:-Infinity,lastSnapshot:-Infinity,lastEvents:-Infinity,lastHello:-Infinity,lastPing:-Infinity,lastPeerAt:now(),openedAt:now(),commandCounters:{},latestInput:sanitizeInput(),pendingFire:false,pendingMG:false,pendingSecondary:false,error:''});
+  if(this.host)this.members=[{...this.profile,host:true,ready:true}];
   this.transport=transportFactory(config,this.code,{onMessage:m=>this.receive(m),onClose:message=>this.fail(message)});
  }
  get host(){return this.role==='host';}
- get canStart(){return this.host&&this.phase==='lobby'&&!!this.peer&&this.peerReady&&this.now()-this.lastPeerAt<6000;}
- get waiting(){return !this.host&&this.phase==='battle'&&(this.game?._authority?.paused||this.now()-(this.lastStateAt??this.now())>1500);}
+ get peer(){return this.host?this.members.find(m=>m.id!==this.profile.id):this.members.find(m=>m.host);}
+ get peerReady(){return this.members.filter(m=>!m.host).every(m=>m.ready);}
+ get ready(){return this.members.find(m=>m.id===this.profile.id)?.ready===true;}
+ get canStart(){return this.host&&this.phase==='lobby'&&this.members.length>=2&&this.peerReady&&(this.settings.bots||[0,1].every(team=>this.members.some(m=>m.team===team)))&&[...this.peers.values()].every(p=>this.now()-p.lastAt<6000);}
+ get waiting(){return !this.host&&['starting','battle'].includes(this.phase)&&(this.game?._authority?.paused||this.now()-(this.lastStateAt??this.now())>1500);}
  async connect(){
   await this.transport.connect();if(this.closed)return;
-  this.connected=true;this.phase='lobby';this.lastPeerAt=this.openedAt=this.now();
+  this.connected=true;this.phase='lobby';this.lastPeerAt=this.openedAt=this.now();this.onChat(null,true);
   if(this.pollAutomatically)this.timer=setInterval(()=>this.poll(),250);
   this.poll();this.notify();return this;
  }
  send(type,payload={}){return this.transport.send({type,from:this.profile.id,...payload});}
  notify(){this.onLobby(this);}
- welcome(){if(this.peer)this.send('welcome',{to:this.peer.id,host:this.profile,guest:this.peer,settings:this.settings,ready:this.peerReady,phase:this.phase});}
+ welcome(){if(this.host)this.send('welcome',{hostId:this.profile.id,members:this.members,settings:this.settings,revision:this.revision,phase:this.phase});}
+ changed(){this.revision++;for(const m of this.members)m.ready=m.host;this.error='';this.welcome();this.notify();}
+ reject(to,message){this.send('rejected',{to,message});}
  receive(m){
   if(this.closed||!m||typeof m.type!=='string'||typeof m.from!=='string'||m.from===this.profile.id||m.to&&m.to!==this.profile.id)return;
   const now=this.now();
   if(this.host&&m.type==='join'){
    let profile;try{profile=normalizeProfile(m.profile);}catch{return;}if(profile.id!==m.from)return;
-   if(this.peer&&this.peer.id!==profile.id||this.phase!=='lobby'){if(this.peer?.id===profile.id&&this.phase==='starting')this.sendStart();else this.send('busy',{to:profile.id});return;}
-   if(!this.peer){this.peer=profile;this.peerReady=false;}this.lastPeerAt=now;this.welcome();this.notify();return;
+   const known=this.peers.get(m.from);
+   if(known){known.lastAt=now;if(this.phase==='lobby')this.welcome();else if(this.phase==='starting')this.sendStart();return;}
+   if(this.phase!=='lobby'||this.members.length>=this.maxPlayers){this.send('busy',{to:m.from});return;}
+   const counts=[0,1].map(team=>this.members.filter(p=>p.team===team).length),team=counts[0]<=counts[1]?0:1;
+   this.members.push({...profile,team,ready:false,host:false});this.peers.set(m.from,{lastAt:now,ack:0,commands:{},loaded:false});this.changed();return;
   }
   if(!this.host&&m.type==='welcome'){
-   let host,guest;try{host=normalizeProfile(m.host);guest=normalizeProfile(m.guest);}catch{return;}
-   if(host.id!==m.from||guest.id!==this.profile.id||this.peer&&this.peer.id!==host.id)return;
-   this.peer=host;this.settings=options(m.settings);this.lastPeerAt=now;if(this.phase==='lobby'){this.ready=m.ready===true;this.notify();}return;
+   let members;try{if(m.hostId!==m.from||this.peer&&this.peer.id!==m.from||!Number.isSafeInteger(m.revision)||m.revision<this.revision)return;members=roster(m.members,m.from);}catch{return;}
+   const self=members.find(p=>p.id===this.profile.id);if(!self)return;
+   this.members=members;this.profile={...self};this.settings=options(m.settings);this.revision=m.revision;this.lastPeerAt=now;this.error='';this.notify();return;
   }
   if(!this.host&&m.type==='busy'&&!this.peer){this.fail('Místnost je plná nebo už v ní běží bitva.');return;}
-  if(!this.peer||m.from!==this.peer.id)return;
-  this.lastPeerAt=now;
+  const remote=this.host?this.peers.get(m.from):this.peer?.id===m.from?this.peer:null;if(!remote)return;
+  this.lastPeerAt=now;if(this.host)remote.lastAt=now;
+  if(this.host&&m.type==='chat-request'&&this.phase==='battle'){
+   const previous=this.chatPeers.get(m.from)||{sequence:0,at:-Infinity};
+   if(!Number.isSafeInteger(m.sequence)||m.sequence<=previous.sequence||m.sequence>previous.sequence+10000)return;
+   this.chatPeers.set(m.from,{...previous,sequence:m.sequence});
+   if(now-previous.at<1000)return;
+   if(this.publishChat(m.from,m.text))this.chatPeers.get(m.from).at=now;
+   return;
+  }
+  if(!this.host&&m.type==='chat'&&this.phase==='battle'&&m.match===this.descriptor?.id){
+   const e=m.entry;
+   if(!Number.isSafeInteger(e?.sequence)||e.sequence<=this.lastChatSequence||typeof e.nick!=='string'||e.nick.length>20||typeof e.text!=='string'||!e.text.trim()||e.text.length>180)return;
+   this.lastChatSequence=e.sequence;this.onChat({nick:e.nick,text:e.text});return;
+  }
   if(m.type==='ping'&&Number.isFinite(m.at)){this.send('pong',{to:m.from,at:m.at});return;}
   if(m.type==='pong'&&Number.isFinite(m.at)){const elapsed=now-m.at;if(elapsed>=0&&elapsed<5000)this.latency=this.latency===null?elapsed:this.latency*.7+elapsed*.3;return;}
-  if(m.type==='leave'||m.type==='closed'){
-   if(this.host&&this.phase==='lobby'){this.peer=null;this.peerReady=false;this.notify();}
-   else this.fail(m.type==='closed'?'Hostitel uzavřel místnost.':'Soupeř opustil bitvu.');return;
-  }
+  if(m.type==='leave'&&this.host){this.removePeer(m.from,'Hráč opustil bitvu.');return;}
+  if(m.type==='closed'&&!this.host){this.fail('Hostitel uzavřel místnost.');return;}
   if(this.host){
-   if(m.type==='ready'&&this.phase==='lobby'){this.peerReady=m.ready===true;this.welcome();this.notify();}
-   if(m.type==='loaded'&&this.phase==='starting'&&m.match===this.descriptor.id){this.phase='battle';this.lastSnapshot=-Infinity;this.onBattle(this.game,this);this.sendState(true);}
-   if(m.type==='input'&&this.phase==='battle'&&Number.isSafeInteger(m.sequence)&&m.sequence>this.ack&&m.sequence<this.ack+10000){
-    this.ack=m.sequence;this.game.setGuestInput(m.input);
-    for(const name of actions){const counter=m.commands?.[name];if(Number.isSafeInteger(counter)&&counter>0&&counter<100000&&counter>(this.receivedCommands[name]||0)){this.receivedCommands[name]=counter;this.game.command('guest',name);}}
+   if(m.type==='profile'&&this.phase==='lobby')this.updateMember(m.from,m.profile);
+   if(m.type==='team'&&this.phase==='lobby')this.updateTeam(m.from,m.team);
+   if(m.type==='ready'&&this.phase==='lobby'&&m.revision===this.revision){this.members.find(p=>p.id===m.from).ready=m.ready===true;this.welcome();this.notify();}
+   if(m.type==='loaded'&&this.phase==='starting'&&m.match===this.descriptor.id){remote.loaded=true;this.beginWhenLoaded();}
+   if(m.type==='input'&&this.phase==='battle'&&m.match===this.descriptor.id&&Number.isSafeInteger(m.sequence)&&m.sequence>remote.ack&&m.sequence<remote.ack+10000){
+    remote.ack=m.sequence;const id=memberTankId(this.descriptor,m.from);this.game.setHumanInput(id,m.input);
+    for(const name of actions){const counter=m.commands?.[name];if(Number.isSafeInteger(counter)&&counter>0&&counter<100000&&counter>(remote.commands[name]||0)){remote.commands[name]=counter;this.game.command(id,name);}}
    }
   }else{
+   if(m.type==='rejected'&&typeof m.message==='string'&&m.message.length<200){this.error=m.message;this.onEvent({type:'message',text:m.message,playerRelated:true});this.notify();return;}
    if(m.type==='start'&&['lobby','battle'].includes(this.phase)){
     let descriptor;try{descriptor=normalizeMatch(m.descriptor);}catch{return;}
-    if(descriptor.host.id!==this.peer.id||descriptor.guest.id!==this.profile.id)return;
-    if(this.descriptor?.id===descriptor.id){this.send('loaded',{match:descriptor.id});return;}
+    if(descriptor.host.id!==this.peer.id||!descriptor.members?.some(p=>p.id===this.profile.id))return;
+    if(this.descriptor?.id===descriptor.id){this.send('loaded',{to:this.peer.id,match:descriptor.id});return;}
     if(this.phase!=='lobby')return;
-    const game=new ReplicaBattle(descriptor,{onCommand:name=>this.action(name)});if(!game.receive(m.snapshot,now))return;
-    this.descriptor=descriptor;this.game=game;this.phase='battle';this.lastStateAt=now;this.onBattle(game,this);this.send('loaded',{match:descriptor.id});return;
+    const game=new ReplicaBattle(descriptor,{profileId:this.profile.id,onCommand:name=>this.action(name)});if(!game.receive(m.snapshot,now))return;
+    this.descriptor=descriptor;this.game=game;this.phase='battle';this.lastStateAt=now;this.onBattle(game,this);this.send('loaded',{to:this.peer.id,match:descriptor.id});return;
    }
    if(m.type==='state'&&this.phase==='battle'&&this.game.receive(m.snapshot,now))this.lastStateAt=now;
-   if(m.type==='events'&&this.phase==='battle'&&Number.isSafeInteger(m.sequence)&&m.sequence>this.lastEventSequence&&Array.isArray(m.events)&&m.events.length<=48){
-    this.lastEventSequence=m.sequence;
-    for(const e of m.events){if(!e||!['shot','hit','bounce','kill','capture','repair','smoke','message','impact'].includes(e.type)||typeof e.text!=='undefined'&&typeof e.text!=='string'||e.text?.length>250||['x','y','z'].some(k=>e[k]!==undefined&&(!Number.isFinite(e[k])||Math.abs(e[k])>5000)))continue;this.onEvent(localEvent(e,true));}
+   if(m.type==='events'&&m.match===this.descriptor?.id&&this.phase==='battle'&&Number.isSafeInteger(m.sequence)&&m.sequence>this.lastEventSequence&&Array.isArray(m.events)&&m.events.length<=48){
+    this.lastEventSequence=m.sequence;for(const e of m.events)if(validEvent(e))this.onEvent(localEvent(e,{localId:this.game.localId,team:this.game.localTeam}));
    }
   }
  }
- setReady(value){if(this.host||this.phase!=='lobby'||!this.peer)return;this.ready=!!value;this.send('ready',{ready:this.ready});this.notify();}
+ updateMember(id,patch){
+  const member=this.members.find(m=>m.id===id);if(!member||this.phase!=='lobby')return false;
+  let p;try{p=normalizeProfile({...member,...patch,id});}catch(error){if(id!==this.profile.id)this.reject(id,error.message);return false;}
+  Object.assign(member,p);if(id===this.profile.id)this.profile={...member};this.changed();return true;
+ }
+ updateTeam(id,team){
+  const member=this.members.find(m=>m.id===id);if(!member||this.phase!=='lobby'||![0,1].includes(team))return false;
+  if(member.team===team)return true;
+  if(this.members.filter(m=>m.team===team).length>=this.maxTeamPlayers){this.error='Tým je plný (4 hráči).';if(id!==this.profile.id)this.reject(id,this.error);this.notify();return false;}
+  member.team=team;if(id===this.profile.id)this.profile={...member};this.changed();return true;
+ }
+ setProfile(patch){if(this.phase!=='lobby')return false;return this.host?this.updateMember(this.profile.id,patch):!!this.peer&&this.send('profile',{to:this.peer.id,profile:patch});}
+ setTeam(team){if(this.phase!=='lobby'||![0,1].includes(team))return false;return this.host?this.updateTeam(this.profile.id,team):!!this.peer&&this.send('team',{to:this.peer.id,team});}
+ setSettings(patch){if(!this.host||this.phase!=='lobby'||patch.mapId!==undefined&&!MAPS.some(m=>m.id===patch.mapId))return false;this.settings=options({...this.settings,...patch});this.changed();return true;}
+ setReady(value){if(this.host||this.phase!=='lobby'||!this.peer)return false;return this.send('ready',{to:this.peer.id,ready:!!value,revision:this.revision});}
  start(){
   if(!this.canStart)return false;
-  this.descriptor=normalizeMatch({id:randomId(),...this.settings,seed:globalThis.crypto.getRandomValues(new Uint32Array(1))[0],host:this.profile,guest:this.peer});
-  this.game=new HostedBattle(this.descriptor,{onEvent:e=>this.onEvent(localEvent(e))});this.phase='starting';this.startedAt=this.now();this.sendStart();this.notify();return true;
+  this.descriptor=normalizeMatch({id:randomId(),...this.settings,seed:globalThis.crypto.getRandomValues(new Uint32Array(1))[0],host:this.profile,guest:this.peer,members:this.members});
+  this.game=new HostedBattle(this.descriptor,{onEvent:e=>this.onEvent(localEvent(e))});for(const p of this.peers.values())p.loaded=false;this.phase='starting';this.startedAt=this.now();this.sendStart();this.notify();return true;
  }
- sendStart(){this.send('start',{descriptor:this.descriptor,snapshot:makeSnapshot(this.game,this.sequence++,this.ack,this.hidden)});this.lastStart=this.now();}
+ beginWhenLoaded(){if(this.phase!=='starting'||![...this.peers.values()].every(p=>p.loaded))return;this.phase='battle';this.lastSnapshot=-Infinity;this.onBattle(this.game,this);this.sendState(true);}
+ sendStart(){this.send('start',{descriptor:this.descriptor,snapshot:makeSnapshot(this.game,this.sequence++,0,true)});this.lastStart=this.now();}
  action(name){if(!actions.includes(name)||this.phase!=='battle')return false;if(this.host)return this.game.command('player',name);this.commandCounters[name]=(this.commandCounters[name]||0)+1;this.sendInput(true);return true;}
- idleInput(){return {...this.latestInput,throttle:0,steer:0,fire:false,machineGun:false};}
- stopInput(){this.latestInput=this.idleInput();this.pendingFire=this.pendingMG=false;if(!this.host&&this.phase==='battle')this.sendInput(true);}
+ idleInput(){return {...this.latestInput,throttle:0,steer:0,fire:false,secondaryFire:false,machineGun:false};}
+ stopInput(){this.latestInput=this.idleInput();this.pendingFire=this.pendingMG=this.pendingSecondary=false;if(!this.host&&this.phase==='battle')this.sendInput(true);}
  sendInput(force=false){
-  const now=this.now();if(!force&&now-this.lastInput<50)return;
-  const input={...this.latestInput,fire:this.pendingFire||this.latestInput.fire,machineGun:this.pendingMG||this.latestInput.machineGun};
-  if(this.send('input',{sequence:++this.inputSequence,input,commands:{...this.commandCounters}})){this.lastInput=now;this.pendingFire=this.pendingMG=false;}
+  const now=this.now();if(!this.descriptor||!force&&now-this.lastInput<50)return;
+  const input={...this.latestInput,fire:this.pendingFire||this.latestInput.fire,machineGun:this.pendingMG||this.latestInput.machineGun,secondaryFire:this.pendingSecondary||this.latestInput.secondaryFire};
+  if(this.send('input',{to:this.peer.id,match:this.descriptor.id,sequence:++this.inputSequence,input,commands:{...this.commandCounters}})){this.lastInput=now;this.pendingFire=this.pendingMG=this.pendingSecondary=false;}
  }
- sendState(force=false){const now=this.now();if(!force&&now-this.lastSnapshot<1000/12)return;if(this.send('state',{snapshot:makeSnapshot(this.game,this.sequence++,this.ack,this.hidden)}))this.lastSnapshot=now;}
+ sendState(force=false){const now=this.now();if(!force&&now-this.lastSnapshot<1000/12)return;if(this.send('state',{snapshot:makeSnapshot(this.game,this.sequence++,0,this.hidden)}))this.lastSnapshot=now;}
  update(dt,input={}){
   if(this.closed||this.phase!=='battle')return;
-  this.latestInput=sanitizeInput(input);
+  this.latestInput=sanitizeInput(input);if(this.hidden)this.latestInput=this.idleInput();
   if(this.host){
    if(!this.hidden&&!this.game.finished)this.game.update(dt,this.latestInput);
-   if(this.game.networkEvents.length&&this.now()-this.lastEvents>=40){const events=this.game.networkEvents.splice(0,48);this.send('events',{sequence:++this.eventSequence,events});this.lastEvents=this.now();}
+   if(this.game.networkEvents.length&&this.now()-this.lastEvents>=40){const events=this.game.networkEvents.splice(0,48);this.send('events',{match:this.descriptor.id,sequence:++this.eventSequence,events});this.lastEvents=this.now();}
    this.sendState(!!this.game.finished);
   }else{
-   this.pendingFire||=input.fire===true;this.pendingMG||=input.machineGun===true;this.sendInput();
+   this.pendingFire||=this.latestInput.fire;this.pendingMG||=this.latestInput.machineGun;this.pendingSecondary||=this.latestInput.secondaryFire;this.sendInput();
    this.game.advance(dt,this.waiting?this.idleInput():this.latestInput,this.now(),this.latency||0);
   }
  }
  setHidden(value){this.hidden=!!value;this.stopInput();if(this.host&&this.phase==='battle')this.sendState(true);}
+ publishChat(id,value){
+  const member=this.members.find(m=>m.id===id);
+  if(!member||typeof value!=='string')return false;
+  const text=value.replace(/[\u0000-\u001f\u007f]/g,' ').trim().slice(0,180);if(!text)return false;
+  const entry={sequence:++this.chatSequence,nick:member.nick,text};
+  if(!this.send('chat',{match:this.descriptor.id,entry}))return false;
+  this.onChat(entry);return true;
+ }
+ chat(value){
+  if(this.closed||!this.connected||this.phase!=='battle'||typeof value!=='string'||!value.trim()||this.now()-this.lastChatAt<1000)return false;
+  const text=value.slice(0,180),sent=this.host?this.publishChat(this.profile.id,text):this.send('chat-request',{to:this.peer.id,sequence:++this.chatRequest,text});
+  if(sent)this.lastChatAt=this.now();return sent;
+ }
+ removePeer(id,message){
+  if(!this.peers.has(id))return;this.peers.delete(id);this.members=this.members.filter(m=>m.id!==id);
+  if(this.phase==='lobby'){this.changed();return;}
+  this.game?.removeHuman(memberTankId(this.descriptor,id));
+  if(!this.peers.size){this.fail(message);return;}
+  this.revision++;this.welcome();this.notify();this.beginWhenLoaded();if(this.phase==='battle')this.sendState(true);
+ }
  poll(){
   if(this.closed||!this.connected)return;const now=this.now();
   if(now-this.lastHello>=1000){this.lastHello=now;if(this.phase==='lobby'){if(this.host)this.welcome();else this.send('join',{profile:this.profile});}else if(this.host&&this.phase==='battle'&&(this.hidden||this.game.finished))this.sendState(true);}
-  if(this.peer&&now-this.lastPing>=2000){this.lastPing=now;this.send('ping',{at:now});}
-  if(this.phase==='starting'){if(now-this.startedAt>20000){this.fail('Soupeř nestihl načíst bitvu. Založ novou místnost.');return;}if(now-this.lastStart>=1000)this.sendStart();}
-  if(this.phase==='lobby'&&now-this.lastPeerAt>12000){if(this.host){if(this.peer){this.peer=null;this.peerReady=false;this.notify();}}else this.fail(this.peer?'Hostitel přestal odpovídat.':'Místnost nebyla nalezena. Ověř kód a otevřené okno hostitele.');}
-  if(this.phase==='battle'&&now-this.lastPeerAt>15000&&!this.game.finished)this.fail('Soupeř se odpojil. Vytvoř nebo připoj novou místnost.');
+  if(this.peer&&now-this.lastPing>=2000){this.lastPing=now;this.send('ping',{...(this.host?{}:{to:this.peer.id}),at:now});}
+  if(this.host){
+   for(const [id,p] of this.peers)if(now-p.lastAt>(this.phase==='lobby'?12000:15000))this.removePeer(id,'Hráč se odpojil.');
+   if(this.closed)return;
+   if(this.phase==='starting'){
+    if(now-this.startedAt>20000){for(const [id,p] of this.peers)if(!p.loaded){this.send('closed',{to:id});this.removePeer(id,'Hráč nestihl načíst bitvu.');}this.beginWhenLoaded();}
+    else if(now-this.lastStart>=1000)this.sendStart();
+   }
+  }else if(now-this.lastPeerAt>(this.phase==='lobby'?12000:15000)&&!this.game?.finished)this.fail(this.peer?'Hostitel přestal odpovídat.':'Místnost nebyla nalezena. Ověř kód a otevřené okno hostitele.');
  }
  close(){if(this.closed)return;this.send(this.host?'closed':'leave');this.closed=true;this.connected=false;clearInterval(this.timer);this.transport.close();}
  fail(message){if(this.closed)return;this.close();this.onClose(message,this);}
@@ -56837,6 +57005,23 @@ const ONLINE_CONFIG={url:'https://jllejxiyeyshgwilfipy.supabase.co',publishableK
 
 return {ONLINE_CONFIG};
 })();
+MODULES["room-links.js"]=(()=>{
+const {normalizeRoomCode} = MODULES["realtime.js"];
+// An invite only selects a room. The recipient still chooses a nickname and
+// explicitly connects, so opening someone else's link never starts a session.
+function roomInviteCode(address){
+ try{return normalizeRoomCode(new URL(address).searchParams.get('room'));}catch{return '';}
+}
+function roomInviteLink(address,code){
+ const url=new URL(address);
+ if(!['https:','http:'].includes(url.protocol))return '';
+ url.username='';url.password='';url.hash='';
+ url.searchParams.set('room',normalizeRoomCode(code));
+ return url.href;
+}
+
+return {roomInviteCode,roomInviteLink};
+})();
 MODULES["multiplayer-ui.js"]=(()=>{
 const {PublicServerUI} = MODULES["public-server-ui.js"];
 const {MultiplayerRoom} = MODULES["multiplayer.js"];
@@ -56844,10 +57029,13 @@ const {ONLINE_CONFIG} = MODULES["online-config.js"];
 const {MAPS,TANKS,getTank,getMap} = MODULES["data.js"];
 const {cleanNick} = MODULES["leaderboard.js"];
 const {translate,localize} = MODULES["i18n.js"];
+const {roomInviteCode,roomInviteLink} = MODULES["room-links.js"];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tankOptions=(progress,selected)=>TANKS.filter(t=>progress.unlocked.includes(t.id)||t.id===selected).map(t=>`<option value="${t.id}" ${t.id===selected?'selected':''}>${esc(t.name+' '+t.variant)}</option>`).join('');
+const mapOptions=selected=>MAPS.map(m=>`<option value="${m.id}" ${m.id===selected?'selected':''}>${esc(m.name)} · ${m.size} m</option>`).join('');
 class MultiplayerUI{
  constructor({getProgress,save,openModal,closeModal,onBattle,onClosed,toast}){
-  Object.assign(this,{getProgress,save,openModal,closeModal,onBattle,onClosed,toast,room:null,operation:0});
+  Object.assign(this,{getProgress,save,openModal,closeModal,onBattle,onClosed,toast,room:null,operation:0,inviteCode:roomInviteCode(location.href)});
   this.servers=new PublicServerUI(this);
   document.addEventListener('click',e=>{
    const b=e.target.closest('[data-mp]');if(!b)return;
@@ -56857,15 +57045,47 @@ class MultiplayerUI{
    if(b.dataset.mp==='leave')this.leave();
    if(b.dataset.mp==='ready')this.room?.setReady(!this.room.ready);
    if(b.dataset.mp==='start'){b.disabled=true;try{if(!this.room?.start())this.renderRoom();}catch(error){this.toast(error.message);this.renderRoom();}}
-   if(b.dataset.mp==='copy'&&this.room){if(navigator.clipboard)navigator.clipboard.writeText(this.room.code).then(()=>this.toast('Kód místnosti zkopírován.')).catch(()=>this.toast('Zkopíruj zobrazený kód místnosti.'));else this.toast('Zkopíruj zobrazený kód místnosti.');}
+   if(b.dataset.mp==='copy')this.copyInvite(false);
+   if(b.dataset.mp==='copy-link')this.copyInvite(true);
   });
+  document.addEventListener('change',e=>this.editRoom(e.target));
   document.addEventListener('keydown',e=>{if(e.code==='Enter'&&e.target.id==='mp-code'){e.preventDefault();this.connect('guest');}});
  }
+ openInvite(){if(!this.inviteCode)return false;this.open();document.querySelector('#mp-nick')?.focus();return true;}
  open(){
   if(this.room){this.renderRoom();return;}
-  const p=this.getProgress(),mapId=getMap(p.map).size<=900?p.map:'city';
-  this.openModal('multiplayer',`<span class="eyebrow">ONLINE / MULTIPLAYER BETA</span><h2>Vyzvi skutečného hráče.</h2><p class="modal-intro">Vyber veřejný server, soukromou místnost s kamarádem nebo offline bitvu proti botům.</p><div class="mp-profile"><label>Přezdívka<input id="mp-nick" maxlength="20" minlength="3" autocomplete="nickname" value="${esc(p.multiplayerNick||p.nickname||'Velitel')}"></label><label>Tvůj tank<select id="mp-tank">${TANKS.filter(t=>p.unlocked.includes(t.id)).map(t=>`<option value="${t.id}" ${t.id===p.selected?'selected':''}>${esc(t.name+' '+t.variant)}</option>`).join('')}</select></label></div>${this.servers.markup()}<h3>Soukromá místnost s kamarádem</h3><div class="mp-options"><section><span class="eyebrow">01 / ZALOŽIT</span><h3>Vlastní místnost</h3><label>Bojiště<select id="mp-map">${MAPS.map(m=>`<option value="${m.id}" ${m.id===mapId?'selected':''}>${m.name} · ${m.size} m</option>`).join('')}</select></label><label class="mp-checkbox"><input id="mp-bots" type="checkbox" checked>Doplnit týmy pěti boty</label><button class="primary-button" data-mp="create">ZALOŽIT MÍSTNOST →</button></section><section><span class="eyebrow">02 / PŘIPOJIT</span><h3>Ke kamarádovi</h3><label>Kód místnosti<input id="mp-code" maxlength="10" autocomplete="off" spellcheck="false" placeholder="ABCDEFGH"></label><p>Hostitel ti pošle osmimístný kód.</p><button class="secondary-button" data-mp="join">PŘIPOJIT SE →</button></section></div><p id="mp-status" role="status"></p><p class="mp-note">Tréninkový režim bez změn výzkumu a žebříčku. Hostitel musí nechat hru otevřenou na popředí. Vlastní importované obrázky se neposílají ostatním hráčům.</p>`);
+  const p=this.getProgress(),mapId=getMap(p.map).id;
+  this.openModal('multiplayer',`<span class="eyebrow">ONLINE / MULTIPLAYER BETA</span><h2>Vyraz do bitvy s přáteli.</h2><p class="modal-intro">Vyber veřejný server, soukromou místnost až pro osm hráčů nebo offline bitvu proti botům.</p>
+   ${this.inviteCode?`<div class="mp-invitation" role="status"><strong>Pozvánka do místnosti</strong> <span translate="no">${esc(this.inviteCode)}</span><p>Vyber přezdívku a tank, potom se připoj tlačítkem níže.</p></div>`:''}
+   <div class="mp-profile"><label>Přezdívka<input id="mp-nick" maxlength="20" minlength="3" autocomplete="nickname" value="${esc(p.multiplayerNick||p.nickname||'Velitel')}"></label><label>Tvůj tank<select id="mp-tank">${tankOptions(p,p.selected)}</select></label></div>
+   ${this.servers.markup()}<h3>Soukromá místnost · až 8 hráčů</h3><div class="mp-options"><section><span class="eyebrow">01 / ZALOŽIT</span><h3>Vlastní místnost</h3><label>Bojiště<select id="mp-map">${mapOptions(mapId)}</select></label><label class="mp-checkbox"><input id="mp-bots" type="checkbox" checked>Doplnit týmy boty do 6 proti 6</label><button class="primary-button" data-mp="create">ZALOŽIT MÍSTNOST →</button></section><section><span class="eyebrow">02 / PŘIPOJIT</span><h3>Ke kamarádovi</h3><label>Kód místnosti<input id="mp-code" maxlength="10" autocomplete="off" spellcheck="false" placeholder="ABCDEFGH" value="${esc(this.inviteCode)}"></label><p>Hostitel ti pošle odkaz nebo osmimístný kód.</p><button class="secondary-button" data-mp="join">PŘIPOJIT SE →</button></section></div><p id="mp-status" role="status"></p><p class="mp-note">Tréninkový režim bez změn výzkumu a žebříčku. Hostitel musí nechat hru otevřenou na popředí. Vlastní importované obrázky se neposílají ostatním hráčům.</p>`);
   this.servers.mount();
+ }
+ async copyInvite(link){
+  const room=this.room;if(!room)return;
+  const value=link?roomInviteLink(location.href,room.code):room.code;
+  if(!value){this.toast('Odkaz lze sdílet z webové adresy hry. Ze staženého souboru pošli kód místnosti.');return;}
+  try{if(!navigator.clipboard)throw Error();await navigator.clipboard.writeText(value);this.toast(link?'Odkaz na místnost zkopírován.':'Kód místnosti zkopírován.');}
+  catch{
+   const field=document.querySelector(link?'#mp-share-link':'.mp-room-code strong');
+   if(link&&field){field.closest('details').open=true;field.focus();field.select();}
+   this.toast(link?'Zkopíruj označený odkaz na místnost.':'Zkopíruj zobrazený kód místnosti.');
+  }
+ }
+ editRoom(target){
+  if(!['mp-room-tank','mp-room-team','mp-room-map','mp-room-bots'].includes(target.id))return;
+  const room=this.room;if(!room||room.phase!=='lobby')return;
+  try{
+   let changed=false;
+   if(target.id==='mp-room-tank'){
+    const p=this.getProgress(),tankId=target.value;
+    if(p.unlocked.includes(tankId))changed=room.setProfile({tankId,appearance:p.appearances?.[tankId]});
+   }
+   if(target.id==='mp-room-team')changed=room.setTeam(Number(target.value));
+   if(target.id==='mp-room-map'&&room.host)changed=room.setSettings({mapId:target.value});
+   if(target.id==='mp-room-bots'&&room.host)changed=room.setSettings({bots:target.checked});
+   if(!changed){this.signature='';this.renderRoom();if(room.error)this.toast(room.error);}
+  }catch(error){this.toast(error.message);this.signature='';this.renderRoom();}
  }
  async connect(role){
   if(this.room)return;this.servers.stop();const p=this.getProgress(),nickname=cleanNick(document.querySelector('#mp-nick').value),tankId=document.querySelector('#mp-tank').value,status=document.querySelector('#mp-status');
@@ -56873,7 +57093,7 @@ class MultiplayerUI{
   const operation=++this.operation;document.querySelectorAll('[data-mp=create],[data-mp=join]').forEach(b=>b.disabled=true);status.textContent='Připojuji k multiplayeru…';
   try{
    const room=new MultiplayerRoom({config:ONLINE_CONFIG,role,code:role==='guest'?document.querySelector('#mp-code').value:undefined,profile:{nick:nickname,tankId,appearance:p.appearances?.[tankId]},settings:{mapId:document.querySelector('#mp-map').value,bots:document.querySelector('#mp-bots').checked,difficulty:'normal'},
-    onLobby:()=>{if(this.room===room)this.renderRoom();},onBattle:(game)=>{if(this.room===room)this.onBattle(game,room);},onEvent:event=>this.onEvent?.(event),onClose:message=>{if(this.room!==room)return;this.room=null;this.operation++;this.onClosed(message);}});
+    onChat:(entry,reset)=>{if(this.room===room)this.servers.chat(entry,reset);},onLobby:()=>{if(this.room===room)this.renderRoom();},onBattle:(game)=>{if(this.room===room)this.onBattle(game,room);},onEvent:event=>{if(this.room===room&&room.phase==='lobby'&&event.type==='message'){this.toast(event.text);this.signature='';this.renderRoom();}this.onEvent?.(event);},onClose:message=>{if(this.room!==room)return;this.room=null;this.operation++;this.onClosed(message);}});
    this.room=room;await room.connect();
    if(operation!==this.operation){room.close();return;}
    p.multiplayerNick=nickname;this.save();this.renderRoom();
@@ -56881,11 +57101,29 @@ class MultiplayerUI{
  }
  renderRoom(){
   const room=this.room;if(!room||room.phase==='battle')return;
-  const signature=JSON.stringify([room.code,room.host,room.peer?.id,room.peer?.nick,room.peer?.tankId,room.peerReady,room.ready,room.phase,room.canStart,room.settings]);
+  const members=room.members||[],me=members.find(p=>p.id===room.profile.id)||room.profile,teamLimit=room.maxTeamPlayers||4,connected=room.host||!!room.peer,editable=connected&&room.phase==='lobby';
+  const signature=JSON.stringify([room.code,room.host,members,me,room.ready,room.phase,room.canStart,room.settings,room.error]);
   if(signature===this.signature&&document.querySelector('.mp-room-code'))return;this.signature=signature;
-  const player=(p,label)=>p?`<article class="mp-player"><span>${label}</span><strong translate="no">${esc(p.nick)}</strong><small>${esc(getTank(p.tankId).name+' '+getTank(p.tankId).variant)}</small></article>`:`<article class="mp-player waiting"><span>${label}</span><strong>${room.host?'Čekám na hráče…':'Hledám hostitele…'}</strong><small>${room.host?'Pošli mu kód místnosti':'Navazuji spojení…'}</small></article>`;
-  this.openModal('multiplayer',`<span class="eyebrow">ONLINE / MÍSTNOST</span><h2>${room.host?'Tvoje místnost je připravená.':room.peer?'Jsi ve stejné místnosti.':'Hledám místnost…'}</h2><div class="mp-room-code"><span>KÓD MÍSTNOSTI</span><strong translate="no">${room.code}</strong><button class="secondary-button" data-mp="copy">KOPÍROVAT</button></div><div class="mp-players">${player(room.host?room.profile:room.peer,'HOSTITEL')}${player(room.host?room.peer:room.profile,'SOUPĚŘ')}</div>${room.host||room.peer?`<div class="mp-match-info"><strong>${getMap(room.settings.mapId).name}</strong><span>${room.settings.bots?'6 proti 6 · dva hráči a deset botů':'1 proti 1 · pouze hráči'}</span></div>`:''}<p class="modal-intro" role="status">${room.phase==='starting'?'Načítám společné bojiště…':!room.peer?(room.host?'Čekám na soupeře. Místnost zůstane otevřená.':'Čekám na odpověď hostitele…'):room.host?room.peerReady?'Soupeř je připraven. Můžeš spustit bitvu.':'Soupeř ještě nepotvrdil připravenost.':room.ready?'Jsi připraven. Čekám na spuštění hostitelem.':'Potvrď připravenost a hostitel spustí bitvu.'}</p><div class="modal-actions">${room.host?`<button class="primary-button" data-mp="start" ${room.canStart?'':'disabled'}>SPUSTIT BITVU →</button>`:`<button class="primary-button" data-mp="ready" ${!room.peer||room.phase!=='lobby'?'disabled':''}>${room.ready?'ZRUŠIT PŘIPRAVENOST':'JSEM PŘIPRAVEN →'}</button>`}<button class="secondary-button" data-mp="leave">OPUSTIT MÍSTNOST</button></div><p class="mp-note">Hostitel počítá bitvu. Jeho zavření místnosti ukončí spojení. Při přepnutí jeho hry na pozadí se bitva pozastaví.</p>`);
+  const focusId=document.activeElement?.id,scroll=document.querySelector('#modal .modal')?.scrollTop||0;
+  const teamSize=team=>members.filter(p=>p.team===team).length;
+  const card=p=>`<article class="mp-player ${p.id===me.id?'is-you':''}"><div class="mp-player-label"><span>${p.host?'HOSTITEL':'HRÁČ'}${p.id===me.id?' · TY':''}</span><span class="mp-ready ${p.ready||p.host?'ready':''}">${p.ready||p.host?'PŘIPRAVEN':'ČEKÁ'}</span></div><strong translate="no">${esc(p.nick)}</strong><small>${esc(getTank(p.tankId).name+' '+getTank(p.tankId).variant)}</small></article>`;
+  const team=number=>`<section class="mp-team mp-team-${number}" aria-labelledby="mp-team-title-${number}"><header><h3 id="mp-team-title-${number}">${number===0?'MODRÝ TÝM':'ČERVENÝ TÝM'}</h3><span>${teamSize(number)} / ${teamLimit}</span></header><div class="mp-team-members">${members.filter(p=>p.team===number).map(card).join('')}${Array.from({length:Math.max(0,teamLimit-teamSize(number))},()=>'<div class="mp-empty-slot">Volné místo</div>').join('')}</div></section>`;
+  const bothTeams=teamSize(0)>0&&teamSize(1)>0;
+  const status=room.phase==='starting'?'Načítám společné bojiště…':!connected?'Čekám na odpověď hostitele…':members.length<2?'Pozvi další hráče odkazem nebo kódem místnosti.':!room.settings.bots&&!bothTeams?'Rozdělte se do obou týmů.':room.host?(room.canStart?'Všichni jsou připraveni. Můžeš spustit bitvu.':'Čekám, až ostatní hráči potvrdí připravenost.'):(room.ready?'Jsi připraven. Čekám na spuštění hostitelem.':'Potvrď připravenost a hostitel spustí bitvu.');
+  const link=roomInviteLink(location.href,room.code);
+  this.openModal('multiplayer',`<span class="eyebrow">ONLINE / MÍSTNOST · ${members.length} / 8</span><h2>${room.host?'Tvoje místnost je připravená.':connected?'Jsi ve stejné místnosti.':'Hledám místnost…'}</h2>
+   <div class="mp-room-code"><span>KÓD MÍSTNOSTI</span><strong translate="no">${esc(room.code)}</strong><div class="mp-share-actions"><button class="secondary-button" data-mp="copy">KOPÍROVAT KÓD</button><button class="primary-button" data-mp="copy-link" ${link?'':'disabled'}>KOPÍROVAT ODKAZ</button></div></div>
+   ${link?`<details class="mp-share-details"><summary>Odkaz pro připojení</summary><input id="mp-share-link" aria-label="Odkaz pro připojení" value="${esc(link)}" readonly translate="no"></details>`:'<p class="mp-note">Odkaz lze sdílet z webové adresy hry. Ze staženého souboru pošli kód místnosti.</p>'}
+   <div class="mp-profile mp-room-controls"><label>Tvůj tank<select id="mp-room-tank" ${editable?'':'disabled'}>${tankOptions(this.getProgress(),me.tankId)}</select></label><label>Tvůj tým<select id="mp-room-team" ${editable?'':'disabled'}>${[0,1].map(n=>`<option value="${n}" ${me.team===n?'selected':''} ${teamSize(n)>=teamLimit&&me.team!==n?'disabled':''}>${n===0?'MODRÝ TÝM':'ČERVENÝ TÝM'} · ${teamSize(n)} / ${teamLimit}${teamSize(n)>=teamLimit?' · PLNÝ':''}</option>`).join('')}</select></label></div>
+   <div class="mp-teams">${team(0)}${team(1)}</div>
+   ${room.host?`<div class="mp-profile mp-room-settings"><label>Bojiště<select id="mp-room-map" ${editable?'':'disabled'}>${mapOptions(room.settings.mapId)}</select></label><label class="mp-checkbox"><input id="mp-room-bots" type="checkbox" ${room.settings.bots?'checked':''} ${editable?'':'disabled'}>Doplnit týmy boty do 6 proti 6</label></div>`:''}
+   <div class="mp-match-info"><strong>${esc(getMap(room.settings.mapId).name)}</strong><span>${room.settings.bots?'6 proti 6 · volná místa doplní boti':'Pouze hráči · až 4 proti 4'}</span></div>
+   <p class="mp-note">Tank i tým můžeš změnit před začátkem bitvy. Změny nastavení zruší připravenost hráčů.</p>
+   <p class="modal-intro" role="status">${status}</p>${room.error?`<p class="mp-room-error" role="alert">${esc(room.error)}</p>`:''}
+   <div class="modal-actions">${room.host?`<button class="primary-button" data-mp="start" ${room.canStart?'':'disabled'}>SPUSTIT BITVU →</button>`:`<button class="primary-button" data-mp="ready" ${editable?'':'disabled'}>${room.ready?'ZRUŠIT PŘIPRAVENOST':'JSEM PŘIPRAVEN →'}</button>`}<button class="secondary-button" data-mp="leave">OPUSTIT MÍSTNOST</button></div><p class="mp-note">Hostitel počítá bitvu. Jeho zavření místnosti ukončí spojení. Při přepnutí jeho hry na pozadí se bitva pozastaví.</p>`);
   localize(document.querySelector('#modal-content'));
+  if(focusId){const restored=document.getElementById(focusId);if(restored&&!restored.disabled)restored.focus({preventScroll:true});}
+  const modal=document.querySelector('#modal .modal');if(modal)modal.scrollTop=scroll;
  }
  leave(silent=false){this.servers.stop();const hadRoom=!!this.room;this.operation++;this.signature='';const room=this.room;this.room=null;room?.close();if(!silent){this.closeModal();if(hadRoom)this.onClosed('');}}
  status(){
@@ -56895,6 +57133,8 @@ class MultiplayerUI{
   return translate(room.host?'ONLINE · HOSTITEL':'ONLINE · HRÁČ')+' · '+(room.latency===null?'—':Math.round(room.latency))+' ms';
  }
 }
+
+
 
 return {MultiplayerUI};
 })();
@@ -57047,7 +57287,7 @@ class ZombieGame extends Game{
   if(this.phase!=='combat')return;
   this.time+=dt;this.remaining=this.time;
   const p=this.player;
-  p.reload=Math.max(0,p.reload-dt);p.missileReload=Math.max(0,p.missileReload-dt);p.smokeCooldown=Math.max(0,p.smokeCooldown-dt);
+  p.reload=Math.max(0,p.reload-dt);p.secondaryReload=Math.max(0,(p.secondaryReload||0)-dt);p.missileReload=Math.max(0,p.missileReload-dt);p.smokeCooldown=Math.max(0,p.smokeCooldown-dt);
   p.mgCooldown=Math.max(0,(p.mgCooldown||0)-dt);p.mgHeat=Math.max(0,(p.mgHeat||0)-dt*(.18+(this.upgrades.cooling||0)*.12));if(p.mgHeat<.3)p.mgOverheated=false;
   if(p.repair>0){p.repair=Math.max(0,p.repair-dt);if(p.repair===0)for(const k of ['engine','tracks','turret','breech'])p.modules[k]=Math.max(85,p.modules[k]);}
   for(const c of this.smokeClouds){c.life-=dt;c.radius=Math.min(15,c.radius+dt*6);}this.smokeClouds=this.smokeClouds.filter(c=>c.life>0);
@@ -57123,6 +57363,24 @@ const UP = new THREE.Vector3(0, 1, 0);
 const DUMMY = new THREE.Object3D();
 const TEX = new Map();
 const GEO = new Map();
+function terrainGeometry(map,segments=300){
+  const size=(map.size||1000)+80,half=size/2;
+  const axis=extra=>{
+    const fixed=[...new Set(extra)].filter(v=>v>-half&&v<half).sort((a,b)=>a-b);
+    const values=Array.from({length:segments+1},(_,i)=>-half+i*size/segments).filter(v=>!fixed.some(f=>Math.abs(f-v)<.05));
+    return [...values,...fixed].sort((a,b)=>a-b);
+  };
+  const xs=axis((map.bridges||[]).flatMap(b=>[b.x-b.w/2-10,b.x-b.w/2,b.x,b.x+b.w/2,b.x+b.w/2+10]));
+  const zs=axis((map.bridges||[]).flatMap(b=>[-1,1].flatMap(s=>[b.z+s*b.d/2,b.z+s*(b.d/2+b.ramp)])));
+  const geo=new THREE.PlaneGeometry(size,size,xs.length-1,zs.length-1),p=geo.attributes.position,uv=geo.attributes.uv;
+  // Add exact deck/approach edges to the terrain grid. Uniform coarse grids
+  // blended the embankment down to the riverbed before it met the bridge.
+  for(let j=0;j<zs.length;j++)for(let i=0;i<xs.length;i++){
+    const k=j*xs.length+i,x=xs[i],z=zs[j];
+    p.setXYZ(k,x,terrainHeight(map.id,x,z),z);uv.setXY(k,(x+half)/size,1-(z+half)/size);
+  }
+  geo.computeVertexNormals();return geo;
+}
 function muzzleEffectProfile(weapon,scoped=false,own=false){
   const clearSight=scoped&&own,auto=weapon==='autocannon';
   return {size:clearSight?(auto?.22:.5):(auto?1.25:2.9),life:clearSight?.035:.12,opacity:clearSight?.2:1,smoke:!clearSight,light:clearSight?.35:12};
@@ -57536,16 +57794,23 @@ function makeSpecialTank(id) {
   cyl(gun,paint,0,0,geo.barrelLength/2,btr?.055:maus?.17:.105,geo.barrelLength,'z');
   cyl(gun,steel,0,0,geo.barrelLength-.06,btr?.08:maus?.21:.16,.12,'z');
   cyl(gun,rubber,0,0,geo.barrelLength+.005,btr?.04:maus?.13:.075,.01,'z');
-  if(maus){cyl(gun,paint,.65,-.03,1.35,.085,2.7,'z');cyl(gun,rubber,.65,-.03,2.71,.055,.01,'z');}
+  let secondary=null,secondaryPivot=null;
+  if(maus){
+    secondaryPivot=new THREE.Group();secondaryPivot.position.set(0,geo.gunY,geo.mantletZ);
+    secondary=new THREE.Group();secondary.position.set(.65,-.03,0);
+    cyl(secondary,paint,0,0,1.35,.085,2.7,'z');cyl(secondary,rubber,0,0,2.71,.055,.01,'z');
+    mergeStatic(secondary);secondaryPivot.add(secondary);
+  }
   for(const wheel of wheels)hull.remove(wheel.root);
   mergeStatic(hull);mergeStatic(turret);mergeStatic(gun);turret.add(gun);
+  if(secondaryPivot)turret.add(secondaryPivot);
   for(const wheel of wheels)hull.add(wheel.root);
   const moduleMeshes={};
   for(const [name,x,y,z,sx,sy,sz,c] of [['engine',0,h*.7,-l*.32,w*.45,.5,1.1,'#73b39e'],['ammo',w*.24,h*.65,0,.4,.6,1.4,'#dbb96b'],['breech',0,h+geo.gunY,geo.turretOffsetZ+.5,.5,.35,.7,'#7bacd1'],['turret',0,h,geo.turretOffsetZ,1.3,.15,1.3,'#ab88d6'],['crew',-.4,h*.7,l*.18,.35,.6,.35,'#9cb8b6'],['tracks',-w*.43,.7,0,.4,.6,l*.8,'#b1bf8b']]){
     const material=mat(c,{emissive:c,emissiveIntensity:.5,transparent:true,opacity:.85});moduleMeshes[name]=box(internals,material,x,y,z,sx,sy,sz);
   }
   internals.visible=false;
-  return {group:ground,hull,turret,internals,moduleMeshes,skinMaterials,originalColors:new Map(skinMaterials.map(m=>[m,m.color.clone()])),width:w,length:l,height:h+(maus?1.75:btr?.85:1.55),muzzleZ:geo.mantletZ+geo.barrelLength,gunY:geo.gunY,turretBaseY:h,turretOffsetZ:geo.turretOffsetZ,dead:false,xray:false,barrels:[gun],barrelBaseZ:[geo.mantletZ],recoil:[0],wheels};
+  return {group:ground,hull,turret,internals,moduleMeshes,skinMaterials,originalColors:new Map(skinMaterials.map(m=>[m,m.color.clone()])),width:w,length:l,height:h+(maus?1.75:btr?.85:1.55),muzzleZ:geo.mantletZ+geo.barrelLength,gunY:geo.gunY,turretBaseY:h,turretOffsetZ:geo.turretOffsetZ,dead:false,xray:false,barrels:secondary?[gun,secondary]:[gun],barrelPivots:secondary?[gun,secondaryPivot]:[gun],barrelBaseZ:secondary?[geo.mantletZ,0]:[geo.mantletZ],recoil:secondary?[0,0]:[0],wheels};
 }
 
 function makeBmpt() {
@@ -57817,7 +58082,7 @@ class Renderer {
 
   buildTerrain(map) {
     const size = map.size || 1000, segments = this.quality === 'low' ? 200 : 300;
-    const geo = new THREE.PlaneGeometry(size + 80, size + 80, segments, segments); geo.rotateX(-Math.PI / 2);
+    const geo = terrainGeometry(map,segments);
     const pos = geo.attributes.position, colors = new Float32Array(pos.count * 3), base = new THREE.Color();
     for (let i = 0; i < pos.count; i++) {
       const x = pos.getX(i), z = pos.getZ(i), h = this.groundAt(x, z); pos.setY(i, h);
@@ -57876,6 +58141,12 @@ class Renderer {
       // Concrete ends below the wearing course. Coplanar top faces flickered.
       box(bridges, concrete, x, height - .66, z, w, 1.2, d);
       box(bridges, asphalt, x, height - .03, z, w - .8, .06, d);
+      for(const end of [-1,1]){
+        const bankZ=z+end*(d/2-1.5),bottom=Math.min(this.groundAt(x-w/2,bankZ),this.groundAt(x+w/2,bankZ),this.groundAt(x,bankZ));
+        // Abutments seal the sides below the road, without a coplanar top.
+        const top=height-.065;
+        if(top>bottom)box(bridges,concrete,x,(top+bottom)/2,bankZ,w,top-bottom,3.2);
+      }
       for (const side of [-1, 1]) {
         const railX = x + side * (w / 2 - .18);
         for (let dz = -d / 2; dz <= d / 2 + .1; dz += 5) box(bridges, iron, railX, height + .63, z + dz, .12, 1.26, .12);
@@ -58003,7 +58274,7 @@ class Renderer {
       model.turret.position.set(root.x,root.y,root.z);
       model.turret.quaternion.copy(model.hull.quaternion);model.turret.rotateY((tank.turretAngle??a)-a);
       if (model.barrels) {
-        model.barrels.forEach((barrel,i)=>{model.recoil[i]*=Math.exp(-dt*23);barrel.position.z=(model.barrelBaseZ?.[i] || 0)-model.recoil[i];barrel.rotation.x=-(tank.gunPitch || 0);});
+        model.barrels.forEach((barrel,i)=>{model.recoil[i]*=Math.exp(-dt*23);barrel.position.z=(model.barrelBaseZ?.[i] || 0)-model.recoil[i];(model.barrelPivots?.[i]||barrel).rotation.x=-(tank.gunPitch || 0);});
       }
       const delta = model.turret.rotation.y - a; model.moduleMeshes.breech.position.x = Math.sin(delta) * .65; model.moduleMeshes.breech.position.z = offset + Math.cos(delta) * .65; model.moduleMeshes.breech.rotation.y = delta;
       if (model.marker) { model.marker.visible = tank.alive; model.marker.rotation.y = this.clock * .5; }
@@ -58317,7 +58588,7 @@ class Renderer {
   dispose() { this.disposed = true; this.resizeObserver?.disconnect(); this.clearWorld(); this.renderer.dispose(); }
 }
 
-return {muzzleEffectProfile,Renderer};
+return {terrainGeometry,muzzleEffectProfile,Renderer};
 })();
 MODULES["audio.js"]=(()=>{
 /** Small, asset-free battlefield soundscape. Audio starts only after unlock(). */
@@ -58607,7 +58878,7 @@ return {AudioEngine};
 })();
 MODULES["controls.js"]=(()=>{
 /** Translate physical keyboard codes into the simulation's hull controls. */
-function keyboardInput(keys) {
+function keyboardInput(keys, cruise = 0) {
   const forward = keys.has('KeyW') || keys.has('ArrowUp');
   const reverse = keys.has('KeyS') || keys.has('ArrowDown');
   const left = keys.has('KeyA') || keys.has('ArrowLeft');
@@ -58617,11 +58888,56 @@ function keyboardInput(keys) {
   // Simulation applies conventional reverse steering while travelling back;
   // this layer always expresses left/right intent in the vehicle's frame.
   return {
-    throttle: Number(forward) - Number(reverse),
+    throttle: forward || reverse || left || right ? Number(forward) - Number(reverse) : Math.sign(cruise),
     steer: Number(left) - Number(right),
     fire: false,
     machineGun: keys.has('Space'),
   };
+}
+
+const movementKeys = new Set(['KeyW','KeyS','KeyA','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight']);
+class CruiseControl {
+  constructor(){this.direction=0;}
+  keydown(code,repeat=false){
+    if(movementKeys.has(code))this.reset();
+    else if(!repeat&&code==='KeyE')this.direction=1;
+    else if(!repeat&&code==='KeyQ')this.direction=-1;
+    return this.direction;
+  }
+  reset(){this.direction=0;}
+}
+
+// A rejected lock request is often transient (e.g. no activation after an
+// asynchronous room join). Every subsequent click must be allowed to retry.
+class MouseLock {
+  constructor(canvas,doc,now=()=>performance.now()){
+    Object.assign(this,{canvas,doc,now,pending:false,failed:false,attempt:0,started:0});
+  }
+  request(){
+    if(this.doc.pointerLockElement===this.canvas)return true;
+    if(this.pending&&this.now()-this.started<2000)return false;
+    const attempt=++this.attempt;this.started=this.now();this.pending=true;this.failed=false;
+    const fail=()=>{if(attempt===this.attempt){this.pending=false;this.failed=true;}};
+    try{
+      if(!this.canvas.requestPointerLock){fail();return false;}
+      this.canvas.requestPointerLock()?.catch(fail);
+      return true;
+    }catch{fail();return false;}
+  }
+  changed(){this.attempt++;this.pending=false;this.failed=false;}
+  error(){this.attempt++;this.pending=false;this.failed=true;}
+}
+
+// Browsers that deny pointer lock still let the player rotate indefinitely:
+// hold the free cursor at an edge. The center remains ordinary mouse aiming.
+function edgeLookDelta(pointer,rect,dt){
+  if(!pointer.inside||rect.width<=0||rect.height<=0)return {x:0,y:0};
+  const axis=(value,start,size)=>{
+    const q=(value-start)/size*2-1;
+    return Math.abs(q)>.9?Math.sign(q)*Math.min(1,(Math.abs(q)-.9)/.1):0;
+  };
+  const elapsed=Math.max(0,Math.min(.05,dt));
+  return {x:axis(pointer.x,rect.left,rect.width)*420*elapsed,y:axis(pointer.y,rect.top,rect.height)*280*elapsed};
 }
 
 // Pointer events report only the transition from no mouse buttons to some
@@ -58635,7 +58951,7 @@ function bindMouseButtons(target, releaseTarget, onDown, onUp) {
   };
 }
 
-return {keyboardInput,bindMouseButtons};
+return {keyboardInput,CruiseControl,MouseLock,edgeLookDelta,bindMouseButtons};
 })();
 MODULES["app.js"]=(()=>{
 const {getLanguage,getLanguagePreference,setLanguage,mountLocalization,translate} = MODULES["i18n.js"];
@@ -58650,7 +58966,7 @@ const {CAMOUFLAGES,normalizeAppearance,normalizeAppearances,importTankImage,DECA
 const {ZombieGame,ZOMBIE_UPGRADES} = MODULES["zombies.js"];
 const {Renderer} = MODULES["renderer.js"];
 const {AudioEngine} = MODULES["audio.js"];
-const {keyboardInput,bindMouseButtons} = MODULES["controls.js"];
+const {keyboardInput,bindMouseButtons,CruiseControl,MouseLock,edgeLookDelta} = MODULES["controls.js"];
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const STORAGE='iron-front-progress-v1', defaults={xp:0,unlocked:['pz4f2','m4a1','t341941'],selected:'pz4f2',nation:'de',map:'valley',battles:0,wins:0,kills:0,settings:{sound:true,quality:'high',sensitivity:1}};
 let progress;
@@ -58661,9 +58977,10 @@ let hangarTab='vehicles',mapFilter='all';
 let customDraft=null,customPreviewTimer,imageImportVersion=0,workshopEditor=null;
 let game=null,renderer=null,paused=false,awardDone=false,lastTime=performance.now(),lastHud=0,modalView='',toastTimer,noticeTimer,flashTimer,feed=[],pointer={x:innerWidth*.5,y:innerHeight*.5,down:false,right:false},keys=new Set(),returnFocus=null;
 let killConfirmTimer;
-let ignoreMouseMove=true,fireRequested=false,mgRequested=false,touchCannon=false,scope=false,touchAim=false,lockUnavailable=false,lockPending=false,lastUnlock=-1000,lastAim=null;
+let ignoreMouseMove=true,fireRequested=false,mgRequested=false,secondaryRequested=false,touchCannon=false,scope=false,touchAim=false,lastUnlock=-1000,lastAim=null;
 const audio=new AudioEngine();audio.setEnabled(progress.settings.sound);
 const canvas=$('#scene'),hero=$('.hero'), mini=$('#minimap'), mc=mini.getContext('2d');
+const cruise=new CruiseControl(),mouseLock=new MouseLock(canvas,document);
 const fullName=t=>`${t.name} ${t.variant}`;
 const num=n=>Math.round(n).toLocaleString(getLanguage()==='en'?'en-US':'cs-CZ');
 const caliber=t=>t.gunCaliber||parseInt(t.gun);
@@ -58719,7 +59036,7 @@ function switchHangarTab(tab){
 function renderHangar(){
  const map=getMap(progress.map);$('#selected-map').innerHTML=esc(map.name)+' <span>ZMĚNIT ↗</span>';
  switchHangarTab(hangarTab);
- if($('#game-mode').value!=='zombies')$('.mode-label small').textContent=$('#game-mode').value==='multiplayer'?'1 proti 1 · volitelní boti':$('#game-mode').value==='deathmatch'?'30 killů · 12 minut · 6 proti 6':deploymentSummary();
+ if($('#game-mode').value!=='zombies')$('.mode-label small').textContent=$('#game-mode').value==='multiplayer'?'Až 8 hráčů · vlastní týmy · volitelní boti':$('#game-mode').value==='deathmatch'?'30 killů · 12 minut · 6 proti 6':deploymentSummary();
  const tank=getTank(progress.selected);if($('#matchup-label'))$('#matchup-label').textContent=NATIONS.find(n=>n.id===tank.nation).name+' proti '+NATIONS.filter(n=>n.id!==tank.nation).map(n=>n.name).join(' / ');$('#xp-top').textContent=num(progress.xp);$('#hero-flag').textContent=NATIONS.find(n=>n.id===tank.nation).short;$('#hero-role').textContent=`${tank.role.toLocaleUpperCase('cs-CZ')} · ${roman(tank.rank)}. ÚROVEŇ`;$('#hero-name').textContent=fullName(tank);$('#hero-gun').innerHTML=`${gunLabel(tank)} <small>mm</small>`;$('#spec-role').textContent=tank.role.toUpperCase();
  $('#nation-tabs').innerHTML=NATIONS.map(n=>`<button class="nation-tab ${progress.nation===n.id?'active':''}" data-nation="${n.id}" aria-pressed="${progress.nation===n.id}">${flag(n.id)}${n.name.toUpperCase()}</button>`).join('');
  const tanks=TANKS.filter(t=>t.nation===progress.nation);$('#tank-cards').classList.toggle('three',tanks.length===3);$('#tank-cards').classList.toggle('five',tanks.length===5);$('#tank-cards').classList.toggle('six',tanks.length>=6);$('#tank-cards').innerHTML=tanks.map(t=>{const owned=progress.unlocked.includes(t.id);return `<button class="tank-card ${t.id===progress.selected?'selected':''} ${owned?'':'locked'}" data-tank="${t.id}" aria-pressed="${t.id===progress.selected}"><span class="card-top"><span>${roman(t.rank)}. ÚROVEŇ</span><b>${t.id===progress.selected?'✓ VYBRÁNO':owned?'PŘIPRAVEN':'◇ '+num(t.cost)+' VB'}</b></span>${tankSVG(t)}<strong>${esc(fullName(t))}</strong><small>${owned?t.role.toUpperCase():'UZAMČENO · VYZKOUMAT ↗'}</small></button>`}).join('');
@@ -58763,15 +59080,15 @@ $('#custom-form').addEventListener('change',async e=>{
 function showZombieShop(){
  openModal('zshop',`<span class="eyebrow">PŘEŽITÍ / POLNÍ DÍLNA</span><h2>Vlna ${game.wave} odražena.</h2><p class="modal-intro">${game.credits} šrotu · Vylepšení platí pro toto přežití. Další vlna začne, až budeš připravený.</p><div class="z-upgrades">${ZOMBIE_UPGRADES.map(u=>{const level=game.upgrades[u.id]||0,cost=game.upgradeCost(u.id),max=level>=u.max;return `<article><small>${u.id==='auto'?'AUTONOMNÍ OBRANA':u.id==='repair'?'SERVIS':'ÚROVEŇ '+level+' / '+u.max}</small><h3>${u.name}</h3><p>${u.description}</p><button class="secondary-button" data-zupgrade="${u.id}" ${max||game.credits<cost?'disabled':''}>${max?'ZAKOUPENO':cost+' ŠROTU'}</button></article>`}).join('')}</div><div class="modal-actions"><button id="next-wave" class="primary-button">DALŠÍ VLNA →</button><button data-action="abandon" class="secondary-button">UKONČIT PŘEŽITÍ</button></div>`);
 }
-function showGuide(){openModal('guide',`<span class="eyebrow">POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK</span><h2>Znát svůj tank. Ovládnout bojiště.</h2><p class="modal-intro">Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.</p><div class="guide-grid"><section><h3>Ovládání</h3><div class="controls-list"><span><kbd>W</kbd> / <kbd>S</kbd></span><span>Vpřed / zpátečka</span><span><kbd>A</kbd> / <kbd>D</kbd></span><span>Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla</span><span><kbd>MYŠ</kbd></span><span>Pohyb pohledu a zaměřování; věž zaměřovač dohání</span><span><kbd>LEVÉ TLAČÍTKO</kbd></span><span>Výstřel (lze držet)</span><span><kbd>MEZERNÍK</kbd></span><span>Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.</span><span><kbd>N</kbd></span><span>Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.</span><span><kbd>PRAVÉ TLAČÍTKO</kbd></span><span>Podržet pro přiblížení</span><span><kbd>C</kbd></span><span>Podržet pro rozhlížení bez otáčení věže</span><span><kbd>KOLEČKO</kbd></span><span>Vzdálenost kamery / zvětšení zaměřovače</span><span><kbd>SHIFT</kbd></span><span>Přepnout do první osoby — optický zaměřovač střelce</span><span><kbd>F</kbd></span><span>Oprava modulů při zastavení</span><span><kbd>G</kbd></span><span>Kouřová clona — 3 na život</span><span><kbd>2</kbd></span><span>BMPT: naváděná raketa; po odpalu ji řídíš mířením</span><span><kbd>X</kbd></span><span>Podržet pro zobrazení modulů</span><span><kbd>R</kbd></span><span>Nasadit záložní tank po zničení</span><span><kbd>ESC</kbd></span><span>Pauza</span></div><p>Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.</p><p>Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.</p></section><section><h3>ZOMBIE · Přežití</h3><p>V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný v Nadvládě i týmovém deathmatchi.</p><h3>Nadvláda · 6 proti 6</h3><p>Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po dvanácti minutách.</p><h3>Týmový deathmatch</h3><p>Bez obsazování. První tým s 30 killy vyhrává. Po 12 minutách rozhoduje počet killů; při shodě je remíza. Každý zničený nepřítel má stejnou hodnotu.</p><h3>Každý zásah má svou cestu</h3><p>Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.</p><h3>Přežij další minutu</h3><p>Mapy zahrnují městské bloky, průmyslové dvory, otevřenou rovinu i krajinu s mnoha menšími kopci. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky a využívej terén i budovy. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.</p><h3>Postup zůstává u tebe</h3><p>Výzkum se ukládá automaticky v tomto prohlížeči. V nastavení lze stáhnout a později načíst zálohu postupu. Vymazání dat webu postup odstraní. Hra nepotřebuje účet pro svou simulaci ani herní server.</p></section></div>`)}
+function showGuide(){openModal('guide',`<span class="eyebrow">POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK</span><h2>Znát svůj tank. Ovládnout bojiště.</h2><p class="modal-intro">Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.</p><div class="guide-grid"><section><h3>Ovládání</h3><div class="controls-list"><span><kbd>W</kbd> / <kbd>S</kbd></span><span>Vpřed / zpátečka</span><span><kbd>E</kbd> / <kbd>Q</kbd></span><span>Tempomat vpřed / vzad. WASD nebo šipky jej zruší.</span><span><kbd>A</kbd> / <kbd>D</kbd></span><span>Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla</span><span><kbd>MYŠ</kbd></span><span>Pohyb pohledu a zaměřování; věž zaměřovač dohání</span><span><kbd>LEVÉ TLAČÍTKO</kbd></span><span>Výstřel (lze držet)</span><span><kbd>MEZERNÍK</kbd></span><span>Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.</span><span><kbd>N</kbd></span><span>Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.</span><span><kbd>PRAVÉ TLAČÍTKO</kbd></span><span>Podržet pro přiblížení</span><span><kbd>C</kbd></span><span>Podržet pro rozhlížení bez otáčení věže</span><span><kbd>KOLEČKO</kbd></span><span>Vzdálenost kamery / zvětšení zaměřovače</span><span><kbd>SHIFT</kbd></span><span>Přepnout do první osoby — optický zaměřovač střelce</span><span><kbd>F</kbd></span><span>Oprava modulů při zastavení. Míření a funkční zbraně zůstávají dostupné.</span><span><kbd>G</kbd></span><span>Kouřová clona — 3 na život</span><span><kbd>2</kbd></span><span>BMPT: naváděná raketa; po odpalu ji řídíš mířením</span><span><kbd>X</kbd></span><span>Podržet pro zobrazení modulů</span><span><kbd>R</kbd></span><span>Maus: druhý kanón 75 mm (lze držet). Po zničení: nasadit záložní tank.</span><span><kbd>TAB</kbd></span><span>Týmy a přezdívky v online bitvě</span><span><kbd>ESC</kbd></span><span>Pauza</span></div><p>Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.</p><p>Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.</p></section><section><h3>ZOMBIE · Přežití</h3><p>V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný v Nadvládě i týmovém deathmatchi.</p><h3>Nadvláda · 6 proti 6</h3><p>Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po dvanácti minutách.</p><h3>Týmový deathmatch</h3><p>Bez obsazování. První tým s 30 killy vyhrává. Po 12 minutách rozhoduje počet killů; při shodě je remíza. Každý zničený nepřítel má stejnou hodnotu.</p><h3>Každý zásah má svou cestu</h3><p>Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.</p><h3>Přežij další minutu</h3><p>Mapy zahrnují městské bloky, průmyslové dvory, otevřenou rovinu i krajinu s mnoha menšími kopci. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky a využívej terén i budovy. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.</p><h3>Postup zůstává u tebe</h3><p>Výzkum se ukládá automaticky v tomto prohlížeči. V nastavení lze stáhnout a později načíst zálohu postupu. Vymazání dat webu postup odstraní. Hra nepotřebuje účet pro svou simulaci ani herní server.</p></section></div>`)}
 function showSettings(){if(game)paused=true;openModal('settings',`<span class="eyebrow">NASTAVENÍ / TVŮJ POLYGON</span><h2>Připravit k boji.</h2><div class="settings-row"><div>Jazyk<p>Automaticky podle domény; ruční volba zůstane uložená.</p></div><select data-language-picker aria-label="Jazyk"><option value="auto" ${getLanguagePreference()==='auto'?'selected':''}>Automaticky</option><option value="cs" ${getLanguagePreference()==='cs'?'selected':''}>Čeština</option><option value="en" ${getLanguagePreference()==='en'?'selected':''}>English</option></select></div><div class="settings-row"><div>Zvuk<p>Motor, výstřely a události bitvy</p></div><button class="toggle" id="sound-toggle">${progress.settings.sound?'ZAPNUTO':'VYPNUTO'}</button></div><div class="settings-row"><div>Grafika<p>Nižší kvalita omezí stíny a rozlišení</p></div><select id="quality-select"><option value="high" ${progress.settings.quality==='high'?'selected':''}>Vysoká</option><option value="low" ${progress.settings.quality==='low'?'selected':''}>Úsporná</option></select></div><div class="settings-row"><div><label for="sensitivity-select">Citlivost myši</label><p>Stejný směr myši a pohledu; jemnější míření při přiblížení</p></div><select id="sensitivity-select">${[[.5,"Nízká"],[1,"Normální"],[1.5,"Vyšší"],[2,"Vysoká"]].map(([v,n])=>`<option value="${v}" ${Number(progress.settings.sensitivity)===v?"selected":""}>${n}</option>`).join("")}</select></div><div class="settings-row"><div>Lokální postup<p>${progress.battles} bitev · ${progress.kills} zničených cílů · ${progress.unlocked.length}/${TANKS.length} strojů</p></div><button class="secondary-button" id="export-save">Zálohovat</button></div><div class="settings-row"><div>Obnovit zálohu<p>Nahradí aktuální výzkum uloženým postupem</p></div><label class="secondary-button" style="cursor:pointer">Načíst soubor<input id="import-save" type="file" accept="application/json,.json" hidden></label></div><div class="modal-actions"><button class="primary-button" data-action="close">HOTOVO →</button></div>`)}
 function pause(){if(!game||game.finished)return;if(game.mode==='multiplayer'){paused=true;openModal('pause','<span class="eyebrow">ONLINE BITVA / MENU</span><h2>Bitva pokračuje.</h2><p class="modal-intro">Otevřené menu zastaví jen tvoje ovládání. Soupeř a boti pokračují ve hře.</p><div class="modal-actions"><button class="primary-button" data-action="resume">POKRAČOVAT →</button><button class="secondary-button" data-action="abandon">OPUSTIT MÍSTNOST</button></div>');return;}paused=true;keys.clear();pointer.down=false;openModal('pause',`<span class="eyebrow">BITVA POZASTAVENA</span><h2>Chvíle na rozmyšlenou.</h2><p class="modal-intro">${getMap(progress.map).name} · ${fullName(getTank(progress.selected))}<br>Simulace je pozastavená. Tvůj tank je v bezpečí.</p><div class="modal-actions"><button class="primary-button" data-action="resume">POKRAČOVAT →</button><button class="secondary-button" data-view="guide">OVLÁDÁNÍ</button><button class="secondary-button" data-action="abandon">UKONČIT BITVU</button></div>`)}
-function startBattle(){if($('#game-mode').value==='multiplayer'){multiplayerUI?.open();return;}if(!renderer)return;closeModal();$('#modal').hidden=true;modalView='';audio.unlock().catch(()=>{});game=new ($('#game-mode').value==='zombies'?ZombieGame:Game)({mode:$('#game-mode').value,tankId:progress.selected,mapId:progress.map,difficulty:$('#difficulty').value,onEvent:onGameEvent});awardDone=false;paused=false;keys.clear();feed=[];$('#kill-confirmation').hidden=true;$('#kill-feed').innerHTML='';$('#hit-notice').textContent='';$('#respawn-panel').hidden=true;$('#hangar').hidden=true;$('#battle').hidden=false;document.body.classList.add('in-battle');$('#battle-scene').append(canvas);renderer.resize();renderer.setBattle(game);scope=false;lastAim=null;lockUnavailable=false;clearControls();captureMouse();pointer.x=innerWidth/2;pointer.y=innerHeight*.48;pointer.down=false;$('#battle-map-label').textContent=game.map.name.toUpperCase();$('#battle-objective').textContent=game.mode==='zombies'?'PŘEŽIJ HORDU · MEZERNÍK KULOMET · PŘEJÍŽDĚJ ZOMBÍKY':game.mode==='deathmatch'?'TÝMOVÝ DEATHMATCH · PRVNÍ TÝM S 30 KILLY VYHRÁVÁ':'OBSAĎ A UDRŽ ZÓNY';$('#zombie-hud').hidden=game.mode!=='zombies';$('#nuke-button').hidden=game.mode==='zombies';$('.battle-score').hidden=game.mode==='zombies';$('#battle-tank-name').textContent=fullName(getTank(progress.selected));$('#battle-objective').style.opacity='1';setTimeout(()=>{$('#battle-objective').style.opacity='0'},8500);lastTime=performance.now();updateHUD();}
+function startBattle(){if($('#game-mode').value==='multiplayer'){multiplayerUI?.open();return;}if(!renderer)return;closeModal();$('#modal').hidden=true;modalView='';audio.unlock().catch(()=>{});game=new ($('#game-mode').value==='zombies'?ZombieGame:Game)({mode:$('#game-mode').value,tankId:progress.selected,mapId:progress.map,difficulty:$('#difficulty').value,onEvent:onGameEvent});awardDone=false;paused=false;keys.clear();feed=[];$('#kill-confirmation').hidden=true;$('#kill-feed').innerHTML='';$('#hit-notice').textContent='';$('#respawn-panel').hidden=true;$('#hangar').hidden=true;$('#battle').hidden=false;document.body.classList.add('in-battle');$('#battle-scene').append(canvas);renderer.resize();renderer.setBattle(game);scope=false;lastAim=null;mouseLock.failed=false;clearControls();captureMouse();pointer.x=innerWidth/2;pointer.y=innerHeight*.48;pointer.down=false;$('#battle-map-label').textContent=game.map.name.toUpperCase();$('#battle-objective').textContent=game.mode==='zombies'?'PŘEŽIJ HORDU · MEZERNÍK KULOMET · PŘEJÍŽDĚJ ZOMBÍKY':game.mode==='deathmatch'?'TÝMOVÝ DEATHMATCH · PRVNÍ TÝM S 30 KILLY VYHRÁVÁ':'OBSAĎ A UDRŽ ZÓNY';$('#zombie-hud').hidden=game.mode!=='zombies';$('#nuke-button').hidden=game.mode==='zombies';$('.battle-score').hidden=game.mode==='zombies';$('#battle-tank-name').textContent=fullName(getTank(progress.selected));$('#battle-objective').style.opacity='1';setTimeout(()=>{$('#battle-objective').style.opacity='0'},8500);lastTime=performance.now();updateHUD();}
 function finishBattle(result){document.body.classList.remove('nuke-cinematic');if(game?.mode==='multiplayer'){finishMultiplayer(result);return;}if(awardDone||!result)return;awardDone=true;paused=true;keys.clear();pointer.down=false;const xp=Math.max(0,Math.round(Number(result.xp)||0));progress.xp+=xp;progress.battles++;if(result.winner===0)progress.wins++;progress.kills+=result.kills||0;save();const next=TANKS.find(t=>t.nation===progress.nation&&!progress.unlocked.includes(t.id)&&progress.unlocked.includes(t.requires));openModal('result',`<span class="eyebrow">OPERACE UKONČENA / ${game.map.name.toUpperCase()}</span><h2>${game.mode==='zombies'?'Konec přežití.':result.winner===0?'Vítězství patří tvému týmu.':result.winner===1?'Dnes jsme ztratili bojiště.':'Operace ukončena.'}</h2><p class="modal-intro">${esc(result.reason||'Výsledky byly uloženy.')} Každá zkušenost tě posune dál.</p><div class="result-stats"><div><strong>+${num(xp)}</strong><small>VÝZKUMNÝCH BODŮ</small></div><div><strong>${result.kills||0}</strong><small>ZNIČENÝCH CÍLŮ</small></div><div><strong>${game.mode==='deathmatch'?game.teamKills[0]:result.captures||0}</strong><small>${game.mode==='zombies'?'DOKONČENÝCH VLN':game.mode==='deathmatch'?'TÝMOVÝCH KILLŮ':'OBSAZENÝCH ZÓN'}</small></div><div><strong>${num(result.damage||0)}</strong><small>POŠKOZENÍ MODULŮ</small></div></div><div class="result-message">${next?`Další na řadě: <b>${fullName(next)}</b> · ${progress.xp>=next.cost?'Máš dost bodů na výzkum!':`Zbývá ${num(next.cost-progress.xp)} VB.`}`:'Tvá vývojová větev je kompletní. Vyzkoušej další národ.'}</div><div class="modal-actions"><button class="primary-button" data-action="result-hangar">ZPĚT DO HANGÁRU →</button><button class="secondary-button" data-action="result-research">VÝZKUMNÝ STROM</button></div>`);showScoreEntry(result);}
 function backToHangar(research=false){document.body.classList.remove('nuke-cinematic');$('#server-chat').hidden=true;$('#server-chat-body').hidden=true;multiplayerUI?.leave(true);$('#network-hud').hidden=true;releaseControls();scope=false;game=null;paused=false;modalView='';$('#modal').hidden=true;$('#battle').hidden=true;$('#hangar').hidden=false;document.body.classList.remove('in-battle');hero.prepend(canvas);renderer.resize();renderer.setHangar(progress.selected);audio.update(null,0);keys.clear();pointer.down=false;renderHangar();$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.view==='hangar'));if(research)showResearch();}
-function onGameEvent(e){if(e.type==='nuke'){scope=false;clearControls();document.body.classList.add('nuke-cinematic');const f=$('#nuke-flash');f.classList.remove('detonate');void f.offsetWidth;f.classList.add('detonate');}renderer?.addEvent(e);audio.event(e);if(e.type==='kill'&&e.sourceId==='player'&&e.targetId!=='player'){clearTimeout(killConfirmTimer);const el=$('#kill-confirmation');el.hidden=false;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');el.querySelector('small').textContent=e.text;killConfirmTimer=setTimeout(()=>{el.hidden=true;el.classList.remove('show');},2300);}if(['kill','capture','message'].includes(e.type)){feed.unshift({text:e.text||'',team:e.team,time:performance.now()});feed=feed.slice(0,5)}if(e.playerRelated&&['hit','bounce','kill','repair','capture','message'].includes(e.type)){clearTimeout(noticeTimer);$('#hit-notice').textContent=e.text||({hit:'ZÁSAH',bounce:'ODRAŽENO',kill:'CÍL ZNIČEN'}[e.type]||'');$('#hit-notice').style.opacity='1';noticeTimer=setTimeout(()=>$('#hit-notice').style.opacity='0',2300)}if((e.type==='hit'||e.type==='impact')&&e.targetId===game?.player?.id){clearTimeout(flashTimer);$('#damage-flash').style.opacity='.65';flashTimer=setTimeout(()=>$('#damage-flash').style.opacity='0',100)}}
+function onGameEvent(e){if(e.type==='kill'&&e.targetId===game?.player?.id){cruise.reset();game.player.lastKiller=e.killer||{id:e.sourceId,nick:e.sourceNick||'',tankId:e.sourceType||null,tankName:e.killerName||'',reason:e.reason||'Prostředí'};}if(e.type==='nuke'){scope=false;clearControls();document.body.classList.add('nuke-cinematic');const f=$('#nuke-flash');f.classList.remove('detonate');void f.offsetWidth;f.classList.add('detonate');}renderer?.addEvent(e);audio.event(e);if(e.type==='kill'&&e.sourceId==='player'&&e.targetId!=='player'){clearTimeout(killConfirmTimer);const el=$('#kill-confirmation');el.hidden=false;el.classList.remove('show');void el.offsetWidth;el.classList.add('show');el.querySelector('small').textContent=e.text;killConfirmTimer=setTimeout(()=>{el.hidden=true;el.classList.remove('show');},2300);}if(['kill','capture','message'].includes(e.type)){feed.unshift({text:e.text||'',team:e.team,time:performance.now()});feed=feed.slice(0,5)}if(e.playerRelated&&['hit','bounce','kill','repair','capture','message'].includes(e.type)){clearTimeout(noticeTimer);$('#hit-notice').textContent=e.text||({hit:'ZÁSAH',bounce:'ODRAŽENO',kill:'CÍL ZNIČEN'}[e.type]||'');$('#hit-notice').style.opacity='1';noticeTimer=setTimeout(()=>$('#hit-notice').style.opacity='0',2300)}if((e.type==='hit'||e.type==='impact')&&e.targetId===game?.player?.id){clearTimeout(flashTimer);$('#damage-flash').style.opacity='.65';flashTimer=setTimeout(()=>$('#damage-flash').style.opacity='0',100)}}
 const moduleNames={crew:'Posádka',engine:'Motor',tracks:'Pásy',turret:'Věž',breech:'Závěr',ammo:'Munice'};
-function updateHUD(){if(!game)return;if(game.mode==='zombies'){$('#zombie-hud').innerHTML='<strong>☣ VLNA '+game.wave+'</strong><span>'+game.zombies.filter(z=>z.alive).length+' ZBÝVÁ · '+game.credits+' ŠROTU</span><small>'+ (game.upgrades.auto?'AUTO KULOMET AKTIVNÍ':'MEZERNÍK · KULOMET / LMB · DĚLO')+'</small>';} const n=game.nuke,nb=$('#nuke-button');nb.disabled=!n.ready||!game.player.alive;nb.textContent=n.state==='incoming'?'☢ ÚDER ZA '+Math.ceil(n.timer)+' s':n.state==='detonated'?'☢ JADERNÝ ÚDER':n.ready?'[N] ☢ VYPUSTIT NUKE':'☢ BODY '+Math.min(game.killStreak,n.required)+' / '+n.required;$('#mg-status').textContent=game.player.mgOverheated?'KULOMET · CHLADÍ SE':'MEZERNÍK · KULOMET';$('#mg-heat').style.width=((game.player.mgHeat||0)*100)+'%';const p=game.player,t=getTank(p.type);$('#friendly-score').textContent=game.mode==='deathmatch'?game.teamKills[0]+' / '+game.killLimit:Math.ceil(Math.max(0,game.tickets[0]));$('#enemy-score').textContent=game.mode==='deathmatch'?game.teamKills[1]+' / '+game.killLimit:Math.ceil(Math.max(0,game.tickets[1]));$('#friendly-bar').style.transform=`scaleX(${Math.min(1,Math.max(0,game.mode==='deathmatch'?game.teamKills[0]:game.tickets[0])/game.initialTickets)})`;$('#enemy-bar').style.transform=`scaleX(${Math.min(1,Math.max(0,game.mode==='deathmatch'?game.teamKills[1]:game.tickets[1])/game.initialTickets)})`;const remain=Math.max(0,Math.ceil(game.remaining));$('#battle-time').textContent=`${String(Math.floor(remain/60)).padStart(2,'0')}:${String(remain%60).padStart(2,'0')}`;$('#zone-hud').innerHTML=game.zones.map(z=>`<div class="${z.owner===0?'blue':z.owner===1?'red':''} ${z.contested?'contested':''}" title="Zóna ${z.id}: ${z.contested?'boj o zónu':z.owner===0?'spojenci':z.owner===1?'nepřítel':'neutrální'}"><span>${z.id}</span></div>`).join('');$('#ammo-name').textContent=t.weapon==='autocannon'?'30 mm AP':'APHE';const missileButton=$('#missile-button');missileButton.hidden=p.type!=='bmpt';missileButton.disabled=!p.alive||p.missiles<=0||p.missileReload>0||p.modules.breech<=0||p.modules.turret<=0;missileButton.textContent=`[2] RAKETA ${p.missiles??0}/4${p.missileReload>0?' · '+p.missileReload.toFixed(1)+' s':' · PŘIPRAVENA'}`;$('#speed-value').textContent=Math.round(p.speed*3.6);$('#terrain-label').textContent=terrainAt(game.map.id,p.x,p.z).name.toUpperCase();$('#module-bars').innerHTML=Object.entries(moduleNames).map(([key,name])=>`<div class="module-bar-row"><span>${name}</span><div><i style="width:${Math.max(0,p.modules[key])}%;background:${p.modules[key]>50?'#93b87d':p.modules[key]>0?'#e2ad60':'#df715d'}"></i></div></div>`).join('');[['.engine-block','engine'],['.turret-block','turret'],['.gun-block','breech'],['.ammo-block','ammo'],['.track','tracks']].forEach(([selector,k])=>$$(selector).forEach(el=>{el.classList.toggle('module-damaged',p.modules[k]<55);el.classList.toggle('module-destroyed',p.modules[k]<=0)}));$('#reload-bar').style.width=`${Math.max(0,Math.min(1,1-p.reload/t.reload))*100}%`;$('#reload-label').textContent=p.modules.breech<=0?'ZÁVĚR POŠKOZEN':p.reload>0?'NABÍJÍM':'PŘIPRAVENO';$('#reload-count').textContent=p.reload>0?p.reload.toFixed(1):'●';$('#reticle').classList.toggle('reloading',p.reload>0||p.modules.breech<=0);$('#repair-button').textContent=p.repair>0?`OPRAVA ${Math.ceil(p.repair)} s`:'[F] Opravit';$('#smoke-button').innerHTML=`[G] Kouř <span>${p.smokes??3}</span>`;$('#smoke-button').disabled=!p.alive||(p.smokes??3)<=0;$('#repair-button').disabled=!p.alive;$('#respawn-panel').hidden=p.alive||!!game.finished;if(!p.alive){$('#respawn-text').textContent=p.respawnIn>0?`Záložní tank připraven za ${Math.ceil(p.respawnIn)} s`:'Záložní tank je připraven. Stiskni R nebo pokračuj tlačítkem.';$('#respawn-button').disabled=p.respawnIn>0}feed=feed.filter(e=>performance.now()-e.time<6500);$('#kill-feed').innerHTML=feed.map(e=>`<div class="feed-item ${e.team===0?'ally':'enemy'}">${esc(e.text)}</div>`).join('');drawMinimap();}
+function updateHUD(){if(!game)return;const roster=$('#team-roster');roster.hidden=game.mode!=='multiplayer'||paused||!keys.has('Tab');if(!roster.hidden)roster.innerHTML='<strong>'+translate('TÝMY · TAB')+'</strong><div>'+[0,1].map(team=>'<section><h3>'+translate(team===0?'SPOJENCI':'NEPŘÍTEL')+'</h3>'+game.tanks.filter(t=>t.isHuman&&t.team===team).map(t=>'<p><b translate="no">'+esc(t.nick)+'</b><span translate="no">'+esc(fullName(getTank(t.type)))+'</span>'+(!t.alive?'<small>'+translate('ZNIČEN')+'</small>':'')+'</p>').join('')+'</section>').join('')+'</div>';if(game.mode==='zombies'){$('#zombie-hud').innerHTML='<strong>☣ VLNA '+game.wave+'</strong><span>'+game.zombies.filter(z=>z.alive).length+' ZBÝVÁ · '+game.credits+' ŠROTU</span><small>'+ (game.upgrades.auto?'AUTO KULOMET AKTIVNÍ':'MEZERNÍK · KULOMET / LMB · DĚLO')+'</small>';} const n=game.nuke,nb=$('#nuke-button');nb.disabled=!n.ready||!game.player.alive;nb.textContent=n.state==='incoming'?'☢ ÚDER ZA '+Math.ceil(n.timer)+' s':n.state==='detonated'?'☢ JADERNÝ ÚDER':n.ready?'[N] ☢ VYPUSTIT NUKE':'☢ BODY '+Math.min(game.killStreak,n.required)+' / '+n.required;$('#mg-status').textContent=game.player.mgOverheated?'KULOMET · CHLADÍ SE':'MEZERNÍK · KULOMET';$('#mg-heat').style.width=((game.player.mgHeat||0)*100)+'%';const p=game.player,t=getTank(p.type);$('#friendly-score').textContent=game.mode==='deathmatch'?game.teamKills[0]+' / '+game.killLimit:Math.ceil(Math.max(0,game.tickets[0]));$('#enemy-score').textContent=game.mode==='deathmatch'?game.teamKills[1]+' / '+game.killLimit:Math.ceil(Math.max(0,game.tickets[1]));$('#friendly-bar').style.transform=`scaleX(${Math.min(1,Math.max(0,game.mode==='deathmatch'?game.teamKills[0]:game.tickets[0])/game.initialTickets)})`;$('#enemy-bar').style.transform=`scaleX(${Math.min(1,Math.max(0,game.mode==='deathmatch'?game.teamKills[1]:game.tickets[1])/game.initialTickets)})`;const remain=Math.max(0,Math.ceil(game.remaining));$('#battle-time').textContent=`${String(Math.floor(remain/60)).padStart(2,'0')}:${String(remain%60).padStart(2,'0')}`;$('#zone-hud').innerHTML=game.zones.map(z=>`<div class="${z.owner===0?'blue':z.owner===1?'red':''} ${z.contested?'contested':''}" title="Zóna ${z.id}: ${z.contested?'boj o zónu':z.owner===0?'spojenci':z.owner===1?'nepřítel':'neutrální'}"><span>${z.id}</span></div>`).join('');$('#ammo-name').textContent=t.weapon==='autocannon'?'30 mm AP':'APHE';const missileButton=$('#missile-button');missileButton.hidden=p.type!=='bmpt';missileButton.disabled=!p.alive||p.missiles<=0||p.missileReload>0||p.modules.breech<=0||p.modules.turret<=0;missileButton.textContent=`[2] RAKETA ${p.missiles??0}/4${p.missileReload>0?' · '+p.missileReload.toFixed(1)+' s':' · PŘIPRAVENA'}`;$('#secondary-button').hidden=p.type!=='maus';$('#secondary-button').disabled=!p.alive||p.secondaryReload>0||p.modules.breech<=0;$('#secondary-button').textContent='[R] 75 mm · '+(p.secondaryReload>0?p.secondaryReload.toFixed(1)+' s':translate('PŘIPRAVENO'));$('#cruise-status').hidden=!cruise.direction;$('#cruise-status').textContent=translate(cruise.direction>0?'TEMPOMAT VPŘED · WASD ZRUŠÍ':'TEMPOMAT VZAD · WASD ZRUŠÍ');$('#speed-value').textContent=Math.round(p.speed*3.6);$('#terrain-label').textContent=terrainAt(game.map.id,p.x,p.z).name.toUpperCase();$('#module-bars').innerHTML=Object.entries(moduleNames).map(([key,name])=>`<div class="module-bar-row"><span>${name}</span><div><i style="width:${Math.max(0,p.modules[key])}%;background:${p.modules[key]>50?'#93b87d':p.modules[key]>0?'#e2ad60':'#df715d'}"></i></div></div>`).join('');[['.engine-block','engine'],['.turret-block','turret'],['.gun-block','breech'],['.ammo-block','ammo'],['.track','tracks']].forEach(([selector,k])=>$$(selector).forEach(el=>{el.classList.toggle('module-damaged',p.modules[k]<55);el.classList.toggle('module-destroyed',p.modules[k]<=0)}));$('#reload-bar').style.width=`${Math.max(0,Math.min(1,1-p.reload/t.reload))*100}%`;$('#reload-label').textContent=p.modules.breech<=0?'ZÁVĚR POŠKOZEN':p.reload>0?'NABÍJÍM':'PŘIPRAVENO';$('#reload-count').textContent=p.reload>0?p.reload.toFixed(1):'●';$('#reticle').classList.toggle('reloading',p.reload>0||p.modules.breech<=0);$('#repair-button').textContent=p.repair>0?`OPRAVA ${Math.ceil(p.repair)} s`:'[F] Opravit';$('#smoke-button').innerHTML=`[G] Kouř <span>${p.smokes??3}</span>`;$('#smoke-button').disabled=!p.alive||(p.smokes??3)<=0;$('#repair-button').disabled=!p.alive;$('#respawn-panel').hidden=p.alive||!!game.finished;if(!p.alive){const killer=p.lastKiller;$('#death-killer').textContent=killer?translate('Zničil tě:')+' '+(killer.nick?killer.nick+' · ':'')+(killer.tankName||translate(killer.reason||'Prostředí')):'';$('#respawn-text').textContent=p.respawnIn>0?`Záložní tank připraven za ${Math.ceil(p.respawnIn)} s`:'Záložní tank je připraven. Stiskni R nebo pokračuj tlačítkem.';$('#respawn-button').disabled=p.respawnIn>0}feed=feed.filter(e=>performance.now()-e.time<6500);$('#kill-feed').innerHTML=feed.map(e=>`<div class="feed-item ${e.team===0?'ally':'enemy'}">${esc(e.text)}</div>`).join('');drawMinimap();}
 function drawMinimap(){const s=mini.width,scale=s/game.map.size;mc.drawImage(mapTexture(game.map),0,0,s,s);const cv=(x)=>(x+game.map.size/2)*scale;mc.strokeStyle='#c2d4ac14';mc.lineWidth=1;for(let i=0;i<=6;i++){mc.beginPath();mc.moveTo(i*s/6,0);mc.lineTo(i*s/6,s);mc.moveTo(0,i*s/6);mc.lineTo(s,i*s/6);mc.stroke()}mc.fillStyle='#131e1599';game.map.obstacles.forEach(o=>{if(o.type==='tree')return;mc.fillRect(cv(o.x)-o.w*scale/2,cv(o.z)-o.d*scale/2,o.w*scale,o.d*scale)});for(const z of game.zones){mc.beginPath();mc.arc(cv(z.x),cv(z.z),11,0,Math.PI*2);mc.fillStyle=z.owner===0?'#5babbc99':z.owner===1?'#b76f5899':'#bcc8a948';mc.fill();mc.strokeStyle=z.owner===0?'#a0e3ed':z.owner===1?'#ffaf8b':'#d0d9bc';mc.stroke();if(Math.abs(z.progress)>0&&z.owner===-1){mc.beginPath();mc.arc(cv(z.x),cv(z.z),12,-Math.PI/2,-Math.PI/2+Math.abs(z.progress)*Math.PI*2);mc.strokeStyle=z.progress>0?'#a0e3ed':'#ffaf8b';mc.stroke()}mc.fillStyle='#f1f4df';mc.font='bold 10px sans-serif';mc.textAlign='center';mc.textBaseline='middle';mc.fillText(z.id,cv(z.x),cv(z.z))}for(const t of game.tanks){if(!t.alive||(t.team===1&&!game.canSeeTarget(t)))continue;mc.save();mc.translate(cv(t.x),cv(t.z));mc.rotate(-t.angle);mc.fillStyle=t.isPlayer?'#ffd58d':t.team===0?'#8ad6e7':'#f7967c';mc.beginPath();mc.moveTo(0,5);mc.lineTo(-3,-3);mc.lineTo(3,-3);mc.closePath();mc.fill();if(t.isPlayer){mc.strokeStyle='#fff9da';mc.beginPath();mc.arc(0,0,7,0,Math.PI*2);mc.stroke()}mc.restore()}for(const z of game.zombies||[]){if(!z.alive)continue;mc.fillStyle=z.kind==='brute'?'#e4a964':'#df7862';mc.beginPath();mc.arc(cv(z.x),cv(z.z),2.3,0,Math.PI*2);mc.fill();}mc.fillStyle='#bfcfb4';mc.font='8px sans-serif';mc.textAlign='left';mc.fillText('N',5,9);mc.textAlign='right';mc.fillText('1 km',s-5,s-6);}
 let tagRefresh=-1,tagVisible=new Set(),tagNodes=new Map();
 function drawTags(){
@@ -58783,8 +59100,8 @@ function drawTags(){
 document.addEventListener('click',e=>{const b=e.target.closest('button,a.brand');if(!b)return;if(b.matches('.brand')){e.preventDefault();if(!game)closeModal();return}if(b.dataset.hangarTab){switchHangarTab(b.dataset.hangarTab);if(b.id==='selected-map')$('#maps-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}
  if(b.dataset.mapFilter){mapFilter=b.dataset.mapFilter;$$('[data-map-filter]').forEach(q=>q.setAttribute('aria-pressed',String(q.dataset.mapFilter===mapFilter)));renderHangar();}
  if(b.dataset.view){if(b.dataset.view==='hangar')closeModal();if(b.dataset.view==='research')showResearch();if(b.dataset.view==='guide')showGuide();if(b.dataset.view==='multiplayer'&&!game)multiplayerUI?.open();}if(b.dataset.nation){progress.nation=b.dataset.nation;const t=TANKS.find(t=>t.nation===progress.nation&&progress.unlocked.includes(t.id));selectTank(t.id)}if(b.dataset.tank)selectTank(b.dataset.tank);if(b.dataset.map){progress.map=b.dataset.map;save();renderHangar()}if(b.dataset.equip){selectTank(b.dataset.equip);closeModal()}if(b.dataset.unlock){const t=getTank(b.dataset.unlock);if(!progress.unlocked.includes(t.id)&&progress.xp>=t.cost&&(!t.requires||progress.unlocked.includes(t.requires))){progress.xp-=t.cost;progress.unlocked.push(t.id);save();showResearch(t.id);renderHangar();toast(`${fullName(t)} vyzkoumán. Připraven k nasazení.`)}}switch(b.dataset.action){case'close':case'resume':closeModal();break;case'abandon':{if(game.mode==='multiplayer'){backToHangar();break;}const r=game.abandon();finishBattle(r||game.finished);break}case'result-hangar':backToHangar();break;case'result-research':backToHangar(true);break;}
- if(b.dataset.selectDecal!==undefined&&customDraft){workshopEditor.select(Number(b.dataset.selectDecal));renderer.workshopView(customDraft.decals[Number(b.dataset.selectDecal)].surface.split('-')[1]);}if(b.dataset.removeDecal!==undefined&&customDraft){imageImportVersion++;$('#custom-save').disabled=false;customDraft.decal='';customDraft.decals.splice(Number(b.dataset.removeDecal),1);renderCustomizationForm();previewCustomization();}if(b.id==='customize-button')showCustomization();if(b.id==='custom-save')closeCustomization(true);if(b.id==='custom-cancel')closeCustomization(false);if(b.id==='custom-remove-image'){imageImportVersion++;$('#custom-save').disabled=false;customDraft.decal='';renderCustomizationForm();previewCustomization();}if(b.id==='custom-reset'){imageImportVersion++;$('#custom-save').disabled=false;customDraft=normalizeAppearance({},progress.selected);renderCustomizationForm();previewCustomization();}if(b.dataset.zupgrade){if(game?.buyUpgrade(b.dataset.zupgrade))showZombieShop();}if(b.id==='next-wave'){if(game?.nextWave())closeModal();}if(b.id==='nuke-button')game?.launchNuke();if(b.id==='play-button')startBattle();if(b.id==='close-modal')closeModal();if(b.id==='settings-button')showSettings();if(b.id==='pause-button')pause();if(b.id==='camera-mode-button'&&game&&!paused)scope=!scope;if(b.id==='repair-button')game?.repairPlayer();if(b.id==='smoke-button')game?.smokePlayer();if(b.id==='missile-button')game?.fireMissilePlayer();if(b.id==='respawn-button')respawn();if(b.id==='sound-toggle'){progress.settings.sound=!progress.settings.sound;audio.setEnabled(progress.settings.sound);audio.unlock().catch(()=>{});save();b.textContent=progress.settings.sound?'ZAPNUTO':'VYPNUTO'}if(b.id==='export-save'){const blob=new Blob([JSON.stringify({...progress,format:'iron-front-save-v1'},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='iron-front-postup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Záloha postupu připravena.')}});
-document.addEventListener('change',async e=>{if(e.target.id==='language-select'||e.target.matches('[data-language-picker]')){setLanguage(e.target.value);return;}if(e.target.id==='game-mode'){const online=e.target.value==='multiplayer';$('#play-button').innerHTML=online?'HRÁT ONLINE <span>→</span>':'DO BITVY <span>→</span>';const zombie=e.target.value==='zombies',deathmatch=e.target.value==='deathmatch';$('.mode-label strong').textContent=online?'MULTIPLAYER':zombie?'ZOMBIE · PŘEŽITÍ':deathmatch?'TÝMOVÝ DEATHMATCH':'NADVLÁDA';$('.mode-label small').textContent=online?'1 proti 1 · volitelní boti':zombie?'Vlny · šrot · vylepšení tanku':deathmatch?'30 killů · 12 minut · 6 proti 6':deploymentSummary();$('.deploy-panel p').innerHTML=zombie?'Jeden tank proti hordě.<br>Každou vlnou silnější. Mezi vlnami obchod.':deathmatch?'Žádné zóny. Každý zničený nepřítel je bod pro tým.':'<span id="matchup-label">Bitva národů</span><br>Obsaď zóny. Vybojuj další stroj.';}if(e.target.id==='sensitivity-select'){progress.settings.sensitivity=Number(e.target.value);save();}if(e.target.id==='quality-select'){progress.settings.quality=e.target.value;renderer?.setQuality(progress.settings.quality);save()}if(e.target.id==='import-save'){const f=e.target.files[0];if(!f)return;try{if(f.size>2500000)throw Error();const p=JSON.parse(await f.text());if(p.format!=='iron-front-save-v1'||!Array.isArray(p.unlocked)||!Number.isFinite(p.xp)||p.xp<0)throw Error();progress.unlocked=[...new Set([...defaults.unlocked,...p.unlocked.filter(id=>TANKS.some(t=>t.id===id))])];progress.xp=Math.floor(p.xp);progress.appearances=normalizeAppearances(p.appearances);if(renderer)renderer.appearances=progress.appearances;for(const k of ['battles','wins','kills'])progress[k]=Math.max(0,Math.floor(Number(p[k])||0));progress.selected=progress.unlocked.includes(p.selected)?p.selected:defaults.selected;progress.nation=getTank(progress.selected).nation;save();renderHangar();if(!game)renderer?.setHangar(progress.selected);showSettings();toast('Postup úspěšně obnoven.')}catch{toast('Soubor není platná záloha Hard Steel War.')}}});
+ if(b.dataset.selectDecal!==undefined&&customDraft){workshopEditor.select(Number(b.dataset.selectDecal));renderer.workshopView(customDraft.decals[Number(b.dataset.selectDecal)].surface.split('-')[1]);}if(b.dataset.removeDecal!==undefined&&customDraft){imageImportVersion++;$('#custom-save').disabled=false;customDraft.decal='';customDraft.decals.splice(Number(b.dataset.removeDecal),1);renderCustomizationForm();previewCustomization();}if(b.id==='customize-button')showCustomization();if(b.id==='custom-save')closeCustomization(true);if(b.id==='custom-cancel')closeCustomization(false);if(b.id==='custom-remove-image'){imageImportVersion++;$('#custom-save').disabled=false;customDraft.decal='';renderCustomizationForm();previewCustomization();}if(b.id==='custom-reset'){imageImportVersion++;$('#custom-save').disabled=false;customDraft=normalizeAppearance({},progress.selected);renderCustomizationForm();previewCustomization();}if(b.dataset.zupgrade){if(game?.buyUpgrade(b.dataset.zupgrade))showZombieShop();}if(b.id==='next-wave'){if(game?.nextWave())closeModal();}if(b.id==='nuke-button')game?.launchNuke();if(b.id==='play-button')startBattle();if(b.id==='close-modal')closeModal();if(b.id==='settings-button')showSettings();if(b.id==='pause-button')pause();if(b.id==='camera-mode-button'&&game&&!paused)scope=!scope;if(b.id==='repair-button'){cruise.reset();game?.repairPlayer();}if(b.id==='secondary-button')secondaryRequested=true;if(b.id==='smoke-button')game?.smokePlayer();if(b.id==='missile-button')game?.fireMissilePlayer();if(b.id==='respawn-button')respawn();if(b.id==='sound-toggle'){progress.settings.sound=!progress.settings.sound;audio.setEnabled(progress.settings.sound);audio.unlock().catch(()=>{});save();b.textContent=progress.settings.sound?'ZAPNUTO':'VYPNUTO'}if(b.id==='export-save'){const blob=new Blob([JSON.stringify({...progress,format:'iron-front-save-v1'},null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='iron-front-postup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Záloha postupu připravena.')}});
+document.addEventListener('change',async e=>{if(e.target.id==='language-select'||e.target.matches('[data-language-picker]')){setLanguage(e.target.value);return;}if(e.target.id==='game-mode'){const online=e.target.value==='multiplayer';$('#play-button').innerHTML=online?'HRÁT ONLINE <span>→</span>':'DO BITVY <span>→</span>';const zombie=e.target.value==='zombies',deathmatch=e.target.value==='deathmatch';$('.mode-label strong').textContent=online?'MULTIPLAYER':zombie?'ZOMBIE · PŘEŽITÍ':deathmatch?'TÝMOVÝ DEATHMATCH':'NADVLÁDA';$('.mode-label small').textContent=online?'Až 8 hráčů · vlastní týmy · volitelní boti':zombie?'Vlny · šrot · vylepšení tanku':deathmatch?'30 killů · 12 minut · 6 proti 6':deploymentSummary();$('.deploy-panel p').innerHTML=zombie?'Jeden tank proti hordě.<br>Každou vlnou silnější. Mezi vlnami obchod.':deathmatch?'Žádné zóny. Každý zničený nepřítel je bod pro tým.':'<span id="matchup-label">Bitva národů</span><br>Obsaď zóny. Vybojuj další stroj.';}if(e.target.id==='sensitivity-select'){progress.settings.sensitivity=Number(e.target.value);save();}if(e.target.id==='quality-select'){progress.settings.quality=e.target.value;renderer?.setQuality(progress.settings.quality);save()}if(e.target.id==='import-save'){const f=e.target.files[0];if(!f)return;try{if(f.size>2500000)throw Error();const p=JSON.parse(await f.text());if(p.format!=='iron-front-save-v1'||!Array.isArray(p.unlocked)||!Number.isFinite(p.xp)||p.xp<0)throw Error();progress.unlocked=[...new Set([...defaults.unlocked,...p.unlocked.filter(id=>TANKS.some(t=>t.id===id))])];progress.xp=Math.floor(p.xp);progress.appearances=normalizeAppearances(p.appearances);if(renderer)renderer.appearances=progress.appearances;for(const k of ['battles','wins','kills'])progress[k]=Math.max(0,Math.floor(Number(p[k])||0));progress.selected=progress.unlocked.includes(p.selected)?p.selected:defaults.selected;progress.nation=getTank(progress.selected).nation;save();renderHangar();if(!game)renderer?.setHangar(progress.selected);showSettings();toast('Postup úspěšně obnoven.')}catch{toast('Soubor není platná záloha Hard Steel War.')}}});
 
 function respawn(){
   if(!game?.respawnPlayer())return;
@@ -58793,30 +59110,25 @@ function respawn(){
 function clearControls(){
   multiplayerUI?.room?.stopInput();
   ignoreMouseMove=true;
-  keys.clear();pointer.down=false;pointer.right=false;fireRequested=false;mgRequested=false;touchCannon=false;renderer?.setFreeLook(false);
+  keys.clear();cruise.reset();pointer.inside=false;pointer.down=false;pointer.right=false;fireRequested=false;mgRequested=false;secondaryRequested=false;touchCannon=false;renderer?.setFreeLook(false);
 }
 function releaseControls(){
   clearControls();
   if(document.pointerLockElement===canvas)document.exitPointerLock();
 }
 function captureMouse(){
-  if(touchAim||!game||paused||lockUnavailable||lockPending||document.pointerLockElement===canvas)return;
-  if(!canvas.requestPointerLock){lockUnavailable=true;return;}
-  lockPending=true;
-  try{
-    const request=canvas.requestPointerLock();
-    request?.catch(()=>{lockUnavailable=true;lockPending=false;});
-  }catch{lockUnavailable=true;lockPending=false;}
+  if(touchAim||!game||paused)return;
+  mouseLock.request();
 }
 document.addEventListener('pointerlockchange',()=>{
-  lockPending=false;
-  if(document.pointerLockElement===canvas){ignoreMouseMove=true;lockUnavailable=false;touchAim=false;canvas.focus({preventScroll:true});}
+  mouseLock.changed();ignoreMouseMove=true;
+  if(document.pointerLockElement===canvas){touchAim=false;canvas.focus({preventScroll:true});}
   else {lastUnlock=performance.now();if(game&&!paused&&!game.finished&&$('#server-chat-body').hidden)pause();}
 });
-document.addEventListener('pointerlockerror',()=>{lockPending=false;lockUnavailable=true;});
+document.addEventListener('pointerlockerror',()=>mouseLock.error());
 document.addEventListener('keydown',e=>{
   if(e.target.id==='server-chat-input'){if(e.code==='Escape'){e.preventDefault();toggleServerChat(false);}return;}
-  if(e.code==='Enter'&&multiplayerUI?.room?.public&&game&&!paused&&!e.target.matches('input,select')){e.preventDefault();toggleServerChat();return;}
+  if(e.code==='Enter'&&typeof multiplayerUI?.room?.chat==='function'&&game&&!paused&&!e.target.matches('input,select')){e.preventDefault();toggleServerChat();return;}
   if(customDraft&&e.code==='Escape'){e.preventDefault();closeCustomization(false);return;}
   if(e.code==='Tab'&&!$('#modal').hidden){
     const focusable=[...$('#modal').querySelectorAll('button:not([disabled]):not([hidden]),select,input:not([hidden]),a[href]')];
@@ -58836,16 +59148,16 @@ document.addEventListener('keydown',e=>{
   if(!game||paused)return;
   if(['PageUp','PageDown','KeyY'].includes(e.code)){e.preventDefault();if(e.code==='KeyY'){const hit=renderer.aimFromCenter();game.player.sightRange=Math.max(100,Math.min(1600,Math.round(Math.hypot(hit.x-game.player.x,hit.z-game.player.z)/50)*50));}else game.player.sightRange=Math.max(100,Math.min(1600,game.player.sightRange+(e.code==='PageUp'?100:-100)));}
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight','Tab'].includes(e.code))e.preventDefault();
-  keys.add(e.code);
+  keys.add(e.code);cruise.keydown(e.code,e.repeat);
   if(!e.repeat){
     if(e.code==='Space')mgRequested=true;
     if(e.code==='KeyN')game.launchNuke();
     if(e.code==='ShiftLeft'||e.code==='ShiftRight')scope=!scope;
     if(e.code==='KeyC')renderer.setFreeLook(true);
-    if(e.code==='KeyF')game.repairPlayer();
+    if(e.code==='KeyF'){cruise.reset();game.repairPlayer();}
     if(e.code==='KeyG')game.smokePlayer();
     if(e.code==='Digit2'||e.code==='Numpad2')game.fireMissilePlayer();
-    if(e.code==='KeyR')respawn();
+    if(e.code==='KeyR'){if(game.player.alive)secondaryRequested=true;else respawn();}
   }
 });
 document.addEventListener('keyup',e=>{keys.delete(e.code);if(e.code==='KeyC')renderer?.setFreeLook(false);});
@@ -58869,19 +59181,28 @@ bindMouseButtons(canvas,window,e=>{
   e.preventDefault();canvas.focus({preventScroll:true});touchAim=false;
   if(e.button===0){
     pointer.down=true;fireRequested=true;
-    if(document.pointerLockElement!==canvas&&!lockUnavailable)captureMouse();
+    if(document.pointerLockElement!==canvas)captureMouse();
   }
   if(e.button===2)pointer.right=true;
 },e=>{if(e.button===0)pointer.down=false;if(e.button===2)pointer.right=false;});
 canvas.addEventListener('pointerenter',()=>{if(document.pointerLockElement!==canvas)ignoreMouseMove=true;});
+canvas.addEventListener('pointerleave',()=>{pointer.inside=false;});
 canvas.addEventListener('pointermove',e=>{
   if(customDraft)return;
+  if(e.pointerType==='touch'&&game&&!paused&&!game.finished){touchAim=true;pointer.x=e.clientX;pointer.y=e.clientY;}
+});
+// Locked mouse movement is delivered on document even when the physical
+// cursor would have left the canvas. Do not also process pointermove.
+document.addEventListener('mousemove',e=>{
+  if(customDraft||e.sourceCapabilities?.firesTouchEvents)return;
+  const locked=document.pointerLockElement===canvas;
+  pointer.inside=e.target===canvas;pointer.x=e.clientX;pointer.y=e.clientY;
+  if(!locked&&!pointer.inside)return;
   if(!game){if(pointer.right)renderer?.rotateCamera(e.movementX,e.movementY);return;}
   if(paused||game.finished)return;
-  if(e.pointerType==='touch'){touchAim=true;pointer.x=e.clientX;pointer.y=e.clientY;return;}
   touchAim=false;
   if(ignoreMouseMove){ignoreMouseMove=false;return;}
-  renderer?.rotateCamera(e.movementX,e.movementY,{sensitivity:Number(progress.settings.sensitivity)||1});
+  if(Number.isFinite(e.movementX)&&Number.isFinite(e.movementY))renderer?.rotateCamera(e.movementX,e.movementY,{sensitivity:Number(progress.settings.sensitivity)||1});
 });
 window.addEventListener('pointercancel',clearControls);
 canvas.addEventListener('wheel',e=>{e.preventDefault();if(customDraft)return;if(!paused)renderer?.zoom(e.deltaY,{scope});},{passive:false});
@@ -58891,7 +59212,7 @@ window.addEventListener('beforeunload',()=>multiplayerUI?.room?.close());
 window.addEventListener('resize',()=>renderer?.resize());
 $('#play-button').addEventListener('pointerdown',e=>{touchAim=e.pointerType==='touch';});
 $$('[data-key]').forEach(b=>{
-  b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(b.dataset.key);b.setPointerCapture(e.pointerId);});
+  b.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(b.dataset.key);cruise.reset();b.setPointerCapture(e.pointerId);});
   for(const name of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(name,()=>keys.delete(b.dataset.key));
 });
 $('#touch-fire').addEventListener('pointerdown',e=>{e.preventDefault();touchCannon=true;fireRequested=true;e.target.setPointerCapture(e.pointerId);});
@@ -58902,15 +59223,17 @@ function loop(now){
   const dt=Math.min((now-lastTime)/1000,.05);lastTime=now;
   if(!renderer)return;
   try{
+    if(game&&!paused&&!game.finished&&!touchAim&&document.pointerLockElement!==canvas){const delta=edgeLookDelta(pointer,canvas.getBoundingClientRect(),dt);if(delta.x||delta.y)renderer?.rotateCamera(delta.x,delta.y,{sensitivity:Number(progress.settings.sensitivity)||1});}
     const view={scope:scope&&!!game?.player.alive,zoom:pointer.right,xray:keys.has('KeyX')};
     if(game){
       renderer.updateView(paused?0:dt,game,view);
       if((!paused||game.mode==='multiplayer')&&!game.finished){
         const aimRect=canvas.getBoundingClientRect();if(!paused)lastAim=renderer.aimForSight(touchAim?(pointer.x-aimRect.left)/aimRect.width*2-1:0,touchAim?1-(pointer.y-aimRect.top)/aimRect.height*2:0);
-        const driving=keyboardInput(keys);
-        const input=(paused||!$('#server-chat-body').hidden)&&game.mode==='multiplayer'?multiplayerUI.room.idleInput():{...driving,aimX:lastAim?.x??game.player._aimX,aimY:lastAim?.y??game.player._aimY,aimZ:lastAim?.z??game.player._aimZ,fire:fireRequested||pointer.down||touchCannon,machineGun:mgRequested||driving.machineGun};
-        if(game.mode==='multiplayer'){const wasAlive=game.player.alive;multiplayerUI?.room?.update(dt,input);if(!wasAlive&&game.player.alive){scope=false;renderer.resetView(game);}const hud=$('#network-hud');hud.hidden=false;hud.textContent=multiplayerUI?.status()||'';}else game.update(dt,input);
-        fireRequested=false;mgRequested=false;
+        if(!game.player.alive)cruise.reset();
+        const driving=keyboardInput(keys,cruise.direction);
+        const input=(paused||!$('#server-chat-body').hidden)&&game.mode==='multiplayer'?multiplayerUI.room.idleInput():{...driving,aimX:lastAim?.x??game.player._aimX,aimY:lastAim?.y??game.player._aimY,aimZ:lastAim?.z??game.player._aimZ,fire:fireRequested||pointer.down||touchCannon,machineGun:mgRequested||driving.machineGun,secondaryFire:secondaryRequested||(game.player.alive&&keys.has('KeyR'))};
+        if(game.mode==='multiplayer'){const wasAlive=game.player.alive;multiplayerUI?.room?.update(dt,input);if(!wasAlive&&game.player.alive){scope=false;renderer.resetView(game);}const hud=$('#network-hud');hud.hidden=false;hud.textContent=(multiplayerUI?.status()||'')+' · '+translate('TÝMY · TAB');}else game.update(dt,input);
+        fireRequested=false;mgRequested=false;secondaryRequested=false;
         if(game.finished)finishBattle(game.finished);else if(game.mode==='zombies'&&game.phase==='shop')showZombieShop();
       }
       view.viewUpdated=true;
@@ -58933,7 +59256,7 @@ function loop(now){
       $('#camera-mode-button').setAttribute('aria-pressed',String(view.scope));
       $('#camera-mode-button').hidden=paused||!game.player.alive;
       $('#view-status').hidden=paused||!game.player.alive;
-      $('#view-status').textContent=cinematic?'JADERNÝ ÚDER · MYŠÍ OTÁČEJ KAMEROU':keys.has('KeyC')?'VOLNÝ POHLED · UVOLNI C PRO NÁVRAT':view.scope?'OPTIKA STŘELCE · SHIFT ZPĚT':!touchAim&&document.pointerLockElement!==canvas&&!lockUnavailable?'KLIKNI DO BOJIŠTĚ PRO ZACHYCENÍ MYŠI':'MYŠ MÍŘÍ · C ROZHLÍŽENÍ · ESC PAUZA';
+      $('#view-status').textContent=cinematic?'JADERNÝ ÚDER · MYŠÍ OTÁČEJ KAMEROU':keys.has('KeyC')?'VOLNÝ POHLED · UVOLNI C PRO NÁVRAT':view.scope?'OPTIKA STŘELCE · SHIFT ZPĚT':!touchAim&&document.pointerLockElement!==canvas?'KLIKNI PRO ZACHYCENÍ MYŠI · U OKRAJŮ SE POHLED OTÁČÍ':'MYŠ MÍŘÍ · C ROZHLÍŽENÍ · ESC PAUZA';
       drawTags();if(now-lastHud>90){updateHUD();lastHud=now;}
     }
   }catch(err){console.error('Hard Steel War runtime error',err);paused=true;releaseControls();toast('Simulace narazila na chybu. Vrať se do hangáru a spusť novou bitvu.');}
@@ -58981,7 +59304,7 @@ document.addEventListener('languagechange',()=>{document.title='Hard Steel War �
 $('.loadout-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();switchHangarTab(e.key==='Home'?'vehicles':e.key==='End'?'maps':hangarTab==='vehicles'?'maps':'vehicles');$('#'+hangarTab+'-tab').focus();});
 
 function enterMultiplayer(gameInstance,room){
- if(!renderer)return;multiplayerUI.servers.stop();$('#server-chat').hidden=!room.public;$('#server-chat-body').hidden=true;game=gameInstance;awardDone=false;paused=false;modalView='';$('#modal').hidden=true;$('#hangar').hidden=true;$('#battle').hidden=false;document.body.classList.add('in-battle');$('#battle-scene').append(canvas);renderer.resize();renderer.setBattle(game);scope=false;lastAim=null;lockUnavailable=false;clearControls();feed=[];tagRefresh=-1;tagNodes.forEach(n=>n.remove());tagNodes.clear();$('#kill-feed').innerHTML='';$('#hit-notice').textContent='';$('#kill-confirmation').hidden=true;$('#respawn-panel').hidden=true;$('#zombie-hud').hidden=true;$('#nuke-button').hidden=true;$('.battle-score').hidden=false;$('#battle-map-label').textContent=game.map.name.toUpperCase();$('#battle-tank-name').textContent=fullName(getTank(game.player.type));$('#battle-objective').textContent='ONLINE · OBSAĎ A UDRŽ ZÓNY';$('#battle-objective').style.opacity='1';setTimeout(()=>$('#battle-objective').style.opacity='0',6000);$('#network-hud').hidden=false;room.setHidden(document.hidden);audio.unlock().catch(()=>{});lastTime=performance.now();updateHUD();
+ if(!renderer)return;multiplayerUI.servers.stop();$('#server-chat').hidden=typeof room.chat!=='function';$('#server-chat-body').hidden=true;game=gameInstance;awardDone=false;paused=false;modalView='';$('#modal').hidden=true;$('#hangar').hidden=true;$('#battle').hidden=false;document.body.classList.add('in-battle');$('#battle-scene').append(canvas);renderer.resize();renderer.setBattle(game);scope=false;lastAim=null;mouseLock.failed=false;clearControls();feed=[];tagRefresh=-1;tagNodes.forEach(n=>n.remove());tagNodes.clear();$('#kill-feed').innerHTML='';$('#hit-notice').textContent='';$('#kill-confirmation').hidden=true;$('#respawn-panel').hidden=true;$('#zombie-hud').hidden=true;$('#nuke-button').hidden=true;$('.battle-score').hidden=false;$('#battle-map-label').textContent=game.map.name.toUpperCase();$('#battle-tank-name').textContent=fullName(getTank(game.player.type));$('#battle-objective').textContent='ONLINE · OBSAĎ A UDRŽ ZÓNY';$('#battle-objective').style.opacity='1';setTimeout(()=>$('#battle-objective').style.opacity='0',6000);$('#network-hud').hidden=false;room.setHidden(document.hidden);audio.unlock().catch(()=>{});lastTime=performance.now();updateHUD();
 }
 function finishMultiplayer(result){
  if(awardDone||!result)return;awardDone=true;paused=true;releaseControls();
@@ -58989,14 +59312,15 @@ function finishMultiplayer(result){
 }
 multiplayerUI=new MultiplayerUI({getProgress:()=>progress,save,openModal,closeModal,onBattle:enterMultiplayer,toast,onClosed:message=>{if(game?.mode==='multiplayer'&&!game.finished)backToHangar();else if(modalView==='multiplayer')closeModal();if(message)toast(message);}});
 multiplayerUI.onEvent=onGameEvent;
+if(renderer)multiplayerUI.openInvite();
 
 function toggleServerChat(open=$('#server-chat-body').hidden){
- if(!multiplayerUI?.room?.public)return;
- $('#server-chat-body').hidden=!open;clearControls();
+ if(typeof multiplayerUI?.room?.chat!=='function')return;
+ $('#server-chat-body').hidden=!open;multiplayerUI.servers.unread=0;$('#server-chat-toggle').textContent='CHAT · ENTER';clearControls();
  if(open){releaseControls();$('#server-chat-input').focus();}else{$('#server-chat-input').blur();if(!paused)captureMouse();}
 }
 $('#server-chat-toggle').addEventListener('click',()=>toggleServerChat());
-$('#server-chat-form').addEventListener('submit',e=>{e.preventDefault();const input=$('#server-chat-input');if(input.value.trim()){multiplayerUI?.room?.chat(input.value);input.value='';}toggleServerChat(false);});
+$('#server-chat-form').addEventListener('submit',e=>{e.preventDefault();const input=$('#server-chat-input');if(input.value.trim()){if(!multiplayerUI?.room?.chat(input.value)){toast('Zprávu nelze odeslat. Počkej chvilku a zkus to znovu.');return;}input.value='';}toggleServerChat(false);});
 document.addEventListener('offlinebattle',()=>{closeModal();$('#game-mode').value='battle';startBattle();});
 
 return {};
