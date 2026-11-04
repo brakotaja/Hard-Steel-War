@@ -55306,6 +55306,71 @@ function matchesDevCode(input,ssid,date=new Date()){return ssid!==null&&foldNetw
 
 return {foldNetwork,matchesDevCode};
 })();
+MODULES["realtime.js"]=(()=>{
+const MULTIPLAYER_VERSION=30;
+const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function roomCode(){const a=new Uint8Array(8);globalThis.crypto.getRandomValues(a);return [...a].map(v=>alphabet[v%32]).join('');}
+function normalizeRoomCode(value){const code=String(value||'').toUpperCase().replace(/[\s-]/g,'');if(!/^[A-HJ-NP-Z2-9]{8}$/.test(code))throw Error('Kód místnosti musí mít 8 znaků.');return code;}
+
+// The documented Supabase/Phoenix JSON protocol. No SDK or game-server install
+// is needed; the public project key only opens an ephemeral Broadcast channel.
+class RealtimeTransport{
+ constructor(config,code,{WebSocketImpl=globalThis.WebSocket,onMessage=()=>{},onClose=()=>{},presenceKey,onPresence=()=>{}}={}){
+  Object.assign(this,{config,code:normalizeRoomCode(code),WebSocketImpl,onMessage,onClose,joined:false,closed:false,serial:0});
+  this.presenceKey=presenceKey;this.onPresence=onPresence;this.people=new Map();
+  this.topic='realtime:hsw-pvp-v'+MULTIPLAYER_VERSION+':'+this.code;
+ }
+ connect(){
+  if(this.pending)return this.pending;
+  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(this.config.url)||!/^sb_publishable_/.test(this.config.publishableKey))return Promise.reject(Error('Multiplayer není připojený k serveru.'));
+  this.pending=new Promise((resolve,reject)=>{
+   this.rejectJoin=reject;
+   this.timeout=setTimeout(()=>{reject(Error('Připojení k multiplayeru vypršelo. Zkus to znovu.'));this.close();},12000);
+   const url=this.config.url.replace('https:','wss:')+'/realtime/v1/websocket?apikey='+encodeURIComponent(this.config.publishableKey)+'&vsn=1.0.0';
+   try{this.socket=new this.WebSocketImpl(url);}catch{clearTimeout(this.timeout);reject(Error('Prohlížeč nemůže otevřít multiplayerové spojení.'));return;}
+   this.socket.onopen=()=>{this.joinRef=String(++this.serial);this.push('phx_join',{config:{broadcast:{ack:false,self:false},presence:this.presenceKey?{enabled:true,key:this.presenceKey}:{enabled:false},private:false}},this.joinRef);};
+   this.socket.onmessage=e=>{
+    if(typeof e.data!=='string'||e.data.length>180000)return;
+    let m;try{m=JSON.parse(e.data);}catch{return;}this.lastServerAt=Date.now();
+    if(m.topic===this.topic&&m.event==='phx_reply'&&m.ref===this.joinRef&&!this.joined){
+     clearTimeout(this.timeout);
+     if(m.payload?.status!=='ok'){reject(Error('Server multiplayerové spojení odmítl. Zkus to později.'));this.close();return;}
+     this.joined=true;this.settled=true;this.heartbeat=setInterval(()=>{if(Date.now()-this.lastServerAt>45000)this.fail('Spojení s multiplayerem bylo přerušeno.');else this.push('heartbeat',{},null,'phoenix');},20000);resolve(this);
+    }else if(m.topic===this.topic&&m.event==='broadcast'&&m.payload?.event==='hsw'&&m.payload.payload?.v===MULTIPLAYER_VERSION){this.onMessage(m.payload.payload);}
+    else if(this.presenceKey&&m.topic===this.topic&&['presence_state','presence_diff'].includes(m.event)){
+     if(m.event==='presence_state')this.people.clear();
+     const added=m.event==='presence_state'?m.payload:m.payload.joins;
+     for(const [key,value] of Object.entries(added||{}))this.people.set(key,value.metas?.at(-1));
+     for(const [key,value] of Object.entries(m.payload.leaves||{}))if(value.metas?.some(meta=>meta.phx_ref===this.people.get(key)?.phx_ref))this.people.delete(key);
+     this.onPresence(this.people);
+    }else if(m.topic===this.topic&&['phx_error','phx_close'].includes(m.event))this.fail('Spojení s multiplayerem bylo přerušeno.');
+   };
+   this.socket.onerror=()=>this.fail('Server multiplayeru není dostupný. Zkontroluj internet a zkus to znovu.');
+   this.socket.onclose=()=>{if(!this.closed)this.fail('Spojení s multiplayerem bylo přerušeno.');};
+  });return this.pending;
+ }
+ push(event,payload,ref=null,topic=this.topic){
+  if(this.socket?.readyState!==1)return false;
+  this.socket.send(JSON.stringify({topic,event,payload,ref:ref||String(++this.serial),...(topic===this.topic?{join_ref:this.joinRef}:{})}));return true;
+ }
+ send(message){
+  if(!this.joined||this.closed||this.socket.bufferedAmount>200000)return false;
+  const payload={...message,v:MULTIPLAYER_VERSION};
+  return this.push('broadcast',{type:'broadcast',event:'hsw',payload});
+ }
+ fail(message){if(this.closed)return;this.rejectJoin?.(Error(message));this.close();this.onClose(message);}
+ close(){if(this.closed)return;if(!this.settled)this.rejectJoin?.(Error('Připojení bylo zrušeno.'));this.settled=true;this.closed=true;this.joined=false;clearTimeout(this.timeout);clearInterval(this.heartbeat);if(this.socket){this.socket.onclose=null;this.socket.onerror=null;try{this.socket.close();}catch{}}}
+}
+
+
+return {MULTIPLAYER_VERSION,roomCode,normalizeRoomCode,RealtimeTransport};
+})();
+MODULES["online-config.js"]=(()=>{
+// Public browser credentials only. Never put a secret/service_role key here.
+const ONLINE_CONFIG={url:'https://jllejxiyeyshgwilfipy.supabase.co',publishableKey:'sb_publishable_nW9NGz4Ed-Zi73pUtdvF7Q_Ef4MSFjl'};
+
+return {ONLINE_CONFIG};
+})();
 MODULES["data.js"]=(()=>{
 // Every value is local game data. Historical specifications are deliberately
 // compressed into a playable, realistic-inspired model rather than a simulator.
@@ -55325,7 +55390,7 @@ const TANKS = [
   { id:'m4a1', nation:'us', name:'M4A1', variant:'Sherman', role:'Střední tank', rank:1, cost:0, requires:null, gun:'75 mm M3', armor:{front:62,side:38,rear:38}, speed:45, reload:5.2, penetration:112, description:'Vyvážený Sherman s oblou litou korbou. Rychlá palba a pohyblivá věž.', color:'#76825b' },
   { id:'m4a2', nation:'us', name:'M4A2', variant:'Sherman', role:'Střední tank', rank:2, cost:4500, requires:'m4a1', gun:'75 mm M3', armor:{front:76,side:38,rear:38}, speed:47, reload:4.8, penetration:124, description:'Odolnější čelo a svižné nabíjení. Pomáhej spojencům a obsazuj zóny.', color:'#75835c' },
   { id:'m4a376', nation:'us', name:'M4A3', variant:'Sherman 76 (W)', role:'Střední tank', rank:3, cost:5250, requires:'m4a2', gun:'76 mm M1', armor:{front:76,side:45,rear:38}, speed:49, reload:5.5, penetration:168, description:'Dlouhý 76mm kanón si poradí i s těžkými cíli. Mokré uložení střeliva snižuje riziko výbuchu.', color:'#69774f' },
-  { id:'m18', nation:'us', name:'M18', variant:'Hellcat', role:'Stíhač tanků', rank:3, cost:5250, requires:'m4a2', gun:'76 mm M1A1', gunCaliber:76, width:2.9, length:5.3, acceleration:18.6, armor:{front:25,side:13,rear:13}, speed:216, reload:5.2, penetration:168, description:'Rychlý stíhač tanků s otevřenou věží. Objížděj protivníky a měň pozici; tenký pancíř tě před přímou palbou neochrání.', color:'#74805a' },
+  { id:'m18', nation:'us', name:'M18', variant:'Hellcat', role:'Stíhač tanků', rank:3, cost:5250, requires:'m4a2', gun:'76 mm M1A1', gunCaliber:76, width:2.9, length:5.3, acceleration:18.6, armor:{front:25,side:13,rear:13}, speed:271, reload:5.2, penetration:168, description:'Rychlý stíhač tanků s otevřenou věží. Objížděj protivníky a měň pozici; tenký pancíř tě před přímou palbou neochrání.', color:'#74805a' },
   { id:'m26', nation:'us', name:'M26', variant:'Pershing', role:'Střední tank', rank:4, cost:6000, requires:'m4a376', gun:'90 mm M3', gunCaliber:90, armor:{front:102,side:76,rear:51}, speed:40, reload:7.8, penetration:203, description:'Nízký Pershing se silným 90mm dělem. Zaujmi palebné postavení za hřebenem a využij odolnou věž.', color:'#64754d' },
   { id:'t341941', nation:'ussr', name:'T-34', variant:'1941', role:'Střední tank', rank:1, cost:0, requires:null, gun:'76 mm F-34', armor:{front:45,side:45,rear:40}, speed:53, reload:6.4, penetration:119, description:'Skloněný pancíř a široké pásy. V terénu se rychle dostaneš nepříteli do boku.', color:'#637950' },
   { id:'t341942', nation:'ussr', name:'T-34', variant:'1942', role:'Střední tank', rank:2, cost:4500, requires:'t341941', gun:'76 mm F-34', armor:{front:53,side:45,rear:40}, speed:54, reload:5.7, penetration:131, description:'Zdokonalená věž a rychlejší obsluha kanónu. Pohyblivý bojovník pro obsazování.', color:'#6e8056' },
@@ -55797,6 +55862,18 @@ function solveWeaponAim(tank,mapId,target){
  const dx=target.x-frame.root.x,dz=target.z-frame.root.z,rootRange=Math.max(1,Math.hypot(dx,dz));
  const worldYaw=Math.atan2(dx,dz),local=pose.inverse({x:dx,y:target.y-frame.root.y-geometry.gunY,z:dz});
  let yaw=(tank.angle||0)+Math.atan2(local.x,local.z),rawPitch=0;
+ // The admin mount can point anywhere on the sphere. Solve the short
+ // ballistic arc in world space first, then rotate it into the hull frame.
+ if(tank.developer){
+   for(let i=0;i<4;i++){
+     const pivot=weaponFrame(tank,mapId,{yaw,pitch:rawPitch}).pivot;
+     const x=target.x-pivot.x,z=target.z-pivot.z,y=target.y-pivot.y,r=Math.hypot(x,z);
+     const v2=geometry.speed**2,disc=v2*v2-GRAVITY*(GRAVITY*r*r+2*y*v2);
+     const height=disc>=0?(GRAVITY*r*r+2*y*v2)/(v2+Math.sqrt(disc)):y;
+     const d=pose.inverse({x,y:height,z});yaw=(tank.angle||0)+Math.atan2(d.x,d.z);rawPitch=Math.atan2(d.y,Math.hypot(d.x,d.z));
+   }
+   return {yaw,desiredPitch:rawPitch,rawPitch,limited:false,targetY:target.y,distance:rootRange};
+ }
  // Solve barrel elevation relative to the inclined hull, including gravity.
  for(let iteration=0;iteration<3;iteration++){
   const pivot=weaponFrame(tank,mapId,{yaw,pitch:0}).pivot,range=Math.max(.5,Math.hypot(target.x-pivot.x,target.z-pivot.z));
@@ -55903,10 +55980,10 @@ class Game {
     for(let n=0;n<8;n++){if(this._free(x,z,3)&&!this.tanks?.some(o=>o!==t&&o.alive&&Math.hypot(o.x-x,o.z-z)<8))break;x+=n%2?12:-18;}
     Object.assign(t,{x,z,y:surfaceHeight(this.map.id,x,z),angle:t.team===0?0:Math.PI,turretAngle:t.team===0?0:Math.PI,speed:0,yawVelocity:0,
       alive:true,fall:0,reload:0,secondaryReload:0,mgCooldown:0,mgHeat:0,mgOverheated:false,modules:{engine:100,tracks:100,turret:100,breech:100,ammo:100,crew:100},repair:0,fire:0,respawnIn:0,
-      smoke:0,smokes:3,smokeCooldown:0,missiles:t.type==='bmpt'?4:0,missileReload:0,_barrelIndex:0,health:100,maxSpeed:spec.speed/3.6,width:spec.width??(spec.role==='Těžký tank'||t.type==='bmpt'?4.0:3.45),length:spec.length??(spec.role==='Těžký tank'||t.type==='bmpt'?7.2:6.5),
+      smoke:0,smokes:3,smokeCooldown:0,missiles:t.type==='bmpt'?4:0,missileReload:0,_barrelIndex:0,health:100,maxSpeed:(t.developer?350:spec.speed)/3.6,width:spec.width??(spec.role==='Těžký tank'||t.type==='bmpt'?4.0:3.45),length:spec.length??(spec.role==='Těžký tank'||t.type==='bmpt'?7.2:6.5),
       _aimX:x,_aimZ:z+sign*100,_aimY:null,sightRange:400,_playerDamage:0,_lastPlayerHit:-Infinity,gunPitch:0,_think:this._rand()*.3,_targetId:null,_goal:null,_path:[],_pathAge:99,_reaction:this._rules.reaction,
       _approachKey:null,_approach:null,_approachDone:false,_observed:null,_flankDone:null,_order:null,_tactic:null,_sightChecks:new Map(),
-      _stuck:0,_reverse:0,_lastX:x,_lastZ:z,_lastPlayerHit:-999,_fireSource:null,_repairTotal:0,_captureClock:0,lastHit:null,lastKiller:null});
+      _slopeStall:0,_escapeSlope:null,_avoidSlope:null,_stuck:0,_reverse:0,_lastX:x,_lastZ:z,_lastPlayerHit:-999,_fireSource:null,_repairTotal:0,_captureClock:0,lastHit:null,lastKiller:null});
     if(!initial&&t.isPlayer)this._message('Nový tank připraven. Zpátky do boje!',t);
   }
 
@@ -56005,9 +56082,10 @@ class Game {
     const terrainBonus=spec.nation==='ussr'&&ground.speed<.9?1.1:1;
     const ahead=surfaceHeight(this.map.id,t.x+Math.sin(t.angle)*4,t.z+Math.cos(t.angle)*4),behind=surfaceHeight(this.map.id,t.x-Math.sin(t.angle)*4,t.z-Math.cos(t.angle)*4);
     const slope=(ahead-behind)/8,uphill=Math.max(0,slope*Math.sign(throttle));
-    const max=(spec.speed/3.6)*ground.speed*terrainBonus*engine*tracks*clamp(1-uphill*.85,.35,1);
+    const max=((t.developer?350:spec.speed)/3.6)*(t.developer||t.type==='m18'?Math.min(1,ground.speed):ground.speed)*terrainBonus*engine*tracks*clamp(1-uphill*.85,.35,1);
+    if(!t.isPlayer&&!t.isHuman&&engine&&tracks)t._slopeStall=uphill>.76&&Math.abs(throttle)>.15?(t._slopeStall||0)+dt:Math.max(0,(t._slopeStall||0)-dt*.4);
     const desired=uphill>.8?0:max*throttle*(throttle<0?.42:1);
-    const accel=(spec.acceleration??(spec.role==='Těžký tank'?3.3:4.7))*(Math.abs(desired)<Math.abs(t.speed)?2.3:1);
+    const accel=(t.developer?23:spec.acceleration??(spec.role==='Těžký tank'?3.3:4.7))*(Math.abs(desired)<Math.abs(t.speed)?2.3:1);
     t.speed+=clamp(desired-t.speed,-accel*dt,accel*dt);
     if(Math.abs(slope)>.8&&tracks&&engine)t.speed-=slope*3.5*dt;
     const turn=(spec.turnRate??(spec.role==='Těžký tank'?.69:.92))*tracks*engine*(spec.wheeled?Math.min(1,Math.abs(t.speed)/4):1)*(1-.45*Math.min(1,Math.abs(t.speed)/(max||1)));
@@ -56072,7 +56150,7 @@ class Game {
   }
   enableDeveloperTank(t=this.player){
     if(this.finished||!t.alive||!(t.isPlayer||t.isHuman))return false;
-    t.type='maus';t.developer=true;t.width=3.9;t.length=9.1;t.maxSpeed=20/3.6;t.reload=0;
+    t.type='maus';t.developer=true;t.width=3.9;t.length=9.1;t.maxSpeed=350/3.6;t.reload=0;
     this.devUsed=true;return true;
   }
   demolish(index){
@@ -56477,6 +56555,7 @@ class Game {
       }
     }else {const remembered=t._observed&&this.time-t._observed.time<5?t._observed:null;t._aimX=remembered?.x??t.x+Math.sin(t.angle)*70;t._aimZ=remembered?.z??t.z+Math.cos(t.angle)*70;this._aim(t,dt,t._aimX,t._aimZ);}
     if(t.repair>0){this._move(t,dt,0,0);return;}
+    if(this._escapeHillside(t,dt))return;
     while(t._path.length>1&&distance(t,t._path[0])<6)t._path.shift();
     // A failed route is not permission to drive directly at an unreachable
     // objective. Wait for the next path refresh instead of ramming a river.
@@ -56494,6 +56573,27 @@ class Game {
     this._move(t,dt,throttle,steer);
   }
 
+  _escapeHillside(t,dt){
+    let exit=t._escapeSlope;
+    if(exit&&(distance(t,exit)<3||this.time>exit.until)){t._escapeSlope=null;t._pathAge=99;t._slopeStall=0;t._stuck=0;exit=null;}
+    if(!exit){
+      if(!(t._slopeStall>.55||t._stuck>.9||(!t._path.length&&t._goal)))return false;
+      const h=(x,z)=>surfaceHeight(this.map.id,x,z),gx=(h(t.x+3,t.z)-h(t.x-3,t.z))/6,gz=(h(t.x,t.z+3)-h(t.x,t.z-3))/6,grade=Math.hypot(gx,gz);
+      if(grade<.52)return false;
+      const down=Math.atan2(-gx,-gz);let best=-Infinity;
+      for(const radius of [10,18,27])for(const offset of [0,.58,-.58,1.05,-1.05]){
+        const a=down+offset,p={x:t.x+radius*Math.sin(a),z:t.z+radius*Math.cos(a)};
+        if(!this._lineFree(t,p)||!this._free(p.x,p.z,t.width*.55))continue;
+        const drop=h(t.x,t.z)-h(p.x,p.z);if(drop<=1)continue;
+        const score=Math.min(drop,10)-radius*.09+Math.abs(Math.cos(a-t.angle))*3;
+        if(score>best){best=score;exit=p;}
+      }
+      if(!exit)return false;
+      t._escapeSlope={...exit,until:this.time+7};t._avoidSlope={x:t.x+gx/grade*10,z:t.z+gz/grade*10,until:this.time+22};t._reverse=0;
+    }
+    const heading=Math.atan2(exit.x-t.x,exit.z-t.z),back=Math.cos(heading-t.angle)<0,turn=norm(heading+(back?Math.PI:0)-t.angle);
+    this._move(t,dt,(back?-1:1)*(Math.abs(turn)>.7?.22:.95),clamp(turn*2,-1,1));return true;
+  }
   _free(x,z,radius=2.2) {
     const bound=this.map.size*.5-5;
     if(Math.abs(x)>bound-radius||Math.abs(z)>bound-radius)return false;
@@ -56502,9 +56602,9 @@ class Game {
     return true;
   }
   _lineFree(a,b) {
-    const d=distance(a,b),steps=Math.ceil(d/5);
+    const d=distance(a,b),steps=Math.ceil(d/3);
     let previousHeight=surfaceHeight(this.map.id,a.x,a.z);
-    for(let i=0;i<=steps;i++){const u=steps?i/steps:0,x=mix(a.x,b.x,u),z=mix(a.z,b.z,u),h=surfaceHeight(this.map.id,x,z);if(!this._free(x,z,2.5)||(i>0&&h-previousHeight>d/Math.max(1,steps)*.8))return false;previousHeight=h;}
+    for(let i=0;i<=steps;i++){const u=steps?i/steps:0,x=mix(a.x,b.x,u),z=mix(a.z,b.z,u),h=surfaceHeight(this.map.id,x,z);if(!this._free(x,z,2.5)||(i>0&&h-previousHeight>d/Math.max(1,steps)*.72))return false;previousHeight=h;}
     return true;
   }
   _buildNav() {
@@ -56513,7 +56613,9 @@ class Game {
     return {size,step,offset,cells};
   }
   _pathfind(start,goal) {
-    if(this._lineFree(start,goal))return [{...goal}];
+    const bad=start._avoidSlope?.until>this.time?start._avoidSlope:null;
+    const clear=(a,b)=>(!bad||pointSegmentDistance(bad.x,bad.z,a.x,a.z,b.x,b.z)>5)&&this._lineFree(a,b);
+    if(clear(start,goal))return [{...goal}];
     const {size,step,offset,cells}=this._nav;
     const nearest=p=>{
       const x=clamp(Math.round((p.x-offset)/step),0,size-1),z=clamp(Math.round((p.z-offset)/step),0,size-1),at=z*size+x;
@@ -56533,8 +56635,9 @@ class Game {
         if(!dx&&!dz)continue;const nx=x+dx,nz=z+dz;if(nx<0||nz<0||nx>=size||nz>=size)continue;
         const ni=nz*size+nx;if(closed[ni]||!cells[ni].open)continue;
         if(dx&&dz&&(!cells[z*size+nx].open||!cells[nz*size+x].open))continue;
-        if(cells[ni].height-cells[id].height>step*(dx&&dz?1.414:1)*.8)continue;
-        const ng=g[id]+(dx&&dz?1.414:1)*cells[ni].cost;
+        const length=step*(dx&&dz?1.414:1),grade=(cells[ni].height-cells[id].height)/length;
+        if(grade>.72||bad&&distance(cells[ni],bad)<6)continue;
+        const ng=g[id]+(dx&&dz?1.414:1)*cells[ni].cost*(1+2*Math.max(0,grade)**2);
         if(ng<g[ni]){g[ni]=ng;previous[ni]=id;heap.push({id:ni,f:ng+distance(cells[ni],cells[to])/step});}
       }
     }
@@ -56543,8 +56646,8 @@ class Game {
     const path=[];for(let i=to;i!==from&&i>=0;i=previous[i])path.push({x:cells[i].x,z:cells[i].z});path.reverse();
     // Remove unnecessary grid corners, but never smooth through solid cover.
     const smooth=[];let anchor=start,index=0;
-    while(index<path.length){let far=index;while(far+1<path.length&&this._lineFree(anchor,path[far+1]))far++;smooth.push(path[far]);anchor=path[far];index=far+1;}
-    if(this._lineFree(anchor,goal))smooth.push({...goal});
+    while(index<path.length){let far=index;while(far+1<path.length&&clear(anchor,path[far+1]))far++;smooth.push(path[far]);anchor=path[far];index=far+1;}
+    if(clear(anchor,goal))smooth.push({...goal});
     return smooth;
   }
 }
@@ -56858,6 +56961,171 @@ class PublicServerRoom{
 
 return {serverURL,PublicServerRoom};
 })();
+MODULES["public-battle.js"]=(()=>{
+const randomUUID=()=>crypto.randomUUID();
+const {HostedBattle, makeSnapshot, sanitizeInput, normalizeProfile} = MODULES["multiplayer-game.js"];
+const {getTank} = MODULES["data.js"];
+const botProfile={id:'server-bot-profile',nick:'Server bot',tankId:'pz4f2'};
+const stats=()=>({kills:0,captures:0,damage:0,xp:0});
+
+// The existing tank simulation runs headlessly. Each connection owns exactly one
+// server-assigned tank; no client supplies positions, damage, team or score.
+class PublicBattle extends HostedBattle {
+ constructor({mapId='city',seed=crypto.getRandomValues(new Uint32Array(1))[0]}={}){
+  super({id:randomUUID(),mapId,seed,bots:true,difficulty:'normal',host:botProfile,guest:{...botProfile,id:'server-other-profile',tankId:'m4a1'}});
+  this.members=new Map();this.humanStats={};this.serial=0;
+  for(const t of this.tanks){t.id='bot-'+this.serial++;t.isPlayer=false;t.isHuman=false;delete t.nick;delete t.appearance;}
+  this.networkEvents=[];
+ }
+ add(key,value){
+  if(this.members.has(key))return this.members.get(key);
+  const profile=normalizeProfile({...value,id:randomUUID()});
+  const counts=[0,0];for(const m of this.members.values())counts[m.tank.team]++;
+  const team=counts[0]<=counts[1]?0:1,tank=this.tanks.find(t=>t.team===team&&!t.isHuman);
+  if(!tank||this.members.size>=8)throw Error('Server je plný.');
+  Object.assign(tank,{id:'human-'+this.serial++,type:profile.tankId,isHuman:true,isPlayer:false,nick:profile.nick,appearance:profile.appearance,_remoteInput:{},_lastNetworkInput:-10});
+  this._spawn(tank,true);this.humanStats[tank.id]=stats();
+  const member={profile,tank};this.members.set(key,member);return member;
+ }
+ remove(key){
+  const m=this.members.get(key);if(!m)return;
+  // Keep the vacated vehicle at its current position and health under AI control.
+  // A leaving player cannot heal it or erase a shell that is already in flight.
+  m.tank.isHuman=false;m.tank.nick='';delete m.tank.appearance;m.tank._remoteInput={};
+  if(m.tank.type==='bmpt'){const spec=getTank('t3485');Object.assign(m.tank,{type:spec.id,maxSpeed:spec.speed/3.6,width:3.45,length:6.5,missiles:0});}
+  delete this.humanStats[m.tank.id];this.members.delete(key);
+ }
+ input(key,value){const t=this.members.get(key)?.tank;if(t){t._remoteInput=sanitizeInput(value);t._lastNetworkInput=this.time;}}
+ action(key,name){const t=this.members.get(key)?.tank;return t?this.command(t.id,name):false;}
+ view(key){
+  const self=this.members.get(key);if(!self)return null;
+  const rival=this.tanks.find(t=>t.team!==self.tank.team&&t._slot===0);
+  const id=v=>v===self.tank.id?'guest':v===rival.id?'player':v;
+  const team=v=>v===self.tank.team?1:0;
+  return {self,rival,id,team};
+ }
+ descriptorFor(key){
+  const v=this.view(key);
+  return {...this.descriptor,public:true,host:{...botProfile,tankId:v.rival.type},guest:v.self.profile};
+ }
+ snapshotFor(key,sequence){return this.project(key,makeSnapshot(this,sequence));}
+ project(key,s){
+  const v=this.view(key);s={...s,finished:s.finished&&{...s.finished}};
+  s.tanks=s.tanks.map((t,i)=>({...t,id:v.id(t.id),team:v.team(t.team),lastKiller:t.lastKiller?{...t.lastKiller,id:v.id(t.lastKiller.id)}:null,...(t.isHuman?{appearance:this.tanks[i].appearance}:{})}));
+  s.shells=s.shells.map(s=>({...s,shooterId:v.id(s.shooterId),team:v.team(s.team)}));
+  s.zones=s.zones.map(z=>({...z,owner:z.owner<0?-1:v.team(z.owner),progress:v.self.tank.team===1?z.progress:-z.progress}));
+  s.tickets=v.self.tank.team===1?s.tickets:[s.tickets[1],s.tickets[0]];
+  s.stats={guest:{...this.humanStats[v.self.tank.id]},player:stats()};
+  if(s.finished)s.finished.winner=v.team(s.finished.winner);
+  return s;
+ }
+ eventsFor(key,events){const v=this.view(key);return events.map(e=>({...e,...(e.killer?{killer:{...e.killer,id:v.id(e.killer.id)}}:{}),sourceId:v.id(e.sourceId),targetId:v.id(e.targetId),team:[0,1].includes(e.team)?v.team(e.team):e.team}));}
+}
+
+return {PublicBattle};
+})();
+MODULES["cloud-room.js"]=(()=>{
+const {RealtimeTransport} = MODULES["realtime.js"];
+const {ONLINE_CONFIG} = MODULES["online-config.js"];
+const {PublicServerRoom} = MODULES["public-server.js"];
+const {PublicBattle} = MODULES["public-battle.js"];
+const {ReplicaBattle,normalizeProfile,makeSnapshot,localEvent} = MODULES["multiplayer-game.js"];
+const channel='PUBMATCH';
+function roster(people){
+ const result=[];
+ for(const [id,meta] of people){
+  try{if(Number.isFinite(meta?.entered))result.push({...normalizeProfile({...meta.profile,id}),entered:meta.entered});}catch{}
+ }
+ return result.sort((a,b)=>a.entered-b.entered||a.id.localeCompare(b.id));
+}
+function watchPublicLobby(change,fail){
+ const transport=new RealtimeTransport(ONLINE_CONFIG,channel,{presenceKey:crypto.randomUUID(),onPresence:people=>change(Math.min(8,roster(people).length)),onClose:fail});
+ transport.connect().catch(()=>fail());return transport;
+}
+class CloudRoom extends PublicServerRoom{
+ constructor(options){
+  super({...options,url:'https://local.invalid'});
+  this.id=crypto.randomUUID();this.peers=[];this.sequence=0;this.history=[];this.commandCounts=new Map();
+ }
+ async connect(){
+  this.transport=new RealtimeTransport(ONLINE_CONFIG,channel,{presenceKey:this.id,onPresence:people=>this.membersChanged(roster(people)),onMessage:m=>this.receive(m),onClose:reason=>this.fail(reason)});
+  await this.transport.connect();
+  const ready=new Promise((resolve,reject)=>{this.resolve=resolve;this.reject=reject;});
+  this.timeout=setTimeout(()=>this.fail('Připojení k bitvě vypršelo.'),20000);
+  this.transport.push('presence',{type:'presence',event:'track',payload:{entered:Date.now(),profile:this.profile}});
+  this.timer=setInterval(()=>this.tick(),50);
+  return ready;
+ }
+ membersChanged(all){
+  const i=all.findIndex(p=>p.id===this.id);
+  if(i>=8){this.fail('Server je plný.');return;}
+  this.peers=all.slice(0,8);
+  if(i<0)return;
+  if(this.peers[0].id!==this.id){this.authority=null;return;}
+  if(!this.authority)this.createAuthority(this.frame);
+  for(const id of this.authority.members.keys())if(!this.peers.some(p=>p.id===id))this.authority.remove(id);
+  for(const p of this.peers)this.authority.add(p.id,p);
+ }
+ createAuthority(frame){
+  const game=new PublicBattle(frame?.descriptor);
+  if(frame){
+   const s=frame.state;
+   game.descriptor=frame.descriptor;game.serial=frame.serial;game._serial=frame.objectSerial;this.commandCounts=new Map(frame.commandCounts);
+   Object.assign(game,{time:s.time,remaining:s.remaining,tickets:[...s.tickets],finished:s.finished,humanStats:structuredClone(s.stats),smokeClouds:structuredClone(s.smokeClouds),shells:structuredClone(frame.shells)});
+   s.tanks.forEach((t,i)=>Object.assign(game.tanks[i],structuredClone(t)));
+   s.zones.forEach((z,i)=>Object.assign(game.zones[i],z));
+   for(const [key,profile,index] of frame.members){const tank=game.tanks[index];tank.appearance=profile.appearance;game.members.set(key,{profile,tank});}
+   this.sequence=s.sequence+1;
+  }
+  if(!frame)this.commandCounts.clear();
+  this.authority=game;this.lastTick=this.now();this.lastFrame=-Infinity;
+ }
+ tick(){
+  const g=this.authority;if(!g||this.closed)return;
+  const now=this.now(),dt=Math.min(.2,(now-this.lastTick)/1000);this.lastTick=now;
+  if(!g.finished){g.update(dt/2,{});g.update(dt/2,{});this.endedAt=null;}
+  else if(now-(this.endedAt??=now)>6000){this.createAuthority(null);for(const p of this.peers)this.authority.add(p.id,p);this.endedAt=null;return;}
+  if(now-this.lastFrame<120)return;
+  this.lastFrame=now;
+  const frame={type:'frame',sender:this.id,descriptor:g.descriptor,serial:g.serial,objectSerial:g._serial,commandCounts:[...this.commandCounts].filter(([key])=>g.members.has(key)),state:makeSnapshot(g,++this.sequence),members:[...g.members].map(([id,m])=>[id,m.profile,g.tanks.indexOf(m.tank)]),events:g.networkEvents.splice(0,48),shells:g.shells.slice(-96),history:this.history};
+  this.transport.send(frame);this.receive(frame);
+ }
+ receive(m){
+  if(this.closed||!this.peers.some(p=>p.id===m.sender))return;
+  if(m.type==='frame'){
+   if(m.sender!==this.peers[0]?.id)return;
+   const member=m.members.find(([id])=>id===this.id);if(!member)return;
+   const tanks=m.state.tanks.map((t,i)=>({...t,_slot:m.state.tanks.findIndex(other=>other.team===t.team)===i?0:1}));
+   const members=new Map(m.members.map(([key,profile,index])=>{tanks[index].appearance=profile.appearance;return [key,{profile,tank:tanks[index]}];}));
+   const view=Object.assign(Object.create(PublicBattle.prototype),{descriptor:m.descriptor,members,tanks,humanStats:m.state.stats});
+   const snapshot=view.project(this.id,m.state),fresh=this.game?.descriptor.id!==m.descriptor.id;
+   const replica=fresh?new ReplicaBattle(view.descriptorFor(this.id),{onCommand:n=>this.action(n)}):this.game;
+   if(!replica.receive(snapshot,this.now()))return;
+   this.frame=m;this.history=m.history;this.lastStateAt=this.now();
+   if(fresh){this.game=replica;this.commands={};this.phase='battle';this.onChat(null,true);for(const entry of this.history)this.onChat(entry);this.onBattle(replica,this);clearTimeout(this.timeout);this.settled=true;this.resolve(this);}
+   for(const event of view.eventsFor(this.id,m.events))this.onEvent(localEvent(event,true));
+  }else if(m.type==='chat'){
+   const entry={nick:this.peers.find(p=>p.id===m.sender).nick,text:String(m.text).slice(0,180)};
+   this.history=[...this.history.slice(-29),entry];this.onChat(entry);
+  }else if(m.type==='input'&&this.authority&&m.match===this.authority.descriptor.id){
+   this.authority.input(m.sender,m.input);
+   const counts=this.commandCounts.get(m.sender)||{};
+   for(const name of ['repair','respawn','smoke','missile'])if(Number.isSafeInteger(m.commands?.[name])&&m.commands[name]>(counts[name]||0)){counts[name]=m.commands[name];this.authority.action(m.sender,name);}
+   this.commandCounts.set(m.sender,counts);
+  }
+ }
+ send(message){
+  if(this.closed||!this.transport?.joined)return false;
+  const packet={...message,sender:this.id};
+  if(message.type==='input'&&this.authority){this.receive(packet);return true;}
+  if(message.type==='chat')this.receive(packet);
+  return this.transport.send(packet);
+ }
+ close(){if(this.closed)return;super.close();this.transport?.close();this.authority=null;}
+}
+
+return {watchPublicLobby,CloudRoom};
+})();
 MODULES["public-server-config.js"]=(()=>{
 // Set this to the HTTPS origin of the deployed Node server, then rebuild the HTML.
 // The web page can stay on Endora. No secret keys belong in this file.
@@ -56866,6 +57134,7 @@ const PUBLIC_SERVER_URL='';
 return {PUBLIC_SERVER_URL};
 })();
 MODULES["public-server-ui.js"]=(()=>{
+const {CloudRoom,watchPublicLobby} = MODULES["cloud-room.js"];
 const {PublicServerRoom,serverURL} = MODULES["public-server.js"];
 const {PUBLIC_SERVER_URL} = MODULES["public-server-config.js"];
 const {getMap} = MODULES["data.js"];
@@ -56874,16 +57143,23 @@ class PublicServerUI{
  constructor(owner){
   this.owner=owner;this.generation=0;this.url='';this.messages=[];
   try{this.url=localStorage.getItem('hsw-server-url')||'';}catch{}
-  if(!this.url)this.url=PUBLIC_SERVER_URL||(['localhost','127.0.0.1'].includes(location.hostname)?(location.port==='4187'?'http://127.0.0.1:4188':location.origin):'');
+  if(!this.url)this.url=PUBLIC_SERVER_URL||'';
   document.addEventListener('click',e=>{const action=e.target.closest('[data-server]')?.dataset.server;if(action==='refresh')this.refresh();if(action==='join')this.join();});
  }
  markup(){return `<section class="public-server-section"><div class="server-heading"><div><span class="eyebrow">ONLINE / VEŘEJNÝ SERVER</span><h3>Do bitvy s ostatními</h3></div><span class="server-badge">8 HRÁČŮ</span></div><div id="server-card" role="status">Načítám server…</div><details class="server-address"><summary>Adresa serveru</summary><label>HTTPS adresa<input id="server-url" type="url" placeholder="https://server.example.com" autocomplete="off"></label><button class="secondary-button" data-server="refresh">OBNOVIT SERVER</button></details><p class="mp-note">Připoj se do rozehrané bitvy. Boti doplňují týmy, prázdný server se resetuje. Trénink bez výzkumných bodů.</p></section><div class="mp-offline"><span>Chceš hrát sám?</span><button class="secondary-button" data-mp="offline">OFFLINE PROTI BOTŮM →</button></div>`;}
  mount(){const input=document.querySelector('#server-url');if(input)input.value=this.url;this.refresh(false);}
- stop(){clearTimeout(this.timer);this.controller?.abort();this.generation++;}
+ stop(){this.watch?.close();this.watch=null;clearTimeout(this.timer);this.controller?.abort();this.generation++;}
  async refresh(read=true){
   this.stop();const gen=this.generation,card=document.querySelector('#server-card');if(!card)return;
   if(read)this.url=document.querySelector('#server-url').value.trim();card.textContent=translate('Načítám server…');
-  if(!this.url){card.textContent=translate('Veřejný server zatím není nasazený. Soukromou místnost nebo offline bitvu můžeš spustit níže.');return;}
+  if(!this.url){
+   try{localStorage.removeItem('hsw-server-url');}catch{}
+   this.watch=watchPublicLobby(count=>{
+    if(gen!==this.generation||!card.isConnected){this.watch?.close();return;}
+    const info=document.createElement('p');info.textContent=count+' / 8 · '+translate('hráčů online');
+    const button=document.createElement('button');button.className='primary-button';button.dataset.server='join';button.disabled=count>=8;button.textContent=translate(button.disabled?'SERVER JE PLNÝ':'PŘIPOJIT DO BITVY →');card.replaceChildren(info,button);
+   },()=>{if(gen===this.generation)card.textContent=translate('Server je nedostupný. Můžeš obnovit seznam nebo hrát offline.');});return;
+  }
   try{
    this.url=serverURL(this.url);this.controller=new AbortController();const abort=setTimeout(()=>this.controller?.abort(),7000);
    let response;try{response=await fetch(this.url+'/api/server',{signal:this.controller.signal,cache:'no-store'});}finally{clearTimeout(abort);}
@@ -56902,7 +57178,7 @@ class PublicServerUI{
   const o=this.owner;if(o.room)return;const progress=o.getProgress(),nick=document.querySelector('#mp-nick').value,tankId=document.querySelector('#mp-tank').value,operation=++o.operation;
   this.stop();const card=document.querySelector('#server-card');card.textContent=translate('Připojuji k multiplayeru…');
   try{
-   const room=new PublicServerRoom({url:this.url,profile:{nick,tankId,appearance:progress.appearances?.[tankId]},onBattle:(game,r)=>{if(o.room===r)o.onBattle(game,r);},onEvent:e=>o.onEvent?.(e),onChat:(e,reset)=>this.chat(e,reset),onClose:message=>{if(o.room!==room)return;o.room=null;o.operation++;o.onClosed(message);}});
+   const Room=this.url?PublicServerRoom:CloudRoom;const room=new Room({url:this.url,profile:{nick,tankId,appearance:progress.appearances?.[tankId]},onBattle:(game,r)=>{if(o.room===r)o.onBattle(game,r);},onEvent:e=>o.onEvent?.(e),onChat:(e,reset)=>this.chat(e,reset),onClose:message=>{if(o.room!==room)return;o.room=null;o.operation++;o.onClosed(message);}});
    o.room=room;await room.connect();if(operation!==o.operation){room.close();return;}progress.multiplayerNick=nick;o.save();
   }catch(error){if(operation!==o.operation)return;o.room?.close();o.room=null;if(card.isConnected){card.textContent=error.message;const b=document.createElement('button');b.className='secondary-button';b.dataset.server='refresh';b.textContent=translate('OBNOVIT SERVER');card.append(b);}}
  }
@@ -56915,58 +57191,6 @@ class PublicServerUI{
 }
 
 return {PublicServerUI};
-})();
-MODULES["realtime.js"]=(()=>{
-const MULTIPLAYER_VERSION=29;
-const alphabet='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-function roomCode(){const a=new Uint8Array(8);globalThis.crypto.getRandomValues(a);return [...a].map(v=>alphabet[v%32]).join('');}
-function normalizeRoomCode(value){const code=String(value||'').toUpperCase().replace(/[\s-]/g,'');if(!/^[A-HJ-NP-Z2-9]{8}$/.test(code))throw Error('Kód místnosti musí mít 8 znaků.');return code;}
-
-// The documented Supabase/Phoenix JSON protocol. No SDK or game-server install
-// is needed; the public project key only opens an ephemeral Broadcast channel.
-class RealtimeTransport{
- constructor(config,code,{WebSocketImpl=globalThis.WebSocket,onMessage=()=>{},onClose=()=>{}}={}){
-  Object.assign(this,{config,code:normalizeRoomCode(code),WebSocketImpl,onMessage,onClose,joined:false,closed:false,serial:0});
-  this.topic='realtime:hsw-pvp-v'+MULTIPLAYER_VERSION+':'+this.code;
- }
- connect(){
-  if(this.pending)return this.pending;
-  if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(this.config.url)||!/^sb_publishable_/.test(this.config.publishableKey))return Promise.reject(Error('Multiplayer není připojený k serveru.'));
-  this.pending=new Promise((resolve,reject)=>{
-   this.rejectJoin=reject;
-   this.timeout=setTimeout(()=>{reject(Error('Připojení k multiplayeru vypršelo. Zkus to znovu.'));this.close();},12000);
-   const url=this.config.url.replace('https:','wss:')+'/realtime/v1/websocket?apikey='+encodeURIComponent(this.config.publishableKey)+'&vsn=1.0.0';
-   try{this.socket=new this.WebSocketImpl(url);}catch{clearTimeout(this.timeout);reject(Error('Prohlížeč nemůže otevřít multiplayerové spojení.'));return;}
-   this.socket.onopen=()=>{this.joinRef=String(++this.serial);this.push('phx_join',{config:{broadcast:{ack:false,self:false},presence:{enabled:false},private:false}},this.joinRef);};
-   this.socket.onmessage=e=>{
-    if(typeof e.data!=='string'||e.data.length>180000)return;
-    let m;try{m=JSON.parse(e.data);}catch{return;}this.lastServerAt=Date.now();
-    if(m.topic===this.topic&&m.event==='phx_reply'&&m.ref===this.joinRef&&!this.joined){
-     clearTimeout(this.timeout);
-     if(m.payload?.status!=='ok'){reject(Error('Server multiplayerové spojení odmítl. Zkus to později.'));this.close();return;}
-     this.joined=true;this.settled=true;this.heartbeat=setInterval(()=>{if(Date.now()-this.lastServerAt>45000)this.fail('Spojení s multiplayerem bylo přerušeno.');else this.push('heartbeat',{},null,'phoenix');},20000);resolve(this);
-    }else if(m.topic===this.topic&&m.event==='broadcast'&&m.payload?.event==='hsw'&&m.payload.payload?.v===MULTIPLAYER_VERSION){this.onMessage(m.payload.payload);}
-    else if(m.topic===this.topic&&['phx_error','phx_close'].includes(m.event))this.fail('Spojení s multiplayerem bylo přerušeno.');
-   };
-   this.socket.onerror=()=>this.fail('Server multiplayeru není dostupný. Zkontroluj internet a zkus to znovu.');
-   this.socket.onclose=()=>{if(!this.closed)this.fail('Spojení s multiplayerem bylo přerušeno.');};
-  });return this.pending;
- }
- push(event,payload,ref=null,topic=this.topic){
-  if(this.socket?.readyState!==1)return false;
-  this.socket.send(JSON.stringify({topic,event,payload,ref:ref||String(++this.serial),...(topic===this.topic?{join_ref:this.joinRef}:{})}));return true;
- }
- send(message){
-  if(!this.joined||this.closed||this.socket.bufferedAmount>200000)return false;
-  const payload={...message,v:MULTIPLAYER_VERSION};
-  return this.push('broadcast',{type:'broadcast',event:'hsw',payload});
- }
- fail(message){if(this.closed)return;this.rejectJoin?.(Error(message));this.close();this.onClose(message);}
- close(){if(this.closed)return;if(!this.settled)this.rejectJoin?.(Error('Připojení bylo zrušeno.'));this.settled=true;this.closed=true;this.joined=false;clearTimeout(this.timeout);clearInterval(this.heartbeat);if(this.socket){this.socket.onclose=null;this.socket.onerror=null;try{this.socket.close();}catch{}}}
-}
-
-
-return {MULTIPLAYER_VERSION,roomCode,normalizeRoomCode,RealtimeTransport};
 })();
 MODULES["multiplayer.js"]=(()=>{
 const {RealtimeTransport,roomCode,normalizeRoomCode} = MODULES["realtime.js"];
@@ -57151,12 +57375,6 @@ class MultiplayerRoom{
 }
 
 return {MultiplayerRoom};
-})();
-MODULES["online-config.js"]=(()=>{
-// Public browser credentials only. Never put a secret/service_role key here.
-const ONLINE_CONFIG={url:'https://jllejxiyeyshgwilfipy.supabase.co',publishableKey:'sb_publishable_nW9NGz4Ed-Zi73pUtdvF7Q_Ef4MSFjl'};
-
-return {ONLINE_CONFIG};
 })();
 MODULES["room-links.js"]=(()=>{
 const {normalizeRoomCode} = MODULES["realtime.js"];
@@ -58538,7 +58756,7 @@ class Renderer {
     if (this.pendingViewAim) {
       const aim = this.pendingViewAim;
       this.cameraYaw = Math.atan2(view.position.x - aim.x, view.position.z - aim.z);
-      this.cameraPitch = clamp(Math.atan2(view.position.y - (aim.y ?? this.heightAt(aim.x, aim.z) + 1.3), Math.hypot(aim.x - view.position.x, aim.z - view.position.z)), -.6, .85);
+      this.cameraPitch = clamp(Math.atan2(view.position.y - (aim.y ?? this.heightAt(aim.x, aim.z) + 1.3), Math.hypot(aim.x - view.position.x, aim.z - view.position.z)), p.developer?-Math.PI/2:-.6, p.developer?Math.PI/2:.85);
       this.pendingViewAim = null;
     }
     const cosPitch = Math.cos(this.cameraPitch);
@@ -58775,7 +58993,7 @@ class Renderer {
     // Positive world yaw turns left in this +Z-forward world. Screen-right mouse
     // motion must reduce yaw; downward mouse motion increases downward pitch.
     const speed = .0026 * clamp(Number(sensitivity) || 1, .2, 3) * this.camera.fov / 54;
-    this.cameraYaw -= dx * speed; this.cameraPitch = clamp(this.cameraPitch + dy * speed, this.game?.player?.flight?-1.55:-.6,this.game?.player?.flight?1.55:.85);
+    this.cameraYaw -= dx * speed; this.cameraPitch = clamp(this.cameraPitch + dy * speed, this.game?.player?.developer?-Math.PI/2:this.game?.player?.flight?-1.55:-.6,this.game?.player?.developer?Math.PI/2:this.game?.player?.flight?1.55:.85);
     if(!this.viewScope)this.chaseElevation=clamp((this.chaseElevation??.25)+dy*speed,-.12,1.15);
   }
   zoom(delta, { scope = this.viewScope } = {}) {
