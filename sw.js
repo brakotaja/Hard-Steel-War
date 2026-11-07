@@ -1,8 +1,9 @@
 // Hard Steel War: service worker that makes the game installable and playable offline.
 //
 // How it behaves:
-// - Online: the game page and app icons always come from the server, so whatever
-//   you push to GitHub reaches players the next time they open the game.
+// - Online: the game page, the 3D engine (vendor/three.js) and app icons always come
+//   from the server, so whatever you push to GitHub reaches players the next time
+//   they open the game.
 // - Offline, or when the server doesn't answer within a few seconds: it uses the
 //   last copy it saved instead.
 // - Multiplayer (Supabase), custom game servers and every other site are never touched.
@@ -10,10 +11,11 @@
 // You don't need to edit this file when you update index.html. Change CACHE only
 // if you change the FILES list below.
 
-const CACHE = 'hsw-app-v1';
+const CACHE = 'hsw-app-v2';
 const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
   './',
+  './vendor/three.js',
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
