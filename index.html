@@ -207,7 +207,7 @@ body.in-battle .topbar{display:none}
 #battle-scene #scene{width:100%;height:100%}
 .battle-top{
   position:absolute;top:23px;left:25px;right:25px;display:flex;justify-content:space-between;align-items:flex-start;
-  pointer-events:none;
+  pointer-events:none;z-index:1;
 }
 .hud-button{pointer-events:auto;background:#16241bd9;border:1px solid #afbea54a;padding:10px 12px;font-size:15px}
 .hud-button span{font-size:8px;vertical-align:middle;margin-left:7px;color:#a8b99d}
@@ -234,30 +234,30 @@ body.in-battle .topbar{display:none}
 }
 .battle-bottom{position:absolute;bottom:23px;left:25px;right:25px;justify-content:space-between;pointer-events:none}
 .module-panel,.minimap-wrap{background:#14251bdc;border:1px solid #b0c29c3d;backdrop-filter:blur(7px)}
-.module-panel{width:238px;padding:13px}
-.hud-caption{display:flex;justify-content:space-between;gap:8px;font-size:8px;letter-spacing:.8px;color:#d7e4c9}
-.hud-caption span:last-child{color:#93ad80;font-size:7px}
-.module-layout{display:flex;gap:15px;align-items:center;margin-top:14px}
-.tank-diagram{width:65px;height:103px;position:relative;flex-shrink:0}
+.module-panel{width:310px;padding:15px}
+.hud-caption{display:flex;justify-content:space-between;gap:8px;font-size:10px;letter-spacing:.8px;color:#d7e4c9}
+.hud-caption span:last-child{color:#93ad80;font-size:9px}
+.module-layout{display:flex;gap:18px;align-items:center;margin-top:14px}
+.tank-diagram{width:88px;height:139px;position:relative;flex-shrink:0}
 .track{
-  position:absolute;top:12px;bottom:2px;width:10px;border:1px solid #81aa76;
-  background:repeating-linear-gradient(#5d7d4b 0 3px,#2f4829 3px 5px);
+  position:absolute;top:16px;bottom:3px;width:13px;border:1px solid #81aa76;
+  background:repeating-linear-gradient(#5d7d4b 0 4px,#2f4829 4px 7px);
 }
 .track.left{left:1px}
 .track.right{right:1px}
-.hull{position:absolute;inset:10px 14px 0;border:1px solid #8ca77c;background:#66825238}
+.hull{position:absolute;inset:13px 19px 0;border:1px solid #8ca77c;background:#66825238}
 .turret-block{
-  position:absolute;width:28px;height:32px;top:13px;left:3px;border:1px solid #a0b990;background:#809b6e80;border-radius:5px;
+  position:absolute;width:38px;height:43px;top:18px;left:5px;border:1px solid #a0b990;background:#809b6e80;border-radius:7px;
 }
-.gun-block{position:absolute;left:11px;top:-25px;height:26px;width:4px;background:#a2bf8d}
-.engine-block{position:absolute;bottom:3px;left:4px;right:4px;height:23px;background:#728a595c;border:1px solid #8da677}
-.ammo-block{position:absolute;top:50px;left:4px;right:4px;height:12px;background:#9ea15d6b}
+.gun-block{position:absolute;left:15px;top:-34px;height:35px;width:6px;background:#a2bf8d}
+.engine-block{position:absolute;bottom:4px;left:5px;right:5px;height:31px;background:#728a595c;border:1px solid #8da677}
+.ammo-block{position:absolute;top:68px;left:5px;right:5px;height:16px;background:#9ea15d6b}
 .module-damaged{background:#e77c3c90!important;border-color:#e7a24d!important}
 .module-destroyed{background:#c34e4590!important;border-color:#ed7464!important}
 #module-bars{flex:1}
-.module-bar-row{display:flex;align-items:center;gap:6px;font-size:8px;margin:7px 0;color:#b8c9aa}
-.module-bar-row>span{width:48px}
-.module-bar-row>div{background:#354c30;height:3px;flex:1}
+.module-bar-row{display:flex;align-items:center;gap:8px;font-size:10px;margin:9px 0;color:#b8c9aa}
+.module-bar-row>span{width:60px}
+.module-bar-row>div{background:#354c30;height:5px;flex:1}
 .module-bar-row i{display:block;background:#93b87d;height:100%}
 .module-actions{display:flex;gap:10px;margin-top:13px;pointer-events:auto}
 .module-actions button{border:1px solid #617c4c;padding:7px 8px;font-size:8px;flex:1;background:#354a2dc7}
@@ -281,22 +281,20 @@ body.in-battle .topbar{display:none}
 #reload-count{font-size:18px;color:var(--gold);font-variant-numeric:tabular-nums;min-width:24px}
 .key-hints{display:flex;gap:16px;font-size:8px;color:#c7d8bb}
 .key-hints kbd{font-size:7px;background:#16291bd9;border-color:#8ca77659;margin-right:4px}
-.minimap-wrap{width:204px;padding:10px}
-.minimap-wrap canvas{width:182px;height:182px;display:block;margin-top:9px}
+.minimap-wrap{width:292px;padding:10px}
+.minimap-wrap canvas{width:270px;height:270px;display:block}
 .battle-objective{
   position:absolute;top:150px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:3px;color:#eef3df;
   text-shadow:0 2px 5px #000;transition:opacity 1s;pointer-events:none;
 }
+/* Third person: outer ring = where you aim, inner ring (#gun-marker) = where the gun points. */
 #reticle{
-  position:absolute;left:50%;top:50%;width:37px;height:37px;transform:translate(-50%,-50%);border:1px solid #eff3dc9c;
-  border-radius:50%;pointer-events:none;filter:drop-shadow(0 1px 2px #111);
+  position:absolute;left:50%;top:50%;width:36px;height:36px;transform:translate(-50%,-50%);border:2px solid #c8ccc2e0;
+  border-radius:50%;pointer-events:none;filter:drop-shadow(0 0 1px #000c) drop-shadow(0 1px 2px #0009);
 }
-#reticle:before,#reticle:after{content:'';position:absolute;background:#e5edce9c}
-#reticle:before{width:1px;height:55px;left:17px;top:-10px}
-#reticle:after{height:1px;width:55px;top:17px;left:-10px}
-#reticle i{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--gold);left:16px;top:16px;z-index:1}
 #reticle.reloading{border-style:dashed;opacity:.6}
-#reticle>span{position:absolute;top:45px;text-align:center}
+#reticle.scoped{width:0;height:0;border:0;filter:none}
+#reticle>span{position:absolute;top:44px;text-align:center;text-shadow:0 1px 3px #000}
 .kill-feed{position:absolute;top:122px;right:24px;display:flex;flex-direction:column;gap:7px;max-width:300px;pointer-events:none}
 .feed-item{background:#11261c9c;padding:8px 11px;border-left:2px solid #a5b994;font-size:9px;color:#d7e4cc}
 .feed-item.enemy{border-left-color:var(--red)}
@@ -337,9 +335,9 @@ body.in-battle .topbar{display:none}
   h1{font-size:58px}
   .hero-corner small{display:none}
   .key-hints{gap:6px}
-  .module-panel{width:210px}
-  .minimap-wrap{width:180px}
-  .minimap-wrap canvas{width:158px;height:158px}
+  .module-panel{width:260px}
+  .minimap-wrap{width:232px}
+  .minimap-wrap canvas{width:210px;height:210px}
 }
 @media(max-width:800px){
   .brand{gap:7px}
@@ -359,17 +357,17 @@ body.in-battle .topbar{display:none}
   .battle-top{top:12px;left:12px;right:12px}
   .battle-score{width:350px}
   .battle-bottom{left:12px;right:12px;bottom:12px}
-  .module-panel{width:182px;padding:9px}
-  .tank-diagram{transform:scale(.8);margin-left:-7px;margin-right:-10px}
+  .module-panel{width:200px;padding:9px}
+  .tank-diagram{transform:scale(.75);margin:-17px -11px}
   .module-layout{gap:8px;margin-top:5px}
-  .module-bar-row{font-size:7px}
-  .module-bar-row>span{width:42px}
+  .module-bar-row{font-size:8px;margin:7px 0}
+  .module-bar-row>span{width:46px}
   .module-actions{gap:5px}
   .module-actions button{padding:7px 3px;font-size:7px}
   .key-hints{display:none}
   .driving-hud{transform-origin:bottom}
-  .minimap-wrap{width:150px}
-  .minimap-wrap canvas{width:128px;height:128px}
+  .minimap-wrap{width:190px}
+  .minimap-wrap canvas{width:100%;height:auto}
   .battle-map-label{display:none}
   .battle-score{margin:auto}
   .battle-top>.hud-button{position:absolute}
@@ -419,8 +417,6 @@ body.in-battle .topbar{display:none}
   .ammo-hud small{font-size:6px}
   .speed strong{font-size:32px}
   .minimap-wrap{width:120px;padding:7px}
-  .minimap-wrap canvas{width:104px;height:104px}
-  .minimap-wrap .hud-caption{font-size:6px}
   .hud-caption span:last-child{display:none}
   .battle-score{width:285px;padding:10px}
   .score-row{font-size:7px}
@@ -471,27 +467,15 @@ body.in-battle .topbar{display:none}
 /* Mouse aim: the crosshair is the requested aim; the small ring follows the gun. */
 body.in-battle #scene{cursor:none;touch-action:none;outline:none}
 #gun-marker{
-  position:absolute;width:15px;height:15px;border:2px solid #edc580;border-radius:50%;transform:translate(-50%,-50%);
-  pointer-events:none;filter:drop-shadow(0 1px 2px #111);opacity:.9;
+  position:absolute;width:19px;height:19px;border:2px solid #c8ccc2e0;border-radius:50%;transform:translate(-50%,-50%);
+  pointer-events:none;filter:drop-shadow(0 0 1px #000c) drop-shadow(0 1px 2px #0009);
 }
-#gun-marker.aligned{border-color:#cde9ad}
+#gun-marker.aligned{border-color:#eef2e8}
 .view-status{
   position:absolute;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:1.6px;color:#dfebd3;
   text-shadow:0 1px 3px #000;pointer-events:none;white-space:nowrap;
 }
-.scope-overlay{
-  border:0;border-radius:0;background:radial-gradient(ellipse at center,transparent 50%,#050a078c 77%,#050a07e6 100%);
-  box-shadow:inset 0 0 80px #0005;
-}
-.scope-ticks{
-  position:absolute;width:190px;height:100px;left:50%;top:50%;transform:translate(-50%,0);border-top:1px solid #e1ebc860;
-  background:repeating-linear-gradient(90deg,transparent 0 18px,#e1ebc860 18px 19px,transparent 19px 20px) center top/100% 7px no-repeat;
-}
-.scope-ticks:after{
-  content:'';position:absolute;left:50%;height:70px;width:18px;transform:translateX(-50%);
-  background:repeating-linear-gradient(0deg,transparent 0 18px,#e1ebc860 18px 19px,transparent 19px 20px);
-  border-left:1px solid #e1ebc860;
-}
+#scope-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .touch-aim-actions{display:flex;gap:10px;align-items:center;pointer-events:auto}
 #touch-scope{background:#1c3424bb;border:1px solid #b3ca9f55;padding:14px 9px;font-size:8px;touch-action:none}
 @media(max-width:800px){
@@ -601,7 +585,10 @@ body.in-battle #scene{cursor:none;touch-action:none;outline:none}
 #custom-image::file-selector-button{background:#d2b578;color:#14201a;border:0;padding:9px;margin-bottom:5px;cursor:pointer}
 
 /* Reserve separate layout areas for driving instruments and status text. */
-.battle-bottom{display:grid;grid-template-columns:238px minmax(210px,1fr) 242px;gap:20px;align-items:end}
+.battle-bottom{display:grid;grid-template-columns:310px minmax(210px,1fr) 292px;gap:20px;align-items:end}
+@media(max-width:1100px){
+  .battle-bottom{grid-template-columns:260px minmax(200px,1fr) 232px}
+}
 .driving-hud{position:static;transform:none;width:auto;min-width:0;margin:0;justify-self:center}
 .key-hints{flex-wrap:wrap;justify-content:center;max-width:320px}
 .view-status{top:180px;bottom:auto}
@@ -610,9 +597,9 @@ body.in-battle #scene{cursor:none;touch-action:none;outline:none}
 .decal-editor .custom-decal-preview{width:72px;height:72px}
 .decal-editor input[type=range]{width:100%;accent-color:#d2b578}
 @media(max-width:900px){
-  .battle-bottom{grid-template-columns:182px minmax(150px,1fr) 160px;gap:10px}
+  .battle-bottom{grid-template-columns:200px minmax(150px,1fr) 190px;gap:10px}
   .module-panel{width:100%}
-  .minimap-wrap{width:160px}
+  .minimap-wrap{width:190px}
   .minimap-wrap canvas{width:100%;height:auto}
   .key-hints{display:none}
   .view-status{top:160px;bottom:auto;font-size:7px;letter-spacing:0}
@@ -620,18 +607,22 @@ body.in-battle #scene{cursor:none;touch-action:none;outline:none}
   .driving-hud .speed strong{font-size:32px}
 }
 @media(max-width:600px){
-  .battle-bottom{grid-template-columns:140px minmax(130px,1fr) 95px;gap:5px;left:8px;right:8px}
-  .minimap-wrap{width:95px;padding:5px}
-  .minimap-wrap .hud-caption{font-size:6px}
+  .battle-bottom{grid-template-columns:150px minmax(120px,1fr) 120px;gap:5px;left:8px;right:8px}
+  .minimap-wrap{width:120px;padding:5px}
   .driving-hud .ammo-hud{width:130px;padding:7px}
   .driving-hud .mg-hud{width:125px}
-  .module-panel{width:140px;padding:6px}
+  .module-panel{width:150px;padding:6px}
   .module-layout{gap:5px}
   .module-panel .tank-diagram{display:none}
   .view-status{display:none}
 }
+/* Touch buttons clear the larger damage panel and map. */
+@media(pointer:coarse) and (min-width:901px){.touch-controls{bottom:280px}}
+@media(pointer:coarse) and (min-width:1101px){.touch-controls{bottom:330px}}
 @media(max-width:420px){
-  .battle-bottom{grid-template-columns:140px 1fr 95px}
+  .battle-bottom{grid-template-columns:140px 1fr 105px}
+  .module-panel{width:140px}
+  .minimap-wrap{width:105px}
   .driving-hud{position:absolute;bottom:160px;left:50%;transform:translateX(-50%);width:140px}
   .touch-controls{bottom:280px}
 }
@@ -950,6 +941,11 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #efd
 }
 #server-chat-form button{padding:8px;background:#d9b473;color:#18251d;font-size:9px;border-radius:3px}
 #server-chat-body>small{display:block;color:#96ac9d;font-size:9px;margin-top:8px}
+/* Online battles keep the log on screen; the panel and input appear only while typing. */
+#server-chat.live #server-chat-body:not(.typing){background:none;border-color:transparent;box-shadow:none;padding:0 12px;pointer-events:none}
+#server-chat.live #server-chat-body:not(.typing) :is(#server-chat-form,small){display:none}
+#server-chat.live #server-chat-log{height:auto;max-height:160px;text-shadow:0 1px 3px #000,0 0 2px #000}
+#server-chat.live #server-chat-body:not(.typing) #server-chat-log{overflow:hidden}
 @media(max-width:680px){
   .public-server-section{padding:16px}
   .server-heading h3{font-size:20px}
@@ -960,6 +956,7 @@ button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #efd
   .mp-offline button{font-size:10px}
   #server-chat{left:12px;top:150px}
   #server-chat-log{height:110px}
+  #server-chat.live #server-chat-log{max-height:110px}
 }
 
 /* Keep the blast and orbit unobstructed until the results appear. */
@@ -1389,7 +1386,7 @@ try{const theme=localStorage.getItem('hsw-theme');if(theme==='light'||theme==='m
 </div>
 <footer><span>HARD STEEL WAR <b> / </b> EXPERIMENTÁLNÍ TANKOVÝ POLYGON</span><span class="text-button">OFFLINE EDICE · VŠE V TOMTO SOUBORU</span><button class="text-button" data-view="guide">Ovládání a mechaniky ↗</button></footer></div>
 </main>
-<section id="battle" hidden><div id="battle-scene"></div><div class="battle-top"><button id="pause-button" class="hud-button">Ⅱ <span>ESC</span></button><div class="battle-score"><div class="score-row"><span class="team-blue">SPOJENCI <b id="friendly-score">2000</b></span><span id="battle-time">12:00</span><span class="team-red"><b id="enemy-score">2000</b> NEPŘÍTEL</span></div><div class="ticket-bars"><i id="friendly-bar"></i><i id="enemy-bar"></i></div><div id="zone-hud" class="zone-hud"></div></div><span class="battle-map-label" id="battle-map-label"></span></div><div id="network-hud" hidden></div><section id="server-chat" hidden><button id="server-chat-toggle" type="button">CHAT · ENTER</button><div id="server-chat-body" hidden><div id="server-chat-log" role="log" aria-label="Chat" aria-live="polite"></div><form id="server-chat-form"><input id="server-chat-input" aria-label="Zpráva" placeholder="Napiš zprávu…" maxlength="180" autocomplete="off"><button type="submit">ODESLAT</button></form><small>Enter · odeslat / Esc · zavřít</small></div></section><aside id="team-roster" hidden></aside><div id="name-tags"></div><div id="zombie-hud" hidden></div><div id="scope-overlay" class="scope-overlay" hidden><div class="scope-ticks"></div></div><div id="view-status" class="view-status"></div><button id="camera-mode-button" class="camera-mode-button">[SHIFT] 1. OSOBA</button><div id="gun-marker" hidden></div><div id="reticle"><i></i><span></span></div><div id="hit-notice" aria-live="polite"></div><div id="kill-confirmation" class="kill-confirmation" hidden><span>✦</span><strong>CÍL ZNIČEN</strong><small></small></div><div id="kill-feed" class="kill-feed"></div><div class="battle-objective" id="battle-objective">OBSAĎ A UDRŽ ZÓNY</div><div id="damage-flash"></div><div id="nuke-flash"></div><button id="nuke-button" disabled>☢ BODY 0 / 10</button><div class="battle-bottom"><div class="module-panel"><div class="hud-caption"><span id="battle-tank-name"></span><span id="crew-label">POSÁDKA</span></div><div class="module-layout"><div id="tank-diagram" class="tank-diagram"><div class="track left"></div><div class="hull"><div class="engine-block"></div><div class="turret-block"><div class="gun-block"></div></div><div class="ammo-block"></div></div><div class="track right"></div></div><div id="module-bars"></div></div><div class="module-actions"><button id="repair-button">[F] Opravit</button><button id="smoke-button">[G] Kouř <span>3</span></button></div><button id="secondary-button" class="missile-action" hidden>[R] 75 mm · PŘIPRAVENO</button><button id="missile-button" class="missile-action" hidden>[2] RAKETA 4/4</button></div><div class="driving-hud"><small id="cruise-status" hidden></small><div class="speed"><strong id="speed-value">0</strong><span>km/h</span></div><div class="ammo-hud"><div class="shell-icon"></div><div><strong id="ammo-name">APHE</strong><small id="reload-label">PŘIPRAVENO</small><div class="reload-track"><i id="reload-bar"></i></div></div><span id="reload-count"></span></div><div class="mg-hud"><span id="mg-status">MEZERNÍK · KULOMET</span><div><i id="mg-heat"></i></div></div><div class="key-hints"><span><kbd>W A S D</kbd> Pohyb</span><span><kbd>MYŠ</kbd> Míření</span><span><kbd>SHIFT</kbd> Zaměřovač</span><span><kbd>C</kbd> Rozhlížení</span></div></div><div class="minimap-wrap"><div class="hud-caption"><span>TAKTICKÁ MAPA</span><span id="terrain-label">TERÉN</span></div><canvas id="minimap" width="220" height="220" aria-label="Taktická mapa bojiště"></canvas></div></div><div id="respawn-panel" hidden><span class="eyebrow">STROJ VYŘAZEN</span><h2>Bitva ještě nekončí.</h2><p id="death-killer" translate="no"></p><p id="respawn-text">Připravuje se záložní tank…</p><button id="respawn-button" class="primary-button">ZPĚT DO BOJE →</button></div><div class="touch-controls"><div class="touch-pad"><button data-key="KeyW">▲</button><button data-key="KeyA">◀</button><button data-key="KeyS">▼</button><button data-key="KeyD">▶</button></div><div class="touch-aim-actions"><button id="touch-scope">ZAMĚŘOVAČ</button><button id="touch-fire">PALBA</button></div></div></section>
+<section id="battle" hidden><div id="battle-scene"></div><div class="battle-top"><button id="pause-button" class="hud-button">Ⅱ <span>ESC</span></button><div class="battle-score"><div class="score-row"><span class="team-blue">SPOJENCI <b id="friendly-score">2000</b></span><span id="battle-time">12:00</span><span class="team-red"><b id="enemy-score">2000</b> NEPŘÍTEL</span></div><div class="ticket-bars"><i id="friendly-bar"></i><i id="enemy-bar"></i></div><div id="zone-hud" class="zone-hud"></div></div><span class="battle-map-label" id="battle-map-label"></span></div><div id="network-hud" hidden></div><section id="server-chat" hidden><button id="server-chat-toggle" type="button">CHAT · ENTER</button><div id="server-chat-body" hidden><div id="server-chat-log" role="log" aria-label="Chat" aria-live="polite"></div><form id="server-chat-form"><input id="server-chat-input" aria-label="Zpráva" placeholder="Napiš zprávu…" maxlength="180" autocomplete="off"><button type="submit">ODESLAT</button></form><small>Enter · odeslat / Esc · zavřít</small></div></section><aside id="team-roster" hidden></aside><div id="name-tags"></div><div id="zombie-hud" hidden></div><div id="scope-overlay" class="scope-overlay" hidden><canvas id="scope-canvas" aria-hidden="true"></canvas></div><div id="view-status" class="view-status"></div><button id="camera-mode-button" class="camera-mode-button">[SHIFT] 1. OSOBA</button><div id="gun-marker" hidden></div><div id="reticle"><span></span></div><div id="hit-notice" aria-live="polite"></div><div id="kill-confirmation" class="kill-confirmation" hidden><span>✦</span><strong>CÍL ZNIČEN</strong><small></small></div><div id="kill-feed" class="kill-feed"></div><div class="battle-objective" id="battle-objective">OBSAĎ A UDRŽ ZÓNY</div><div id="damage-flash"></div><div id="nuke-flash"></div><button id="nuke-button" disabled>☢ BODY 0 / 10</button><div class="battle-bottom"><div class="module-panel"><div class="hud-caption"><span id="battle-tank-name"></span><span id="crew-label">POSÁDKA</span></div><div class="module-layout"><div id="tank-diagram" class="tank-diagram"><div class="track left"></div><div class="hull"><div class="engine-block"></div><div class="turret-block"><div class="gun-block"></div></div><div class="ammo-block"></div></div><div class="track right"></div></div><div id="module-bars"></div></div><div class="module-actions"><button id="repair-button">[F] Opravit</button><button id="smoke-button">[G] Kouř <span>3</span></button></div><button id="secondary-button" class="missile-action" hidden>[R] 75 mm · PŘIPRAVENO</button><button id="missile-button" class="missile-action" hidden>[2] RAKETA 4/4</button></div><div class="driving-hud"><small id="cruise-status" hidden></small><div class="speed"><strong id="speed-value">0</strong><span>km/h</span></div><div class="ammo-hud"><div class="shell-icon"></div><div><strong id="ammo-name">APHE</strong><small id="reload-label">PŘIPRAVENO</small><div class="reload-track"><i id="reload-bar"></i></div></div><span id="reload-count"></span></div><div class="mg-hud"><span id="mg-status">MEZERNÍK · KULOMET</span><div><i id="mg-heat"></i></div></div><div class="key-hints"><span><kbd>W A S D</kbd> Pohyb</span><span><kbd>MYŠ</kbd> Míření</span><span><kbd>SHIFT</kbd> Zaměřovač</span><span><kbd>C</kbd> Rozhlížení</span></div></div><div class="minimap-wrap"><canvas id="minimap" width="300" height="300" aria-label="Taktická mapa bojiště"></canvas></div></div><div id="respawn-panel" hidden><span class="eyebrow">STROJ VYŘAZEN</span><h2>Bitva ještě nekončí.</h2><p id="death-killer" translate="no"></p><p id="respawn-text">Připravuje se záložní tank…</p><button id="respawn-button" class="primary-button">ZPĚT DO BOJE →</button></div><div class="touch-controls"><div class="touch-pad"><button data-key="KeyW">▲</button><button data-key="KeyA">◀</button><button data-key="KeyS">▼</button><button data-key="KeyD">▶</button></div><div class="touch-aim-actions"><button id="touch-scope">ZAMĚŘOVAČ</button><button id="touch-fire">PALBA</button></div></div></section>
 <div id="modal" class="modal-backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button id="close-modal" class="modal-close" aria-label="Zavřít">×</button><div id="modal-content"></div></section></div>
 <section id="workshop" hidden><div id="custom-preview"></div><aside><span class="eyebrow">DÍLNA / VLASTNÍ VZHLED</span><h2 id="custom-title"></h2><p>Vyber nálepku přímo na 3D tanku. Táhni po pancíři, rohy měň velikost, horním úchytem otáčej. Pravým tlačítkem si tank prohlédni ze všech stran.</p><div id="custom-form"></div><button id="custom-reset" class="text-button">Obnovit původní vzhled</button><div class="custom-actions"><button id="custom-save" class="primary-button">ULOŽIT VZHLED</button><button id="custom-cancel" class="secondary-button">ZRUŠIT</button></div><small>Vzhled je zdarma a nemění bojové vlastnosti. Ukládá se pro každý tank zvlášť v tomto prohlížeči.</small></aside></section><div id="toast" role="status"></div>
 </div>
@@ -1558,7 +1555,9 @@ const CONTENT_TRANSLATIONS=[
  ['Přepnout do první osoby — optický zaměřovač střelce','Toggle first-person gunner optics'],['Oprava modulů při zastavení','Repair modules while stationary'],
  ['Kouřová clona — 3 na život','Smoke screen — three per life'],['BMPT: naváděná raketa; po odpalu ji řídíš mířením','BMPT: guided missile; steer it after launch with your aim'],
  ['Podržet pro zobrazení modulů','Hold to view modules'],['Pauza','Pause'],
- ['Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.','The reticle is centered on deployment. The large cross sets your aim. The smaller marker predicts the first shell impact; cover in front of the barrel can stop your shot. First person uses gunner optics; the small marker follows the gun. Click the battlefield for unlimited mouse rotation. Esc releases the mouse and pauses. Adjust sensitivity in Settings.'],
+ ['Po nasazení je zaměřovač uprostřed obrazovky. Velký kroužek ukazuje, kam míříš. Menší kroužek ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě se kříž optiky pohybuje s hlavní a šedý kroužek ukazuje, kam míříš. Značky pod křížem (4, 8, 12, 16 = stovky metrů) ukazují, kam střela na danou vzdálenost dopadne. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.','The reticle is centered on deployment. The large ring is where you aim. The small ring predicts the first shell impact; cover in front of the barrel can stop your shot. In first person the optic crosshair follows the gun and a grey ring marks your aim. The marks below the cross (4, 8, 12, 16 = hundreds of metres) show where the shell falls at that range. Click the battlefield for unlimited mouse rotation. Esc releases the mouse and pauses. Adjust sensitivity in Settings.'],
+ ['Nástřel ±100 m; po nasazení 0 m','Sight range ±100 m; starts at 0 m'],
+ ['Dálkoměr: nastaví nástřel na vzdálenost bodu pod zaměřovačem','Rangefinder: sets the sight range to the distance under the reticle'],
  ['Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.','On touch devices, use the direction buttons, touch the battlefield to aim and press FIRE. A wide screen gives the best view.'],
  ['ZOMBIE · Přežití','ZOMBIES · Survival'],
  ['V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný v Nadvládě i týmovém deathmatchi.','Choose Zombies in the hangar. Repel waves with the machine gun on Space, cannon explosions and running over the horde. Spend scrap between waves. The automatic machine gun costs 1,800 scrap and aims independently of your turret. You have one life; upgrades and scrap last for the current run. Nukes are available in Domination and Team Deathmatch.'],
@@ -2934,7 +2933,7 @@ class Game {
     Object.assign(t,{x,z,y:surfaceHeight(this.map.id,x,z),angle:t.team===0?0:Math.PI,turretAngle:t.team===0?0:Math.PI,speed:0,yawVelocity:0,
       alive:true,fall:0,drone:null,flight:null,reload:0,secondaryReload:0,mgCooldown:0,mgHeat:0,mgOverheated:false,modules:{engine:100,tracks:100,turret:100,breech:100,ammo:100,crew:100},repair:0,fire:0,respawnIn:0,
       smoke:0,smokes:3,smokeCooldown:0,missiles:t.type==='bmpt'?4:0,missileReload:0,_barrelIndex:0,health:100,maxSpeed:(t.developer?350:spec.speed)/3.6,width:spec.width??(spec.role==='Těžký tank'||t.type==='bmpt'?4.0:3.45),length:spec.length??(spec.role==='Těžký tank'||t.type==='bmpt'?7.2:6.5),
-      _aimX:x,_aimZ:z+sign*100,_aimY:null,sightRange:400,_playerDamage:0,_lastPlayerHit:-Infinity,gunPitch:0,_think:this._rand()*.3,_targetId:null,_goal:null,_path:[],_pathAge:99,_reaction:this._rules.reaction,
+      _aimX:x,_aimZ:z+sign*100,_aimY:null,sightRange:0,_playerDamage:0,_lastPlayerHit:-Infinity,gunPitch:0,_think:this._rand()*.3,_targetId:null,_goal:null,_path:[],_pathAge:99,_reaction:this._rules.reaction,
       _approachKey:null,_approach:null,_approachDone:false,_observed:null,_flankDone:null,_order:null,_tactic:null,_sightChecks:new Map(),
       _slopeStall:0,_escapeSlope:null,_avoidSlope:null,_stuck:0,_reverse:0,_lastX:x,_lastZ:z,_lastPlayerHit:-999,_fireSource:null,_repairTotal:0,_captureClock:0,lastHit:null,lastKiller:null});
     if(!initial&&t.isPlayer)this._message('Nový tank připraven. Zpátky do boje!',t);
@@ -4073,7 +4072,7 @@ class ReplicaBattle extends Game{
    }
    if(t.fall>previous.fall)o.y=t.y;
    if(isPlayer&&old){
-     o.sightRange=old.sightRange||400;
+     o.sightRange=old.sightRange??0;
      if(!initial&&!t.fall&&old.alive&&t.alive){
        o.x=old.x;
        o.z=old.z;
@@ -4084,7 +4083,7 @@ class ReplicaBattle extends Game{
    }
    o._terrainPose=null;return o;
   });
-  this.player=this.tanks.find(t=>t.isPlayer);this.player.sightRange??=400;
+  this.player=this.tanks.find(t=>t.isPlayer);this.player.sightRange??=0;
   const oldShells=new Map(a.shells.map(s=>[s.id,s]));
   this.shells=b.shells.map(s=>{
     const prior=oldShells.get(s.id),o={...s,team:s.team^this.localTeam,shooterId:id(s.shooterId)},
@@ -6088,11 +6087,17 @@ MODULES["renderer.js"]=(()=>{
 
 const {normalizeAppearance} = MODULES["appearance.js"];
 const { getTank, getMap, terrainHeight, surfaceHeight, riverCenter, terrainAt } = MODULES["data.js"];
-const { weaponFrame, weaponGeometry, hullPose } = MODULES["ballistics.js"];
+const { weaponFrame, weaponGeometry, hullPose, GRAVITY } = MODULES["ballistics.js"];
 // All geometry and surface textures are generated locally. No runtime asset requests.
 const TAU = Math.PI * 2;
 const clamp = THREE.MathUtils.clamp;
 const mix = THREE.MathUtils.lerp;
+// The chase camera sits this many radians above the line of sight, which
+// keeps the tank a little below the reticle.
+const CHASE_OFFSET = .185;
+// Gun elevation above the line of sight that lands a shell on it at `range`.
+// A sight range of 0 m means no superelevation: the bore stays on the sight line.
+const sightSuperelevation = (range, speed) => range > 0 ? .5 * Math.asin(Math.min(1, GRAVITY * range / (speed * speed))) : 0;
 const UP = new THREE.Vector3(0, 1, 0);
 const DUMMY = new THREE.Object3D();
 const TEX = new Map();
@@ -6909,7 +6914,7 @@ class Renderer {
     this.cameraYaw = Math.PI;
     this.cameraPitch = .065;
     this.cameraDistance = 22;
-    this.scopeFov = 22;
+    this.scopeFov = 15;
     this.viewScope = false;
     this.freeLook = false;
     this.savedAim = null;
@@ -7133,10 +7138,11 @@ class Renderer {
 
   resetView(game) {
     this.cameraYaw = (game.player?.angle || 0) + Math.PI;
-    this.chaseElevation=.25;
+    this.chaseBoom = null;
+    this.savedSightAim = null;
     this.cameraPitch = .065;
     this.cameraDistance = 22;
-    this.scopeFov = 22;
+    this.scopeFov = 15;
     this.viewScope = false;
     this.freeLook = false;
     this.savedAim = null;
@@ -7634,26 +7640,16 @@ class Renderer {
       // the turret slews or the barrel compensates for projectile drop.
       view.position.set(frame.root.x, frame.root.y + frame.gunY, frame.root.z);
     }
-    else {
-      const d=this.cameraDistance,elevation=this.chaseElevation??.25,flat=d*Math.cos(elevation);
-      view.position.set(anchor.x+Math.sin(this.cameraYaw)*flat,anchor.y+d*Math.sin(elevation),anchor.z+Math.cos(this.cameraYaw)*flat);
-      view.position.y = Math.max(view.position.y, this.heightAt(view.position.x, view.position.z) + 1.5);
-      // Bring the chase camera in front of nearby buildings instead of looking
-      // through them. Trees do not steal the view when driving through foliage.
-      const direction = view.position.clone().sub(anchor), distance = direction.length();
-      const cameraRay = new THREE.Ray(anchor.clone(), direction.normalize());
-      let clearDistance = distance;
-      for (const obstacle of this.map?.obstacles || []) {
-        if (obstacle.type === 'tree') continue;
-        const hit = this.intersectBounds(cameraRay, obstacle.x, this.heightAt(obstacle.x, obstacle.z), obstacle.z, obstacle.rotation || 0, obstacle.w, obstacle.h, obstacle.d);
-        if (hit) clearDistance = Math.min(clearDistance, Math.max(2, hit.distanceTo(anchor) - .7));
-      }
-      if (clearDistance < distance) cameraRay.at(clearDistance, view.position);
-    }
+    else this.placeChaseCamera(anchor, view.position, dt);
     if (this.pendingViewAim) {
-      const aim = this.pendingViewAim;
-      this.cameraYaw = Math.atan2(view.position.x - aim.x, view.position.z - aim.z);
-      this.cameraPitch = clamp(Math.atan2(view.position.y - (aim.y ?? this.heightAt(aim.x, aim.z) + 1.3), Math.hypot(aim.x - view.position.x, aim.z - view.position.z)), p.developer?-Math.PI/2:-.6, p.developer?Math.PI/2:.85);
+      const aim = this.pendingViewAim, aimY = aim.y ?? this.heightAt(aim.x, aim.z) + 1.3, [low, high] = this.pitchLimits(p, scoped);
+      // The chase boom follows the view pitch, so settle the angles and the
+      // camera position together to keep the requested point under the cross.
+      for (let i = 0; i < (scoped ? 1 : 3); i++) {
+        this.cameraYaw = Math.atan2(view.position.x - aim.x, view.position.z - aim.z);
+        this.cameraPitch = clamp(Math.atan2(view.position.y - aimY, Math.hypot(aim.x - view.position.x, aim.z - view.position.z)), low, high);
+        if (!scoped) this.placeChaseCamera(anchor, view.position, 1);
+      }
       this.pendingViewAim = null;
     }
     const cosPitch = Math.cos(this.cameraPitch);
@@ -7669,6 +7665,47 @@ class Renderer {
     this.sun.target.updateMatrixWorld();
   }
 
+  // One orbit angle drives both the view pitch and the boom, so the two can
+  // never drift apart and park the camera high above the tank. Looking up
+  // lowers the boom until the camera rides just above the ground behind the
+  // tank; from there the view keeps tilting up instead of lifting the camera.
+  placeChaseCamera(anchor, out, dt = 1) {
+    const d = this.cameraDistance, elevation = clamp(this.cameraPitch + CHASE_OFFSET, -.35, 1.15), flat = d * Math.cos(elevation);
+    out.set(anchor.x + Math.sin(this.cameraYaw) * flat, anchor.y + d * Math.sin(elevation), anchor.z + Math.cos(this.cameraYaw) * flat);
+    // Lift only as much as the ground needs: under the camera and along the
+    // boom, so a hill behind the tank never hides it.
+    const water = this.map?.water?.level ?? -Infinity, floor = (x, z) => Math.max(this.heightAt(x, z), water);
+    let y = Math.max(out.y, floor(out.x, out.z) + 1.1);
+    for (let f = .4; f < .99; f += .15) {
+      const need = floor(mix(anchor.x, out.x, f), mix(anchor.z, out.z, f)) + .6;
+      y = Math.max(y, anchor.y + (need - anchor.y) / f);
+    }
+    out.y = Math.min(y, anchor.y + d);
+    // Bring the chase camera in front of nearby buildings instead of looking
+    // through them. Trees do not steal the view when driving through foliage.
+    const direction = out.clone().sub(anchor), distance = direction.length();
+    const cameraRay = new THREE.Ray(anchor.clone(), direction.normalize());
+    let clearDistance = distance;
+    for (const obstacle of this.map?.obstacles || []) {
+      if (obstacle.type === 'tree') continue;
+      const hit = this.intersectBounds(cameraRay, obstacle.x, this.heightAt(obstacle.x, obstacle.z), obstacle.z, obstacle.rotation || 0, obstacle.w, obstacle.h, obstacle.d);
+      if (hit) clearDistance = Math.min(clearDistance, Math.max(2, hit.distanceTo(anchor) - .7));
+    }
+    // Snap in front of a wall at once, but ease back out once it is passed so
+    // the view does not pop at every corner. Tracked as a share of the boom so
+    // terrain lift and zoom never lag.
+    const clear = clearDistance / Math.max(distance, .001), boom = this.chaseBoom ?? 1;
+    this.chaseBoom = dt >= 1 || clear <= boom ? clear : boom + (clear - boom) * (1 - Math.exp(-dt * 5));
+    if (this.chaseBoom < .999) cameraRay.at(this.chaseBoom * distance, out);
+    return out;
+  }
+
+  pitchLimits(p, scoped = this.viewScope) {
+    if (p?.developer) return [-Math.PI / 2, Math.PI / 2];
+    if (p?.flight || p?.drone) return [-1.55, 1.55];
+    return scoped ? [-.6, .85] : [-1.25, .85];
+  }
+
   updateOpticalCamera(game) {
     this.camera.copy(this.aimCamera);
     this.camera.updateMatrixWorld();
@@ -7679,8 +7716,8 @@ class Renderer {
   setFreeLook(active) {
     active = !!active;
     if (active === this.freeLook || this.mode !== 'battle') return;
-    if (active) this.savedAim = this.aimFromCenter();
-    else { this.pendingViewAim = this.savedAim; this.savedAim = null; }
+    if (active) { this.savedSightAim = this.game?.player ? this.aimForSight(0, 0) : null; this.savedAim = this.aimFromCenter(); }
+    else { this.pendingViewAim = this.savedAim; this.savedAim = null; this.savedSightAim = null; }
     this.freeLook = active;
   }
 
@@ -7793,14 +7830,40 @@ class Renderer {
     return { x: candidate.x, y: candidate.y, z: candidate.z };
   }
 
+  // The gun converges on whatever is under the reticle; the sight range only
+  // adds superelevation. At 0 m the bore points straight at that point and the
+  // shell drops below it with distance (read the drop off the scope's range
+  // marks). With the range set to the target distance the shell lands on it.
+  // The result is a point on that trajectory, so the shared gun solver (and
+  // the multiplayer input) recover exactly this barrel elevation.
   aimForSight(screenX=0,screenY=0) {
-    if(this.freeLook&&this.savedAim)return this.savedAim;
-    this.screen.set(screenX,screenY);this.raycaster.setFromCamera(this.screen,this.camera);
-    const ray=this.raycaster.ray,p=this.game.player,frame=weaponFrame(p,this.map.id);
-    const pivot=new THREE.Vector3(frame.pivot.x,frame.pivot.y,frame.pivot.z);
-    const along=Math.max(0,pivot.sub(ray.origin).dot(ray.direction));
-    const point=ray.at(along+(p.sightRange||400),new THREE.Vector3());
-    return {x:point.x,y:point.y,z:point.z,manualRange:true};
+    if(this.freeLook&&this.savedSightAim)return {...this.savedSightAim};
+    const target=this.castAim(screenX,screenY),p=this.game.player;
+    const root=weaponFrame(p,this.map.id).root;
+    const frame=weaponFrame(p,this.map.id,{yaw:Math.atan2(target.x-root.x,target.z-root.z),pitch:0}),pivot=frame.pivot;
+    const range=Math.hypot(target.x-pivot.x,target.z-pivot.z);
+    // A guided missile flies to the aim point itself, so steer it exactly.
+    const guiding=this.game.shells?.some(s=>s.missile&&s.shooterId===p.id);
+    if(range<8||guiding)return {x:target.x,y:target.y,z:target.z,manualRange:true};
+    const speed=frame.speed,pitch=clamp(Math.atan2(target.y-pivot.y,range)+sightSuperelevation(p.sightRange||0,speed),-1.2,1.2);
+    const c=Math.cos(pitch),time=Math.max(0,range-frame.barrelLength*c)/(speed*c);
+    return {x:target.x,y:clamp(pivot.y+Math.tan(pitch)*range-.5*GRAVITY*time*time,-199,1499),z:target.z,manualRange:true};
+  }
+
+  // Screen point of the gun's sight line (bore minus the superelevation of the
+  // selected range): the centre of the scope reticle. `focal` converts an
+  // angle below that line into pixels for the range marks.
+  getSightCross(game) {
+    const p = game?.player;
+    if (!p?.alive || p.flight || p.drone) return null;
+    const frame = weaponFrame(p, this.map.id), d = frame.direction, zero = sightSuperelevation(p.sightRange || 0, frame.speed);
+    const pitch = Math.asin(clamp(d.y, -1, 1)) - zero, yaw = Math.atan2(d.x, d.z), c = Math.cos(pitch);
+    const v = new THREE.Vector3(Math.sin(yaw) * c, Math.sin(pitch), Math.cos(yaw) * c).transformDirection(this.camera.matrixWorldInverse);
+    const tan = Math.tan(THREE.MathUtils.degToRad(this.camera.fov) / 2), focal = this.height / 2 / tan;
+    if (v.z > -.05) return null;
+    // Range marks: how far below the sight line a shell falls at each range.
+    const marks = [400, 800, 1200, 1600].map(range => ({ range, offset: Math.tan(sightSuperelevation(range, frame.speed) - zero) * focal }));
+    return { x: this.width / 2 + v.x / -v.z * focal, y: this.height / 2 - v.y / -v.z * focal, marks };
   }
 
   getAimMarker(aim) {
@@ -8015,8 +8078,8 @@ class Renderer {
     // motion must reduce yaw; downward mouse motion increases downward pitch.
     const speed = .0026 * clamp(Number(sensitivity) || 1, .2, 3) * this.camera.fov / 54;
     this.cameraYaw -= dx * speed;
-    this.cameraPitch = clamp(this.cameraPitch + dy * speed, this.game?.player?.developer?-Math.PI/2:(this.game?.player?.flight||this.game?.player?.drone)?-1.55:-.6,this.game?.player?.developer?Math.PI/2:(this.game?.player?.flight||this.game?.player?.drone)?1.55:.85);
-    if(!this.viewScope)this.chaseElevation=clamp((this.chaseElevation??.25)+dy*speed,-.12,1.15);
+    const [low, high] = this.pitchLimits(this.game?.player);
+    this.cameraPitch = clamp(this.cameraPitch + dy * speed, low, high);
   }
   zoom(delta, { scope = this.viewScope } = {}) {
     if (this.mode !== 'battle') return;
@@ -8502,7 +8565,7 @@ let game=null,renderer=null,paused=false,awardDone=false,lastTime=performance.no
   noticeTimer,flashTimer,feed=[],pointer={x:innerWidth*.5,y:innerHeight*.5,down:false,right:false},keys=new Set(),
   returnFocus=null;
 let killConfirmTimer;
-let ignoreMouseMove=true,fireRequested=false,mgRequested=false,secondaryRequested=false,touchCannon=false,scope=false,
+let chatTyping=false,ignoreMouseMove=true,fireRequested=false,mgRequested=false,secondaryRequested=false,touchCannon=false,scope=false,
   touchAim=false,lastUnlock=-1000,lastAim=null;
 const audio=new AudioEngine();audio.setEnabled(progress.settings.sound);
 const canvas=$('#scene'),hero=$('.hero'), mini=$('#minimap'), mc=mini.getContext('2d');
@@ -8772,7 +8835,7 @@ function showZombieShop(){
  }).join('')}</div><div class="modal-actions"><button id="next-wave" class="primary-button">DALŠÍ VLNA →</button><button data-action="abandon" class="secondary-button">UKONČIT PŘEŽITÍ</button></div>`);
 }
 function showGuide(){
-  openModal('guide',`<span class="eyebrow">POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK</span><h2>Znát svůj tank. Ovládnout bojiště.</h2><p class="modal-intro">Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.</p><div class="guide-grid"><section><h3>Ovládání</h3><div class="controls-list"><span><kbd>W</kbd> / <kbd>S</kbd></span><span>Vpřed / zpátečka</span><span><kbd>E</kbd> / <kbd>Q</kbd></span><span>Tempomat vpřed / vzad. W nebo S jej zruší.</span><span><kbd>A</kbd> / <kbd>D</kbd></span><span>Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla</span><span><kbd>MYŠ</kbd></span><span>Pohyb pohledu a zaměřování; věž zaměřovač dohání</span><span><kbd>LEVÉ TLAČÍTKO</kbd></span><span>Výstřel (lze držet)</span><span><kbd>MEZERNÍK</kbd></span><span>Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.</span><span><kbd>N</kbd></span><span>Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.</span><span><kbd>PRAVÉ TLAČÍTKO</kbd></span><span>Podržet pro přiblížení</span><span><kbd>C</kbd></span><span>Podržet pro rozhlížení bez otáčení věže</span><span><kbd>KOLEČKO</kbd></span><span>Vzdálenost kamery / zvětšení zaměřovače</span><span><kbd>SHIFT</kbd></span><span>Přepnout do první osoby — optický zaměřovač střelce</span><span><kbd>F</kbd></span><span>Oprava modulů při zastavení. Míření a funkční zbraně zůstávají dostupné.</span><span><kbd>G</kbd></span><span>Kouřová clona — 3 na život</span><span><kbd>2</kbd></span><span>BMPT: naváděná raketa; po odpalu ji řídíš mířením</span><span><kbd>X</kbd></span><span>Podržet pro zobrazení modulů</span><span><kbd>R</kbd></span><span>Maus: druhý kanón 75 mm (lze držet). Po zničení: nasadit záložní tank.</span><span><kbd>TAB</kbd></span><span>Týmy a přezdívky v online bitvě</span><span><kbd>ESC</kbd></span><span>Pauza</span></div><p>Po nasazení je zaměřovač uprostřed obrazovky. Velký kříž určuje cíl. Menší značka ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě míříš optikou střelce; menší značka ukazuje, kam právě vystřelí hlaveň. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.</p><p>Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.</p></section><section><h3>ZOMBIE · Přežití</h3><p>V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný v Nadvládě i týmovém deathmatchi.</p><h3>Nadvláda · 6 proti 6</h3><p>Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po dvanácti minutách.</p><h3>Týmový deathmatch</h3><p>Bez obsazování. První tým s 30 killy vyhrává. Po 12 minutách rozhoduje počet killů; při shodě je remíza. Každý zničený nepřítel má stejnou hodnotu.</p><h3>Každý zásah má svou cestu</h3><p>Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.</p><h3>Přežij další minutu</h3><p>Mapy zahrnují městské bloky, průmyslové dvory, otevřenou rovinu i krajinu s mnoha menšími kopci. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky a využívej terén i budovy. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.</p><h3>Postup zůstává u tebe</h3><p>Výzkum se ukládá automaticky v tomto prohlížeči. S hráčským účtem se ukládá i do cloudu, takže můžeš pokračovat na jiném zařízení. V nastavení lze stáhnout a později načíst zálohu postupu nebo změnit motiv. Vymazání dat webu smaže postup, který není uložený v účtu.</p></section></div>`);
+  openModal('guide',`<span class="eyebrow">POLNÍ PŘÍRUČKA / ZÁKLADNÍ VÝCVIK</span><h2>Znát svůj tank. Ovládnout bojiště.</h2><p class="modal-intro">Původní prohlížečová hra inspirovaná tankovými simulátory. Model pancíře a modulů je zjednodušený pro krátké, taktické bitvy. Parametry strojů jsou herně vyvážené. BMPT Terminator je moderní ruský bonus na konci větve SSSR; odemkneš ho po IS-2. Ve větvích najdeš také Tiger II a M26 Pershing.</p><div class="guide-grid"><section><h3>Ovládání</h3><div class="controls-list"><span><kbd>W</kbd> / <kbd>S</kbd></span><span>Vpřed / zpátečka</span><span><kbd>E</kbd> / <kbd>Q</kbd></span><span>Tempomat vpřed / vzad. W nebo S jej zruší.</span><span><kbd>A</kbd> / <kbd>D</kbd></span><span>Plynulé řízení vlevo / vpravo; při couvání se korba stáčí jako u vozidla</span><span><kbd>MYŠ</kbd></span><span>Pohyb pohledu a zaměřování; věž zaměřovač dohání</span><span><kbd>LEVÉ TLAČÍTKO</kbd></span><span>Výstřel (lze držet)</span><span><kbd>MEZERNÍK</kbd></span><span>Kulomet; sleduj přehřátí. Silný pancíř neprostřelí.</span><span><kbd>N</kbd></span><span>Nuke za 10 bodů: každý kill +1, smrt −1. Body zůstávají mezi životy. Odpočet 8 s, potom vítězství.</span><span><kbd>PRAVÉ TLAČÍTKO</kbd></span><span>Podržet pro přiblížení</span><span><kbd>C</kbd></span><span>Podržet pro rozhlížení bez otáčení věže</span><span><kbd>KOLEČKO</kbd></span><span>Vzdálenost kamery / zvětšení zaměřovače</span><span><kbd>SHIFT</kbd></span><span>Přepnout do první osoby — optický zaměřovač střelce</span><span><kbd>PgUp / PgDn</kbd></span><span>Nástřel ±100 m; po nasazení 0 m</span><span><kbd>Y</kbd></span><span>Dálkoměr: nastaví nástřel na vzdálenost bodu pod zaměřovačem</span><span><kbd>F</kbd></span><span>Oprava modulů při zastavení. Míření a funkční zbraně zůstávají dostupné.</span><span><kbd>G</kbd></span><span>Kouřová clona — 3 na život</span><span><kbd>2</kbd></span><span>BMPT: naváděná raketa; po odpalu ji řídíš mířením</span><span><kbd>X</kbd></span><span>Podržet pro zobrazení modulů</span><span><kbd>R</kbd></span><span>Maus: druhý kanón 75 mm (lze držet). Po zničení: nasadit záložní tank.</span><span><kbd>TAB</kbd></span><span>Týmy a přezdívky v online bitvě</span><span><kbd>ESC</kbd></span><span>Pauza</span></div><p>Po nasazení je zaměřovač uprostřed obrazovky. Velký kroužek ukazuje, kam míříš. Menší kroužek ukazuje předpokládaný první dopad střely; překážka před hlavní může výstřel zastavit. V první osobě se kříž optiky pohybuje s hlavní a šedý kroužek ukazuje, kam míříš. Značky pod křížem (4, 8, 12, 16 = stovky metrů) ukazují, kam střela na danou vzdálenost dopadne. Pro neomezené otáčení klikni do bojiště; Esc uvolní myš a pozastaví hru. Citlivost nastavíš v nastavení.</p><p>Na dotykovém zařízení použij směrová tlačítka, dotyk bojiště pro míření a tlačítko PALBA. Nejlepší přehled máš na široké obrazovce.</p></section><section><h3>ZOMBIE · Přežití</h3><p>V hangáru vyber režim Zombie. Odraz vlny, střílej kulometem na mezerníku, používej výbuchy děla a přejížděj hordy. Mezi vlnami nakupuj za šrot. Auto kulomet za 1 800 šrotu míří nezávisle na tvé věži. Posádka má jeden život; upgrady a šrot platí jen do konce přežití. Nuke je dostupný v Nadvládě i týmovém deathmatchi.</p><h3>Nadvláda · 6 proti 6</h3><p>Ty a pět spojeneckých botů stejné země proti šesti tankům výhradně cizích zemí. Vjeď do kruhu A, B nebo C a drž pozici. Přítomnost nepřítele obsazování zastaví. Ovládané zóny ubírají soupeři body; vítězí tým, který vyčerpá jeho zásoby nebo vede po dvanácti minutách.</p><h3>Týmový deathmatch</h3><p>Bez obsazování. První tým s 30 killy vyhrává. Po 12 minutách rozhoduje počet killů; při shodě je remíza. Každý zničený nepřítel má stejnou hodnotu.</p><h3>Každý zásah má svou cestu</h3><p>Účinná tloušťka pancíře závisí na úhlu dopadu, straně korby i vzdálenosti. Prudký úhel může střelu odrazit. Průnik poškodí modul podle místa zásahu: pásy zastaví tank, motor omezí pohyb, věž zpomalí míření a závěr znemožní palbu. Zásah munice nebo vyřazení posádky může stroj zničit.</p><h3>Přežij další minutu</h3><p>Mapy zahrnují městské bloky, průmyslové dvory, otevřenou rovinu i krajinu s mnoha menšími kopci. Řeku přejížděj přes mosty; hluboká voda je neprůjezdná. Kryj boky a využívej terén i budovy. Kouř ztíží botům zaměřování a umožní opravu. Písek, bahno a hluboký sníh zpomalují přesun; cesty jsou rychlejší. Po zničení dostaneš další stroj za cenu týmových bodů.</p><h3>Postup zůstává u tebe</h3><p>Výzkum se ukládá automaticky v tomto prohlížeči. S hráčským účtem se ukládá i do cloudu, takže můžeš pokračovat na jiném zařízení. V nastavení lze stáhnout a později načíst zálohu postupu nebo změnit motiv. Vymazání dat webu smaže postup, který není uložený v účtu.</p></section></div>`);
 }
 function showSettings(){
   if(game)paused=true;
@@ -8803,7 +8866,10 @@ function startBattle(){
   awardDone=false;
   paused=false;
   $('#server-chat').hidden=false;
+  $('#server-chat').classList.remove('live');
   $('#server-chat-body').hidden=true;
+  $('#server-chat-body').classList.remove('typing');
+  chatTyping=false;
   multiplayerUI.servers.chat(null,true);
   keys.clear();
   feed=[];
@@ -8858,7 +8924,10 @@ function backToHangar(research=false){
   cruise.reset();
   document.body.classList.remove('nuke-cinematic');
   $('#server-chat').hidden=true;
+  $('#server-chat').classList.remove('live');
   $('#server-chat-body').hidden=true;
+  $('#server-chat-body').classList.remove('typing');
+  chatTyping=false;
   multiplayerUI?.leave(true);
   $('#network-hud').hidden=true;
   releaseControls();
@@ -8957,7 +9026,6 @@ function updateHUD(){
   $('#cruise-status').hidden=!cruise.direction;
   $('#cruise-status').textContent=translate(cruise.direction>0?'TEMPOMAT VPŘED · W/S ZRUŠÍ':'TEMPOMAT VZAD · W/S ZRUŠÍ');
   $('#speed-value').textContent=Math.round((p.drone?p.drone.speed||0:p.speed)*3.6);
-  $('#terrain-label').textContent=terrainAt(game.map.id,p.x,p.z).name.toUpperCase();
   $('#module-bars').innerHTML=Object.entries(moduleNames).map(([key,name])=>`<div class="module-bar-row"><span>${name}</span><div><i style="width:${Math.max(0,p.modules[key])}%;background:${p.modules[key]>50?'#93b87d':p.modules[key]>0?'#e2ad60':'#df715d'}"></i></div></div>`).join('');
   [['.engine-block','engine'],['.turret-block','turret'],['.gun-block','breech'],['.ammo-block','ammo'],['.track','tracks']].forEach(([selector,k])=>$$(selector).forEach(el=>{
     el.classList.toggle('module-damaged',p.modules[k]<55);
@@ -9048,6 +9116,41 @@ function drawMinimap(){
   mc.fillText('N',5,9);
   mc.textAlign='right';
   mc.fillText('1 km',s-5,s-6);
+}
+const scopeCanvas=$('#scope-canvas'),sc=scopeCanvas.getContext('2d');
+// Gunner optic: a black surround fading into the view, a crosshair hung on
+// the gun's sight line with range marks for shell drop below it, and a grey
+// ring where the player is aiming. Returns where the range readout goes,
+// relative to the aim point: inside the optic, left of centre.
+function drawScope(rect,aimX,aimY,showAim){
+  const box=$('#scope-overlay').getBoundingClientRect(),w=box.width,h=box.height,dpr=Math.min(2,devicePixelRatio||1);
+  const pw=Math.round(w*dpr),ph=Math.round(h*dpr);
+  if(scopeCanvas.width!==pw||scopeCanvas.height!==ph){scopeCanvas.width=pw;scopeCanvas.height=ph;}
+  sc.setTransform(dpr,0,0,dpr,0,0);sc.clearRect(0,0,w,h);
+  const cx=rect.left+rect.width/2-box.left,cy=rect.top+rect.height/2-box.top,R=Math.min(rect.width,rect.height)*.47;
+  const fade=sc.createRadialGradient(cx,cy,R*.78,cx,cy,R);
+  fade.addColorStop(0,'rgba(0,0,0,0)');fade.addColorStop(.6,'rgba(0,0,0,.62)');fade.addColorStop(1,'#000');
+  sc.fillStyle=fade;sc.fillRect(0,0,w,h);
+  const cross=renderer.getSightCross(game);
+  if(cross){
+    const gx=rect.left+cross.x-box.left,gy=rect.top+cross.y-box.top;
+    sc.save();sc.beginPath();sc.arc(cx,cy,R,0,Math.PI*2);sc.clip();
+    sc.strokeStyle=sc.fillStyle='#000';sc.lineWidth=Math.max(1.5,R/260);
+    sc.beginPath();sc.moveTo(gx-2*R,gy);sc.lineTo(gx+2*R,gy);sc.moveTo(gx,gy-2*R);sc.lineTo(gx,gy+2*R);sc.stroke();
+    sc.font=Math.round(Math.max(9,R*.024))+'px monospace';sc.textBaseline='middle';
+    for(const {range,offset} of cross.marks){
+      if(Math.abs(offset)<2)continue;
+      const half=R*(range%800?.045:.08),y=gy+offset;
+      sc.beginPath();sc.moveTo(gx-half,y);sc.lineTo(gx+half,y);sc.stroke();
+      sc.fillText(String(range/100),gx+half+5,y);
+    }
+    sc.restore();
+  }
+  if(showAim){
+    sc.strokeStyle='#a2a2a2';sc.lineWidth=2;
+    sc.beginPath();sc.arc(aimX-box.left,aimY-box.top,Math.max(9,R*.045),0,Math.PI*2);sc.stroke();
+  }
+  return {left:(cx-R*.5+box.left-aimX)+'px',top:(cy+R*.06+box.top-aimY)+'px'};
 }
 let tagRefresh=-1,tagVisible=new Set(),tagNodes=new Map();
 function drawTags(){
@@ -9255,7 +9358,7 @@ function captureMouse(){
 document.addEventListener('pointerlockchange',()=>{
   mouseLock.changed();ignoreMouseMove=true;
   if(document.pointerLockElement===canvas){touchAim=false;canvas.focus({preventScroll:true});}
-  else {lastUnlock=performance.now();if(game&&!paused&&!game.finished&&$('#server-chat-body').hidden)pause();}
+  else {lastUnlock=performance.now();if(game&&!paused&&!game.finished&&!chatTyping)pause();}
 });
 document.addEventListener('pointerlockerror',()=>mouseLock.error());
 document.addEventListener('keydown',e=>{
@@ -9279,7 +9382,7 @@ document.addEventListener('keydown',e=>{
   }
   if(!game||paused)return;
   if(game.player.developer&&!game.finished&&['KeyH','KeyT','KeyB','KeyV'].includes(e.code)){
-    e.preventDefault();if(e.repeat||!$('#server-chat-body').hidden)return;
+    e.preventDefault();if(e.repeat||chatTyping)return;
     if(e.code==='KeyH')showDevMenu();else devAction({KeyT:'fiveSahurs',KeyB:'fivePatapims',KeyV:'drone'}[e.code]);
     return;
   }
@@ -9288,8 +9391,8 @@ document.addEventListener('keydown',e=>{
     e.preventDefault();
     if(e.code==='KeyY'){
       const hit=renderer.aimFromCenter();
-      game.player.sightRange=Math.max(100,Math.min(1600,Math.round(Math.hypot(hit.x-game.player.x,hit.z-game.player.z)/50)*50));
-    }else game.player.sightRange=Math.max(100,Math.min(1600,game.player.sightRange+(e.code==='PageUp'?100:-100)));
+      game.player.sightRange=Math.max(0,Math.min(2000,Math.round(Math.hypot(hit.x-game.player.x,hit.z-game.player.z)/50)*50));
+    }else game.player.sightRange=Math.max(0,Math.min(2000,(game.player.sightRange||0)+(e.code==='PageUp'?100:-100)));
   }
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight','Tab'].includes(e.code))e.preventDefault();
   keys.add(e.code);cruise.keydown(e.code,e.repeat);
@@ -9401,11 +9504,11 @@ function loop(now){
         if(!paused)lastAim=renderer.aimForSight(touchAim?(pointer.x-aimRect.left)/aimRect.width*2-1:0,touchAim?1-(pointer.y-aimRect.top)/aimRect.height*2:0);
         if(!game.player.alive)cruise.reset();
         const driving=keyboardInput(keys,game.player.repair>0?0:cruise.direction);
-        const input=(paused||!$('#server-chat-body').hidden)?(game.mode==='multiplayer'?multiplayerUI.room.idleInput():{}):{...driving,...((game.player.flight||game.player.drone)?{throttle:keyboardInput(keys).throttle,flyYaw:renderer.cameraYaw+Math.PI,flyPitch:-renderer.cameraPitch,lift:Number(keys.has('Space'))-Number(keys.has('ControlLeft')||keys.has('ControlRight'))}:{}),aimX:lastAim?.x??game.player._aimX,aimY:lastAim?.y??game.player._aimY,aimZ:lastAim?.z??game.player._aimZ,fire:fireRequested||pointer.down||touchCannon,machineGun:mgRequested||driving.machineGun,secondaryFire:secondaryRequested||(game.player.alive&&keys.has('KeyR'))};
+        const input=(paused||chatTyping)?(game.mode==='multiplayer'?multiplayerUI.room.idleInput():{}):{...driving,...((game.player.flight||game.player.drone)?{throttle:keyboardInput(keys).throttle,flyYaw:renderer.cameraYaw+Math.PI,flyPitch:-renderer.cameraPitch,lift:Number(keys.has('Space'))-Number(keys.has('ControlLeft')||keys.has('ControlRight'))}:{}),aimX:lastAim?.x??game.player._aimX,aimY:lastAim?.y??game.player._aimY,aimZ:lastAim?.z??game.player._aimZ,fire:fireRequested||pointer.down||touchCannon,machineGun:mgRequested||driving.machineGun,secondaryFire:secondaryRequested||(game.player.alive&&keys.has('KeyR'))};
         if(game.mode==='multiplayer'){
           const wasAlive=game.player.alive;
           multiplayerUI?.room?.update(dt,input);
-          if(!wasAlive&&game.player.alive){scope=false;renderer.resetView(game);}
+          if(!wasAlive&&game.player.alive){scope=false;game.player.sightRange=0;renderer.resetView(game);}
           const hud=$('#network-hud');
           hud.hidden=false;
           hud.textContent=(multiplayerUI?.status()||'')+' · '+translate('TÝMY · TAB');
@@ -9424,15 +9527,22 @@ function loop(now){
       reticle.style.top=(touchAim?pointer.y:rect.top+rect.height/2)+'px';
       reticle.hidden=cinematic||!game.player.alive||paused||keys.has('KeyC');
       const gun=lastAim&&!game.player.flight&&!game.player.drone?renderer.getGunMarker(game,lastAim):null;
-      marker.hidden=reticle.hidden||!gun?.visible;
+      const scoped=view.scope&&!cinematic&&!paused;
+      // Third person: the outer ring is the aim, the inner ring the gun. In the
+      // scope the reticle itself follows the gun and a grey ring marks the aim.
+      reticle.classList.toggle('scoped',scoped);
+      marker.hidden=reticle.hidden||scoped||!gun?.visible;
       if(gun?.visible){
         marker.style.left=(rect.left+gun.x)+'px';
         marker.style.top=(rect.top+gun.y)+'px';
         marker.classList.toggle('aligned',gun.aligned);
       }
-      $('#reticle>span').textContent=game.player.drone?'FPV DRON · WASD / MYŠ · SPACE / CTRL · LMB DETONACE · V ZRUŠIT':(gun?.limited?'MEZ NÁMĚRU · ':gun?.blocked?'PŘEKÁŽKA · ':'')+'NÁSTŘEL '+game.player.sightRange+' m · PgUp/PgDn · Y změřit';
+      const info=$('#reticle>span');
+      info.textContent=game.player.drone?'FPV DRON · WASD / MYŠ · SPACE / CTRL · LMB DETONACE · V ZRUŠIT':(gun?.limited?'MEZ NÁMĚRU · ':gun?.blocked?'PŘEKÁŽKA · ':'')+'NÁSTŘEL '+(game.player.sightRange||0)+' m';
       $('.turret-block').style.transform='rotate('+(-(game.player.turretAngle-game.player.angle)*180/Math.PI)+'deg)';
-      $('#scope-overlay').hidden=cinematic||!view.scope||paused;
+      $('#scope-overlay').hidden=!scoped;
+      const place=scoped?drawScope(rect,parseFloat(reticle.style.left),parseFloat(reticle.style.top),!reticle.hidden):null;
+      info.style.left=place?place.left:'';info.style.top=place?place.top:'';
       $('#camera-mode-button').textContent=view.scope?'[SHIFT] 3. OSOBA':'[SHIFT] 1. OSOBA';
       $('#camera-mode-button').setAttribute('aria-pressed',String(view.scope));
       $('#camera-mode-button').hidden=paused||!game.player.alive;
@@ -9552,7 +9662,10 @@ function enterMultiplayer(gameInstance,room){
  if(!renderer)return;
  multiplayerUI.servers.stop();
  $('#server-chat').hidden=typeof room.chat!=='function';
- $('#server-chat-body').hidden=true;
+ $('#server-chat').classList.add('live');
+ $('#server-chat-body').hidden=false;
+ $('#server-chat-body').classList.remove('typing');
+ chatTyping=false;
  game=gameInstance;
  cruise.reset();
  awardDone=false;
@@ -9602,9 +9715,12 @@ multiplayerUI=new MultiplayerUI({getProgress:()=>progress,save,openModal,closeMo
 multiplayerUI.onEvent=onGameEvent;
 if(renderer)multiplayerUI.openInvite();
 
-function toggleServerChat(open=$('#server-chat-body').hidden){
+// Online the log stays visible; "open" means typing, which idles the tank.
+function toggleServerChat(open=!chatTyping){
  if(!game)return;
- $('#server-chat-body').hidden=!open;
+ chatTyping=open;
+ $('#server-chat-body').hidden=!open&&!$('#server-chat').classList.contains('live');
+ $('#server-chat-body').classList.toggle('typing',open);
  multiplayerUI.servers.unread=0;
  $('#server-chat-toggle').textContent='CHAT · ENTER';
  clearControls();
